@@ -1,0 +1,88 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{UHF}
+
+
+\section{RHF}
+
+\subsection{Singlet Excitation Operators}
+    Generally, the one- and two-body excitation operators are defined as:
+    \begin{align}
+        E _{q}^{p} &= \hat{p}^{\dagger}_{\alpha}\hat{q}_{\alpha} + \hat{p}^{\dagger}_{\beta}\hat{q}_{\beta}  \\
+        e _{rs}^{pq} &= \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{q}^{\dagger}_{\tau}\hat{s}_{\tau}\hat{r}_{\sigma}
+    \end{align}
+
+    By:
+    \begin{equation}
+        [\hat{p}^{\dagger},\hat{q}]_{+} = \hat{\delta}_{pq}
+    \end{equation}
+    the two-body singlet excitation operator could be written as:
+    \begin{align}
+        e ^{pq}_{rs} =& \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{q}^{\dagger}_{\tau}\hat{s}_{\tau}\hat{r}_{\sigma} \nonumber \\
+        =& -\sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{q}^{\dagger}_{\tau}\hat{r}_{\sigma}\hat{s}_{\tau} \nonumber \\
+        =& -\sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}(\delta _{qr}\delta _{\sigma \tau} - \hat{r}_{\sigma}\hat{q}^{\dagger}_{\tau})\hat{s}_{\tau} \nonumber \\
+        =& \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{r}_{\sigma}\hat{q}^{\dagger}_{\tau}\hat{s}_{\tau} - \sum_{\sigma \tau}\delta _{qr}\delta _{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{s}_{\tau} \nonumber \\
+        =& \hat{p}^{\dagger}_{\alpha}\hat{r}_{\alpha}\hat{q}^{\dagger}_{\alpha}\hat{s}_{\alpha} + \hat{p}^{\dagger}_{\alpha}\hat{r}_{\alpha}\hat{q}^{\dagger}_{\beta}\hat{s}_{\beta}
+        + \hat{p}^{\dagger}_{\beta}\hat{r}_{\beta}\hat{q}^{\dagger}_{\alpha}\hat{s}_{\alpha} + \hat{p}^{\dagger}_{\beta}\hat{r}_{\beta}\hat{q}^{\dagger}_{\beta}\hat{s}_{\beta}
+        -\delta _{qr}(\hat{p}^{\dagger}_{\alpha}\hat{s}_{\alpha} + \hat{p}^{\dagger}_{\beta}\hat{s}_{\beta}) \nonumber \\
+        =& E _{r}^{p}E ^{q}_{s} - \delta _{qr}E _{s}^{p}
+    \end{align} 
+    Note, conventionally, the indices for the two-body operator are written in Chemists' notation.
+    \\
+    
+    Considering the nature of excitation operators, the following expressions are often more useful:
+
+    \begin{align}
+        E _{i}^{a} &= \hat{a}^{\dagger}_{\alpha}\hat{i}_{\alpha} + \hat{a}^{\dagger}_{\beta}\hat{i}_{\beta} \\
+        e _{ij}^{ab} &= \sum_{\sigma \tau}\hat{a}^{\dagger}_{\sigma}\hat{b}^{\dagger}_{\tau}\hat{j}_{\tau}\hat{i}_{\sigma}
+        = E _{i}^{a}E _{j}^{b}
+    \end{align}
+
+
+
+
+
+\end{document}

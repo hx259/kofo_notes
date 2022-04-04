@@ -1,0 +1,263 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{Normal Ordering}
+    Normal ordering is introduced for the convenience of using Wick's theorem.
+    The reference state for normal ordering and contractions here is the Fermi vacuum.
+    The pseudo-creation and pseudo-annihilation operators are introduced for the sake of normal ordering:
+    \begin{align}
+        \hat{b}_{i}^{\dagger} &= \hat{i} & \hat{b}_{i} &= \hat{i}^{\dagger} \\ \nonumber
+        \hat{b}^{\dagger}_{a} &= \hat{a}^{\dagger} & \hat{b}_{a} &= \hat{a}
+    \end{align}
+    The normal ordering is satisfied if all pseudo-creation operators are left to all pseudo-annihilation
+    operators, i.e.:
+    \begin{equation}
+        \{\hat{A}\hat{B}\hat{C}\dots\}=(-1)^{\sigma}\hat{b}^{\dagger}_{p}\hat{b}^{\dagger}_{q}\dots \hat{b}_{u}\hat{b}_{v}
+    \end{equation}
+    This is defined such that:
+    \begin{align}
+        \hat{b}_{p}|0\rangle &= \hat{b}_{p}|ijk\dots\rangle = 0 \\
+        \langle 0|\hat{b}^{\dagger}&=\langle ijk\dots|\hat{b}_{p}^{\dagger} =0
+    \end{align}
+    For example, a typical normal ordered string of operators looks like:
+    \begin{equation}
+        \hat{a}^{\dagger}\hat{b}^{\dagger}\hat{i}\hat{j}\hat{j}^{\dagger}\hat{i}^{\dagger}\hat{b}\hat{a}
+    \end{equation}
+    Contractions w.r.t Fermi vacuum are defined as:
+    \begin{equation}
+        \wick[sep=0.35em]{\c1{\hat{A}}\c1{\hat{B}}} =\hat{A}\hat{B} -\{\hat{A}\hat{B}\}
+    \end{equation}
+    and this rearranges to gives the simplest case of Wick's theorem:
+    \begin{equation}
+        \hat{A}\hat{B}=\{\hat{A}\hat{B}\} + \{\wick[sep=0.35em]{\c1{\hat{A}}\c1{\hat{B}}}\}
+    \end{equation}
+    Note that:
+        $\{\wick[sep=0.35em]{\c1{\hat{A}}\c1{\hat{B}}}\} = \wick[sep=0.35em]{\c1{\hat{A}}\c1{\hat{B}}}$
+    , since:
+    \begin{equation}
+        \{\hat{A}\hat{B}\hat{C}\dots \wick[sep=0.35em]{\c1{\hat{R}}\dots \c2{\hat{S}}\dots \c1{\hat{T}}\dots \c2{\hat{U}}}\} = (-1)^{\hat{\sigma}}\wick[sep=0.35em]{\c1{\hat{R}}\c1{\hat{T}}}\wick[sep=0.35em]{\c1{\hat{S}}\c1{\hat{U}}}\{\hat{A}\hat{B}\hat{C}\dots\}
+    \end{equation}
+    The anti-commutation relations are satisfied between annihilation operators and between creation operators. However,
+    this is not true between annihilation and creation operators:
+    \begin{equation}
+        [\hat{p},\hat{q}]_{+} = \hat{p}\hat{q} + \hat{q}\hat{p} =0
+    \end{equation}
+    \begin{equation}
+        [\hat{p}^{\dagger}\hat{q}^{\dagger}]_{+} = \hat{p}^{\dagger}\hat{q}^{\dagger} + \hat{q}^{\dagger}\hat{p}^{\dagger} = 0
+    \end{equation}
+    \begin{equation}
+        [\hat{p}^{\dagger},\hat{q}]_{+} = [\hat{q},\hat{p}^{\dagger}]_{+} =\hat{p}^{\dagger}\hat{q} + \hat{q}\hat{p}^{\dagger} = \hat{\delta} _{pq}
+    \end{equation}
+    This comes from the permutation relation of slater determinant:
+    \begin{equation}
+        |pqijk\dots\rangle = -|qpijk\dots\rangle
+    \end{equation}
+    This means it's free to swap between annihilation operators and between creation annihilation operators,
+    as long as the corresponding sign are assigned:
+    \begin{equation}
+        \hat{p}\hat{q} = -\hat{q}\hat{p}
+    \end{equation}
+    \begin{equation}
+        \hat{p}^{\dagger}\hat{q}^{\dagger} = -\hat{q}^{\dagger}\hat{p}^{\dagger}
+    \end{equation}
+    Also, we know that contractions between virtual and occupied space is $0$ as $\delta _{occ,vir}=0$.
+    By this we know that only non-zero contractions are:
+    \begin{equation}
+        \wick[sep=0.35em]{\c1{\hat{i}^{\dagger}}\c1{\hat{j}}} = \delta _{ij}
+    \end{equation}
+    \begin{equation}
+        \wick[sep=0.35em]{\c1{\hat{a}}\c1{\hat{b}^{\dagger}}} = \delta _{ab}
+    \end{equation}
+
+    \subsection{Normal Ordered Hamiltonian}
+    Generally, the Hamiltonian could be written as:
+    \begin{align}
+        \hat{H} &= \sum_{pq}\langle p|\hat{h}|q\rangle \hat{p}^{\dagger}\hat{q}+ \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r} \nonumber \\
+                &= \sum_{pq}h _{pq} \hat{p}^{\dagger}\hat{q}+ \frac{1}{2}\sum_{pqrs}\langle pq|rs\rangle \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}
+    \end{align} 
+    Evaluating the product strings:
+    \begin{align}
+        \hat{p}^{\dagger}\hat{q}=&\{\hat{p}^{\dagger}\hat{q}\} + \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\c1{\hat{q}}}\} \\ \nonumber
+         =& \{\hat{p}^{\dagger}\hat{q}\} + \delta _{pq}\delta _{p \in \text{occ}}
+    \end{align}
+    \begin{align}
+        \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r} =& \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}+
+        \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\c1{\hat{q}^{\dagger}}\c1{\hat{s}}\c2{\hat{r}}}\} +
+        \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\c1{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}}\} +
+        \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}}\} \nonumber \\
+         &+ \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\c1{\hat{r}}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c1{\hat{q}^{\dagger}}\c1{\hat{s}}\hat{r}}\}
+         +\{\wick[sep=0.35em]{\hat{p}^{\dagger}\c1{\hat{q}^{\dagger}}\hat{s}\c1{\hat{r}}}\} \\ \nonumber
+         =& \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} + \delta _{pr} \delta _{qs}\delta _{p\in \text{occ}} \delta _{q\in \text{occ}} 
+         - \delta _{ps}\delta_{qr}\delta _{p\in \text{occ}}\delta _{q\in \text{occ}} \\ \nonumber 
+         & -\delta _{ps}\delta _{p\in \text{occ}}\{\hat{q}^{\dagger}\hat{r}\} + \delta _{pr}\delta _{p\in \text{occ}}\{\hat{q}^{\dagger}\hat{s}\} + \delta _{qs}\delta _{q\in \text{occ}}\{\hat{p}^{\dagger}\hat{s}\} \\ \nonumber 
+         &- \delta _{qs}\delta _{q\in \text{occ}}\{\hat{p}^{\dagger}\hat{s}\}
+    \end{align}
+    Substitute these back into the expression of Hamiltonian, and the one-body part looks like:
+    \begin{align}
+        \sum_{pq}h _{pq}\hat{p}^{\dagger}\hat{q} =& \sum_{pq}h _{pq}(\{\hat{p}^{\dagger}\hat{q}\}+\delta _{pq}\delta _{p\in \text{occ}}) \nonumber \\
+         =& \sum_{pq}h _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{i}h _{ii}
+    \end{align}
+    and the two-body part:
+    \begin{align}
+        \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r} =& \frac{1}{4}(\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} 
+        + \sum_{pqrs}\langle pq||rs\rangle \delta _{pr} \delta _{qs }\delta _{p\in \text{occ}}\delta _{q\in \text{occ}} \nonumber \\
+         & - \sum_{pqrs}\langle pq||rs\rangle \delta _{ps}\delta _{qr}\delta _{p\in \text{occ}}\delta _{q\in \text{occ}} 
+         - \sum_{pqrs}\langle pq||rs\rangle \delta _{ps}\delta _{p\in \text{occ}}\{\hat{q}^{\dagger}\hat{r}\} \\ \nonumber
+         & + \sum_{pqrs}\langle pq||rs\rangle \delta _{pr}\delta _{p\in \text{occ}}\{\hat{q}^{\dagger}\hat{s}\} + \sum_{pqrs}\langle pq||rs\rangle \delta _{qs} \delta _{q\in \text{occ}}\{\hat{p}^{\dagger}\hat{r}\} \\ \nonumber
+         & - \sum_{pqrs}\langle pq||rs\rangle \delta _{qr} \delta _{q\in \text{occ}}\{\hat{p}^{\dagger}\hat{s}\}) \\ \nonumber
+         =& \frac{1}{4}(\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} + \sum_{ij}\langle ij||ij\rangle - \sum_{ij}\langle ij||ji\rangle \\ \nonumber
+         & -\sum_{pri}\langle iq||ri\rangle\{\hat{q}^{\dagger}\hat{r}\} + \sum_{qsi}\langle iq||is\rangle\{\hat{q}^{\dagger}\hat{s}\} \\ \nonumber
+         & +\sum_{pri}\langle pi||ri\rangle\{\hat{p}^{\dagger}\hat{r}\} - \sum_{psi}\langle pi||is\rangle\{\hat{p}^{\dagger}\hat{s}\}) \\ \nonumber
+         =& \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle + \sum_{pqi}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\}
+    \end{align}
+    Combine and rearrange we obtain the Hamiltonian as:
+    \begin{align}
+        \hat{H} &= \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle + \sum_{pq}h _{pq} \{\hat{p}^{\dagger}\hat{q}\}
+        + \sum_{pqi}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \nonumber \\
+         &= \langle \Phi _{0}|\hat{H}|\Phi _{0}\rangle + \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}
+    \end{align}
+    since we have:
+    \begin{equation}
+        E_{\text{HF}} = \langle \Phi _{0}|\hat{H}|\Phi _{0}\rangle = \sum_{i}h _{ii}+ \frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+    \end{equation}
+    \begin{equation}
+        f _{pq} = h _{pq} + \sum_{i}\langle pi||qi\rangle
+    \end{equation} where $f _{pq}$ is Fock matrix element. \\ 
+    Now taking away the Hartree-Fock energy, we obtain the normal-ordered Hamiltonian w.r.t the Fermi vacuum: 
+    \begin{align} \hat{H}_{\text{N}} =& \hat{H} - \langle \Phi _{0}|\hat{H}|\Phi _{0}\rangle \\ \nonumber 
+        =& \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} \\ \nonumber 
+        =&  \hat{F} _{\text{N}} + \hat{W} 
+    \end{align} 
+    This $\hat{H}_{\text{N}}$ operator could be seen as the correlation operator. 
+
+    \subsection{Effective Hamiltonian} 
+    From BCH expansion, we can write the effective Hamiltonian as: 
+    \begin{align} \hat{\mathcal{H}} =& e ^{-\hat{T}}\hat{H}_{\text{N}}e ^{\hat{T}} \nonumber \\ 
+        =& \hat{H}_{\text{N}} + [\hat{H}_{\text{N}},\hat{T}] + \frac{1}{2!}[[\hat{H}_{\text{N}},\hat{T}],\hat{T}] + \frac{1}{3!}[[[\hat{H}_{\text{N}},\hat{T}],\hat{T}],\hat{T}] \\ \nonumber 
+        &+ \frac{1}{4!}[[[[\hat{H}_{\text{N}},\hat{T}],\hat{T}],\hat{T}],\hat{T}]+\dots 
+    \end{align} 
+    Note that the cluster operators $\hat{T}_{m}$ commute with each other, i.e.:
+    \begin{equation}
+        [\hat{T}_{m},\hat{T}_{n}] = 0
+    \end{equation}
+    since:
+    \begin{align}
+        [\hat{T}_{m},\hat{T}_{n}] =& \sum_{ai}\sum_{bj}\hat{T}_{m}\hat{T}_{n}-\sum_{bj}\sum_{ai}\hat{T}_{n}\hat{T}m \nonumber \\
+         =& \sum_{ai}\sum_{bj}\frac{1}{(m!)^{2}}t _{i \dots}^{a \dots}\{\hat{a}^{\dagger}\hat{i}\dots\}\frac{1}{(n!)^{2}}t _{j \dots}^{b \dots}\{\hat{b}^{\dagger}\hat{j}\dots\} \\ \nonumber
+         &- \sum_{bj}\sum_{ai}\frac{1}{(n!)^{2}}t _{j \dots}^{b \dots}\{\hat{b}^{\dagger}\hat{j}\dots\}\frac{1}{(m!)^{2}}t _{i \dots}^{a \dots}\{\hat{a}^{\dagger}\hat{i}...\} \\ \nonumber
+         =& \sum_{ai}\sum_{bj}\frac{1}{(m!)^{2}(n!)^{2}}t _{i \dots}^{a \dots}t _{j \dots}^{b \dots}\{\hat{a}^{\dagger}\hat{i}\dots \hat{b}^{\dagger}\hat{j}^{\dagger}\dots\} \\ \nonumber 
+         &- \sum_{bj}\sum_{ai}\frac{1}{(m!)^{2}(n!)^{2}}t _{j \dots}^{b \dots}t _{i \dots}^{a \dots}\{\hat{b}^{\dagger}\hat{j}\dots \hat{a}^{\dagger}\hat{i}\dots\} \\ \nonumber
+         =& 0
+    \end{align}
+    as  $\{\hat{a}^{\dagger}\hat{i}\dots\}$ could never make non-zero contractions to its right.
+    Therefore: $\hat{T}_{m}\hat{T}_{n}=\hat{T}_{n}\hat{T}_{m}$, while the same conclusion could not be drawn between $\hat{T}$ and $\hat{H}$.
+    \\
+
+    Now consider about the infinite sum of commutators in the effective Hamiltonian. It could be reduced significantly using Wick's theorem and properties of operators.
+    Let's give the result at first and then explain and rationalise it:
+    \begin{align}
+        \hat{\mathcal{H}} =& e ^{-\hat{T}}\hat{H}_{\text{N}}e \hat{T} \nonumber \\
+        =& \hat{H}_{\text{N}} + \frac{1}{2!}[[\hat{H}_{\text{N}},\hat{T}],\hat{T}] + \frac{1}{3!}[[[\hat{H}_{\text{N}},\hat{T}],\hat{T}],\hat{T}] \\ \nonumber
+        &+ \frac{1}{4!}[[[[\hat{H}_{\text{N}},\hat{T}],\hat{T}],\hat{T}],\hat{T}] \\ \nonumber
+        =& \hat{H}_{\text{N}} + (\hat{H}_{\text{N}}\hat{T})_{\text{C}} + \frac{1}{2!}(\hat{H}_{\text{N}}\hat{T}^{2})_{\text{C}} + \frac{1}{3!}(\hat{H}_{\text{N}}\hat{T}^{3})_{\text{C}}+\frac{1}{4!}(\hat{H}_{\text{N}}\hat{T}^{4})_{\text{C}} \\ \nonumber
+        =& (\hat{H}_{\text{N}}e ^{\hat{T}})_{\text{C}}
+    \end{align}
+    This means that the effective Hamiltonian only contains terms in which all cluster operators on the right to $\hat{H}_{\text{N}}$ 
+    contracts at least once with $\hat{H}_{\text{N}}$. For example, in the expansion of \\
+    $\hat{W}\hat{T}_{2}^{2}=\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}\{\hat{a}^{\dagger}\hat{b}^{\dagger}\hat{j}\hat{i}\}\{\hat{c}^{\dagger}\hat{d}^{\dagger}\hat{l}\hat{k}\}$:\\
+    $\wick[sep=0.35em]{\{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\c2{\hat{s}}\hat{r}\hat{a}^{\dagger}\hat{b}^{\dagger}\c1{\hat{j}}\hat{i}\c2{\hat{c}^{\dagger}}\hat{d}^{\dagger}\hat{l}\hat{k}\}}$ 
+    will remain, while $\wick[sep=0.35em]{\{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\hat{r}\hat{a}^{\dagger}\hat{b}^{\dagger}\c1{\hat{j}}\hat{i}\hat{c}^{\dagger}\hat{d}^{\dagger}\hat{l}\hat{k}\}}$ 
+    will be cancelled. \\
+
+    As a direct result of this connected form combined with the fact that $\hat{H}_{\text{N}}$ contain at most two-body operators (i.e. 4 creation/annihilation operators), the infinite sum of commutators
+    in effective Hamiltonian terminates at four-fold.
+    To rationalise the connected form of $\hat{\mathcal{H}}$, we start by stating some facts:\\
+    1. Terms in which all cluster operators are to the left of $\hat{H}_{\text{N}}$, e.g. $\hat{T}\hat{T}\hat{T}\hat{H}_{\text{N}}$, contains only an uncontracted term in the expansion.
+    This is because cluster operator $\hat{T}$ could never make contractions to its right, as the only non-zero contractions are of the forms $\wick[sep=0.35em]{\c1{\hat{a}}\c1{\hat{b}^{\dagger}}}$ and $\wick[sep=0.35em]{\c1{\hat{i}^{\dagger}}\c1{\hat{j}}}$.\\
+    2. Uncontracted terms in the commutator expansion always cancel out. E.g. $[\hat{H}_{\text{N}},\hat{T}]$ generates two uncontracted terms
+    $\{\hat{p}^{\dagger}\hat{q}\dots\}\{\hat{a}^{\dagger}\hat{i}\dots\}$ and $-\{\hat{a}^{\dagger}\hat{i}\dots\}\{\hat{p}^{\dagger}\hat{q}\dots\}$ which cancel out to be zero. Generally this comes from the fact that
+    number of creation/annihilation operators in any term of $\hat{\mathcal{H}}$ is even, hence the permutation 
+    $\begin{pmatrix} \{\hat{p}^{\dagger}\hat{q}\dots\}\{\hat{a}^{\dagger}\hat{i}\dots\}\\\{\hat{a}^{\dagger}\hat{i}\dots\}\{\hat{p}^{\dagger}\hat{q}\dots\} \end{pmatrix}$ 
+    always have even parity.\\
+    3. Any terms which are not in the connected form, i.e. in which there are uncontracted cluster operator $\hat{T}$, will cancel out with each other. This comes from the fact that 
+    uncontracted $\hat{T}$ could be moved around in the normal ordering with even parity, and it is free to swap the dummy summation index.
+    We will see this more clearly with an example:\\
+    In the expansion of the commutator $[[\hat{W},\hat{T}_{1}],\hat{T}_{1}]$:
+    \begin{equation}
+        [[\hat{W},\hat{T}_{1}],\hat{T}_{1}] = \hat{W}\hat{T}_{1}^{2} - 2 \hat{T}_{1}\hat{W}\hat{T}_{1} + \hat{T}_{1}^{2}\hat{W}
+    \end{equation}
+    All the uncontracted terms vanish. $\hat{T}_{1}^{2}\hat{W}$ has no any other contribution. $\hat{T}_{1}\hat{W}\hat{T}_{1}$ term does not satisfy the connected form, hence
+    all the contracted terms will be cancelled out with contracted terms in $\hat{W}\hat{T}_{1}^{2}$ which don't satisfy connected rule. More specifically:
+    \begin{align}
+        \hat{T}_{1}\hat{W}\hat{T}_{1} =& \sum_{ai}\sum_{pqrs}\sum_{bj} \frac{1}{4} t _{i}^{a}t  _{j}^{b}\langle pq||rs\rangle\{\hat{a}^{\dagger}\hat{i}\}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}\{\hat{b}^{\dagger}\hat{j}\} \nonumber \\
+         =& \frac{1}{4}\sum_{ai}\sum_{pqrs}\sum_{bj}t _{i}^{a}t _{j}^{b}\langle pq||rs\rangle \Big(\{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} +  \{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\hat{p}^{\dagger}\c2{\hat{q}^{\dagger}}\c1{\hat{s}}\hat{r}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} \\ \nonumber
+         &+ \{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\hat{q}\hat{s}\c1{\hat{r}}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} + \{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\hat{p}^{\dagger}\c2{\hat{q}^{\dagger}}\hat{s}\c1{\hat{r}}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} + \{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\c{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\hat{r}\hat{b}^{\dagger}\c{\hat{j}}}\} \\ \nonumber
+         &+ \{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\hat{p}^{\dagger}\c{\hat{q}^{\dagger}}\hat{s}\hat{r}\hat{b}^{\dagger}\c{\hat{j}}}\} + \{\hat{a}^{\dagger}\hat{i}\wick[sep=0.35em]{\hat{p}^{\dagger}\hat{q}^{\dagger}\c{\hat{s}}\hat{r}\c{\hat{b}^{\dagger}}\hat{j}}\} + \{\hat{a}^{\dagger}\hat{i}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\wick[sep=0.35em]{\c{\hat{r}}\c{\hat{b}^{\dagger}}\hat{j}}\} \Big)
+    \end{align}
+    If we expand $\hat{W}\hat{T}_{1}^{2}= \sum\limits_{pqrs}\sum\limits_{ai}\sum\limits_{bj}\frac{1}{4}t _{i}^{a}t _{j}^{b}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}\{\hat{a}^{\dagger}\hat{i}\}\{\hat{b}^{\dagger}\hat{j}\}$, 
+    we can find the terms in which there are uncontrated $\hat{T}_{1}$ operators to the right of $\hat{W}$, match exactly with the terms above:
+    \begin{align}
+         & \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}\c1{\hat{a}^{\dagger}}\c2{\hat{i}}\hat{b}^{\dagger}\hat{j}}\} + \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c2{\hat{i}}\hat{b}^{\dagger}\hat{i}}\} 
+         + \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\c1{\hat{r}}\hat{a}^{\dagger}\hat{i}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} + \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}\hat{a}^{\dagger}\hat{i}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} \nonumber \\
+         & \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c2{\hat{q}^{\dagger}}\c1{\hat{s}}\hat{r}\c1{\hat{a}^{\dagger}}\c2{\hat{i}}\hat{b}^{\dagger}\hat{j}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c2{\hat{q}^{\dagger}}\hat{s}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c2{\hat{i}}\hat{b}^{\dagger}\hat{j}}\}
+         + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c2{\hat{q}^{\dagger}}\c1{\hat{s}}\hat{r}\hat{a}^{\dagger}\hat{i}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c2{\hat{q}^{\dagger}}\hat{s}\c1{\hat{r}}\hat{a}^{\dagger}\hat{i}\c1{\hat{b}^{\dagger}}\c2{\hat{j}}}\} \nonumber \\
+         & \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\hat{r}\hat{a}^{\dagger}\c1{\hat{i}}\hat{b}^{\dagger}\hat{j}}\} + \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\hat{r}\hat{a}^{\dagger}\hat{i}\hat{b}^{\dagger}\c1{\hat{j}}}\}
+         + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c1{\hat{q}^{\dagger}}\hat{s}\hat{r}\hat{a}^{\dagger}\c1{\hat{i}}\hat{b}^{\dagger}\hat{j}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c1{\hat{q}^{\dagger}}\hat{s}\hat{r}\hat{a}^{\dagger}\hat{i}\hat{b}^{\dagger}\c1{\hat{j}}}\} \nonumber \\
+         & \{\wick[sep=0.35em]{\hat{p}^{\dagger}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}\c1{\hat{a}^{\dagger}}\hat{i}\hat{b}^{\dagger}\hat{j}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}\hat{a}^{\dagger}\hat{i}\c1{\hat{b}^{\dagger}}\hat{j}}\}
+         + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\c1{\hat{r}}\hat{a}^{\dagger}\hat{i}\c1{\hat{b}^{\dagger}}\hat{i}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\hat{i}\hat{b}^{\dagger}\hat{j}}\}
+    \end{align}
+    After we manipulate these sums with permutation and swapping some dummy indices, we can find that these are exactly twice of the terms in $\hat{T}_{1}\hat{W}\hat{T}_{1}$. Since $\hat{T}_{1}\hat{W}\hat{T}_{1}$ has
+    a coefficient of -2 in the expansion of the commutator, they cancel each other out exactly. \\
+
+    Combining the rule of connected form and the fact that $\hat{H}_{\text{N}}$ has at most 4 creation/annihilation operators, the BCH expansion of effective Hamiltonian terminates at four fold, as stated in eqn.29.
+
+    \subsection{Vacuum Expectation Value}
+    By design of normal ordering, the Fermi vacuum expectation value of any product string in normal ordering w.r.t. Fermin level is 0 unless the product string is fully contracted:
+    \begin{equation}
+   \langle 0 |\{\hat{A}_{1}\hat{A}_{2}\dots\}\{\hat{B}_{1}\hat{B}_{2}\dots\}\{\hat{C}_{1}\hat{C}_{2}\dots\} |0\rangle = \sideset{}{'}\sum _{\stackrel{\text{fully}}{\text{contracted}}}\{\wick[sep=0.35em]{\c1{\hat{A1}}\c2{\hat{A}_{2}}.\c5{.}. \c3{\hat{B}_{1}}\c4{\hat{B}_{2}}\c6{.}\c1{.}\c2{.} \c6{\hat{C}_{1}}\c5{\hat{C}}_{2}\c3{.}\c4{.}.}\} 
+    \end{equation}
+
+
+\end{document}

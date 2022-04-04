@@ -1,0 +1,155 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+
+\section{Rayleigh-Schrödinger Perturbation Theory}
+The exact Hamiltonian is partitioned into a $0 ^{\text{th}}$ order component (unperturbed system) and a perturbation:
+\begin{equation}
+    \hat{H} = \hat{H}_{0} + \lambda \hat{V}
+\end{equation} 
+where $\lambda$ is the order parameter. The $n ^{\text{th}}$ exact wavefunction $\Psi _{n}$ is an eigenfunction to the Hamiltonian:
+\begin{equation}
+    \hat{H}|\Psi _{n}\rangle=E _{n}|\Psi _{n}\rangle
+\end{equation}
+and the unperturbed system is already solved:
+\begin{equation}
+    \hat{H} _{0}|\Psi _{n}^{(0)}\rangle = E _{n}^{(0)}|\Psi _{n}^{(0)}\rangle
+\end{equation}
+$\Psi _{n}$ and $E _{n}$ could be expanded as:
+\begin{equation}
+    |\Psi _{n}\rangle = |\Psi _{n}^{(0)}\rangle + \lambda |\Psi _{n}^{(1)}\rangle + \lambda ^{2}|\Psi _{n}^{(2)}\rangle + \dots = \sum_{i=0}\lambda ^{i}|\Psi _{n}^{(i)}\rangle
+\end{equation}
+\begin{equation}
+    E _{n} = E _{n}^{(0)} + \lambda E _{n}^{(1)} + \lambda ^{2}E _{n}^{(2)} + \dots = \sum_{i=0}\lambda ^{i} E _{n}^{(i)}
+\end{equation}
+Substitute these expansions into the Schrödinger equation:
+\begin{align}
+    0 =& (\hat{H} - E _{n})|\Psi _{n}\rangle \nonumber \\
+    0 =& (\hat{H}-\sum_{j=0}\lambda ^{j}E _{n}^{(j)})\sum_{i=0}\lambda ^{i}|\Psi _{n}^{(i)}\rangle \\ \nonumber
+    0 =& (\hat{H}_{0} - E _{n}^{(0)} + \lambda \hat{V} - \lambda E _{n}^{(1)} - \lambda ^{2}E _{n}^{(2)}+\dots)  (|\Psi _{n}^{(0)}\rangle + \lambda |\Psi _{n}^{(1)}\rangle + \lambda ^{2}|\Psi _{n}^{(2)}\rangle+ \dots)
+\end{align}
+By collecting the terms with matching orders of $\lambda$, we can obtain one equation for each order:
+\begin{align}
+    \lambda ^{0}: 0= & (\hat{H}_{0}-E _{n}^{(0)})|\Psi _{n}^{(0)}\rangle \\
+    \lambda ^{1}: 0= & (\hat{H} _{0}-E _{n}^{(0)})|\Psi _{n}^{(1)}\rangle + (\hat{V}-E _{n}^{(1)})|\Psi _{n}^{(0)}\rangle \\
+    \lambda ^{2}: 0= & (\hat{H}_{0}-E _{n}^{(0)})|\Psi _{n}^{(2)}\rangle + (\hat{V}-E _{n}^{(1)})|\Psi _{n}^{(1)}\rangle - E _{n}^{(2)}|\Psi _{n}^{(0)}\rangle \\
+    & \dots \nonumber \\
+    \lambda ^{m}: 0= & (\hat{H}_{0}-E _{n}^{(0)})|\Psi _{n}^{(m)}\rangle + (\hat{V}-E _{n}^{(1)})|\Psi _{n}^{(m-1)}\rangle -\sum_{l=0}^{m-2}E _{n}^{(m-l)}|\Psi _{n}^{(l)}\rangle
+\end{align}
+The general $m ^{\text{th}}$ equation could be re-written as:
+\begin{equation}
+    \hat{H} _{0}|\Psi _{n}^{(m)}\rangle + \hat{V}|\Psi _{n}^{(m-1)}\rangle = \sum_{l=0}^{m}E _{n}^{(m-l)}|\Psi _{n}^{(l)}\rangle
+\end{equation}
+
+\subsection{Energy Correction}
+The energy correction of each order could be obtained by projecting $\langle \Psi _{n}^{(0)}|$ onto corresponding equation (and denoting $\Psi _{n}^{(0)}$ as $\Phi _{n}$):
+\begin{align}
+    \langle \Phi _{n}|\hat{H} _{0}|\Psi _{n}^{(m)}\rangle + \langle \Phi _{n}|\hat{V}|\Psi _{n}^{(m-1)}\rangle =& \sum_{l=0}^{m}E _{n}^{(m-l)}\langle \Phi _{n}|\Psi _{n}^{(l)}\rangle \\ \nonumber
+    \langle \hat{H} _{0}\Phi _{n}|\Psi _{n}^{(m)}\rangle + \langle \Phi _{n}|\hat{V}|\Psi _{n}^{(m-1)}\rangle =& \sum_{l=0}^{m}E _{n}^{(m-l)}\delta _{0l} \\ \nonumber
+    E _{n}^{(0)}\delta _{0m} + \langle \Phi _{n}|\hat{V}|\Psi _{n}^{(m-1)}\rangle =& E _{n}^{(m)}
+\end{align}
+where we employed the intermediate normalisation condition:
+\begin{equation}
+    \langle \Phi _{n}|\Psi _{n}^{(m)}\rangle = \delta _{m0}
+\end{equation}
+Therefore, we can obtain the $m ^{\text{th}}$ order energy correction ($m>0$) as:
+\begin{equation}
+    E _{n}^{(m)} = \langle \Phi _{n}|\hat{V}|\Psi _{n}^{(m-1)}\rangle
+\end{equation}
+
+\subsection{Wavefunction Expansion}
+The perturbed wavefunctions could be expanded in a set of $0 ^{\text{th}}$ order wavefunction $\{\Phi _{i}\}$:
+\begin{equation}
+    |\Psi _{n}^{(m)}\rangle = \sum_{k}a _{kn}^{(m)}|\Phi _{k}\rangle
+\end{equation}
+By inserting the resolution of identity:
+\begin{equation}
+    |\Psi _{n}^{(m)}\rangle = \sum_{k}|\Phi _{k}\rangle\langle \Phi _{k}|\Psi _{n}^{(m)}\rangle
+\end{equation}
+we find that:
+\begin{equation}
+    a _{kn}^{(m)} = \langle \Phi _{k}|\Psi _{n}^{(m)}\rangle
+\end{equation}
+By the property of Hermitian operator:
+\begin{equation}
+    a _{kn}^{(0)} = \langle \Phi _{k}|\Phi _{n}\rangle = \delta _{kn}
+\end{equation}
+Also, by the intermediate normalisation condition we have defined:
+\begin{equation}
+    a _{nn}^{(m)} = \langle \Phi _{n}|\Psi _{n}^{(m)}\rangle = \delta _{0m}
+\end{equation}
+Since we do not need to expand the $0 ^{\text{th}}$ order wavefunction, we can safely say that $a _{nn}^{(m)}=0$.\\
+
+\subsection{Wavefunction and Energy Expression}
+To obtain the exact form of the coefficients thus the wavefunction, we project $\langle \Phi _{k}|$ onto equations
+of corresponding order of $\lambda$. For example, to obtain $a _{kn}^{(1)}$, we project onto $\lambda ^{1}$ equation:
+\begin{align}
+    0 &= \langle \Phi _{k}|(\hat{H}_{0}-E _{n}^{(0)})|\Psi _{n}^{(1)}\rangle + \langle \Phi _{k}|\hat{V}-E _{n}^{(1)}|\Phi _{n}\rangle   \nonumber \\
+      &= E _{k}^{(0)}\langle \Phi _{k}|\Psi _{n}^{(1)}\rangle - E _{n}^{(0)}\langle \Phi _{k}|\Psi _{n}^{(1)}\rangle + \langle \Phi _{k}|\hat{V}|\Phi _{n}\rangle - E _{n}^{(1)}\langle \Phi _{k}|\Phi _{n}\rangle \nonumber \\
+      &= E _{k}^{(0)}a _{kn}^{(1)} - E _{n}^{(0)}a _{kn}^{(1)} + \langle \Phi _{k}|\hat{V}|\Phi _{n}\rangle - E _{n}^{(1)}\delta _{nk}
+\end{align}
+For $k\neq n$, we have:
+\begin{equation}
+    a _{kn}^{(1)} = \frac{\langle \Phi _{k}|\hat{V}|\Phi _{n}\rangle}{E _{n}^{(0)} - E _{k}^{(0)}} = \frac{V _{kn}}{E _{n}^{(0)}-E _{k}^{(0)}}
+\end{equation}
+Since $a _{nn}^{(1)} = \langle \Phi _{n}|\Psi _{n}^{(1)}\rangle = 0$, it is safe to exclude $n=k$ term in summations of $a _{kn}^{(1)}$ .
+Now we have the expression for $1 ^{\text{st}}$ order wavefunction:
+\begin{align}
+    |\Psi _{n}^{(1)}\rangle =& \sum_{k}{\vphantom{\sum}}' a _{kn}^{(1)}|\Phi _{k}\rangle \nonumber \\
+     =& \sum_{k}{\vphantom{\sum}}' \frac{\langle \Phi _{k}|\hat{V}|\Phi _{n}\rangle}{E _{n}^{(0)}-E _{k}^{(0)}}|\Phi _{k}\rangle \nonumber \\
+     =& \sum_{k}{\vphantom{\sum}}' \frac{V _{kn}}{E _{n}^{(0)}-E _{k}^{(0)}}|\Phi _{k}\rangle
+\end{align}
+where $\sum_{k}{\vphantom{\sum}}'$ denotes summation without $n=k$. And the $2 ^{\text{nd}}$ order energy correction follows as:
+\begin{align}
+    E _{n}^{(2)} =& \langle \Phi _{n}|\hat{V}|\Psi _{n}^{(1)}\rangle \nonumber \\
+     =& \sum_{k}{\vphantom{\sum}}' \langle \Phi _{n}|\hat{V}|\Phi _{k}\rangle \frac{V _{kn}}{E _{n}^{(0)}-E _{k}^{(0)}} \nonumber \\
+     =& \sum_{k}{\vphantom{\sum}}' \frac{V _{nk}V _{kn}}{E _{n}^{(0)}-E  _{k}^{(0)}} \nonumber \\
+     =& \sum_{k}{\vphantom{\sum}}' \frac{\abs{V _{nk}}^{2}}{E _{n}^{(0)}-E _{k}^{(0)}}  
+\end{align}
+
+
+
+
+\end{document}

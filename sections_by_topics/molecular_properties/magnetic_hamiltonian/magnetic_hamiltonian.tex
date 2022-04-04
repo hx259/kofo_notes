@@ -1,0 +1,95 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{Hamiltonian in Magnetic Field}
+
+
+    \subsection{Hamiltonian Mechanics}
+
+    \subsection{Electromagnetic Field}
+
+    \subsection{Hamiltonian in Electromagnetic Field}
+    Schrödinger Equation:
+    \begin{equation}
+        i \hbar \pdv{\Psi}{t} = \frac{1}{2m} (-i\hbar \mathbf{\nabla} - z \mathbf{A})\cdot(-i \hbar \mathbf{\nabla} - z \mathbf{A})\Psi + z \phi \Psi
+    \end{equation}
+    which is linear on $\phi$ and quadratic on $\mathbf{A}$.
+
+    \subsection{Spin}
+    Revised one-electron Hamiltonian:
+    \begin{equation}
+        H = \frac{p ^{2}}{2 m _{e}} + \frac{e}{m _{e}}\mathbf{A}\cdot \mathbf{p} + \frac{e}{m _{e}}\mathbf{B}\cdot \mathbf{s} + \frac{e ^{2}}{2 m _{e}}A ^{2} + e \phi
+    \end{equation}
+    where the:
+    \begin{itemize}
+    \item $\mathbf{A}\cdot \mathbf{p}$ term is the coupling of magnetic field with electron orbital motion
+    \item $\mathbf{B}\cdot \mathbf{s}$ term is the coupling of magnetic field with spin
+    \item $A ^{2}$ term is the correction to the scalar potential $\phi$
+    \end{itemize}
+
+    \subsection{Molecular Electronic Hamiltonian}
+    Molecular electronic Hamiltonian in atomic units:
+    \begin{align}
+        H = &\frac{1}{2}\sum_{i}p _{i}^{2} - \sum_{K,i}\frac{Z _{K}}{r _{iK}} + \sum_{i>j}\frac{1}{r _{ij}} + \sum_{K>L}\frac{Z _{K}Z _{L}}{R _{KL}} \\ \nonumber 
+        &+ \sum_{i}\mathbf{A}_{i}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \sum_{i}\mathbf{B}(\mathbf{r}_{i})\cdot \mathbf{s}_{i} - \sum_{i}\phi(\mathbf{r}_{i}) + \frac{1}{2}\sum_{i}A ^{2}(\mathbf{r}_{i})
+    \end{align}
+    In perturbative treatment we can write the Hamiltonian as:
+    \begin{equation}
+        H = H^{(0)} + H^{(1)} + H^{(2)}
+    \end{equation}
+    where
+    \begin{equation}
+        H^{(1)} = \sum_{i}\mathbf{A}_{i}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \sum_{i}\mathbf{B}(\mathbf{r}_{i})\cdot \mathbf{s}_{i} - \sum_{i}\phi(\mathbf{r}_{i}) 
+    \end{equation}
+    and the first two terms are the paramagnetic contribution to the Hamiltonian, and the diamagnetic contribution is:
+    \begin{equation}
+        H^{(2)} = \frac{1}{2}\sum_{i}A ^{2}(\mathbf{r}_{i})
+    \end{equation}
+
+
+
+
+
+\end{document}

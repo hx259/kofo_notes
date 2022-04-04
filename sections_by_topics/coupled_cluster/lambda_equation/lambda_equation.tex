@@ -1,0 +1,176 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{$\Lambda$ Equations}
+
+\subsection{Derivation of $\Lambda$ Equations}
+    This is a summary of the article Salter et al., J. Chem. Phys. 90, 1752 (1989).\\
+
+    For a perturbation $\chi$, we define the following notations here:
+    \begin{align*}
+        T &= T(\chi)\Big|_{{\chi=0}} & T ^{\chi} &= \pdv{T(\chi)}{\chi}\Big|_{{\chi=0}} \\
+        \Delta E &=\Delta E(\chi)\Big|_{{\chi=0}} & \Delta E ^{\chi} &= \pdv{\Delta E(\chi)}{\chi}\Big|_{{\chi=0}} \\
+        H _{\text{N}} =& f _{\text{N}} + W _{\text{N}} = (f _{\text{N}}(\chi) + W _{\text{N}}(\chi))\Big|_{{\chi=0}}  \\
+        H _{\text{N}}^{\chi} =& f _{\text{N}}^{\chi} + W _{\text{N}}^{\chi} =\Big(\pdv{f _{\text{N}}(\chi)}{\chi} + \pdv{W _{\text{N}}(\chi)}{\chi}\Big)\Big|_{{\chi=0}}
+    \end{align*}
+    We also define the orthonormal determinant space as $|P\rangle$, in which $T(\chi)$ and $\Delta E(\chi)$ are determined:
+    \begin{equation}
+        |P\rangle = |0\rangle + |\Phi\rangle
+    \end{equation}
+    where $|0\rangle$ is the ground-state determinant and $|\Phi\rangle$ represent the excited determinant space.
+    We know that:
+    \begin{equation}
+        |P\rangle\langle P| = |0\rangle\langle 0| + |\Phi \rangle\langle \Phi| = \hat{1}
+    \end{equation}
+    \\
+    We have the CC equations as:
+    \begin{align}
+        \langle 0|\mathcal{H}|0 \rangle =& \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|0 \rangle = \Delta E \\
+        \langle \Phi|\mathcal{H}|0\rangle=& \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|0 \rangle = 0
+    \end{align}
+    By taking derivatives w.r.t. $\chi$ on both sides of the eigenvalue equation $\mathcal{H}|0\rangle = \Delta E |0\rangle$, we have:
+    \begin{align}
+        \Delta E ^{\chi}|0\rangle &= (-T ^{\chi}e ^{-T}H _{\text{N}}e ^{T} + e ^{-T}H _{\text{N}}^{\chi}e ^{T} + e ^{-T}H _{\text{N}}e ^{T}T ^{\chi})|0\rangle  \nonumber \\
+        &= \{[\mathcal{H},T ^{\chi}] + (H _{\text{N}}e ^{T})_{\text{C}}\}|0\rangle\nonumber \\
+        &= \{[(H _{\text{N}}e ^{T})_{\text{C}} T ^{\chi}]_{\text{C}} + (H _{\text{N}}e ^{T})_{\text{C}}\}|0\rangle 
+    \end{align}  
+    Project $|P\rangle$ on both sides of the equation we obtain the equations for energy derivative and amplitude derivatives:
+    \begin{align}
+        \langle 0|[(H _{\text{N}}e ^{T})_{\text{C}}T ^{\chi}]_{\text{C}} + (H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle &= \Delta E ^{\chi} \\
+        \langle \Phi|[(H _{\text{N}}e ^{T})_{\text{C}}T ^{\chi}]_{\text{C}} + (H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle &= 0
+    \end{align}
+    We could solve the amplitude derivative equation for $T ^{\chi}$ and use that to obtain $\Delta E ^{\chi}$. However, this is difficult as well as unnecessary.
+    Instead, we can manipulate the equations in the following manner to get rid of the $T ^{\chi}$ dependence in the energy derivative equation.
+ 
+    First, we have the derivative eigenvalue equation as:
+    \begin{align}
+        \Delta E ^{\chi}|0\rangle&= \{[(H _{\text{N}}e ^{T})_{\text{C}},T ^{\chi}] + (H _{\text{N}}e ^{T})_{\text{C}}\}|0\rangle \nonumber \\
+        &= \{(H _{\text{N}}e ^{T})_{\text{C}}T ^{\chi} - T ^{\chi}(H _{\text{N}}e ^{T})_{\text{C}} + (H _{\text{N}}^{\chi} e ^{T})_{\text{C}}\}|0\rangle
+    \end{align}
+    Insert, on the RHS, that $\hat{1} = |P\rangle \langle P|$
+    \begin{equation}
+        \Delta E ^{\chi}|0\rangle = (H _{\text{N}}e ^{T})_{\text{C}}|P\rangle \langle P|T ^{\chi}|0\rangle - T ^{\chi}|P\rangle \langle P|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle + (H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle
+    \end{equation}
+    Projecting onto $\langle 0|$ we get:
+    \begin{align}
+        \Delta E ^{\chi} =& \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|P\rangle\langle P|T ^{\chi}|0\rangle - \langle 0|T ^{\chi}|P\rangle\langle P|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle + \langle 0|(H _{\text{N}}^{\chi} e ^{T})_{\text{C}}|0 \rangle &  \nonumber \\
+        =& \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle \langle 0| T ^{\chi}|0\rangle - \langle 0|T ^{\chi}|0\rangle \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle + \langle 0|(H _{\text{N}}^{\chi} e ^{T})_{\text{C}}|0 \rangle \nonumber \\
+        &+ \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle \langle \Phi|T ^{\chi}|0\rangle - \langle 0|T ^{\chi}|\Phi \rangle \langle \Phi |(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle \rangle \nonumber \\
+        =& \Delta E \times 0 - 0 \times \Delta E + \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle
+        + \langle 0 |(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle \langle \Phi|T ^{\chi}|0\rangle - 0 \times 0 \nonumber \\
+        =& \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle \langle \Phi |T ^{\chi}|0\rangle
+    \end{align}
+    where we used the fact that $\langle 0 | T ^{\chi}|0\rangle = \langle 0|T ^{\chi}|\Phi\rangle = 0$ since $T ^{\chi}$ is an excitation operator. \\
+    Similarly, projecting onto $\langle \Phi|$ gives:
+    \begin{align}
+       0 =& \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|P\rangle\langle P|T ^{\chi}|0\rangle - \langle \Phi|T ^{\chi}|P\rangle\langle P|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle + \langle \Phi|(H _{\text{N}}^{\chi} e ^{T})_{\text{C}}|0 \rangle &  \nonumber \\
+        =& \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle \langle 0| T ^{\chi}|0\rangle - \langle \Phi|T ^{\chi}|0\rangle \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle + \langle \Phi|(H _{\text{N}}^{\chi} e ^{T})_{\text{C}}|0 \rangle \nonumber \\
+        &+ \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle \langle \Phi|T ^{\chi}|0\rangle - \langle \Phi|T ^{\chi}|\Phi \rangle \langle \Phi |(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle \rangle \nonumber \\
+        =& 0 \times 0 - \langle \Phi |T ^{\chi}|0\rangle \Delta E + \langle \Phi |(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle + \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle \langle \Phi|T ^{\chi}|0\rangle - \langle \Phi|T ^{\chi}|\Phi\rangle \times 0 \nonumber \\
+        =& \langle \Phi |(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle + \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle \langle \Phi|T ^{\chi}|0\rangle - \langle \Phi |T ^{\chi}|0\rangle \Delta E
+    \end{align} 
+    From this we can get the expression for the integral containing $T ^{\chi}$:
+    \begin{align}
+        \langle \Phi|T ^{\chi}|0\rangle \Big(\langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle - \Delta E\Big) =& -\langle \Phi|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle   \nonumber \\
+        \langle \Phi|T ^{\chi}|0\rangle =& \frac{\langle \Phi|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle}{\Delta E - \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle}
+    \end{align}
+    Sub this back into the expression for $\Delta E ^{\chi}$:
+    \begin{equation}
+        \Delta E ^{\chi} =  \frac{\langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle\langle \Phi|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle}{\Delta E - \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle} + \langle 0|(H _{\text{N}}^{\chi} e ^{T})_{\text{C}}|0 \rangle
+    \end{equation}
+    Here we define a new operator such that:
+    \begin{equation}
+        \langle 0|\Lambda|\Phi\rangle = \frac{\langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle}{\Delta E - \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle}
+    \end{equation}
+    $\Lambda$ is a de-excitation operator:
+    \begin{align}
+        \Lambda =& \sum_{\mu}\Lambda _{\mu} \\
+        \Lambda _{\mu} =& \sum_{\substack{a,b,...\\i,j,...}}\frac{1}{(m!)^{2}}\{\hat{i}^{\dagger}\hat{a}\hat{j}^{\dagger}\hat{b}\dots\}
+    \end{align}
+    With this definition (and the fact that, as a de-excitation operator, $\langle 0|\Lambda|0 \rangle = 0$ ), we can re-write the $\Delta E ^{\chi}$ equation as:
+    \begin{align}
+        \Delta E ^{\chi} =& \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle + \langle 0|\Lambda|\Phi\rangle\langle \Phi|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle \nonumber \\
+        =& \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle + \langle 0|\Lambda|\Phi\rangle\langle \Phi|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle + \langle 0|\Lambda|0 \rangle \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle \nonumber \\
+        =& \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle + \langle 0|\Lambda\Big(|0\rangle\langle 0| +|\Phi\rangle\langle \Phi|\Big)(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0\rangle \nonumber \\
+        =& \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle + \langle 0|\Lambda(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle
+    \end{align}
+    We also have the $\Lambda$ equation as:
+    \begin{align}
+        \frac{\langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle}{\Delta E - \langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle} =& \langle 0|\Lambda|\Phi\rangle \Leftrightarrow \nonumber \\
+        \langle 0|\Lambda|\Phi\rangle\langle \Phi|(H _{\text{N}}e ^{T})_{\text{C}}-\Delta E|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0 \Leftrightarrow\nonumber \\
+        \langle 0|\Lambda\Big(|\Phi\rangle\langle \Phi| + |0\rangle\langle 0|\Big)\Big((H _{\text{N}}e ^{T})_{\text{C}}-\Delta E\Big)|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0 \Leftrightarrow\nonumber \\
+        \langle 0|\Lambda(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle - \Delta E\langle 0|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0
+    \end{align}
+    By considering $\langle 0|(H _{\text{N}}e ^{T})_{\text{C}}\Lambda|\Phi\rangle$:
+    \begin{align}
+        \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}\Lambda|\Phi\rangle =& \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}\Big(|0\rangle\langle 0| + |\Phi\rangle\langle \Phi|\Big)\Lambda|\Phi\rangle  \nonumber \\
+        =& \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|0 \rangle \langle 0|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle\langle \Phi |\Lambda|\Phi\rangle \nonumber \\
+        =& \Delta E \langle 0|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle\langle \Phi|\Lambda|\Phi\rangle
+    \end{align} 
+    We can obtain the $\Lambda$ equation as:
+    \begin{align}
+        \langle 0|\Lambda (H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle - \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle\langle \Phi|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0 \Leftrightarrow\nonumber \\
+        \langle 0|[\Lambda, (H _{\text{N}}e ^{T})_{\text{C}}]|\Phi\rangle+ \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle\langle \Phi|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0
+    \end{align}
+    This together with the $\Delta E ^{\chi}$ equation, are the CC energy derivative equations:
+    \begin{align}
+        \Delta E ^{\chi} =& \langle 0|(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle + \langle 0|\Lambda(H _{\text{N}}^{\chi}e ^{T})_{\text{C}}|0 \rangle \\
+        0 =& \langle 0|[\Lambda, (H _{\text{N}}e ^{T})_{\text{C}}]|\Phi\rangle+ \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle\langle \Phi|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle
+    \end{align}
+    Alternatively, the $\Lambda$ equation could be written in a more compact form:
+    \begin{align}
+        \langle 0|[\Lambda, (H _{\text{N}}e ^{T})_{\text{C}}]|\Phi\rangle+ \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle\langle \Phi|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0 \Leftrightarrow \nonumber \\
+        \langle 0|\Lambda (H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle - \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle \langle \Phi|\Lambda|\Phi \rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0 \Leftrightarrow \nonumber \\
+        \langle 0|\Lambda (H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle - \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|0\rangle \langle 0|\Lambda|\Phi\rangle + \langle 0|(H _{\text{N}}e ^{T})_{\text{C}}|\Phi\rangle =& 0 \Leftrightarrow \nonumber \\
+        \langle 0|\Lambda(H _{\text{N}}e ^{T})_{\text{C}} - \Lambda\Delta E + (H _{\text{N}}e ^{T})_{\text{C}}|\Phi \rangle =& 0 \nonumber \\
+        \Updownarrow& \nonumber \\
+        \langle 0|(1+\Lambda)((\mathcal{H}-\Delta E)|\Phi\rangle =& 0
+    \end{align}
+
+
+
+
+
+\end{document}

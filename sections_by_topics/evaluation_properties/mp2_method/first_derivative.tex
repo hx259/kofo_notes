@@ -1,0 +1,411 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\section{Direct Differentiation}
+MP2 energy in spin-orbital formalism:
+\begin{align}
+    E ^{(2)} =& \frac{1}{4}\sum_{ijab}\frac{\langle ab||ij\rangle \langle ij||ab\rangle}{f _{ii}+f _{jj}-f _{aa}-f _{bb}} \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}T _{ij}^{ab}\langle ij||ab\rangle
+\end{align}
+in which we denote the MP2 amplitude:
+\begin{equation}
+    T _{ij}^{ab} = \frac{\langle ab||ij\rangle}{\Delta _{ab}^{ij}} = \frac{\langle ab||ij\rangle}{f _{ii}+f _{jj}-f _{aa}-f _{bb}}
+\end{equation} 
+Directly differentiate the second-order energy w.r.t. perturbation parameter $\lambda$:
+\begin{align}
+    \pdv{E ^{(2)}}{\lambda} =& \frac{1}{4}\sum_{ijab}\pdv{\lambda}(T _{ij}^{ab}\langle ij||ab\rangle) \nonumber \\
+    =&\frac{1}{4}\sum_{ijab}\Big(\pdv{T _{ij}^{ab}}{\lambda}\Big)\langle ij||ab\rangle + \frac{1}{4}\sum_{ijab}T _{ij}^{ab} \Big(\pdv{\langle ij||ab\rangle}{\lambda}\Big)
+\end{align}
+in which:
+\begin{align}
+    \pdv{\langle ij||ab\rangle}{\lambda} = \langle i ^{\lambda}j||ab\rangle + \langle ij ^{\lambda}||ab\rangle + \langle ij||a ^{\lambda}b\rangle + \langle ij||ab ^{\lambda}\rangle
+\end{align} 
+exploiting the permutational symmetry and equivalence of the dummy indices:
+\begin{align}
+    \sum_{ijab}\langle ij ^{\lambda}||ab\rangle = \sum_{ijab}\langle j ^{\lambda}i||ba\rangle = \sum_{jiba}\langle i ^{\lambda}j||ab\rangle
+\end{align}
+Therefore:
+\begin{equation}
+    \sum_{ijab}\langle ij||ab\rangle ^{\lambda} = 2 \sum_{ijab}(\langle i ^{\lambda}j||ab\rangle + \langle ij||a ^{\lambda}b\rangle)
+\end{equation}
+Then:
+\begin{align}
+    \pdv{T _{ij}^{ab}}{\lambda} =& \pdv{\lambda}(\frac{\langle ab||ij\rangle}{\Delta _{ab}^{ij}}) \nonumber \\
+    =& \frac{\langle ab||ij\rangle ^{\lambda}}{\Delta _{ab}^{ij}} - \frac{\langle ab||ij\rangle}{(\Delta _{ab}^{ij})^{2}}\Big(\pdv{\Delta _{ab}^{ij}}{\lambda}\Big) \nonumber \\
+    =&  \frac{\langle ab||ij\rangle ^{\lambda}}{\Delta _{ab}^{ij}} - \frac{\langle ab||ij\rangle}{(\Delta _{ab}^{ij})^{2}}(\varepsilon _{i} ^{\lambda} + \varepsilon _{j}^{\lambda} - \varepsilon _{a}^{\lambda}-\varepsilon _{b}^{\lambda})
+\end{align}
+Putting eqns (6) and (7) together:
+\begin{align}
+    \pdv{E ^{(2)}}{\lambda} =& \frac{1}{4}\sum_{ijab}\langle ij||ab\rangle (T _{ij}^{ab})^{\lambda} + \frac{1}{4}\sum_{ijab}T _{ij}^{ab}\langle ij||ab\rangle ^{\lambda} \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}\langle ij||ab\rangle\Big(\frac{\langle ab||ij\rangle ^{\lambda}}{\Delta _{ab}^{ij}}-\frac{\langle ab||ij\rangle}{(\Delta _{ab}^{ij})^{2}}(\varepsilon _{i} ^{\lambda} + \varepsilon _{j}^{\lambda} - \varepsilon _{a}^{\lambda}-\varepsilon _{b}^{\lambda})\Big) + \frac{1}{4}\sum_{ijab}\langle ij||ab\rangle ^{\lambda}T _{ij} ^{ab} \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle\langle ab||ij\rangle ^{\lambda}}{\Delta _{ab}^{ij}} + \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle ^{\lambda}\langle ab||ij\rangle}{\Delta _{ab}^{ij}}- \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle\langle ab||ij\rangle}{(\Delta _{ab}^{ij})^{2}}(2 \varepsilon _{i}^{\lambda} -2 \varepsilon _{a}^{\lambda})  \nonumber \\
+    =& \frac{1}{2}\sum_{ijab}(T _{ij}^{ab})^{*}\langle a ^{\lambda}b||ij\rangle + \frac{1}{2}\sum_{ijab}(T _{ij}^{ab})^{*}\langle ab||i ^{\lambda}j\rangle + \frac{1}{2}\sum_{ijab}T ^{ab}_{ij}\langle i ^{\lambda}j||ab\rangle + \frac{1}{2}\sum_{ijab} T _{ij}^{ab}\langle ij||a ^{\lambda}b\rangle \nonumber \\
+    &- \frac{1}{2}\sum_{ijab}T _{ij}^{ab}(T _{ij}^{ab})^{*}(\varepsilon _{i}^{\lambda}-\varepsilon _{a}^{\lambda})
+\end{align}
+Using the expression for $|i ^{\lambda}\rangle$ and $|a ^{\lambda}\rangle$:
+\begin{align}
+    \pdv{E ^{(2)}}{\lambda}=& \frac{1}{2}\sum_{ijab}(T _{ij}^{ab})^{*}\Big(\sum_{k}(U _{ka}^{\lambda})^{*}\langle kb||ij\rangle + \sum_{f\neq a}(U _{fa}^{\lambda})^{*}\langle fb||ij\rangle + \sum_{\mu}C _{\mu a}^{*}\langle \mu ^{\lambda} b||ij\rangle\Big) \nonumber \\
+    &+ \frac{1}{2}\sum_{ijab}(T _{ij}^{ab})^{*}\Big(\sum_{k\neq i}U _{ki}^{\lambda}\langle ab||kj\rangle + \sum_{f}U _{fi}^{\lambda}\langle ab||fj\rangle + \sum_{\mu}C _{\mu i}\langle ab||\mu ^{\lambda} j\rangle\Big) \nonumber \\
+    &+ \frac{1}{2}\sum_{ijab}T _{ij}^{ab}\Big(\sum_{k\neq i}(U _{ki}^{\lambda})^{*}\langle kj||ab\rangle + \sum_{f}(U _{fi}^{\lambda})^{*}\langle fj||ab\rangle + \sum_{\mu}C _{\mu i}^{*}\langle \mu ^{\lambda} j||ab\rangle\Big) \nonumber \\
+    &+ \frac{1}{2}\sum_{ijab}T _{ij}^{ab}\Big(\sum_{k}U _{ka}^{\lambda}\langle ij||kb\rangle + \sum_{f\neq a}U _{fa}^{\lambda}\langle ij||fb\rangle + \sum_{\mu}C _{\mu a}\langle ij||\mu ^{\lambda}b\rangle\Big) \nonumber \\
+    &-\frac{1}{2}\sum_{ijab}T _{ij}^{ab}(T _{ij}^{ab})^{*}(\varepsilon _{i}^{\lambda}-\varepsilon _{a}^{\lambda})
+\end{align}
+Using the orthonormality condition on $(U _{ka}^{\lambda})^{*}$, $(U _{fa}^{\lambda})^{*}$, $(U _{ki}^{\lambda})^{*}$ and $U _{ka}^{\lambda}$, and omitting the AO terms (terms involving $|\phi _{\mu}\rangle$) for now:
+\begin{align}
+    \pdv{E ^{(2)}}{\lambda} =& \frac{1}{2}\sum_{ijab}\sum_{k}(T ^{ab}_{ij})^{*}\langle kb||ij\rangle(-S _{ak}^{\lambda} - U _{ak}^{\lambda}) + \frac{1}{2}\sum_{ijab}\sum_{f\neq a}(T _{ij}^{ab})^{*}\langle fb||ij\rangle(-S _{af}^{\lambda}-U _{af}^{\lambda}) \nonumber \\
+    &+ \frac{1}{2}\sum_{ijab}\sum_{k\neq i}(T _{ij}^{ab})^{*}\langle ab||kj\rangle U _{ki}^{\lambda} + \frac{1}{2}\sum_{ijab}\sum_{f}(T _{ij}^{ab})^{*}\langle ab||fi\rangle U _{fi}^{\lambda} \nonumber \\
+    &+ \frac{1}{2}\sum_{ijab}\sum_{k\neq i}T _{ij}^{ab}\langle kj||ab\rangle (-S _{ik}^{\lambda}-U _{ik}^{\lambda}) + \frac{1}{2}\sum_{ijab}\sum_{f}T _{ij}^{ab}\langle fj||ab\rangle (U _{fi}^{\lambda})^{*} \nonumber \\
+    &+ \frac{1}{2}\sum_{ijab}\sum_{k}T _{ij}^{ab}\langle ij||kb\rangle(-S _{ak}^{\lambda}-(U _{ak}^{\lambda})^{*}) + \frac{1}{2}\sum_{ijab}\sum_{f\neq a}T _{ij}^{ab}\langle ij||fb\rangle U _{fa}^{\lambda} \nonumber \\
+    &-\frac{1}{2}\sum_{ijab}T _{ij}^{ab}(T _{ij}^{ab})^{*}(\varepsilon _{i}^{\lambda}-\varepsilon _{a}^{\lambda}) + \text{AO terms}
+\end{align}
+collecting the $U _{af}^{\lambda}$ and $U _{fa}^{\lambda}$ terms and swapping some dummy indices:\\
+\begin{align}
+    A =&-\frac{1}{2}\sum_{ijab}\sum_{f\neq a} (T _{ij}^{ab})^{*}\langle fb||ij\rangle U _{af}^{\lambda} + \frac{1}{2} \sum_{ijab}\sum_{f\neq a}T _{ij}^{ab}\langle ij||fb\rangle U _{fa}^{\lambda} \nonumber \\
+    =&- \frac{1}{2}\sum_{ijfb}\sum_{a\neq f}(T _{ij}^{fb})^{*}\langle ab||ij\rangle U _{fa}^{\lambda} + \frac{1}{2} \sum_{ijab}\sum_{f\neq a}T _{ij}^{ab}\langle ij||fb\rangle U _{fa}^{\lambda} \nonumber \\
+    =& \frac{1}{2}\sum_{ijab}\sum_{f\neq a}\langle ij||fb\rangle \langle ab||ij\rangle U _{fa}^{\lambda}\Big(\frac{1}{\Delta _{ab}^{ij}}-\frac{1}{\Delta _{fb}^{ij}}\Big) \nonumber \\
+    =& \frac{1}{2}\sum_{ijab}\sum_{f\neq a}\langle ij||fb\rangle \langle ab||ij\rangle U _{fa}^{\lambda}\frac{\epsilon _{a}-\epsilon _{f}}{\Delta _{ab}^{ij}\Delta _{fb}^{ij}}
+\end{align}
+using the expression for $U _{fa}^{\lambda}$:
+\begin{align}
+    A =& \frac{1}{2}\sum_{ijab}\sum_{f\neq a}\frac{\langle ij||fb\rangle\langle ab||ij\rangle(Q _{fa}^{\lambda}+\sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle fg||am\rangle])}{\Delta _{ab}^{ij}\Delta _{fb}^{ij}} \nonumber \\
+    =& \frac{1}{2}\sum_{ijab}\sum_{f\neq a}T _{ij}^{ab}(T _{ij}^{fb})^{*}\Big(Q _{fa}^{\lambda}+\sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle fg||am\rangle]\Big)
+\end{align}
+evaluating the $\varepsilon _{a}^{\lambda}$ term in $\pdv{E ^{(2)}}{\lambda}$ expression:
+\begin{align}
+    \frac{1}{2}\sum_{ijab}T _{ij}^{ab}(T _{ij}^{ab})^{*}\varepsilon _{a}^{\lambda} =&\frac{1}{2}\sum_{ijab}T _{ij}^{ab}(T _{ij}^{ab})^{*}\Big(Q _{aa}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle am||ag\rangle + (U _{gm}^{\lambda})^{*}\langle ag||am\rangle]\Big) \nonumber \\
+    =& \frac{1}{2}\sum_{ijab}\sum_{f=a}T _{ij}^{ab}(T _{ij}^{fb})^{*}(Q _{fa}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle fg||am\rangle])
+\end{align}
+add this term into $A$:
+\begin{equation}
+    A + \frac{1}{2}\sum_{ijab}T _{ij}^{ab}(T _{ij}^{ab})^{*}\varepsilon _{a}^{\lambda} = \frac{1}{2}\sum_{ijabf}T _{ij}^{ab}(T _{ij}^{fb})^{*}\Big(Q _{fa}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle fg||am\rangle]\Big)
+\end{equation}
+Similarly, collecting the $U _{ki}^{\lambda}$ and $U _{ik}^{\lambda}$ terms, and add the $\varepsilon _{i}^{\lambda}$ term into them we get:
+\begin{equation}
+    -\frac{1}{2}\sum_{ijabk}(T _{ij}^{ab})^{*}T _{kj}^{ab}\Big(Q _{ki}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle km||ig\rangle + (U _{gm}^{\lambda})^{*}\langle kg||im\rangle]\Big)
+\end{equation}
+Now looking at the $S _{ak}^{\lambda}$ terms:
+\begin{align}
+    &-\frac{1}{2}\sum_{ijab}\sum_{k}(T _{ij} ^{ab})^{*}\langle kb||ij\rangle S _{ak}^{\lambda} - \frac{1}{2}\sum_{ijab}\sum_{k}T _{ij}^{ab}\langle ij||kb\rangle S _{ak}^{\lambda} \nonumber \\
+    =& -\frac{1}{2}\sum_{ijkab}S _{ak}^{\lambda}\Big(\frac{\langle ij||ab\rangle \langle kb||ij\rangle + \langle ab||ij\rangle \langle ij||kb\rangle}{\Delta _{ab}^{ij}}\Big)
+\end{align}
+\textcolor{blue}{no further simplification for general (complex) orbitals, but could be further simplified if assumed real orbitals}
+\\
+
+Now putting these all back into eqn (10):
+\begin{align}
+    \pdv{E ^{(2)}}{\lambda} =& -\frac{1}{2}\sum_{ijkab}S _{ak}^{\lambda}\Big(T _{ij}^{ab}\langle ij||kb\rangle + (T _{ij}^{ab})^{*}\langle kb||ij\rangle\Big) \nonumber \\
+    &- \frac{1}{2}\sum_{ijab}\sum_{f\neq a}(T _{ij}^{ab})^{*}\langle fb||ij\rangle S _{af}^{\lambda} -\frac{1}{2}\sum_{ijab}\sum_{k\neq i}T _{ij}^{ab}\langle kj||ab\rangle S _{ik}^{\lambda}\nonumber \\
+    &+\frac{1}{2}\sum_{ijab}\sum_{f}(T _{ij}^{ab})^{*}\langle ab||fi\rangle U _{fi}^{\lambda} + \frac{1}{2}\sum_{ijab}\sum_{f}T _{ij}^{ab}\langle fj||ab\rangle (U _{fi}^{\lambda})^{*} \nonumber \\
+    &-\frac{1}{2}\sum_{ijab}\sum_{k}(T _{ij}^{ab})^{*}\langle kb||ij\rangle U _{ak}^{\lambda} - \frac{1}{2}\sum_{ijab}\sum_{k}T _{ij}^{ab}\langle ij||kb\rangle (U _{ak}^{\lambda})^{*} \nonumber \\
+    &+ \frac{1}{2}\sum_{ijabf}T _{ij}^{ab}(T _{ij}^{fb})^{*}\Big(Q _{fa}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle fg||am\rangle]\Big) \nonumber \\
+    &-\frac{1}{2}\sum_{ijabk}(T _{ij}^{ab})^{*}T _{kj}^{ab}\Big(Q _{ki}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle km||ig\rangle + (U _{gm}^{\lambda})^{*}\langle kg||im\rangle]\Big)
+\end{align}
+
+By defining:
+\begin{align}
+    D _{ki} =& -\frac{1}{2}\sum_{jab}(T _{ij}^{ab})^{*}T _{kj}^{ab} \\
+    D _{fa} =& \frac{1}{2}\sum_{ijb}(T _{ij}^{fb})^{*}T _{ij}^{ab} \\
+    I _{ik} =& -\frac{1}{2}\sum_{jab}T _{ij}^{ab}\langle kj||ab\rangle \\
+    I _{af} =& -\frac{1}{2}\sum_{ijb}(T _{ij}^{ab})^{*}\langle fb||ij\rangle \\
+    I _{ak} =& -\frac{1}{2}\sum_{ijb}(T _{ij}^{ab}\langle ij||kb\rangle + (T _{ij}^{ab})^{*}\langle kb||ij\rangle)
+\end{align}
+the derivative becomes:
+\begin{align}
+    \pdv{E ^{(2)}}{\lambda} =& \sum_{ak}S _{ak}^{\lambda}I _{ak} + \sum_{a\neq f}S _{af}^{\lambda}I _{af} + \sum_{i\neq k}S _{ik}^{\lambda}I _{ik} \nonumber \\
+    &+\sum_{af}D _{fa}Q _{fa}^{\lambda} + \sum_{ik}D _{ki}Q _{ki}^{\lambda} \nonumber \\
+    &+ \frac{1}{2}\sum_{ijabf}(T _{ij}^{fb})^{*}\langle fb||ai\rangle U _{ai}^{\lambda} + \frac{1}{2}\sum_{ijabf}T _{ij}^{fb}\langle aj||fb\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    &- \frac{1}{2}\sum_{ijkab}(T _{kj}^{ab})^{*}\langle ib||kj\rangle U _{ai}^{\lambda} - \frac{1}{2}\sum_{ijkab}T _{kj}^{ab}\langle kj||ib\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    &+ \frac{1}{2}\sum_{ijmabfg}T _{mj}^{gb}(T _{mj}^{fb})^{*}U _{ai}^{\lambda}\langle fi||ga\rangle + \frac{1}{2}\sum_{ijmabfg}T _{mj}^{gb}(T _{mj}^{fb})^{*}(U _{ai}^{\lambda})^{*}\langle fa||gi\rangle \nonumber \\
+    &- \frac{1}{2}\sum_{ijkmabg}(T _{mj}^{gb})^{*}T _{kj}^{gb}U _{ai}^{\lambda}\langle ki||ma\rangle - \frac{1}{2}\sum_{ijkmabg}(T _{mj}^{gb})^{*}T _{kj}^{gb}(U _{ai}^{\lambda})^{*}\langle ka||mi\rangle \nonumber \\
+    =& \sum_{ak}S _{ak}^{\lambda}I _{ak} + \sum_{a\neq f}S _{af}^{\lambda}I _{af} + \sum_{i\neq k}S _{ik}^{\lambda}I _{ik} \nonumber \\
+    &+\sum_{af}D _{fa}Q _{fa}^{\lambda} + \sum_{ik}D _{ki}Q _{ki}^{\lambda} \nonumber \\
+    &+ \frac{1}{2}\sum_{ijabf}(T _{ij}^{fb})^{*}\langle fb||ai\rangle U _{ai}^{\lambda} + \frac{1}{2}\sum_{ijabf}T _{ij}^{fb}\langle aj||fb\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    &- \frac{1}{2}\sum_{ijkab}(T _{kj}^{ab})^{*}\langle ib||kj\rangle U _{ai}^{\lambda} - \frac{1}{2}\sum_{ijkab}T _{kj}^{ab}\langle kj||ib\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    &+\sum_{fg}\sum_{ai} D _{fg}\langle fi||ga\rangle U _{ai}^{\lambda} + \sum_{fg}\sum_{ai}D _{fg}\langle fa||gi\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    &+\sum_{km}\sum_{ai} D _{km}\langle ki||ma\rangle U _{ai}^{\lambda} + \sum_{km}\sum_{ai}D _{km}\langle ka||mi\rangle(U _{ai}^{\lambda})^{*} \nonumber \\
+    =& \sum_{ai}S _{ai}^{\lambda}I _{ai} + \sum_{a\neq b}S _{a}^{\lambda}I _{ab} + \sum_{i\neq j}S _{ij}^{\lambda}I _{ij} + \sum_{ab}D _{ab}Q _{ab}^{\lambda} + \sum_{ij}D _{ij}Q _{ij}^{\lambda} \nonumber \\
+    &+\frac{1}{2}\sum_{ai}\sum_{jbc}(T _{ij}^{bc})^{*}\langle bc||ai\rangle U _{ai}^{\lambda} + \frac{1}{2}\sum_{ai}\sum_{jbc}T _{ij}^{bc}\langle aj||bc\rangle (U _{ai} ^{\lambda})^{*} \nonumber \\
+    &-\frac{1}{2}\sum_{ai}\sum_{jkb}(T _{kj}^{ab})^{*}\langle ib||kj\rangle U _{ai}^{\lambda} - \frac{1}{2}\sum_{ai}\sum_{jkb}T _{kj}^{ab}\langle kj||ib\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    &+\sum_{ai}\sum_{bc}D _{bc}\langle bi||ca\rangle U _{ai} ^{\lambda} + \sum_{ai}\sum_{bc}D _{bc}\langle ba||ci\rangle(U _{ai}^{\lambda})^{*} \nonumber \\
+    &+\sum_{ai}\sum_{jk}D _{jk}\langle ji||ka\rangle U _{ai}^{\lambda} + \sum_{ai}\sum_{jk}D _{jk}\langle ja||ki\rangle (U _{ai}^{\lambda})^{*} \nonumber \\
+    =& \sum_{ai}S _{ai}^{\lambda}I _{ai} + \sum_{ab}S _{ab}^{\lambda}I _{ab} + \sum_{ij}S _{ij}^{\lambda}I _{ij} + \sum_{ab}D _{ab}Q _{ab}^{\lambda} + \sum_{ij}D _{ij}Q _{ij}^{\lambda} \nonumber \\
+    &+ \text{something like}\sum_{ai}X _{ai}U _{ai}^{\lambda}
+\end{align}
+\textcolor{red}{$\sum_{a\neq b}$ and $\sum_{i\neq j}$ terms, what about the $a=b$ and $i=j$ terms?} \\
+\textcolor{blue}{Should I drop the complex conjugate? but still can't see how to merge $\langle bi||ca\rangle$ and $\langle ba||ci\rangle$ terms hence could not get the same $X _{ai}$ intermediate as in the article.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Some Identities}
+From CPHF orthonormality condition:
+\begin{equation}
+    U _{pq}^{\lambda} + (U _{qp}^{\lambda})^{*} + S _{pq}^{\lambda} = 0
+\end{equation}
+Consider the spin-orbital (and using $\mathbf{C}(\lambda) = \mathbf{C}(0)\mathbf{U}(\lambda)$):
+\begin{align}
+    |a \rangle = |\psi _{a}\rangle =& \sum_{\mu}C _{\mu a}(\lambda)|\phi _{\mu}\rangle \nonumber \\
+    =& \sum_{\mu}\Big(\sum_{q}C _{\mu q}(0)U _{qa}(\lambda)\Big)|\phi _{\mu}\rangle \nonumber \\
+    =& \sum_{\mu}\Big(\sum_{k}C _{\mu k}(0)U _{ka}(\lambda)\Big)|\phi _{\mu}\rangle + \sum_{\mu}\Big(\sum_{f\neq a}C _{\mu f}(0)U _{fa}(\lambda)\Big)|\phi _{\mu}\rangle
+\end{align}
+\textcolor{red}{Question: Why not include $U _{aa}$  into this sum?} \\
+Taking derivative w.r.t. $\lambda$:
+\begin{align}
+    |a ^{\lambda}\rangle =& \sum_{\mu}\Big(\sum_{k}C _{\mu k}(0)U _{ka}^{\lambda}\Big)|\phi _{\mu}\rangle + \sum_{\mu}\Big(\sum_{f\neq a}C _{\mu f}(0)U _{fa}^{\lambda}\Big)|\phi _{\mu}\rangle \nonumber \\
+    &+ \sum_{\mu}\Big(\sum_{k}C _{\mu k}(0)U _{ka}\Big)|\phi _{\mu}^{\lambda}\rangle + \sum_{\mu}\Big(\sum_{f\neq a}C _{\mu f}(0)U _{fa}\Big)|\phi _{\mu}^{\lambda}\rangle
+\end{align}
+Noticing that $\mathbf{U}(0)=\mathbf{I}$ hence $\sum_{\mu}C _{\mu k}(0)|\phi _{\mu}\rangle = |\psi _{k}\rangle$:
+\begin{align}
+    |a ^{\lambda}\rangle =& \sum_{k}U _{ka}^{\lambda}|\psi _{k}\rangle + \sum_{f\neq a}U _{fa}^{\lambda}|\psi _{f}\rangle + \sum_{\mu q}C _{\mu _{q}}(0)U _{qa}|\phi _{\mu}^{\lambda}\rangle \nonumber \\
+    =& \sum_{k}U _{ka}^{\lambda}|k\rangle + \sum_{f\neq a}U _{fa}^{\lambda}|f\rangle + \sum_{\mu}C _{\mu a}|\mu ^{\lambda}\rangle
+\end{align}
+
+Similarly:
+\begin{align}
+    |i ^{\lambda}\rangle = \sum_{k\neq i}U _{ki}^{\lambda}|k\rangle + \sum_{f}U _{fi}^{\lambda}|f\rangle + \sum_{\mu}C _{\mu i}|\mu ^{\lambda}\rangle
+\end{align}
+
+Expression for CPHF coefficients (c.f. Pople et al. 1979): 
+\begin{equation}
+    U _{fa}^{\lambda} = \frac{1}{\varepsilon _{a}-\varepsilon _{f}}(Q _{fa}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle fg||am\rangle])
+\end{equation}
+\begin{equation}
+    U _{ki}^{\lambda} = \frac{1}{\varepsilon _{i}-\varepsilon _{k}}(Q _{ki}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle fm||ag\rangle + (U _{gm}^{\lambda})^{*}\langle kg||im\rangle])
+\end{equation}
+\begin{equation}
+    \varepsilon _{a}^{\lambda} = Q _{aa}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle am||ag\rangle + (U _{gm}^{\lambda})^{*}\langle ag||am\rangle]
+\end{equation}
+\begin{equation}
+    \varepsilon _{i}^{\lambda} = Q _{ii}^{\lambda} + \sum_{gm}[U _{gm}^{\lambda}\langle im||ig\rangle + (U _{gm}^{\lambda})^{*}\langle ig||im\rangle]
+\end{equation}
+
+
+
+
+
+\section{Lagrangian Method}
+\subsection{Perturbed Orthonormality Condition}
+We have the general orthonormality condition, subject to perturbation, as:
+\begin{equation}
+    S _{pq}=\langle p|q\rangle = \delta _{pq}
+\end{equation}
+\begin{equation}
+    \sum_{\mu \nu}C _{\mu p}^{*}S _{\mu \nu}C _{\nu q} = \delta _{pq}
+\end{equation}
+Parameterization of the MO coefficients:
+\begin{equation}
+    \mathbf{C}(\lambda) = \mathbf{C}(0)\mathbf{U}(\lambda)
+\end{equation}
+\begin{equation}
+    C _{\mu p}(\lambda) = \sum_{r}C _{\mu r}(0)U _{rp}(\lambda)
+\end{equation}
+in which $\mathbf{U}(\lambda)$ is the solution to the CPHF equations.
+\\
+
+Now the orthonomality condition using this parameterization:
+\begin{equation}
+    \sum_{\mu \nu}\Big(\sum_{r}U _{rp}^{*}(\lambda)C _{\mu r}^{*}(0)\Big)S _{\mu \nu}(\lambda)\Big(\sum_{s}C _{\nu s}(0)U _{sq}(\lambda)\Big) = \delta _{pq}
+\end{equation}
+Introducing the transformed overlap matrix:
+\begin{equation}
+    \mathcal{S} _{pq}(\lambda) = \sum_{\mu \nu}C _{\mu p}^{*}(0)S _{\mu \nu}(\lambda)C _{\nu q}(0)
+\end{equation}
+we have:
+\begin{equation}
+    \sum_{rs}U _{rp}^{*}(\lambda)\mathcal{S}_{rs}(\lambda)U _{sq}(\lambda) = \delta _{pq}
+\end{equation}
+differentiating both sides of the equation gives:
+\begin{equation}
+    \sum_{rs}\frac{\dd{U _{rp}^{*}(\lambda)}}{\dd{\lambda}}\mathcal{S}_{rs}(\lambda)U _{sq}(\lambda) + \sum_{rs}U _{rp}^{*}(\lambda)\frac{\dd{\mathcal{S}_{rs}(\lambda)}}{\dd{\lambda}}U _{sq}(\lambda) + \sum_{rs}U _{rp}^{*}(\lambda)\mathcal{S}_{rs}(\lambda)\frac{\dd{U _{sq}(\lambda)}}{\dd{\lambda}} = 0
+\end{equation}
+Noting that $\bm{\mathcal{S}}(0)=\mathbf{I}$ because the unperturbed spin-orbitals are orthonormal, and it is trivial that $\mathbf{U}(0)=\mathbf{I}$. \\
+Therefore evaluating the derivative at $\lambda = 0$, and denoting $A ^{\lambda} =\big(\frac{\dd{A}}{\dd{\lambda}}\big)\big|_{{\lambda=0}}$ results in:
+\begin{align}
+    \sum_{rs}(U _{rp}^{\lambda})^{*}\delta _{rs}\delta _{sq} + \sum_{rs}\delta _{rp}\mathcal{S}_{rs}^{\lambda}\delta _{sq} + \sum_{rs}\delta _{rp}\delta _{rs}U _{sq}^{\lambda} = 0
+\end{align}
+contracting the Kronecker delta tensors we get the perturbed orthonormality condition:
+\begin{equation}
+    (U _{qp}^{\lambda})^{*} + \mathcal{S}_{pq}^{\lambda} + U _{pq}^{\lambda} = 0
+\end{equation}
+
+\subsection{Perturbed Brillouin Condition}
+The SCF density matrix is defined as:
+\begin{equation}
+    D _{\mu \nu}^{\text{SCF}} = \sum_{i}^{N} C _{\mu i}^{*}C _{\nu i}
+\end{equation}
+in which the MO coefficients are parameterized as:
+\begin{align}
+    C _{\mu p}(\lambda) =& \sum_{q} C _{\mu q}(0)U(\lambda)_{qp} \\
+    \mathbf{C}(\lambda) =& \mathbf{C}(0)\mathbf{U}(\lambda)
+\end{align}
+
+
+Define the one- and two-electron parts of the fock matrix, in AO and MO basis, as:
+\begin{equation}
+    \begin{aligned}[t]
+     h _{pq}=& \langle p|\hat{h}|q\rangle
+     = \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q}\\
+     h _{\mu \nu} ^{\text{AO}}=& \langle \mu|\hat{h}|\nu\rangle \\
+    \mathbf{h} =& \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}}\mathbf{C} \\
+    \end{aligned}
+    \qquad 
+    \begin{aligned}[t]
+     g _{pq}=& \sum_{i}\langle pi||qi\rangle
+     = \sum_{i}\sum_{\mu \nu}C _{\mu p}^{*}\langle \mu i||\nu i\rangle C _{\nu q}\\
+     g _{\mu \nu}^{\text{AO}}=& \sum_{i}\langle \mu i||\nu i\rangle
+     = \sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle \\
+    \mathbf{g} =& \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}\mathbf{C} \\
+    \end{aligned}
+\end{equation}
+Therefore, the Fock matrix could be expressed as (with the dependency on SCF density explicitly addressed):
+\begin{align}
+    F _{pq} =& h _{pq} + \sum_{i}\langle pi||qi\rangle \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*} g _{\mu \nu}^{\text{AO}} C _{\nu q} \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu p}^{*}\langle \mu|\hat{h}|\nu\rangle C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*}\big(\sum_{\rho \sigma} D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle\big)C _{\nu q} \\
+    F ^{\text{AO}}_{\mu \nu} =& h _{\mu \nu}^{\text{AO}} + g ^{\text{AO}}_{\mu \nu} = \langle \mu|\hat{h}|\nu\rangle + \sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle \\
+    \mathbf{F}=& \mathbf{h} + \mathbf{g}[\mathbf{D}^{\text{SCF}}] \nonumber \\
+    =& \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}}\mathbf{C} + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]\mathbf{C} \nonumber \\
+    =& \mathbf{C}^{\dagger}\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]\mathbf{C} \\
+    \mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}] =& \mathbf{h}^{\text{AO}} + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]
+\end{align}
+Evaluating the derivative at $\lambda = 0$, noting that $\mathbf{U}(0) = \mathbf{I}$:
+\begin{align}
+    \mathbf{F}^{\lambda} =& \frac{\dd{\mathbf{F}(\lambda)}}{\dd{\lambda}}\Big|_{{\lambda = 0}} = \Big(\mathbf{C}^{\dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda)\Big)^{\lambda} \nonumber \\
+    =&\mathbf{C}^{\lambda \dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}^{\lambda}(\lambda) \nonumber \\
+    &+ \mathbf{C}^{\dagger}(\lambda) \Big(\mathbf{h}^{\text{AO}}(\lambda) + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\Big)^{\lambda} \mathbf{C}(\lambda)  \nonumber \\
+    =& \mathbf{U}^{\lambda \dagger}(\lambda)\underbrace{\mathbf{U}^{\dagger}(0)\mathbf{C}^{\dagger}(0)}_\text{$\mathbf{C}^{\dagger}(\lambda = 0)$}\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\underbrace{\mathbf{C}(0)\mathbf{U}(0)}_\text{$\mathbf{C}(\lambda = 0)$}\mathbf{U}^{\lambda}(\lambda) \nonumber \\
+    &+ \mathbf{C}^{\dagger}(\lambda)\Big(\mathbf{h}^{\text{AO},\lambda}(\lambda) + \mathbf{g}^{\text{AO}, \lambda}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda) + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}(\lambda)](\lambda)\Big)\mathbf{C}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\lambda \dagger}\mathbf{F} + \mathbf{F}\mathbf{U}^{\lambda} + \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}, \lambda}\mathbf{C}
+    + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO},\lambda}[\mathbf{D}^{\text{SCF}}]\mathbf{C} + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}]\mathbf{C}
+\end{align}
+The perturbed Brillouin condition is:
+\begin{equation}
+    F _{ai}^{\lambda} = 0
+\end{equation}
+To evaluate the perturbed Fock matrix, we write the perturbed quantities in suffix notation as (assuming canonical orbitals, i.e. $F _{pq} = \delta _{pq}\varepsilon _{p}$):
+\begin{align}
+    (\mathbf{U}^{\lambda \dagger}\mathbf{F}) _{ai} =& U ^{\lambda *}_{ia}\varepsilon _{i} = \frac{\dd{U _{ia}^{*}}}{\dd{\lambda}}\Big|_{{\lambda = 0}}\varepsilon _{i} \\
+    (\mathbf{F}\mathbf{U}^{\lambda})_{ai} =& \varepsilon _{a}U _{ai}^{\lambda} = \varepsilon _{a}\frac{\dd{U _{ai}}}{\dd{\lambda}}\Big|_{{\lambda=0}} \\
+    (\mathbf{C}^{\dagger}\mathbf{h}^{\text{AO},\lambda}\mathbf{C})_{ai}=&\sum_{\mu \nu}C _{\mu a}^{*}h _{\mu \nu}^{\lambda} C _{\nu i} = \sum_{\mu \nu}C _{\nu a}^{*}\frac{\dd{h _{\mu \nu}}}{\dd{\lambda}}\Big|_{{\lambda=0}}C _{\nu i} \\
+    (\mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}, \lambda}[\mathbf{D}^{\text{SCF}}]\mathbf{C})_{ai} =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle ^{\lambda})C _{\nu i} \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}\frac{\dd{\langle \mu \rho||\nu \sigma\rangle}}{\dd{\lambda}}\Big|_{{\lambda=0}})C _{\nu i} \\
+    (\mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}]\mathbf{C})_{ai} =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}^{\lambda}\langle \mu \rho||\nu \sigma\rangle)C _{\nu i} \nonumber \\
+    =& \sum_{\mu \nu} C _{\mu a}^{*}(\sum_{\rho \sigma}\frac{\dd{D}_{\rho \sigma}}{\dd{\lambda}}\Big|_{{\lambda=0}}\langle \mu \rho||\nu \sigma\rangle)C _{\nu i}
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

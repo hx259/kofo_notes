@@ -1,0 +1,113 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{Contravariant Space}
+By 2nd order perturbation theory, the most important contribution to the corrlation energy
+comes from the configuration $\Phi _{I}$ which spans the first-order interacting space:
+\begin{equation}
+    \langle \Phi _{I}|\hat{H}|0\rangle \neq 0
+\end{equation}
+In RHF, $|0\rangle=|\Phi _{\text{HF}}\rangle$ is the HF determinant, and the singlet excitation operators are defined as:
+\begin{align}
+    \hat{E} _{i}^{a} =& \sum_{\sigma}\hat{a}^{\dagger}_{\sigma}\hat{i}_{\sigma} \\
+    \hat{e} _{ij}^{ab} =& \sum_{\sigma \tau}\hat{a}^{\dagger}_{\sigma}\hat{b}^{\dagger}_{\tau}\hat{j}_{\tau}\hat{i}_{\sigma} = \hat{E}_{i}^{a}\hat{E}_{j}^{b}
+\end{align}
+hence the singly and doubly excitation configurations are:
+\begin{align}
+    |\Phi _{i}^{a}\rangle =& \hat{E}_{i}^{a}|0\rangle \\
+    |\Phi _{ij}^{ab}\rangle =& \hat{E}_{i}^{a}\hat{E}_{j}^{b}|0\rangle
+\end{align}
+From Brillouin theorem, i.e. $f _{ai}=0$, we know that the first-order wavefunction is a linear combination of the doubly excitation configurations:
+\begin{equation}
+    |\Psi ^{(1)}\rangle = \frac{1}{2}\sum_{ij,ab} T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle
+\end{equation}
+the $\frac{1}{2}$ arises due to the summation in spin \textcolor{red}{(?)}.
+\\
+
+It is convenient to define a set of contravariant configurations:
+\begin{align}
+    |\tilde{\Phi}_{i}^{a}\rangle =& \frac{1}{2}\hat{E} _{i}^{a}|0\rangle =\frac{1}{2}|\Phi _{i}^{a}\rangle \\
+    |\tilde{\Phi}_{ij}^{ab}\rangle =& \frac{1}{6}(2 \hat{E} _{i}^{a}\hat{E} _{j}^{b} + \hat{E} _{j}^{a}\hat{E} _{i}^{b})|0\rangle =\frac{1}{6}(2 |\Phi _{ij}^{ab}\rangle + |\Phi _{ji}^{ab}\rangle)
+\end{align}
+As a result, some expressions become simpler:
+\begin{align}
+    \langle \tilde{\Phi}_{ij}^{ab}|\Phi _{kl}^{cd}\rangle =& \delta _{ac}\delta _{bd}\delta _{ik}\delta _{jl} + \delta _{ad}\delta _{bc}\delta _{il}\delta _{jk} \\
+    \langle \tilde{\Phi}_{ij}^{ab}|\Psi ^{(1)}\rangle =& T _{ij}^{ab} \\
+    \langle \tilde{\Phi}_{ij}^{ab}|\hat{H}|\Psi ^{(0)}\rangle =& \langle ab|ij\rangle
+\end{align}
+Now $|\Psi ^{(1)}\rangle$ becomes:
+\begin{equation}
+    |\Psi ^{(1)}\rangle = \frac{1}{2}\sum_{ij,ab}T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle = \sum_{ij,ab}\tilde{T}_{ij}^{ab}|\tilde{\Phi}_{ij}^{ab}\rangle
+\end{equation}
+where $\tilde{T} _{ij}^{ab} = 2T _{ij}^{ab} - T _{ji}^{ab}$.
+
+
+
+\section*{*Derivation}
+Derivation for eqns. (9), (10) and (11):
+\begin{equation}
+    \langle \tilde{\Phi}_{ij}^{ab}|\Phi _{kl}^{cd}\rangle = \langle 0|\frac{1}{6}(2 \hat{E}_{i}^{a}\hat{E} _{j}^{b} + \hat{E} _{j}^{a}\hat{E} _{i}^{b})\hat{E} _{k}^{c} \hat{E}_{l}^{d}|0 \rangle
+\end{equation}
+in which:
+\begin{align}
+    \hat{E}_{i}^{a}\hat{E}_{j}^{b} =& (\hat{a}^{\dagger}_{\alpha}\hat{i}_{\alpha} + \hat{a}^{\dagger}_{\beta}\hat{i}_{\beta})(\hat{b}^{\dagger}_{\alpha}\hat{j}_{\alpha}+ \hat{b}^{\dagger}_{\beta}\hat{j}_{\beta}) \nonumber \\
+    =& \hat{a}^{\dagger}_{\alpha}(\hat{i}_{\alpha}\hat{b}^{\dagger}_{\alpha})\hat{j}_{\alpha} + \hat{a}^{\dagger}_{\alpha}(\hat{i}_{\alpha}\hat{b}^{\dagger}_{\beta})\hat{j}_{\beta} 
+    + \hat{a}^{\dagger}_{\beta}(\hat{i}_{\beta}\hat{b}^{\dagger}_{\alpha})\hat{j}_{\alpha} + \hat{a}^{\dagger}_{\beta}(\hat{i}_{\beta}\hat{b}^{\dagger}_{\beta})\hat{j}_{\beta}
+\end{align}
+by $[\hat{p}^{\dagger},\hat{q}]_{+} = \delta _{pq}$, we have:
+\begin{equation}
+    \hat{E}_{i}^{a}\hat{E}_{j}^{b} = -\hat{a}^{\dagger}_{\alpha}\hat{b}^{\dagger}_{\alpha}\hat{i}_{\alpha}\hat{j}_{\alpha} - \hat{a}^{\dagger}_{\alpha}\hat{b}^{\dagger}_{\beta}\hat{i}_{\alpha}\hat{j}_{\beta}
+    - \hat{a}^{\dagger}_{\beta}\hat{b}^{\dagger}_{\alpha}\hat{i}_{\beta}\hat{j}_{\alpha} - \hat{a}^{\dagger}_{\beta}\hat{b}^{\dagger}_{\beta}\hat{i}_{\beta}\hat{j}_{\beta}
+\end{equation}
+Similarly:
+\begin{equation}
+    \hat{E}_{k}^{c}\hat{E}_{l}^{d} =-\hat{c}^{\dagger}_{\alpha}\hat{d}^{\dagger}_{\alpha}\hat{k}_{\alpha}\hat{l}_{\alpha} - \hat{c}^{\dagger}_{\alpha}\hat{d}^{\dagger}_{\beta}\hat{k}_{\alpha}\hat{l}_{\beta}
+    - \hat{c}^{\dagger}_{\beta}\hat{d}^{\dagger}_{\alpha}\hat{k}_{\beta}\hat{l}_{\alpha} - \hat{c}^{\dagger}_{\beta}\hat{d}^{\dagger}_{\beta}\hat{k}_{\beta}\hat{l}_{\beta}
+\end{equation}
+
+
+
+\end{document}

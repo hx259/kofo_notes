@@ -1,0 +1,369 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+\usepackage{cancel}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+
+%\section{Møller–Plesset Perturbation Theory}
+%\subsection{RHF}
+%In Møller–Plesset perturbation theory, the electronic Hamiltonian is partitioned as:
+%\begin{equation}
+%    \hat{H} = \hat{F} + \hat{V}
+%\end{equation}
+%The zeroth order Hamiltonina is just sum of the one-electron Fock operators.
+%For a closed-shell system with $N$ electrons (hence $N$ spin-orbitals and $\frac{N}{2}$ spatial orbitals):
+%\begin{align}
+%    \hat{H}^{(0)} =& \hat{F} = \sum_{\mu}^{\text{N}_{el}} f(\mu) = \sum_{pq}^{N/2}\hat{E}_{q}^{p}f _{pq} \\
+%    E ^{(0)} =& \langle \Phi _{0}|\hat{H}^{(0)}|\Phi _{0}\rangle = 2 \sum_{i}^{N/2} \epsilon _{i} = 2 \sum_{i}^{N/2} f _{ii} \\
+%    |\Psi ^{(0)}\rangle =& |\Phi _{\text{HF}}\rangle = |\Phi _{0}\rangle
+%\end{align}
+%By Rayleigh-Schrödinger PT, we have (for $m>0$):
+%\begin{equation}
+%    E ^{(m)} = \langle \Phi _{0}|\hat{V}|\Psi ^{(m-1)}\rangle
+%\end{equation}
+%hence the energy contributions of different orders:
+%\begin{align}
+%    E ^{(0)} =& \langle \Phi _{0}|\hat{H}^{(0)}|\Phi _{0}\rangle \\ 
+%    E ^{(1)} =& \langle \Phi _{0}|\hat{V}|\Phi _{0}\rangle \\
+%    E ^{(2)} =& \langle \Phi _{0}|\hat{V}|\Psi ^{(1)}\rangle \\
+%    &\dots \nonumber
+%\end{align}
+%The first-order wavefunction is obtained by linear combination of zeroth-order wavefunctions.
+%\begin{equation}
+%    |\Psi ^{(1)}\rangle = \sum_{ia}T _{i}^{a} |\Phi _{i}^{a}\rangle + \sum_{ijab}T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle + \dots
+%\end{equation}
+%By Slater-Condon rule:
+%\begin{equation}
+%    \langle \Phi _{0}|\hat{V}|\Phi _{I}\rangle =0
+%\end{equation}
+%for any determinant $|\Phi _{I}\rangle$ with more than double excitation.
+%By Brillouin theorem:
+%\begin{align}
+%    \langle \Phi _{0}|\hat{H}|\Phi _{i}^{a}\rangle =& 0 \Leftrightarrow \nonumber \\
+%    \langle \Phi _{0}|\hat{H}^{(0)}|\Phi _{i}^{a}\rangle + \langle \Phi _{0}|\hat{V}|\Phi _{i}^{a}\rangle =& 0 \Leftrightarrow \nonumber \\
+%    \langle \Phi _{0}|\hat{V}|\Phi _{i}^{a}\rangle =& 0
+%\end{align}
+%Therefore, the only determinants contributing to second order energy are the doubly excitated ones:
+%\begin{equation}
+%    |\Psi ^{(1)}\rangle = \frac{1}{2}\sum_{ijab}T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle
+%\end{equation}
+%Then, the second-order energy correction could be obtained as:
+%\begin{align}
+%   E ^{(2)} = \sum_{ijab}T_{ij}^{ab}\langle \Phi _{0}|\hat{V}|\Phi_{ij}^{ab}\rangle
+%\end{align}
+%The amplitudes $T _{ij}^{ab}$ are obtained by solving the first-order RSPT equation:
+%\begin{equation}
+%    (\hat{H}^{(0)}-E ^{(0)})|\Psi ^{(1)}\rangle + (\hat{V}-E ^{(1)})|\Phi _{0}\rangle = 0
+%\end{equation}
+%Projecting $\langle \Phi _{ij}^{ab}$ onto the equation, we have:
+%\begin{align}
+%    \langle \Phi _{ij}^{ab}|\hat{H}^{(0)}-E ^{(0)}|\Psi ^{(1)}\rangle + \langle \Phi _{ij}^{ab}|\hat{V} - E ^{(1)}|\Phi _{0}\rangle =0
+%\end{align}
+
+
+
+%\subsection{RHF With Contravariant Configurations}
+
+\section{Spin-orbital Formalism}
+The molecular Hamiltonian could be written as:
+\begin{equation}
+    \hat{H} = -\frac{1}{2}\sum_{i}^{N_{\text{el}}}\nabla ^{2}_{i} + \sum_{K}^{N _{\text{nuc}}}\sum_{i}^{N _{\text{el}}}\frac{Z _{K}}{\abs{\mathbf{R}_{K}-\mathbf{r}_{i}}} + \sum_{j>i}^{N _{\text{el}}}\frac{1}{\abs{\mathbf{r}_{i}-\mathbf{r}_{j}}} + \sum_{K>L}^{N _{\text{nuc}}}\frac{Z _{K}Z _{L}}{\abs{\mathbf{R}_{K}-\mathbf{R}_{L}}}
+\end{equation}
+Alternatively, we could write the electronic part into second-quantized form:
+\begin{equation}
+    \hat{H}_{\text{elec}} = \sum_{pq}h _{pq}\hat{p}^{\dagger}\hat{q} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}
+\end{equation}
+where we denote the one-electron integral:
+\begin{align}
+    h _{pq} = \langle p |\hat{h}|q\rangle = \langle p|\Big(-\frac{1}{2}\nabla ^{2} + \sum_{K}^{N _{\text{nuc}}}\frac{Z _{K}}{\abs{\mathbf{R}_{K}-\mathbf{r}}}\Big)|q\rangle
+\end{align}
+and the anti-symmetrized two-electron integrals:
+\begin{equation}
+    \langle pq||rs\rangle = \langle pq|\frac{1}{\abs{\mathbf{r}_{i}-\mathbf{r}_{j}}}|rs\rangle - \langle pq|\frac{1}{\abs{\mathbf{r}_{i}-\mathbf{r}_{j}}}|sr\rangle
+\end{equation}
+In these expressions the electron indices are implicitly carried.\\
+Now to partition the Hamiltonian into reference and perturbation, we firstly expand the expression with Wick's theorm:
+\begin{align}
+    \hat{H}_{\text{elec}} = \sum_{pq}h _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{i}h _{ii} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} + \sum_{ipq}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+\end{align}
+We can partition the Hamiltonian into:
+\begin{align}
+    \hat{H}_{\text{elec}}=& \Big(\sum_{pq}h _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{pqi}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\} \Big) + \Big(\sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \Big) + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} \nonumber \\
+    =& \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \Big(\sum_{i}h _{ii}+\sum_{ij}\langle ij||ij\rangle\Big) - \frac{1}{2}\sum_{ij}\langle ij||ij\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} \nonumber \\
+    =& \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \Big(\sum_{i} f _{ii} - \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \Big) + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} \nonumber \\
+    =& \sum_{pq}f_{pq}\{\hat{p}^{\dagger}\hat{q}\} + E _{\text{HF}} +\frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}
+\end{align}
+In Møller–Plesset PT, the reference Hamiltonian is chosen to be the Fock operator:
+\begin{align}
+    \hat{H}^{(0)} = \hat{F} =& \sum_{pq}f _{pq}\hat{p}^{\dagger}\hat{q} = \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{i}f _{ii}
+\end{align}
+The Fock matrix is defined as:
+\begin{equation}
+    f _{pq} = h _{pq} + \sum_{i}\langle pi||qi\rangle
+\end{equation}
+Hence, the electronic Hamiltonian could be partitioned into:
+\begin{equation}
+    \hat{H}_{\text{elec}} = \hat{F} -\frac{1}{2}\sum_{ij}\langle ij||ij\rangle + \hat{V} = \hat{H}^{(0)} + \hat{V}
+\end{equation}
+where the perturbation:
+\begin{equation}
+    \hat{V} =\hat{H}_{\text{elec}} - \hat{F} = \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} - \frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+\end{equation}
+
+
+In summary: the zeroth-order Hamiltonian, perturbation, energy, and wavefunctions in spin-orbital basis:
+\begin{align}
+    &\hat{H}^{(0)}= \sum_{i}^{N} f _{ii} + \sum_{pq}^{N}f _{pq}\{\hat{p}^{\dagger}\hat{q}\}\\
+    &\hat{V} = \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} -\frac{1}{2}\sum_{ij}\langle ij||ij\rangle \\
+    &|\Psi ^{(0)}\rangle = |\Phi _{\text{HF}}\rangle = |\Phi _{0}\rangle \\
+    &E ^{(0)} = \langle \Phi _{0}|\hat{H}^{(0)}|\Phi _{0}\rangle = \sum_{i}^{N} f _{ii} = \sum_{i}\varepsilon _{i} \\
+    &E ^{(1)} = \langle \Phi _{0}|\hat{V}|\Phi _{0}\rangle = -\frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+\end{align}
+
+From Rayleigh-Schrödinger PT, we know that the second order energy correction is:
+\begin{equation}
+    E ^{(2)} = \langle \Phi _{0}|\hat{V}|\Psi ^{(1)}\rangle
+\end{equation}
+The first-order wavefunction is obtained by linear combination of zeroth-order wavefunctions.
+\begin{equation}
+    |\Psi ^{(1)}\rangle = \sum_{\eta \neq 0}\frac{\langle \Phi _{\eta}|\hat{V}|\Phi _{0}\rangle}{E ^{(0)}-E _{\eta}^{(0)}}|\Phi _{\eta}\rangle = \sum_{i}\sum_{a} T _{i}^{a} |\Phi _{i}^{a}\rangle + \sum_{i<j}\sum _{a<b} T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle + \dots
+\end{equation}
+By Slater-Condon rule:
+\begin{equation}
+    \langle \Phi _{0}|\hat{V}|\Phi _{I}\rangle =0
+\end{equation}
+for any determinant $|\Phi _{I}\rangle$ with more than double excitation.
+By Brillouin theorem:
+\begin{align}
+    \langle \Phi _{0}|\hat{H}|\Phi _{i}^{a}\rangle =& 0 \Leftrightarrow \nonumber \\
+    \langle \Phi _{0}|\hat{H}^{(0)}|\Phi _{i}^{a}\rangle + \langle \Phi _{0}|\hat{V}|\Phi _{i}^{a}\rangle =& 0 \Leftrightarrow \nonumber \\
+    \langle \Phi _{0}|\hat{V}|\Phi _{i}^{a}\rangle =& 0
+\end{align}
+Therefore, the only determinants contributing to second-order energy are the doubly excitated ones. Considering the permutation symmetry of $|\Phi _{ij}^{ab}\rangle$, i.e. $|\Phi _{ij}^{ab}\rangle = -|\Phi _{ij}^{ba}\rangle = -|\Phi _{ji}^{ab}\rangle = |\Phi _{ji}^{ba}\rangle$,
+the first-order wavefunction could be written as:
+\begin{equation}
+    |\Psi ^{(1)}\rangle = \frac{1}{4}\sum_{ijab}T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle
+\end{equation}
+To find the amplitude $T _{ij}^{ab}$ , we solve the first-order RSPT equation by projecting $\langle \Phi _{\eta}| = \langle \Phi _{kl}^{cd}| \neq \langle \Phi _{0}|$ onto it:
+\begin{align}
+    (\hat{H}^{(0)}-E ^{(0)})|\Psi ^{(1)}\rangle + (\hat{V}-E ^{(1)})|\Phi _{0}\rangle =& 0 \\
+    \langle \Phi _{kl}^{cd}|\hat{H}^{(0)}-E ^{(0)}|\Psi ^{(1)}\rangle + \langle \Phi _{kl}^{cd}|\hat{V} - E ^{(1)})|\Phi _{0}\rangle =& 0 \Leftrightarrow \nonumber \\
+    \frac{1}{4}\sum_{ijab}\langle \Phi _{kl}^{cd}|\hat{H}^{(0)}|\Phi _{ij}^{ab}\rangle T _{ij}^{ab} - \frac{1}{4}E ^{(0)}\sum_{ijab}\langle \Phi _{kl}^{cd}|\Phi _{ij}^{ab}\rangle T _{ij}^{ab} + \langle \Phi _{kl}^{cd}|\hat{V}|\Phi _{0}\rangle - E ^{(1)}\langle \Phi _{kl}^{cd}|\Phi _{0}\rangle =& 0 \Leftrightarrow \nonumber\\
+    \frac{1}{4}\sum_{ijab}E ^{(0)}_{ijab}T _{ij}^{ab}\langle \Phi _{kl}^{cd}|\Phi _{ij}^{ab}\rangle - \frac{1}{4}E ^{(0)}\sum_{ijab}T _{ij}^{ab}\langle \Phi _{kl}^{cd}|\Phi _{ij}^{ab}\rangle + \langle \Phi _{kl}^{cd}|\hat{V}|\Phi _{0}\rangle =& 0
+\end{align}
+To work out the overlap integral:
+\begin{equation}
+    |\Phi _{ij}^{ab}\rangle = \big(\{\hat{a}^{\dagger}\hat{b}^{\dagger}\hat{j}\hat{i}\}+\sum_{\substack{\text{all possible} \\ \text{contractions}}}\{\wick[sep=0.35em]{\c1{\hat{a}^{\dagger}}\hat{b}^{\dagger}\c1{\hat{j}}\hat{i}}\}\big)|\Phi _{0}\rangle
+\end{equation}
+Noting that only fully contracted terms contribute to the vacuum expectation value:
+\begin{align}
+    \langle \Phi _{kl}^{cd}|\Phi _{ij}^{ab}\rangle =& \sum_{\substack{\text{fully}\\\text{contracted}}}\langle \Phi _{0}|\{\hat{c}^{\dagger}\hat{d}^{\dagger}\hat{l}\hat{k}\}\{\hat{a}^{\dagger}\hat{b}^{\dagger}\hat{j}\hat{i}\}|\Phi _{0}\rangle \nonumber \\
+    =& \delta _{ca}\delta _{db}\delta _{ki}\delta _{lj} - \delta _{ca}\delta _{db}\delta _{kj}\delta _{li} - \delta _{cb}\delta _{ad}\delta _{ki}\delta _{lj} + \delta _{cb}\delta _{ad}\delta _{kj}\delta _{li}
+\end{align}
+Therefore (exploiting the permutation symmetry $T _{ij}^{ab} = -T _{ji}^{ab} = -T _{ij}^{ba} = T _{ji}^{ba}$ ):
+\begin{align}
+    \sum_{ijab} T _{ij}^{ab}\langle \Phi _{kl}^{cd}|\Phi _{ij}^{ab}\rangle =& T ^{cd}_{kl} - T ^{cd}_{lk} - T ^{dc}_{kl} + T ^{dc}_{lk} = 4 T_{kl}^{cd}
+\end{align}
+hence we obtain the amplitude as:
+\begin{equation}
+    T _{kl}^{cd} = \frac{\langle \Phi _{kl}^{cd}|\hat{V}|\Phi _{0}\rangle}{f _{kk}+f _{ll}-f _{cc}-f _{dd}}
+\end{equation}
+and the second-order energy:
+\begin{align}
+    E ^{(2)} =& \langle \Phi _{0}|\hat{V}|\Psi ^{(1)}\rangle \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}\langle \Phi _{0}|\hat{V}|\Phi _{ij}^{ab}\rangle T _{ij}^{ab} \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}\frac{\langle \Phi _{0}|\hat{V}|\Phi _{ij}^{ab}\rangle\langle \Phi _{ij}^{ab}|\hat{V}|\Phi _{0}\rangle}{f _{ii}+f _{jj}- f _{aa}-f _{bb}} \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle\langle ab||ij\rangle}{f _{ii}+f _{jj}-f _{aa}-f _{bb}}
+\end{align}
+note that the $-\frac{1}{2}\sum_{ij}\langle ij||ij\rangle$ part in $\hat{V}$ does not contribute to the second-order energy, since $\langle \Phi _{0}|\Phi _{ij}^{ab}\rangle = 0$. \\
+The total energy up to MP2-level correction is:
+\begin{align}
+    E _{\text{MP2}} =& E ^{(0)} + E ^{(1)} + E ^{(2)} \nonumber \\
+    =& \sum_{i}h _{ii} + \sum_{ij}\langle ij||ij\rangle - \frac{1}{2}\sum_{ij}\langle ij||ij\rangle + E ^{(2)} \nonumber \\
+    =& \underbrace{\sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle}_\text{$E _{\text{HF}} = E ^{(0)} + E ^{(1)}$} + \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle \langle ab||ij\rangle}{f _{ii}+f _{jj}-f _{aa}-f _{bb}}
+\end{align}
+
+\newpage
+
+\section{Spin-Adapted-Orbital Formalism}
+\begin{align}
+    \hat{E}_{q}^{p} =& \sum_{\sigma}\hat{p}^{\dagger}_{\sigma}\hat{q}_{\sigma}\\
+    \hat{e}_{rs}^{pq} =& \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{q}^{\dagger}_{\tau}\hat{s}_{\tau}\hat{r}_{\sigma}
+\end{align}
+Noting that $[\hat{p}^{\dagger}, \hat{q}]_{+}= \delta _{pq}$, we can get the relationship between one- and two-body operators:
+\begin{align}
+    \hat{e}^{pr}_{qs} =& \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{r}^{\dagger}_{\tau}\hat{s}_{\tau}\hat{q}_{\sigma} \nonumber \\
+    =& - \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{r}^{\dagger}_{\tau}\hat{q}_{\sigma}\hat{s}_{\tau} \nonumber \\
+    =& - \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}(\delta _{rq}\delta _{\sigma \tau}-\hat{q}_{\sigma}\hat{r}^{\dagger}_{\tau})\hat{s}_{\tau} \nonumber \\
+    =& \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{q}_{\sigma}\hat{r}^{\dagger}_{\tau}\hat{s}_{\tau} - \sum_{\sigma \tau}\hat{p}^{\dagger}_{\sigma}\hat{s}_{\tau}\delta _{rq}\delta _{\sigma \tau} \nonumber \\
+    =& \hat{E}_{q}^{p}\hat{E}_{s}^{r} - \delta _{rq}\sum_{\sigma}\hat{p}^{\dagger}_{\sigma}\hat{s}_{\sigma} \nonumber \\
+    =& \hat{E}_{q}^{p}\hat{E}_{s}^{r} - \delta _{rq}\hat{E}_{s}^{p}
+\end{align}
+Consider the permutation symmetry of the two-body operator:
+\begin{align}
+    \hat{e}^{rp}_{sq} =& \sum_{\sigma \tau}\hat{r}^{\dagger}_{\sigma}\hat{p}^{\dagger}_{\tau}\hat{q}_{\tau}\hat{s}_{\sigma} \nonumber \\
+    =& -\sum_{\sigma \tau}\hat{p}^{\dagger}_{\tau}\hat{r}^{\dagger}_{\sigma}\hat{q}_{\tau}\hat{s}_{\sigma} \nonumber \\
+    =& \sum_{\sigma \tau}\hat{p}^{\dagger}_{\tau}\hat{r}^{\dagger}_{\sigma}\hat{s}_{\sigma}\hat{q}_{\tau} \nonumber \\
+    =& \hat{e}^{pr}_{qs}
+\end{align}
+we can evaluate the commutation relation between one-body operators:
+\begin{align}
+    [\hat{E}^{p}_{q},\hat{E}^{r}_{s}] =& \hat{E}^{p}_{q}\hat{E}^{r}_{s} - \hat{E}^{r}_{s}\hat{E}^{p}_{q} \nonumber \\
+    =& e ^{pr}_{qs} + \delta _{rq}\hat{E}_{s}^{p} - (\hat{e}^{rp}_{sq}+\delta _{ps}\hat{E}^{r}_{q}) \nonumber \\
+    =& \delta _{rq}\hat{E}^{p}_{s} - \delta _{ps}\hat{E}^{r}_{q}
+\end{align}
+Using this relation, we can evaluate the overlap integral of doubly-excited determinants: \\
+\begin{align}
+    \langle \Phi _{ij}^{ab}|\Phi _{kl}^{cd}\rangle =& \delta _{ac}\delta _{bd}\langle \Phi _{0}|\hat{e}^{ij}_{kl}|\Phi _{0}\rangle + \delta _{ad}\delta _{bc}\langle \Phi _{0}|\hat{e}^{ij}_{lk}|\Phi _{0}\rangle \nonumber \\
+    =& \delta _{ad}\delta _{bc}(4 \delta _{jk}\delta _{il} - 2\delta _{ik}\delta _{jl}) + \delta _{ac}\delta _{bd}(4 \delta _{jl}\delta _{ik} - 2 \delta _{il}\delta _{jk})
+\end{align}
+
+\newpage
+
+\section{Spin-Adapted-Contravariant-Configuration Formalism}
+The Hamiltonian in spin-adapted form:
+\begin{equation}
+    \hat{H}_{\text{elec}} = \sum_{pq}h _{pq}\hat{E}^{p}_{q} + \frac{1}{2}\sum_{pqrs}\langle pq|rs\rangle \hat{e}^{pq}_{rs}
+\end{equation}
+\begin{align}
+    \hat{H}_{\text{elec}} =& \sum_{pq}h _{pq}\hat{E}^{p}_{q} + \frac{1}{2}\sum_{pqrs}\langle pq|rs\rangle (\hat{E}^{p}_{r}\hat{E}^{q}_{s} - \delta _{qr}\hat{E}^{p}_{s}) \nonumber \\
+    =& \sum_{pq}h _{pq}\hat{E}^{p}_{q} + \frac{1}{2}\sum_{pqs}\langle pq|sq\rangle \hat{E}^{p}_{s} + \frac{1}{2}\sum_{pqrs}\langle pq|rs\rangle \hat{E}^{p}_{r}\hat{E}^{q}_{s}
+\end{align}
+The contravariant configurations:
+\begin{align}
+    |\tilde{\Phi}_{i}^{a}\rangle =& \frac{1}{2}|\Phi _{i}^{a}\rangle = \frac{1}{2}\hat{E}_{i}^{a}|\Phi _{0}\rangle \\
+    |\tilde{\Phi}_{ij}^{ab}\rangle =& \frac{1}{6}(2 |\Phi _{ij}^{ab}\rangle + |\Phi _{ji}^{ab}\rangle) = \frac{1}{6}(2\hat{E}_{i}^{a}\hat{E}_{j}^{b}+\hat{E}_{j}^{a}\hat{E}_{i}^{b})|\Phi _{0}\rangle
+\end{align}
+Now:
+\begin{align}
+    \langle \tilde{\Phi}_{ij}^{ab}|\Phi _{kl}^{cd}\rangle =& \frac{1}{3}\langle \Phi _{ij}^{ab}|\Phi _{kl}^{cd}\rangle + \frac{1}{6}\langle \Phi _{ji}^{ab}|\Phi _{kl}^{cd}\rangle \nonumber \\
+    =&\frac{1}{3}(\delta _{ad}\delta _{bc}(4 \delta _{jk}\delta _{il}-2 \textcolor{red}{\cancel{\delta _{ik}\delta _{jl}}})+\delta _{ac}\delta _{bd}(4 \delta _{jl}\delta _{ik}-2 \textcolor{blue}{\cancel{\delta _{jk}\delta _{il}}})) \nonumber \\
+    &+\frac{1}{6}(\delta _{ad}\delta _{bc}(4 \textcolor{red}{\cancel{\delta _{ik}\delta _{jl}}}-2 \delta _{jk}\delta _{il})+\delta _{ac}\delta _{bd}(4 \textcolor{blue}{\cancel{\delta _{il}\delta _{jk}}}-2 \delta _{ik}\delta _{jl})) \nonumber \\
+    =&\delta _{ad}\delta _{bc}\delta _{jk}\delta _{il} + \delta _{ac}\delta _{bd}\delta _{jl}\delta _{ik}
+\end{align}
+
+
+\newpage
+\section*{*Derivation}
+\subsection*{Spin-orbital Formalism}
+Some expansions using Wick's theorem:\\
+Expanding the electronic Hamiltonian using Wick's theorem:
+\begin{align}
+    \hat{p}^{\dagger}\hat{q} = \{\hat{p}^{\dagger}\hat{q}\} + \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\c1{\hat{q}}}\}
+    = \{\hat{p}^{\dagger}\hat{q}\} + \delta _{pq}\delta _{pi}
+\end{align}
+\begin{align}
+    \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r} =& \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} + \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\c1{\hat{s}}\hat{r}}\} + \{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\hat{q}^{\dagger}\hat{s}\c1{\hat{r}}}\}
+    + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c1{\hat{q}^{\dagger}}\c1{\hat{s}}\hat{r}}\} + \{\wick[sep=0.35em]{\hat{p}^{\dagger}\c1{\hat{q}^{\dagger}}\hat{s}\c1{\hat{r}}}\}
+    + \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\c1{\hat{q}^{\dagger}}\c1{\hat{s}}\c2{\hat{r}}}\} + \{\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\c1{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}}\} \nonumber \\
+    =& \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} - \delta _{ps}\delta _{pi}\{\hat{q}^{\dagger}\hat{r}\} + \delta _{pr}\delta _{pi}\{\hat{q}^{\dagger}\hat{s}\} + \delta _{qs}\delta _{qi}\{\hat{p}^{\dagger}\hat{r}\} - \delta _{qr}\delta _{qi}\{\hat{p}^{\dagger}\hat{s}\} \nonumber \\
+    &+ \delta _{pr}\delta _{pi}\delta _{qs}\delta _{qj} - \delta _{ps}\delta _{pi}\delta _{qr}\delta _{qj}
+\end{align}
+hence:
+\begin{align}
+    \sum_{pq}h _{pq}\hat{p}^{\dagger}\hat{q} =& \sum_{pq}h _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{pq}h _{pq}\delta _{pq}\delta _{pi} \nonumber \\
+    =& \sum_{pq}h _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{i}h _{ii}
+\end{align}
+\begin{align}
+    \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r} =& \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} - \frac{1}{4}\sum_{iqr}\langle iq||ri\rangle\{\hat{q}^{\dagger}\hat{r}\} + \frac{1}{4}\sum_{iqs}\langle iq||is\rangle \{\hat{q}^{\dagger}\hat{s}\} \nonumber \\
+    &+ \frac{1}{4}\sum_{ipr}\langle pi||ri\rangle \{\hat{p}^{\dagger}\hat{r}\} - \frac{1}{4}\sum_{ips}\langle pi||is\rangle \{\hat{p}^{\dagger}\hat{s}\} \nonumber \\
+    &+\frac{1}{4}\sum_{ij}\langle ij||ijab\rangle - \frac{1}{4}\sum_{ij}\langle ij||ji\rangle \nonumber \\
+    =& \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} + \sum_{pqi}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+\end{align}
+
+The perturbation integral:
+\begin{align}
+    \langle \Phi _{0}|\hat{V}|\Phi _{ij}^{ab}\rangle =& \frac{1}{4}\sum_{pqrs}\langle \Phi _{0}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}\{\hat{a}^{\dagger}\hat{b}^{\dagger}\hat{j}\hat{i}\}|\Phi _{0}\rangle \langle pq||rs\rangle \nonumber\\
+    =& \frac{1}{4}\sum_{pqrs}\langle \Phi _{0}|\Big( \{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c2{\hat{b}^{\dagger}}\c3{\hat{j}}\c4{\hat{i}}}\}
+    + \{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c2{\hat{b}^{\dagger}}\c4{\hat{j}}\c3{\hat{i}}}\} \nonumber \\
+    &+ \{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c2{\hat{a}^{\dagger}}\c1{\hat{b}^{\dagger}}\c3{\hat{j}}\c4{\hat{i}}}\}
+    +\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c2{\hat{a}^{\dagger}}\c1{\hat{b}^{\dagger}}\c4{\hat{j}}\c3{\hat{i}}}\}
+        \Big)|\Phi _{0}\rangle \langle pq||rs\rangle \nonumber \\
+    =& \frac{1}{4}\sum_{pqrs}(\delta _{pi}\delta _{qj}\delta _{sb}\delta _{ra} - \delta _{pj}\delta _{qi}\delta _{sb}\delta _{ra} - \delta _{pi}\delta _{qj}\delta _{sa}\delta _{rb} + \delta _{pj}\delta _{qi}\delta _{sa}\delta _{rb})\langle pq||rs\rangle \nonumber \\
+    =& \frac{1}{4}(\langle ij||ab\rangle - \langle ji||ab\rangle - \langle ij||ba\rangle + \langle ji||ba\rangle) \nonumber \\
+    =& \langle ij||ab\rangle
+\end{align}
+
+
+\subsection*{Spin-Adapted Formalism}
+\textcolor{blue}{(Blue indicates the operator pairs being swapped)}
+\begin{align}
+    \langle \Phi _{ij}^{ab}|\Phi _{kl}^{cd}\rangle =& \langle \Phi _{0}|\hat{E}^{j}_{b}\textcolor{blue}{\hat{E}^{i}_{a}\hat{E}^{c}_{k}}\hat{E}^{d}_{l}|\Phi _{0}\rangle \nonumber \\
+    =& \langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{k}^{c}\textcolor{blue}{\hat{E}^{i}_{a}\hat{E}^{d}_{l}}|\Phi _{0}\rangle + \delta _{ac}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{k}^{i}\hat{E}^{d}_{l}|\Phi _{0}\rangle - \delta _{ik}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{a}^{c}\hat{E}_{l}^{d}|\Phi _{0} \rangle \nonumber \\
+    =& \langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{k}\hat{E}_{l}^{d}\textcolor{red}{\cancel{\hat{E}^{i}_{a}|\Phi _{0}\rangle}} + \delta _{ad}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{k}\hat{E}_{l}^{i}|\Phi _{0}\rangle - \delta _{il}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{k}\hat{E}_{a}^{d}|\Phi _{0}\rangle \nonumber \\
+        &+ \delta _{ac}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{k}^{i}\hat{E}^{d}_{l}|\Phi _{0}\rangle - \delta _{ik}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{a}^{c}\hat{E}_{l}^{d}|\Phi _{0} \rangle \nonumber \\
+    =&\delta _{ad}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{k}\hat{E}_{l}^{i}|\Phi _{0}\rangle - \delta _{il}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{k}\hat{E}_{a}^{d}|\Phi _{0}\rangle \nonumber \\
+        &+ \delta _{ac}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{k}^{i}\hat{E}^{d}_{l}|\Phi _{0}\rangle - \delta _{ik}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{a}^{c}\hat{E}_{l}^{d}|\Phi _{0} \rangle
+\end{align}
+Evaluating term by term (noting that $\hat{E}^{a}_{b}|\Phi _{0}\rangle = 0$ ):
+\begin{align}
+    \langle \Phi _{0}|\textcolor{blue}{\hat{E}^{j}_{b}\hat{E}^{c}_{k}}\hat{E}^{i}_{l}|\Phi _{0}\rangle =& \textcolor{red}{\cancel{\langle \Phi _{0}|\hat{E}_{k}^{c}}}\hat{E}_{b}^{j}\hat{E}_{l}^{i}|\Phi _{0}\rangle + \delta _{bc}\langle \Phi _{0}|\hat{E}^{j}_{k}\hat{E}^{i}_{l}|\Phi _{0}\rangle - \delta _{jk}\langle \Phi _{0}|\hat{E}_{b}^{c}\hat{E}^{i}_{l}|\Phi _{0}\rangle \nonumber \\
+    =& \delta _{bc}\langle \Phi _{0}|\hat{E}^{j}_{k}\hat{E}^{i}_{l}|\Phi _{0}\rangle - \delta _{jk}\langle \textcolor{red}{\cancel{\Phi _{0}|\hat{E}_{b}^{c}}}\hat{E}^{i}_{l}|\Phi _{0}\rangle \\
+    \langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{k}\textcolor{red}{\cancel{\hat{E}^{d}_{a}|\Phi _{0}\rangle}} =& 0 
+\end{align}
+\begin{align}
+    \langle \Phi _{0}|\hat{E}^{j}_{b}\textcolor{blue}{\hat{E}^{i}_{k}\hat{E}^{d}_{l}}|\Phi _{0}\rangle =& \langle \Phi _{0}|\textcolor{blue}{\hat{E}^{j}_{b}\hat{E}^{d}_{l}}\hat{E}^{i}_{k}|\Phi _{0}\rangle + \textcolor{red}{\cancel{\delta _{dk}}}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{l}^{i}|\Phi _{0}\rangle - \delta _{il}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{d}_{k}|\Phi _{0}\rangle \nonumber \\
+    =& \textcolor{red}{\cancel{\langle \Phi _{0}|\hat{E}^{d}_{l}}}\hat{E}^{j}_{b}\hat{E}^{i}_{k}|\Phi _{0}\rangle + \delta _{bd}\langle \Phi _{0}|\hat{E}^{j}_{l}\hat{E}^{i}_{k}|\Phi _{0}\rangle - \delta _{jl}\langle \Phi _{0}|\hat{E}^{d}_{b}\hat{E}^{i}_{k}|\Phi _{0}\rangle \nonumber \\
+    & - \delta _{il}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{d}_{k}|\Phi _{0}\rangle \nonumber \\
+    =& \delta _{bd}\langle \Phi _{0}|\hat{E}^{j}_{l}\hat{E}^{i}_{k}|\Phi _{0}\rangle - \delta _{jl}\textcolor{red}{\cancel{\langle \Phi _{0}|\hat{E}^{d}_{b}}}\hat{E}^{i}_{k}|\Phi _{0}\rangle - \delta _{il}\textcolor{violet}{\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{d}_{k}|\Phi _{0}\rangle}
+\end{align}
+\begin{align}
+    \langle \Phi _{0}|\hat{E}^{j}_{b}\textcolor{blue}{\hat{E}^{c}_{a}\hat{E}^{d}_{l}}|\Phi _{0}\rangle =& \langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{d}_{l}\textcolor{red}{\cancel{\hat{E}^{c}_{a}|\Phi _{0}\rangle}} + \delta _{ad}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}_{l}^{c}|\Phi _{0}\rangle - \textcolor{red}{\cancel{\delta _{cl}}}\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{d}_{a}|\Phi _{0}\rangle \nonumber \\
+    =& \delta _{ad}\textcolor{violet}{\langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{c}_{l}|\Phi _{0}\rangle}
+\end{align}
+The \textcolor{violet}{violet} terms (using $\hat{E}^{i}_{j}|\Phi _{0}\rangle =(\hat{i}^{\dagger}_{\alpha}\hat{j}_{\alpha} + \hat{i}^{\dagger}_{\beta}\hat{j}_{\beta})|\Phi _{0}\rangle = 2 \delta _{ij}|\Phi _{0}\rangle$ ):
+\begin{align}
+    \langle \Phi _{0}|\hat{E}_{b}^{j}\hat{E}_{l}^{c}|\Phi _{0}\rangle =& \langle \Phi _{0}|\hat{E}^{c}_{l}\textcolor{red}{\cancel{\hat{E}^{j}_{b}|\Phi _{0}\rangle}} + \delta _{bc}\langle \Phi _{0}|\hat{E}^{j}_{l}|\Phi _{0}\rangle - \delta _{jl}\langle \Phi _{0}|\textcolor{red}{\cancel{\hat{E}_{b}^{c}|\Phi _{0}\rangle}} \nonumber \\
+    =& 2 \delta _{bc}\delta _{jl} \\
+    \langle \Phi _{0}|\hat{E}^{j}_{b}\hat{E}^{d}_{k}|\Phi _{0}\rangle =& 2 \delta _{bd}\delta _{jk}
+\end{align}
+Putting them together :
+\begin{align}
+    \langle \Phi _{ij}^{ab}|\Phi _{kl}^{cd}\rangle =& \delta _{ad}\delta _{bc}\langle \Phi _{0}|\hat{E}_{k}^{j}\hat{E}^{i}_{l}|\Phi _{0}\rangle + \delta _{ac}\delta _{bd}\langle \Phi _{0}|\hat{E}_{l}^{j}\hat{E}^{i}_{k}|\Phi _{0}\rangle \nonumber \\
+    &- 2 \delta _{ac}\delta _{il}\delta _{bd}\delta _{jk} - 2\delta _{ik}\delta _{ad}\delta _{bc}\delta _{jl} \nonumber \\
+    =& 4 \delta _{ad}\delta _{bc}\delta _{jk}\delta _{il} + 4 \delta _{ac}\delta _{bd}\delta _{jl}\delta _{ik} - 2 \delta _{ac}\delta _{bd}\delta _{il}\delta _{jk} - 2 \delta _{ad}\delta _{bc}\delta _{ik}\delta _{jl} \nonumber \\
+    =& \delta _{ad}\delta _{bc}(4 \delta _{jk}\delta _{il} - 2\delta _{ik}\delta _{jl}) + \delta _{ac}\delta _{bd}(4 \delta _{jl}\delta _{ik} - 2 \delta _{il}\delta _{jk})
+\end{align}
+
+\end{document}

@@ -1,0 +1,99 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+
+\section{CC Density Matrix}
+
+\subsection{Reduced Density Matrix}
+    We have the one- and two-body RDM as:
+    \begin{align}
+        \gamma(x,x') =& \sum_{pq}\phi _{q}(x) \gamma _{qp} \phi _{p}^{*}(x') \\
+        \Gamma(x _{1},x _{2}; x'_{1}, x'_{2}) =& \sum_{pqrs}\phi _{r}(x _{1})\phi _{s}(x _{2})\Gamma _{rspq}\phi _{p}^{*}(x' _{1})\phi _{q}^{*}(x' _{2}) 
+    \end{align}
+    in which $\gamma _{qp}$ and $\Gamma _{rspq}$ are the elements of discrete representation of one- and two- body RDM $\gamma(x,x')$ and $\Gamma(x _{1},x _{2};x' _{1},x' _{2})$:
+    \begin{align}
+        \gamma _{qp} =& \frac{\langle \Psi|\hat{p}^{\dagger}\hat{q}|\Psi\rangle}{\langle \Psi | \Psi \rangle} = \frac{\langle 0|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|0 \rangle}{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle} = \langle 0|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|0 \rangle _{\text{C}} \\
+        \Gamma _{rspq} =& \frac{\langle \Psi|\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}|\Psi\rangle}{\langle \Psi | \Psi \rangle} = \frac{\langle 0|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{\hat{T}}|0 \rangle}{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle} = \langle 0|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{\hat{T}}|0 \rangle _{\text{C}}
+    \end{align}
+    where we used the eqn(46(?)), i.e.:
+    \begin{align}
+        \langle 0|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|0 \rangle =& \langle 0|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|0 \rangle + \langle 0|e ^{\hat{T}^{\dagger}}\{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\c1{\hat{q}}}\} e ^{\hat{T}}|0 \rangle  \nonumber \\
+        =& \langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle \langle 0|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|0 \rangle _{\text{C}} + \delta _{pq}\delta _{p\in \text{occ}}\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle
+    \end{align}
+    Therefore:
+    \begin{align}
+        \gamma _{qp} =& \langle 0|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|0 \rangle _{\text{C}} + \delta _{pq}\delta _{p\in \text{occ}} \nonumber \\
+         =& (\gamma _{\text{N}}) _{qp} + \delta _{pq}\delta _{p\in \text{occ}}
+    \end{align} 
+    
+    With these, we can evaluate the expected values operators. The one-body expression can be obtained as:
+    \begin{align}
+        \bar{O} =& \frac{\langle \Psi|\hat{O}|\Psi \rangle}{\langle \Psi | \Psi\rangle}  \nonumber \\
+         =& \frac{\sum_{pq}o _{pq}\langle 0|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|0 \rangle}{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle} 
+          + \frac{\sum_{pq}o _{pq}\langle 0|e ^{\hat{T}^{\dagger}}\{\wick[sep=0.35em]{\c1{\hat{p}^{\dagger}}\c1{\hat{q}}}\}e ^{\hat{T}}|0 \rangle}{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle} \\ \nonumber
+         =& \frac{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0\rangle\sum_{pq}o _{pq}\langle 0|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|0 \rangle _{\text{C}}}{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle} 
+         +\frac{\sum_{pq}o _{pq}\langle 0|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|0 \rangle \delta _{pq}\delta _{p\in \text{occ}} }{\langle 0|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|0 \rangle} \\ \nonumber
+         =& \sum_{pq}o _{pq}\langle 0|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|0 \rangle _{\text{C}} + \sum_{pq}o _{pq} \delta _{pq} \delta _{p\in \text{occ}} \\ \nonumber
+         =& \sum_{pq}o _{pq}(\gamma _{\text{N}}) _{qp} + \sum_{i}o _{ii} \\ \nonumber
+         =& \sum_{pq}o _{pq}\gamma _{qp}
+    \end{align}
+
+    Similarly, for a general two-body operator $\hat{G} = \frac{1}{4}\sum_{pqrs}\langle pq|\hat{g}|rs\rangle _{\text{A}} \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}$, where $\langle pq|\hat{g}|rs\rangle _{\text{A}} = \langle pq|\hat{g}|rs\rangle - \langle pq|\hat{g}|sr\rangle$, the expectation value is:
+    \begin{equation}
+        \bar{G} = \frac{\langle \Psi|\hat{G}|\Psi \rangle}{\langle \Psi|\Psi \rangle} = \frac{1}{4}\sum_{pqrs}\langle pq|\hat{g}|rs\rangle _{\text{A}} \Gamma _{rspq}
+    \end{equation}
+    The $\Gamma _{rspq}$ tensor could be partitioned as:
+
+
+
+
+\subsection{Response Density Matrix}
+
+
+
+\subsection{Relaxed/Effective Density Matrix}
+
+
+\end{document}

@@ -1,0 +1,93 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{Introduction}
+
+
+    \subsection{Perturbation}
+
+    \subsection{Electric Properties}
+    In electric field $\mathbf{F}$ :
+    \begin{equation}
+        E(\mathbf{F}) = E _{0} - \mathbf{F}^{\text{T}}\mathbf{d}_{0} - \frac{1}{2}\mathbf{F}^{\text{T}}\mathbf{\alpha}\mathbf{F} + \order*{\mathbf{F}^{3}}
+    \end{equation}
+    where the molecular properties: permanent dipole moment $\mathbf{d}_{0}$ and polarisability tensor $\mathbf{\alpha}$ are:
+    \begin{align}
+        \mathbf{d}_{0} =& -\frac{\dd{E}}{\dd{\mathbf{F}}}\Big| _{\mathbf{0}} \\
+        \mathbf{\alpha} =& -\frac{\dd{^{2}E}}{\dd{\mathbf{F}^{2}}}\Big|_{{\mathbf{0}}}
+    \end{align}
+
+    \subsection{Magnetic Properties (Closed-Shell)}
+    For an NMR experiment on closed-shell systems, we have:
+    \begin{itemize}
+    \item Closed-shell system
+    \item Static external magnetic field $\mathbf{B}$ 
+    \item a set of nuclear magnetic moments $\mathbf{M}_{K}$
+    \end{itemize}
+    With these conditions:
+    \begin{equation}
+        E(\mathbf{B}, \mathbf{M}_{K}) = E _{0} + \frac{1}{2}\mathbf{B}^{\text{T}}\mathbf{E}^{(20)}\mathbf{B} + \sum_{K}\mathbf{B}^{\text{T}}\mathbf{E}_{K}^{(11)}\mathbf{M}_{K} + \sum_{K>L}\mathbf{M}_{K}^{\text{T}}\mathbf{E}_{KL}^{(02)}\mathbf{M}_{L}
+    \end{equation}
+    No first-order term since it vanishes for closed-shell systems (explained in section 4), and the higher order properties are neglected. The properties:
+    \begin{itemize}
+    \item magnetisability tensor (direct interaction of the system with external field $\mathbf{B}$):
+        \begin{equation}
+            \mathbf{E}^{(20)} = \mathbf{\xi} = -\frac{\dd{^{2}E}}{\dd{\mathbf{B}^{2}}}\Big|_{{\mathbf{0}}}
+        \end{equation}
+    \item coupling of magnetic moment $\mathbf{M}_{K}$ to field $\mathbf{B}$:
+        \begin{equation}
+            \mathbf{E}_{K}^{(11)} = \frac{\dd{^{2}E}}{\dd{\mathbf{M}_{K}}\dd{\mathbf{B}}} = -\mathbf{I}_{3} + \mathbf{\sigma}_{K}
+        \end{equation}
+        where $\mathbf{\sigma}_{K}$ is the nuclear magnetic shielding tensor
+    \item coupling between nuclear magnetic moments:
+        \begin{equation}
+            \mathbf{E}_{KL}^{(02)}= \frac{\dd{^{2}E}}{\dd{\mathbf{M}_{K}}\dd{\mathbf{M}_{L}}}\Big|_{{0}} = \frac{\mu _{0}}{4 \pi}\frac{R ^{2}_{KL}\mathbf{I}_{3}-3 \mathbf{R}_{KL}\mathbf{R}_{KL}^{\text{T}}}{R _{KL}^{5}} + \mathbf{K}_{KL}
+        \end{equation}
+        the first term is the classical direct dipole-dipole interaction between $\mathbf{M}_{K}$ and $\mathbf{M}_{L}$ and the second term is the indirect nuclear spin-spin coupling tensor
+    \end{itemize}
+
+
+
+\end{document}

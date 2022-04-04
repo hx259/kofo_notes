@@ -1,0 +1,78 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{NMR Shielding}
+Shielding Tensor:
+\begin{equation}
+    \sigma _{\beta \alpha}^{K} = \frac{\dd{^{2}E}}{\dd{B _{\alpha}}\dd{m_{K_{\beta}}}}\Big|_{{\mathbf{B},\mathbf{m}_{K} =\mathbf{0}}}
+\end{equation}
+How do I parameterize energy $E$ with $\mathbf{B}$ and $\mathbf{m}_{K}$? \\
+The one-electronic Hamiltonian in magnetic field:
+\begin{equation}
+    h(\mathbf{r},\mathbf{B},\mathbf{m}) = \frac{1}{2}\bm{\pi}^{2}-\phi(\mathbf{r})
+\end{equation}
+in which:
+\begin{equation}
+    \bm{\pi} = -i \bm{\nabla} + \mathbf{A}
+\end{equation}
+is the kinetic momentum operator.
+
+
+Vector potential:
+\begin{equation}
+    \mathbf{A}_{i} = \mathbf{A}_{0}(\mathbf{r}_{i}) + \sum_{K}\mathbf{A}_{K}(\mathbf{r}_{i})
+\end{equation} 
+with:
+\begin{align}
+    \mathbf{A}_{0}(\mathbf{r}_{i}) &= \frac{1}{2}\mathbf{B}\times \mathbf{r}_{0} &\mathbf{B} &= \mathbf{\nabla}\times \mathbf{A}(\mathbf{r}) \\
+    \mathbf{A}_{K}(\mathbf{r}_{i}) &= \alpha ^{2}\frac{\mathbf{M}_{K}\times \mathbf{r}_{K}}{r _{K}^{3}} &\mathbf{B}_{K}(\mathbf{r}) &= \mathbf{\nabla}\times \mathbf{A}_{K}(\mathbf{r})
+\end{align}
+The first part is contribution from the external magnetic field, the second part from the nuclear magnetic moments.
+\\
+Now parameterize with MO coefficients / densities?
+
+
+
+\end{document}

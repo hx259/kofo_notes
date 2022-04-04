@@ -1,0 +1,147 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\section{Coupled Perturbed Hatree-Fock (CPHF) Method}
+    This is a summary of the article Pople et al., IJQC (1979).
+    \\
+
+    The fock equation, subject to a perturbation $\xi$, in matrix notation:
+    \begin{equation}
+        \mathbf{F}(\xi)\mathbf{C}(\xi) = \mathbf{S}(\xi))\mathbf{C}(\xi)\mathbf{E}(\xi)
+    \end{equation}
+    The spin-orbitals are required to be orthonormal for all values of $\xi$:
+    \begin{equation}
+        \mathbf{C}^{\dagger}(\xi)\mathbf{S}(\xi)\mathbf{C}(\xi) = \mathbf{I}
+    \end{equation}
+    We would like to transform $\mathbf{C}(\xi)$ to unperturbed spin-orbital coefficients, i.e. $\mathbf{C}(0)$.
+    Consider the transformation from AO to MO:
+    \begin{equation}
+        \psi _{p}(\xi) = \sum_{\mu}C _{\mu p}(\xi)\phi _{\mu}(\xi)
+    \end{equation}
+    Suppose we have the basis functions $\{\phi _{i}(0)\}$ changed to $\{\phi _{i}(\xi)\}$ but the coefficients $\mathbf{C}(0)$ remains unperturbed:
+    \begin{equation}
+        \psi _{p}(\xi) = \sum_{q}U _{qp}(\xi)\big(\sum_{\mu}C _{\mu q}(0)\phi _{\mu}(\xi)\big)
+    \end{equation}
+    The matrix $\mathbf{U}(\xi)$ transforms the spin-orbital coefficients $\mathbf{C}(0)$  to a perturbed basis:
+    \begin{align}
+        C _{\mu p}(\xi) =& \sum_{q}C _{\mu q}(0)U _{qp}(\xi) \\
+        \Updownarrow & \nonumber \\
+        \mathbf{C}(\xi) =& \mathbf{C}(0)\mathbf{U}(\xi)
+    \end{align}
+    Now our aim is to find $\mathbf{U}(\xi)$ for perturbation $\xi$.\\
+
+    The Roothaan equations subject to perturbation are:
+    \begin{equation}
+        \mathbf{F}(\xi)\mathbf{C}(\xi) = \mathbf{S}(\xi)\mathbf{C}(\xi)\mathbf{E}(\xi)
+    \end{equation}
+    Writing the equation in terms of unperturbed coefficients and left-multiply by $\mathbf{C}^{\dagger}(0)$:
+    \begin{align}
+        \mathbf{F}(\xi)\mathbf{C}(0)\mathbf{U}(\xi) =& \mathbf{S}(\xi)\mathbf{C}(0)\mathbf{U}(\xi)\mathbf{E}(\xi) \nonumber \\
+        \Leftrightarrow \mathbf{C}^{\dagger}(0)\mathbf{F}(\xi)\mathbf{C}(0)\mathbf{U}(\xi) =& \mathbf{C}(0)\mathbf{S}(\xi)\mathbf{C}(0)\mathbf{U}(\xi)\mathbf{E}(\xi)
+    \end{align} 
+    By defining:
+    \begin{align}
+        \bm{\mathcal{F}}(\xi) &= \mathbf{C}^{\dagger}(0)\mathbf{F}(\xi)\mathbf{C}(0)  \\
+        \bm{\mathcal{S}}(\xi) &= \mathbf{C}^{\dagger}(0)\mathbf{S}(\xi)\mathbf{C}(0) 
+    \end{align}
+    the Roothaan equations become:
+    \begin{equation}
+        \bm{\mathcal{F}}(\xi)\mathbf{U}(\xi) = \bm{\mathcal{S}}(\xi)\mathbf{U}(\xi)\mathbf{E}(\xi)
+    \end{equation}
+    and the orthonomality condition follows:
+    \begin{equation}
+        \mathbf{U}^{\dagger}(\xi)\bm{\mathcal{S}}(\xi)\mathbf{U}(\xi) = \mathbf{I}
+    \end{equation}
+    Note here that, by definition, $\bm{\mathcal{S}}(0)$ and $\mathbf{U}(0)$ are the unit matrix $\mathbf{I}$:
+    \begin{align}
+        \mathbf{C}(\xi = 0) = \mathbf{C}(0)\mathbf{U}(\xi = 0) \Longleftrightarrow \mathbf{U}(0) = \mathbf{I}  \\
+        \bm{\mathcal{S}}(\xi = 0) = \mathbf{C}^{\dagger}(0)\mathbf{S}(\xi = 0)\mathbf{C}(0) = \mathbf{I}
+    \end{align}
+    Turn off the perturbation in the Roothaan equations subject to perturbation:
+    \begin{align}
+         \bm{\mathcal{F}}(0)\mathbf{U}(0) =& \bm{\mathcal{S}}(0)\mathbf{U}(0)\mathbf{E}(0) \\
+         \Updownarrow& \nonumber \\
+         \bm{\mathcal{F}}(0) =& \mathbf{E}(0)
+    \end{align}
+    With the unperturbed case defined, we now try to solve the Roothaan equations subject to perturbation, with orthonomality condition, by expanding the perturbed matrices in power series:
+    \begin{align}
+        \bm{\mathcal{F}}(\xi) =& \mathbf{E}(0) + \xi \bm{\mathcal{F}}^{(1)} + \order{\xi ^{2}} \\
+        \bm{\mathcal{S}}(\xi) =& \mathbf{I} + \xi \bm{\mathcal{S}}^{(1)} + \order{\xi ^{2}} \\
+        \mathbf{U}(\xi) =& \mathbf{I} + \xi \mathbf{U}^{(1)} + \order{\xi ^{2}} \\
+        \mathbf{E}(\xi) =& \mathbf{E}(0) + \xi \mathbf{E}^{(1)} + \order{\xi ^{2}}
+    \end{align}
+    Substitute these expansions into the Roothaan equations and normalisation condition, and collect linear terms in $\xi$:
+    \begin{align}
+        \mathbf{E}(0)\mathbf{U}^{(1)} + \bm{\mathcal{F}}^{(1)} =& \mathbf{E}^{(1)} + \mathbf{U}^{(1)}\mathbf{E}(0) + \bm{\mathcal{S}}^{(1)}\mathbf{E}(0) \\
+        \mathbf{0} =& \mathbf{U}^{(1)\dagger} + \bm{\mathcal{S}}^{(1)} + \mathbf{U}^{(1)}
+    \end{align}
+    Now our aim is to solve for $\mathbf{U}^{(1)}$ and $\mathbf{E}^{(1)}$.\\
+    As adding a random phase factor to the wavefunction does not alter the physical observables (e.g. electron density), we can safely choose elements of $\mathbf{U}$ to be real, WLOG.
+    Therefore, considering the diagonal terms in the orthonomality equation:
+    \begin{equation}
+        U _{pp} = -\frac{1}{2}\mathcal{S}_{pp}
+    \end{equation}
+    By looking at the diagonal terms of the Roothaan equations:
+    \begin{align}
+        \big(\mathcal{F}^{(1)} + E (0)U ^{(1)}\big)_{pp} =& \big(\mathcal{S}^{(1)}E(0) + U ^{(1)}E(0) + E ^{(1)} \big)_{pp}  \nonumber \\
+        \Leftrightarrow \mathcal{F}^{(1)}_{pp} + E_{p q}(0) U ^{(1)}_{q p} =& \mathcal{S}^{(1)}_{p r}E ^{(0)}_{r p} + U ^{(1)}_{p s}E _{s p}(0) + E _{pp}^{(1)} \nonumber \\
+        \Leftrightarrow \mathcal{F}^{(1)}_{pp} + E_{p}(0)\delta _{p q} U ^{(1)}_{q p} =& \mathcal{S}^{(1)}_{p r}E _{p}(0)\delta _{r p} + U ^{(1)}_{p s}E _{p}(0)\delta _{p s} + E _{pp}^{(1)} \nonumber \\
+        \Leftrightarrow \mathcal{F}^{(1)}_{pp} + E_{p}(0)U _{pp}^{(1)} =& \mathcal{S}_{pp}^{(1)}E _{p}(0) + U _{pp}^{(1)}E _{p}(0) + E _{p}^{(1)} \nonumber \\
+        \Downarrow& \nonumber \\
+        E _{p}^{(1)} =& \mathcal{F}_{pp}^{(1)} - \mathcal{S}_{pp}^{(1)}E _{p}(0)
+    \end{align}        
+    Einstein's summation convention are assumed here as well as in later sections, unless otherwise noted.
+    \\
+    To find the off-diagonal element of $\mathbf{U}$, we look at the off-diagonal terms in the Roothaan equations:
+    \begin{align}
+        \big(\mathcal{F}^{(1)} + E (0)U ^{(1)}\big)_{pq} =& \big(\mathcal{S}^{(1)}E(0) + U ^{(1)}E(0) + E ^{(1)} \big)_{pq}  \nonumber \\
+        \Leftrightarrow \mathcal{F}_{pq}^{(1)} + E _{pr}(0)U _{rq}^{(1)} =& \mathcal{S}_{ps}^{(1)}E _{sq}(0) + U _{pt}^{(1)}E _{tq}(0) + E _{pq}^{(1)} \nonumber \\
+        \Leftrightarrow \mathcal{F}_{pq}^{(1)} + E _{p}(0)\delta _{pr} U _{rq}^{(1)} =& \mathcal{S}_{ps}^{(1)}E _{q}(0)\delta _{sq} + U _{pt}^{(1)}E _{q}(0)\delta _{tq} + E _{pq}^{(1)} \nonumber \\
+        \Downarrow& \nonumber \\
+        U _{pq}^{(1)} =& \frac{\mathcal{F}_{pq}^{(1)} - \mathcal{S}_{pq}^{(1)}E _{q}(0)}{E _{q}(0) - E _{p}(0)}
+    \end{align}
+    \textcolor{cyan}{TODO:This is unfinished.}
+
+
+\end{document}

@@ -1,0 +1,179 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+\section{Paramagnetic and Diamagnetic Interactions}
+    \begin{itemize}
+    \item Paramagnetic interactions are (linear) $1 ^{\text{st}}$ order: $\sum_{i}\mathbf{A}_{i}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \sum_{i}\mathbf{B}(\mathbf{r}_{i})\cdot \mathbf{s}_{i}$ 
+    \item Energies of paramagnetic systems could be lowered by aligning the molecular magnetic moment with the field
+    \item Diamagnetic interactions are $2 ^{\text{nd}}$ order: $+\frac{1}{2}\sum_{i}A ^{2}(\mathbf{r}_{i})$ 
+    \item Energy of diamagnetic systems could only be increased with the field
+    \end{itemize}
+    Vector potential has both contribution from external magnetic field $\mathbf{B}$ and nuclear magnetic field $\mathbf{B}_{K}$:
+    \begin{equation}
+        \mathbf{A}_{i} = \mathbf{A}_{0}(\mathbf{r}_{i}) + \sum_{K}\mathbf{A}_{K}(\mathbf{r}_{i})
+    \end{equation} 
+    with:
+    \begin{align}
+        \mathbf{A}_{0}(\mathbf{r}_{i}) &= \frac{1}{2}\mathbf{B}\times \mathbf{r}_{0} &\mathbf{B} &= \mathbf{\nabla}\times \mathbf{A}(\mathbf{r}) \\
+        \mathbf{A}_{K}(\mathbf{r}_{i}) &= \alpha ^{2}\frac{\mathbf{M}_{K}\times \mathbf{r}_{K}}{r _{K}^{3}} &\mathbf{B}_{K}(\mathbf{r}) &= \mathbf{\nabla}\times \mathbf{A}_{K}(\mathbf{r})
+    \end{align}
+
+    \subsection{Zeeman Paramagnetic Interactions}
+    \begin{align*}
+        \text{Zeeman} &= 1 ^{\text{st}} \text{order interaction of electron with external magnetic field } \mathbf{B} \\
+               &= \text{Orbital Zeeman} + \text{Spin Zeeman}
+    \end{align*}
+    \begin{equation}
+        H _{\text{zm}}^{(1)} = \sum_{i}(\mathbf{A}_{0}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \mathbf{B}\cdot \mathbf{s}_{i})
+    \end{equation}
+    Orbital Zeeman:
+    \begin{align}
+        \sum_{i}\mathbf{A}_{0}(\mathbf{r _{i}})\cdot \mathbf{p}_{i} &= \frac{1}{2}\sum_{i}\mathbf{B}\times \mathbf{r}_{i0}\cdot \mathbf{p}_{i} \nonumber \\
+        &= \frac{1}{2}\sum_{i}\mathbf{B}\cdot \mathbf{l}_{i0} \\ \nonumber
+        &= \frac{1}{2}\mathbf{B}\cdot \mathbf{L}_{0}
+    \end{align}
+    in which $\mathbf{l}_{i0} = \mathbf{r}_{i0}\times \mathbf{p}_{i}$ is the orbital angular momentum and $\mathbf{L}_{0}=\sum_{i}\mathbf{l}_{i0}$ is the total angular momentum, relative to $\mathbf{R}_{0}$.\\
+    We also used the permutation relation of triple product: $\mathbf{a} \cdot (\mathbf{b}\times \mathbf{c}) = \mathbf{b} \cdot (\mathbf{c}\times \mathbf{a})$
+    \break
+    \\
+    Spin Zeeman:
+    \begin{equation}
+        \sum_{i}\mathbf{B}\cdot \mathbf{s}_{i} = \mathbf{B}\cdot \mathbf{S}
+    \end{equation}
+    where $\mathbf{S} = \sum_{i}\mathbf{s}_{i}$ is the total spin angular momentum. \\
+
+    Therefore, the total Zeeman Hamiltonian is:
+    \begin{equation}
+        H_{\text{zm}}^{(1)} = \mathbf{B}\cdot \mathbf{H}_{0}^{\text{zm}} = \mathbf{B}\cdot (\frac{1}{2}\mathbf{L}_{0} + \mathbf{S})
+    \end{equation}
+
+    \subsection{Hyperfine Paramagnetic Interactions}
+    \begin{align*}
+        \text{Hyperfine} &= 1 ^{\text{st}} \text{order interaction of electron with nuclear magnetic field, with magnetic moment } \mathbf{M}_{K} \\
+        &= \text{Orbital Hyperfine} + \text{Spin Hyperfine}
+    \end{align*}
+    \begin{equation}
+        H _{\text{hf}}^{(1)} = \sum_{i,K}(\mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \mathbf{B}_{K}(\mathbf{r}_{i})\cdot \mathbf{s}_{i})
+    \end{equation}
+    where $\mathbf{A}_{K}(\mathbf{r})=\alpha ^{2}\frac{\mathbf{M}_{K}\times \mathbf{r}_{K}}{r _{K}^{3}}$ is the vector field associated with nuclear magnetic field $\mathbf{B}_{K}$. \\
+
+    Orbital Hyperfine:
+    \begin{equation}
+        \sum_{i,K} \mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} = \alpha ^{2} \sum_{i,K}\frac{(\mathbf{M}_{K}\times \mathbf{r}_{iK})\cdot \mathbf{p}_{i}}{r _{iK}^{3}} = \alpha ^{2}\sum_{i,K}\frac{\mathbf{M}_{K}\cdot \mathbf{l}_{iK}}{r _{iK}^{3}}
+    \end{equation}
+    Spin Hyperfine:
+    \begin{equation}
+        \sum_{i,K} \mathbf{B}_{K}(\mathbf{r}_{i})\cdot \mathbf{s}_{i}
+    \end{equation}
+    and the nuclear magnetic field is:
+    \begin{equation}
+        \mathbf{B}_{K}(\mathbf{r}) = \mathbf{\nabla}\times \mathbf{A}_{K}(\mathbf{r}) = \frac{8 \pi \alpha ^{2}}{3}\delta (\mathbf{r}_{K})\mathbf{M}_{K} + \alpha ^{2}\frac{3 \mathbf{r}_{K}(\mathbf{r}_{K}\cdot \mathbf{M}_{K})- r _{K}^{2}\mathbf{M}_{K}}{r _{K}^{5}}
+    \end{equation} 
+    in which the first term is contact term and only contributes when electron is at the nucleus, while the second term, the dipole term, contributes at distance. \\
+
+    Therefore, the total Hyperfine Hamiltonian is:
+    \begin{align}
+        H _{\text{hf}}^{(1)} &= \sum_{i,K}(\mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \mathbf{B}_{K}(\mathbf{r}_{i})\cdot \mathbf{s}_{i})  \nonumber \\
+        &= \alpha ^{2} \sum_{i,K}\frac{\mathbf{M}_{K}\cdot \mathbf{l}_{iK}}{r _{iK}^{3}} + \frac{8 \pi \alpha ^{2}}{3}\sum_{i,K}\delta _{\mathbf{r}_{iK}}\mathbf{M}_{K}\cdot \mathbf{s}_{i} + \alpha ^{2} \sum_{i,K}\mathbf{M}_{K}\cdot \frac{3 \mathbf{r}_{iK}\mathbf{r}_{iK}^{\text{T}}- \mathbf{r}_{iK}^{2}\mathbf{I}_{3}}{r _{iK}^{5}} \mathbf{s}_{i} \\ \nonumber
+        &= \sum_{K}\mathbf{M}_{K}\cdot (\alpha ^{2}\sum_{i}\frac{\mathbf{l}_{iK}}{r _{iK}^{3}} + \frac{8 \pi \alpha ^{2}}{3}\sum_{i}\delta (\mathbf{r}_{iK})\mathbf{s}_{i} + \alpha ^{2}\sum_{i}\frac{3 \mathbf{r}_{iK}\mathbf{r}_{iK}^{\text{T}}-r _{iK}^{2}\mathbf{I}_{3}}{r _{iK}^{5}} \mathbf{s}_{i}) \\ \nonumber
+        &= \sum_{K}\mathbf{M}_{K}\cdot (\mathbf{H}_{K}^{\text{PSO}} + \mathbf{H}_{K}^{\text{FC}} + \mathbf{H}_{K}^{\text{SD}}) \\ \nonumber
+        &= \sum_{K}\mathbf{M}_{K}\cdot \mathbf{H}_{K}^{\text{hf}}
+    \end{align}
+    in which:
+    \begin{align}
+        \mathbf{H}_{K}^{\text{PSO}} &= \alpha ^{2} \sum_{i}\frac{\mathbf{l}_{iK}}{r _{iK}^{3}} = \text{paramagnetic spin-orbit operator} \\
+        \mathbf{H}_{K}^{\text{FC}} &= \frac{8 \pi \alpha ^{2}}{3} \sum_{i}\delta (\mathbf{r}_{iK})\mathbf{s}_{i} = \text{Fermi-contact operator} \\
+        \mathbf{H}_{K}^{\text{SD}} &= \alpha ^{2}\sum_{i}\frac{3 \mathbf{r}_{iK}\mathbf{r}_{iK}^{\text{T}}-r _{iK}^{2}\mathbf{I}_{3}}{r _{iK}^{5}}\mathbf{s}_{i} = \text{spin-dipole operator}
+    \end{align}
+    where $\mathbf{H}_{K}^{\text{PSO}}$ comes from the Orbital-Hyperfine contribution and $\mathbf{H}_{K}^{\text{FC}}$,$\mathbf{H}_{K}^{\text{SD}}$ come from the Spin-Hyperfine contribution.   
+
+    \subsection{Diamagnetic Interactions}
+    Recall:
+    \begin{equation}
+        H = H ^{(0)} + H ^{(1)} + H ^{(2)}
+    \end{equation}
+    where $H ^{(2)} = \frac{1}{2}\sum_{i}\mathbf{A}_{i}^{2}(\mathbf{r}_{i})$ is the diamagnetic contribution to the Hamiltonian.\\ 
+    The vector potential could be splitted into contributions from the external magnetic field $\mathbf{B}$ and nuclear magnetic field $\mathbf{B}_{K}$: 
+    \begin{equation}
+        \mathbf{A}_{i} = \mathbf{A}_{0}(\mathbf{r}_{i}) + \sum_{K}\mathbf{A}_{K}(\mathbf{r}_{i})
+    \end{equation}
+    To evaluate the diamagnetic interaction:
+    \begin{align}
+        H _{\text{dia}^{(2)}} &= \frac{1}{2}\sum_{i}A _{i}^{2}(\mathbf{r}_{i})  \nonumber \\
+         &= \frac{1}{2}\sum_{i}\big(\mathbf{A}_{0}(\mathbf{r}_{i}) + \sum_{K}\mathbf{A}_{K}(\mathbf{r}_{i})\big)\cdot\big(\mathbf{A}_{0}(\mathbf{r}_{i}) + \sum_{K}\mathbf{A}_{K}(\mathbf{r}_{i})\big) \\ \nonumber
+         &= \frac{1}{2}\sum_{i}A _{0}^{2}(\mathbf{r}_{i}) + \sum_{i,K}\mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{A}_{0}(\mathbf{r}_{i}) + \frac{1}{2}\sum_{i,K,L}\mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{A}_{L}(\mathbf{r}_{i}) \\
+    \end{align}
+    Evaluate term by term:
+    \begin{align}
+        \frac{1}{2}\sum_{i}A _{0}^{2}(\mathbf{r}_{i}) &= \frac{1}{2} \sum_{i}\frac{1}{2}(\mathbf{B}\times \mathbf{r}_{i0})\cdot \frac{1}{2}(\mathbf{B}\times \mathbf{r}_{i0}) \nonumber \\
+         &= \mathbf{B}^{\text{T}}(\frac{1}{8}\sum_{i}\mathbf{I}_{3}r _{i0}^{2}- r _{i0}r _{i0}^{\text{T}})\mathbf{B} \\ \nonumber
+         &= \mathbf{B}^{\text{T}}\mathbf{H}_{00}^{\text{dia}}\mathbf{B} 
+    \end{align}
+    \begin{align}
+        \sum_{i,K}\mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{A}_{0}(\mathbf{r}_{i}) &= \frac{1}{2} \alpha ^{2}\sum_{i,K}\frac{(\mathbf{B}\times \mathbf{r}_{i0})\cdot (\mathbf{M}_{K}\times \mathbf{r}_{iK})}{r _{iK}^{3}}  \nonumber \\
+         &= \mathbf{M}_{K}^{\text{T}} \sum_{K}(\frac{\alpha ^{2}}{2}\sum_{i}\frac{\mathbf{r}_{i0}^{\text{T}}\mathbf{r}_{iK}\mathbf{I}_{3}-\mathbf{r}_{i0}\mathbf{r}_{iK}^{\text{T}}}{r _{iK}^{3}})\mathbf{B} \nonumber \\
+         &= \sum_{K}\mathbf{M}_{K}^{\text{T}}\mathbf{H}_{K0}^{\text{dia}}\mathbf{B}
+    \end{align}
+    \begin{align}
+        \frac{1}{2}\sum_{i,K,L}\mathbf{A}_{K}(\mathbf{r}_{i})\cdot \mathbf{A}_{L}(\mathbf{r}_{i}) &= \frac{\alpha ^{4}}{2}\sum_{i,K,L}\frac{(\mathbf{M}_{K}\times \mathbf{r}_{iK})\cdot (\mathbf{M}_{L}\times \mathbf{r}_{iL})}{r _{iK}^{3}r _{iL}^{3}}  \nonumber \\
+         &= \sum_{K,L} \mathbf{M}_{K}^{\text{T}}(\frac{\alpha ^{4}}{2}\sum_{i}\frac{\mathbf{r}_{iK}^{\text{T}}\mathbf{r}_{iL}\mathbf{I}_{3}-\mathbf{r}_{iK}\mathbf{r}_{iL}^{\text{T}}}{r _{iK}^{3}r _{iL}^{3}})\mathbf{M}_{L} \\ \nonumber
+         &= \sum_{K,L} \mathbf{M}_{K}^{\text{T}}\mathbf{H}_{KL}^{\text{dia}}\mathbf{M}_{L}
+    \end{align}
+    Hence altogether, the diamagnetic interaction is:
+    \begin{align}
+        H _{\text{dia}}^{2} &= \frac{1}{2}\sum_{i}A _{i}^{2}(\mathbf{r}_{i}) \nonumber \\
+         &= \mathbf{B}^{\text{T}}\mathbf{H}_{00}^{\text{dia}}\mathbf{B} + \sum_{K}\mathbf{M}_{K}^{\text{T}}\mathbf{H}_{K0}^{\text{dia}}\mathbf{B} + \sum_{K,L}\mathbf{M}_{K}^{\text{T}}\mathbf{H}_{K,L}^{\text{dia}}\mathbf{M}_{L}
+    \end{align}
+    with the terms:
+    \begin{align}
+        \mathbf{H}_{00}^{\text{dia}} & = \frac{1}{8}\sum_{i}(\mathbf{I}_{3}r _{i0}^{2} - \mathbf{r}_{i0}\mathbf{r}_{i0}^{\text{T}}) \\
+        \mathbf{H}_{K0}^{\text{dia}} & = \frac{\alpha ^{2}}{2}\sum_{i}\frac{\mathbf{r}_{i0}^{\text{T}}\mathbf{r}_{iK}\mathbf{I}_{3}-\mathbf{r}_{i0}\mathbf{r}_{iK}^{\text{T}}}{r _{iK}^{3}} \\
+        \mathbf{H}_{KL}^{\text{dia}} & = \frac{\alpha ^{4}}{2}\sum_{i}\frac{\mathbf{r}_{iK}^{\text{T}}\mathbf{r}_{iL}\mathbf{I}_{3}-\mathbf{r}_{iK}\mathbf{r}_{iL}^{\text{T}}}{r _{iK}^{3}r _{iL}^{3}}
+    \end{align}
+
+
+
+
+\end{document}

@@ -1,0 +1,106 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+
+\section{Derivative Evaluation}
+    Here we explore the evaluation of the NMR shielding tensor $\mathbf{\sigma}^{K}$ of nucleus $K$ as an example of calculating the second order response properties.  
+    \\
+    The expression for the shielding tensor is given by:
+    \begin{equation}
+        \sigma ^{K}_{\alpha \beta} = \frac{\dd{^{2}E}}{\dd{B}_{\beta}\dd{m _{K \alpha}}}\Big|_{{\mathbf{B},\bm{m}_{K}=\mathbf{0}}}
+    \end{equation}
+
+    The one-electron Hamiltonian in the magnetic field is (in Atomic Unit):
+    \begin{equation}
+        h(\mathbf{r},\mathbf{B},\mathbf{m}) = \frac{\bm{\pi}^{2}}{2} - \phi(\mathbf{r})
+    \end{equation}
+    in which:
+    \begin{align}
+        \bm{\pi} =& \mathbf{p} + \mathbf{A}(\mathbf{r}, \mathbf{B}, \mathbf{m}) \nonumber \\
+        =& -i \bm{\nabla} + \mathbf{A}(\mathbf{r}, \mathbf{B}, \mathbf{m}) \\
+        \mathbf{A}(\mathbf{r},\mathbf{B},\mathbf{m}) =& \mathbf{A}_{0} + \sum_{K}\mathbf{A}_{K} \nonumber \\
+        =& \frac{1}{2}\mathbf{B}\times \mathbf{r}_{0} + \alpha ^{2}\sum_{K}\frac{\mathbf{m}_{K}\times \mathbf{r}_{K}}{r _{K}^{3}}
+    \end{align}
+    The one-electron Hamiltonian expands to be \textcolor{cyan}{(details to be added later)}:
+    \begin{equation}
+        h(\mathbf{r},\mathbf{B},\mathbf{m}) = \frac{\mathbf{p} ^{2}}{2} + \mathbf{A}\cdot \mathbf{p} + \mathbf{B}\cdot \mathbf{s} + \frac{\mathbf{A}^{2}}{2} - \phi(\mathbf{r}) 
+    \end{equation}
+    And the molecular Hamiltonian is given by:
+    \begin{equation}
+        H = \sum_{i}\frac{\mathbf{p}_{i}^{2}}{2} -\sum_{k,i}\frac{Z _{K}}{r _{iK}} + \sum_{i>j}\frac{1}{r _{ij}} + \sum_{K>L}\frac{Z _{K}Z _{L}}{R _{KL}} + \sum_{i}\mathbf{A}(\mathbf{r}_{i})\cdot \mathbf{p}_{i} + \sum_{i}\mathbf{B}(\mathbf{r}_{i})\cdot \mathbf{s}_{i} - \sum_{i}\phi(\mathbf{r}_{i}) + \sum_{i}\frac{\mathbf{A}^{2}(\mathbf{r}_{i})}{2}
+    \end{equation}
+    \\
+
+    To evaluate the shielding tensor, we could write it into density matrix formalism. From previous chapter, we know that, for general one-body operator $\hat{O}$ and two-body operator $\hat{G}$:
+    \begin{align}
+        \bar{O} =& \frac{\langle \Psi|\hat{O}|\Psi\rangle}{\langle \Psi|\Psi\rangle} = \sum_{pq}o _{pq}\gamma _{qp} \\
+        \bar{G} =& \frac{\langle \Psi|\hat{G}|\Psi\rangle}{\langle \Psi|\Psi\rangle} = \frac{1}{4}\sum_{pqrs}\langle pq|\hat{g}|rs\rangle _{\text{A}} \Gamma _{rspq}
+    \end{align} 
+    \textcolor{magenta}{TODO: derive the expression of shielding tensor in density matrix formalism}
+    \\
+
+    \textcolor{blue}{details to be added:}
+    \begin{align}
+        \pdv{h}{B _{i}} =& -\frac{i}{2}(\mathbf{r}\times \bm{\nabla})_{i} \\
+        \pdv{h}{m _{K j}}=& -\frac{(\mathbf{r}_{K}\times \bm{\nabla})_{j}}{\mathbf{r} _{K}^{3}}\\
+        \frac{\partial ^{2}h}{\partial B _{i}\partial m _{K j}} =& \frac{1}{2}\frac{\mathbf{r}\cdot \mathbf{r}_{K}\delta _{ij}-r _{j}(\mathbf{r}_{K})_{i}}{\mathbf{r}_{K} ^{3}}
+    \end{align}
+
+    \subsection{First Derivative}
+    \textcolor{red}{Taking first derivative w.r.t $m _{K}$ or $\mathbf{B}$?}\\
+    Could try both way.
+    \begin{align}
+        \frac{\dd{\mathcal{L}_{\text{CC}}}}{\dd{m _{K \alpha}}} =& \pdv{\mathcal{L}_{\text{CC}}}{m _{K \alpha}} + \sum_{bj}\pdv{\mathcal{L}_{\text{CC}}}{\kappa _{bj}}\pdv{\kappa _{bj}}{m _{K \alpha}} + \sum_{\mu}\pdv{\mathcal{L} _{\text{CC}}}{t _{\mu}}\pdv{t _{\mu}}{m _{K \alpha}}\nonumber \\ 
+        &+\sum_{\nu}\pdv{\mathcal{L}_{\text{CC}}}{\lambda _{\nu}}\pdv{\lambda _{\nu}}{m _{K \alpha}} +\sum_{z _{ai}}\pdv{\mathcal{L}_{\text{CC}}}{z _{ai}}\pdv{z _{ai}}{m _{K \alpha}} + \sum_{pq}\pdv{\mathcal{L}_{\text{CC}}}{I _{pq}}\pdv{I _{pq}}{m _{K \alpha}} \nonumber \\
+        =& \pdv{\mathcal{L}_{\text{CC}}}{m _{K \alpha}} \\
+        =& \text{\textcolor{blue}{density expression?}}
+    \end{align}
+
+    \subsection{Second Derivative}
+    The second derivative would involve density response terms. ($D _{\mu \nu}^{B _{\beta}}$ for example)
+
+
+
+\end{document}

@@ -1,0 +1,193 @@
+\documentclass[xcolor=dvipsnames,compress,9pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{caption}
+\usepackage{multicol}
+
+\pgfplotsset{compat=1.7}
+
+\renewcommand{\indent}{\hspace*{2em}}
+
+\usetheme{Madrid}
+\useoutertheme[subsection=false]{miniframes}
+\useinnertheme{circles}
+\usefonttheme[onlymath]{serif}
+
+%color theme from latexcolor.com:
+
+%\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77}
+%\usecolortheme[named=cherryblossompink]{structure}
+%\definecolor{etonblue}{rgb}{0.59, 0.78, 0.64}
+%\usecolortheme[named=etonblue]{structure}
+%\definecolor{unitednationsblue}{rgb}{0.36, 0.57, 0.9}
+%\usecolortheme[named=unitednationsblue]{structure}
+\definecolor{tiffanyblue}{rgb}{0.04, 0.73, 0.71}
+\usecolortheme[named=tiffanyblue]{structure}
+%\definecolor{tearose(orange)}{rgb}{0.97, 0.51, 0.47}
+%\usecolortheme[named=tearose(orange)]{structure}
+%\definecolor{lightseagreen}{rgb}{0.13, 0.7, 0.67}
+%\usecolortheme[named=lightseagreen]{structure}
+%\definecolor{palecerulean}{rgb}{0.61, 0.77, 0.89}
+%\usecolortheme[named=palecerulean]{structure}
+%\definecolor{ruddypink}{rgb}{0.88, 0.56, 0.59}
+%\usecolortheme[named=ruddypink]{structure}
+%\definecolor{burntorange}{rgb}{0.8, 0.33, 0.0}
+%\usecolortheme[named=burntorange]{structure}
+
+
+\title[Molecular Properties \&  Coupled Cluster]{Introduction: Evaluation of Electric and Magnetic Molecular Properties using Canonical Coupled Cluster Method}
+\author[H.Xu]{Hang Xu}
+\institute[MPI-KoFo]
+{
+  Neese Department\\
+  Max-Planck-Institut für Kohlenforschung
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+    \frametitle{Second-Order Electric and Magnetic Properties}
+    Hamiltonian subject to perturbation:
+    \begin{equation}
+        \hat{H} = \hat{H}(0)+\lambda \hat{O}
+    \end{equation}
+    E.g. $\hat{O} = -\bm{\mathcal{E}}\cdot \sum_{\mu}q _{\mu}\mathbf{r}_{\mu}$ for external electric field. \\
+    \pause
+
+    Energy response subject to external perturbation (Taylor series):
+    \begin{equation}
+        E(\lambda) = E(0) + \lambda \frac{\dd{E}}{\dd{\lambda}}\Big|_{{\lambda=0}} + \frac{1}{2!}\lambda ^{2}\frac{\dd{^{2}E}}{\dd{\lambda ^{2}}}\Big|_{{\lambda=0}} + \dots
+    \end{equation}
+    \pause 
+
+    By definition of expectation value and Perturbation Theory:
+    \begin{equation}
+        \langle \hat{O}\rangle = \langle \hat{H}^{(1)}\rangle = \frac{\langle \Psi ^{(0)}|\hat{H}^{(1)}|\Psi ^{(0)}\rangle}{\langle \Psi ^{(0)}|\Psi ^{(0)}\rangle} = \frac{\dd{E(\lambda)}}{\dd{\lambda}}\Big|_{{\lambda=0}}
+    \end{equation}
+    \pause
+
+    Therefore we can evaluate many molecular properties with energy derivatives. For example:
+
+    \begin{multicols}{2}
+    \begin{itemize}
+    \item $\frac{\dd{^2 E}}{\dd{\mathcal{E} _{\alpha}}\dd{\mathcal{E} _{\beta}}}$: electric polarizability
+    \item $\frac{\dd{^2 E}}{\dd{B _{\alpha}}\dd{B _{\beta}}}$: magnetizability
+    \item $\frac{\dd{^2 E}}{\dd{B _{\alpha}}\dd{m _{K \beta}}}$: NMR shielding tensor
+    \item $\frac{\dd{^2 E}}{\dd{B _{\alpha}}\dd{S _{\beta}}}$: electronic g-tensor
+    \end{itemize}
+    \end{multicols}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Canonical Coupled Cluster Ansatz}
+    The Coupled Cluster wavefunction:
+    \begin{equation}
+        |\Psi _{\textrm{CC}}\rangle=e ^{\hat{T}}|\Phi _{0}\rangle
+    \end{equation}
+    \begin{align}
+        &\hat{T} = \sum_{\eta}\hat{T}_{\eta} &\hat{T}_{\eta} = \frac{1}{(\eta !)^{2}}\sum_{\substack{ij\dots \\ ab \dots}}t _{ij \dots}^{ab \dots}\{\hat{a}^{\dagger}\hat{i}\hat{b}^{\dagger}\hat{j}\}
+    \end{align}
+    \pause
+    Energy expression:
+    \begin{equation}
+       \Delta E _{\textrm{CC}} = \langle \Psi _{\textrm{CC}}|\hat{H}_{\textrm{N}}|\Psi _{\textrm{CC}}\rangle = \langle \Phi _{0}|\mathcal{H}|\Phi _{0}\rangle
+    \end{equation}
+    \pause
+    Effective Hamiltonian (using BCH expansion):
+    \begin{align}
+        \mathcal{H} =& e ^{-\hat{T}}\hat{H}_{\textrm{N}}e ^{\hat{T}} \nonumber \\
+        =& \hat{H}_{\textrm{N}} + [\hat{H}_{\textrm{N}},\hat{T}] + \frac{1}{2!}[[\hat{H}_{\textrm{N}},\hat{T}],\hat{T}] + \frac{1}{3!}[[[\hat{H}_{\textrm{N}},\hat{T}],\hat{T}],\hat{T}] \nonumber \\
+        &+ \frac{1}{4!}[[[[\hat{H}_{\textrm{N}},\hat{T}],\hat{T}],\hat{T}],\hat{T}] \nonumber \\
+        =&\hat{H}_{\textrm{N}} + (\hat{H}_{\textrm{N}}\hat{T})_{\textrm{C}} + \frac{1}{2!}(\hat{H}_{\textrm{N}}\hat{T}^{2})_{\textrm{C}} + \frac{1}{3!}(\hat{H}_{\textrm{N}}\hat{T}^{3})_{\textrm{C}} + \frac{1}{4!}(\hat{H}_{\textrm{N}}\hat{T}^{4})_{\textrm{C}} \nonumber \\
+        =& (\hat{H}_{\textrm{N}}e ^{\hat{T}})_{\textrm{C}}
+    \end{align}
+\end{frame}
+
+\begin{frame}
+    \frametitle{CC Lagrangian and Stationary Conditions}
+    For non-variational methods, Lagrange's undetermined multipliers ansatz are used.
+    \begin{align}
+        \mathcal{L}_{\textrm{CC}} =& \langle \Phi _{0}|\mathcal{H}|\Phi _{0}\rangle + \sum_{\eta}\lambda _{\eta}\langle \Phi _{\eta}|\mathcal{H}|\Phi _{0}\rangle
+        + \sum_{ai}f _{ai}z _{ai} + \sum_{pq}I _{pq}(\sum_{\mu \nu}C ^{*}_{\mu p}S _{\mu \nu}C _{\nu q} - \delta _{pq}) \nonumber \\
+         =& \langle \Phi _{0}|(1+\hat{\Lambda})\mathcal{H}|\Phi _{0}\rangle + \sum_{ai}f _{ai}z _{ai} + \sum_{pq}I _{pq}(\sum_{\mu \nu}C ^{*}_{\nu p}S _{\mu \nu}C _{\nu q} - \delta _{pq})
+    \end{align}
+    \pause
+The following stationary conditions need to be imposed, resulting different sets of equations to solve:
+\begin{itemize}
+\item $\pdv{\mathcal{L}_{\textrm{CC}}}{\lambda _{\eta}}=0$: resulting the CC amplitude equations
+\pause
+\item $\pdv{\mathcal{L}_{\textrm{CC}}}{t _{\eta}}=0$: resulting the CC $\Lambda$ equations
+\pause
+\item $\pdv{\mathcal{L}_{\textrm{CC}}}{z _{ai}}=0$: resulting the Brillouin condition (HF equations)
+\pause
+\item $\pdv{\mathcal{L}_{\textrm{CC}}}{\kappa _{bj}}=0$: resulting the z-vector equation
+\pause
+\item $\pdv{\mathcal{L}_{\textrm{CC}}}{I _{pq}}=0$: resulting the orthonormality condition
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Evaluation of Derivatives: NMR Shielding Tensor}
+    Expression for the shielding tensor:
+    \begin{align}
+        \sigma ^{K} _{\beta \alpha} =& \Big(\frac{\dd{^{2}E}}{\dd{B _{\alpha}}\dd{m _{K \beta}}}\Big)\Big|_{{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+        =& \sum_{\mu \nu}D _{\mu \nu} \frac{\partial ^2 h _{\mu \nu}}{\partial B _{\alpha}\partial m _{K \beta}} + \sum_{\mu \nu} \pdv{D _{\mu \nu}}{B _{\alpha}}\pdv{h _{\mu \nu}}{m _{K \beta}}
+    \end{align}
+    \pause
+    One-electron Hamiltonian in magnetic field:
+    \begin{equation}
+        h = \frac{\mathbf{p}^{2}}{2} + \mathbf{A}\cdot \mathbf{p} + \mathbf{B}\cdot \mathbf{s} + \frac{\mathbf{A}^{2}}{2} - \phi(\mathbf{r})
+    \end{equation}
+    \pause
+    Then the derivatives of the one-electron Hamiltonian could be worked out.\\
+    Taking derivatives of the Lagrangian $\mathcal{L}_{\textrm{CC}}$ is not too difficult at this point, as the Lagrangian is already made stationary w.r.t most parameters. \\
+    \pause
+    Note the derivatives of MO coefficient $\mathbf{C}$ are worked out by firstly solving the CPSCF equations for the orbital transformation parameter, then for example:
+    \begin{equation}
+        \pdv{C _{\mu p}}{B _{\alpha}} = \sum_{q}C _{\mu q}U ^{B _{\alpha}}_{qp}
+    \end{equation}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Long-Term Goal: Evaluation of Properties with DLPNO-CC method}
+    \begin{center}
+    \begin{tabular}{||c|c||}
+            \hline
+            Method & \footnotesize{Computational Scaling} \\
+            \hline
+            \hline
+            CCSD & $\order*{N ^{6}}$ \\
+            CCSD(T) & $\order*{N ^{7}}$ \\
+            CCSDT & $\order*{N ^{8}}$ \\
+            \hline
+    \end{tabular}
+    \end{center}
+    It's not impossible, but computationally unfriendly hence often not feasible to calculate properties for large molecular systems using canonical CC ansatz.
+    \\~\\
+    \pause
+    Taking local correlation approximations would significantly reduce the amount of calculation,
+    making the methods in previous slides applicable to real-life chemistry.
+    \pause
+    \\~\\
+    \begin{center}
+    \Huge Thank you for your time!
+    \end{center}
+    \pause
+    \begin{align}
+    \text{Acknowlegement: }&\text{Prof. Dr. Frank Neese} \nonumber \\
+                    &\text{Georgi Stoychev}\nonumber \\
+                    &\text{Stan Papadopoulos}\nonumber 
+    \end{align}
+\end{frame}
+    
+\end{document}

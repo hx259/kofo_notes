@@ -1,0 +1,78 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+\usepackage{xcolor}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\title{Evaluation of Electric and Magnetic Molecular Properties using Canonical Coupled Cluster Method \\ (First-year Study Note)}
+\author{Hang Xu}
+
+\begin{document}
+    \maketitle
+
+    This note is in no way complete since I just list all topics I think I should cover then keep filling in blanks.
+
+    \section*{Rough Guide}
+    Theoretical Aspect:
+    \begin{itemize}
+    \item Get familiar with the notation and formulation which already exists in ORCA
+    \item Derive the basic HF, CC theory with these ansatz
+    \item Density formulation of HF and CC
+    \item $\mathbf{\Lambda}$-equations
+    \item $Z$-vector ansatz 
+    \item Construct the CC Lagrangian and impose stationary conditions
+    \item Learn about molecular properties, especially electromagnetic properties
+    \item Current goal: evaluate the NMR shielding tensor with canonical CC ansatz
+    \end{itemize}
+    Computational Aspect:
+    \begin{itemize}
+    \item Read ORCA codes (CPSCF, Canonical CC and CC gradient)
+    \end{itemize}
+    \subsection{\textcolor{red}{Need a tutorial on Frozen-core Approximation}}
+
+    \newpage
+    \tableofcontents
+
+
+
+
+
+\end{document}

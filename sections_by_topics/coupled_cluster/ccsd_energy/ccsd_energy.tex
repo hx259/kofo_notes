@@ -1,0 +1,106 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+
+
+\section{Energy Derivation}
+    \begin{align}
+        E _{\text{CC}} =& \langle 0|\hat{\mathcal{H}}|0\rangle  \nonumber \\
+         =& \langle 0|\hat{H}_{\text{N}}e ^{\hat{T}}|0 \rangle _{\text{C}} \nonumber \\
+         =& \langle 0|\hat{H}_{\text{N}}(1+\hat{T}+\frac{1}{2!}\hat{T}^{2}+\frac{1}{3!}\hat{T}^{3}+\dots)|0 \rangle _{\text{C}}
+    \end{align}
+    By Slater-Condon rule, since $\hat{H}_{\text{N}}$ has at most two-body operators, the exponential series truncates to 2nd order:
+    \begin{align}
+        E _{\text{CC}}&= \langle 0|\hat{H}_{\text{N}}(1+\hat{T}+\frac{1}{2}\hat{T}^{2})|0 \rangle _{\text{C}} \nonumber \\
+        &= \langle 0|\hat{H}_{\text{N}}|0 \rangle + \langle 0|\hat{H}_{\text{N}}\hat{T}|0 \rangle _{\text{C}} + \frac{1}{2}\langle 0|\hat{H}_{\text{N}}\hat{T}^{2}|0 \rangle _{\text{C}}
+    \end{align}
+    The term $\hat{H}_{\text{N}}$  is automatically zero by the definition of Fermi level.
+    The linear term could be expanded as:
+    \begin{align}
+        \langle 0|\hat{H}_{\text{N}}\hat{T}|0 \rangle =& \langle 0|(\hat{F}_{\text{N}}+ \hat{W})(\hat{T}_{1}+\hat{T}_{2})|0 \rangle _{\text{C}} \nonumber \\
+        =& \langle 0|\hat{F}_{\text{N}}\hat{T}_{1}|0 \rangle _{\text{C}} + \langle 0|\hat{F}_{\text{N}}\hat{T}_{2}|0 \rangle _{\text{C}} + \langle 0|\hat{W}\hat{T}_{1}|0 \rangle _{\text{C}} + \langle 0|\hat{W}\hat{T}_{2}|0 \rangle _{\text{C}}
+    \end{align}
+    The second and third terms are zero by Slater-Condon rule. This can also be rationalised as these terms cannot fully contract.
+    The one-body term expands as:
+    \begin{align}
+        \langle 0|\hat{F}_{\text{N}}\hat{T}_{1}|0 \rangle _{\text{C}} =& \sum_{pq}\sum_{ai}f _{pq}t _{i}^{a}\langle 0|\{\hat{p}^{\dagger}\hat{q}\}\{\hat{a}^{\dagger}\hat{i}\}|0 \rangle \nonumber \\
+        =& \sum_{pq}\sum_{ai}f _{pq}t _{i}^{a}\langle 0|\wick[sep=0.35em]{\c2{\hat{p}^{\dagger}}\c1{\hat{q}}\c1{\hat{a}^{\dagger}}\c2{\hat{i}}}|0 \rangle \\ \nonumber
+        =& \sum_{pq}\sum_{ai}f _{pq}t _{i}^{a}\delta _{pi}\delta_{qa} \\ \nonumber 
+        =& \sum_{ai}f _{ia}t _{i}^{a}
+    \end{align}
+    and the two-body term expands in the same way:
+    \begin{align}
+        \langle 0|\hat{W}\hat{T}_{2}|0 \rangle _{\text{C}} =& \sum_{pqrs}\sum_{abij}\frac{1}{4}\langle pq||rs\rangle \frac{1}{4}t _{ij}^{ab}\Big(\langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c2{\hat{b}^{\dagger}}\c3{\hat{j}}\c4{\hat{i}}}\}|0 \rangle
+        + \langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c2{\hat{a}^{\dagger}}\c1{\hat{b}^{\dagger}}\c3{\hat{j}}\c4{\hat{i}}}\}|0 \rangle \nonumber \\
+        &+ \langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c2{\hat{b}^{\dagger}}\c4{\hat{j}}\c3{\hat{i}}}\}|0 \rangle + \langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c2{\hat{a}^{\dagger}}\c1{\hat{b}^{\dagger}}\c4{\hat{j}}\c3{\hat{i}}}\}|0 \rangle \Big) \\ \nonumber
+        =& \frac{1}{16}\sum_{pqrs}\sum_{abij}\langle pq||rs\rangle t _{ij}^{ab}(\delta _{pi}\delta _{qj}\delta _{sb}\delta _{ra} - \delta _{pi}\delta _{qj}\delta _{sa}\delta _{rb} - \delta _{pj}\delta _{qi}\delta _{sb}\delta _{ra} + \delta _{pj}\delta _{qi}\delta _{sa}\delta _{rb}) \\ \nonumber
+        =& \frac{1}{16}\sum_{abij}t _{ij}^{ab}(\langle ij||ab\rangle - \langle ij||ba\rangle - \langle ji||ab\rangle + \langle ji||ba\rangle) \\ \nonumber
+        =& \frac{1}{4}\sum_{abij}t _{ij}^{ab}\langle ij||ab\rangle
+    \end{align}
+    Then let's look at the quadratic term in eqn(?):
+    \begin{align}
+        \langle 0|\hat{H}_{\text{N}}\hat{T}^{2}|0 \rangle _{\text{C}} =& \langle 0|(\hat{F}_{\text{N}}+\hat{W})(\hat{T}_{1}^{2}+2\hat{T}_{1}\hat{T}_{2} +\hat{T}_{2}^{2})|0 \rangle _{\text{C}} \nonumber \\
+        =& \langle 0|\hat{F}_{\text{N}}\hat{T}_{1}^{2}|0 \rangle _{\text{C}} + 2 \langle 0|\hat{F}_{\text{N}}\hat{T}_{1}\hat{T}_{2}|0 \rangle _{\text{C}} + \langle 0|\hat{F}_{\text{N}}\hat{T}_{2}^{2}|0 \rangle _{\text{C}} \\ \nonumber
+        &+ \langle 0|\hat{W}\hat{T}_{1}^{2}|0 \rangle _{\text{C}} + 2 \langle 0|\hat{W}\hat{T}_{1}\hat{T}_{2}|0 \rangle _{\text{C}} + \langle 0|\hat{W}\hat{T}_{2}^{2}|0 \rangle _{\text{C}}
+    \end{align}
+    Again, by Slater-Condon rule, or by counting excitation levels, only one term remains:
+    \begin{align}
+        \langle 0|\hat{H}_{\text{N}}\hat{T}^{2}|0 \rangle _{\text{C}} =& \langle 0|\hat{W}\hat{T}_{1}^{2}|0 \rangle _{\text{C}} \nonumber \\
+         =& \sum_{pqrs}\sum_{ai}\sum_{bj}\frac{1}{4}\langle pq||rs\rangle t _{i}^{a}t _{j}^{b}\langle 0|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}\{\hat{a}^{\dagger}\hat{i}\}\{\hat{b}^{\dagger}\hat{i}\}|0 \rangle \\ \nonumber
+         =& \frac{1}{4}\sum_{pqrs}\sum_{abij}\langle pq||rs\rangle t _{i}^{a}t _{j}^{b}\Big(\langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c3{\hat{i}}\c2{\hat{b}^{\dagger}}\c4{\hat{j}}}\}|0 \rangle
+         + \langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c2{\hat{a}^{\dagger}}\c3{\hat{i}}\c1{\hat{b}^{\dagger}}\c4{\hat{j}}}\}|0 \rangle \\ \nonumber
+         &+ \langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c1{\hat{a}^{\dagger}}\c4{\hat{i}}\c2{\hat{b}^{\dagger}b}\c3{\hat{j}}}\}|0 \rangle + \langle 0|\{\wick[sep=0.35em]{\c4{\hat{p}^{\dagger}}\c3{\hat{q}^{\dagger}}\c2{\hat{s}}\c1{\hat{r}}\c2{\hat{a}^{\dagger}}\c4{\hat{i}}\c1{\hat{b}^{\dagger}}\c3{\hat{j}}}\}|0 \rangle \Big) \\ \nonumber
+         =& \frac{1}{4}\sum_{pqrs}\sum_{abij}\langle pq||rs\rangle t _{i}^{a}t _{j}^{b} (\delta _{pj}\delta _{qi}\delta _{sa}\delta _{rb} - \delta _{pj}\delta _{qi}\delta _{sb}\delta _{ra} + \delta _{pi}\delta _{qj}\delta _{sb}\delta _{ra} - \delta _{pi}\delta _{qj}\delta _{sa}\delta _{rb}) \\ \nonumber
+         =& \frac{1}{4}\sum_{abij}t _{i}^{a}t _{j}^{b}(\langle ji|| ba\rangle - \langle ji||ab\rangle + \langle ij||ab\rangle - \langle ij||ba\rangle) \\ \nonumber
+         =& \sum_{abij}t _{i}^{a}t _{j}^{b}\langle ij||ab\rangle
+    \end{align}
+    Therefore, the CCSD energy is obtained as:
+    \begin{align}
+        E _{\text{CCSD}} =& \langle 0|\hat{H}_{\text{N}}\hat{T}|0 \rangle _{\text{C}} + \frac{1}{2}\langle 0|\hat{H}_{\text{N}}\hat{T}^{2}|0 \rangle _{\text{C}} \\ \nonumber 
+        =& \sum_{ai}f _{ia}t _{i}^{a} + \frac{1}{4}\sum_{ijab}t _{ij}^{ab}\langle ij||ab\rangle + \frac{1}{2}\sum_{ijab}t _{i}^{a}t _{j}^{b} \langle ij||ab\rangle 
+    \end{align}
+
+
+
+\end{document}
