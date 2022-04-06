@@ -248,7 +248,7 @@ The Hartree-Fock energy has contribution from zeroth- and first-order energies i
 \begin{align}
     E _{\text{HF}} =& E ^{(0)} + E ^{(1)} \nonumber \\
     =& \sum_{i}h _{ii} + \sum_{ij}\langle ij||ij\rangle - \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \nonumber \\
-    =& \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+    =& \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle 
 \end{align}
 
 \subsection{Hylleraas Functional}
@@ -265,8 +265,8 @@ in which the relevant operators and functions are:
 \end{align}
 Therefore the Hylleraas functional could be written as:
 \begin{align}
-    E _{\text{H}} =& \frac{1}{8} \Re {\sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{pqrs}\langle pq||rs\rangle\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle} \nonumber \\
-    &+ \frac{1}{16} \sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{klcd} T _{kl}^{cd} \sum_{pq}\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle
+    E _{\text{H}} =& \frac{1}{8} \Re {\sum_{ijab}(T _{ij}^{ab})^{*}\sum_{pqrs}\langle pq||rs\rangle\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle} \nonumber \\
+    &+ \frac{1}{16} \sum_{ijab}(T _{ij}^{ab})^{*}\sum_{klcd} T _{kl}^{cd} \sum_{pq}\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle f _{pq}
 \end{align}
 First, we need to work out the following expectations:
 \begin{align}
@@ -299,36 +299,36 @@ Using GWT, the non-zero contributions come from the fully contracted terms:
 the terms not fully contrated are ommitted.\\
 Therefore, the two parts of Hylleraas functional could be simplified as:
 \begin{align}
-    &\frac{1}{8}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{pqrs}\langle pq||rs\rangle\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle} \nonumber \\
-    =& \frac{1}{8}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}(\langle ab||ij\rangle + \langle ba||ji\rangle - \langle ba||ij\rangle - \langle ab||ji\rangle)} \nonumber \\
-    =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\langle ab||ij\rangle}
+    &\frac{1}{8}\Re{\sum_{ijab}(T _{ij}^{ab})^{*}\sum_{pqrs}\langle pq||rs\rangle\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle} \nonumber \\
+    =& \frac{1}{8}\Re{\sum_{ijab}(T _{ij}^{ab})^{*}(\langle ab||ij\rangle + \langle ba||ji\rangle - \langle ba||ij\rangle - \langle ab||ji\rangle)} \nonumber \\
+    =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{*}\langle ab||ij\rangle}
 \end{align}
 \begin{align}
-    &\frac{1}{16}\sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{klcd}T _{kl}^{cd}\sum_{pq}\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle \nonumber \\
-    =& \frac{1}{16}\Big(\sum_{ijlab}f _{li}(T _{ij}^{ab})^{\dagger}T _{jl}^{ab} - \sum_{ijlab}f _{li}(T _{ij}^{ab})^{\dagger}T _{jl}^{ba} - \sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{kj}^{ab} + \sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{kj}^{ba} \nonumber \\
-    & -\sum_{ijlab}f _{lj}(T _{ij}^{ab})^{\dagger}T _{il}^{ab} + \sum_{ijlab}f _{lj}(T _{ij}^{ab})^{\dagger}T _{il}^{ba} + \sum_{ijkab}f _{kj}(T _{ij}^{ab})^{\dagger}T _{ki}^{ab} - \sum_{ijkab}f _{kj}(T _{ij}^{ab})^{\dagger}T _{ki}^{ba} \nonumber \\
-    & +\sum_{ijabd}f _{bd}(T _{ij}^{ab})^{\dagger}T _{ij}^{ad} - \sum_{ijabd}f _{bd}(T _{ij}^{ab})^{\dagger}T _{ji}^{ad} - \sum_{ijabc}f _{bc}(T _{ij}^{ab})^{\dagger}T _{ij}^{ca} + \sum_{ijabc}f _{bc}(T _{ij}^{ab})^{\dagger}T _{ji}^{ca} \nonumber \\
-    & +\sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{cb} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ji}^{cb} - \sum_{ijabd}f _{ad}(T _{ij}^{ab})^{\dagger}T _{ij}^{bd} + \sum_{ijabd}f _{ad}(T _{ij}^{ab})^{\dagger}T _{ji}^{bd}\Big) \nonumber \\
-    =& \frac{1}{4}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijkab}f _{ki}(T _{ji}^{ab})^{\dagger}T _{jk}^{ab} + \sum_{ijabc}f _{ac}(T _{ij}^{ba})^{\dagger}T _{ij}^{bc} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc}\Big) \nonumber \\
-    =& \frac{1}{2}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc}\Big)
+    &\frac{1}{16}\sum_{ijab}(T _{ij}^{ab})^{*}\sum_{klcd}T _{kl}^{cd}\sum_{pq}\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle f _{pq} \nonumber \\
+    =& \frac{1}{16}\Big(\sum_{ijlab}f _{li}(T _{ij}^{ab})^{*}T _{jl}^{ab} - \sum_{ijlab}f _{li}(T _{ij}^{ab})^{*}T _{jl}^{ba} - \sum_{ijkab}f _{ki}(T _{ij}^{ab})^{*}T _{kj}^{ab} + \sum_{ijkab}f _{ki}(T _{ij}^{ab})^{*}T _{kj}^{ba} \nonumber \\
+    & -\sum_{ijlab}f _{lj}(T _{ij}^{ab})^{*}T _{il}^{ab} + \sum_{ijlab}f _{lj}(T _{ij}^{ab})^{*}T _{il}^{ba} + \sum_{ijkab}f _{kj}(T _{ij}^{ab})^{*}T _{ki}^{ab} - \sum_{ijkab}f _{kj}(T _{ij}^{ab})^{*}T _{ki}^{ba} \nonumber \\
+    & +\sum_{ijabd}f _{bd}(T _{ij}^{ab})^{*}T _{ij}^{ad} - \sum_{ijabd}f _{bd}(T _{ij}^{ab})^{*}T _{ji}^{ad} - \sum_{ijabc}f _{bc}(T _{ij}^{ab})^{*}T _{ij}^{ca} + \sum_{ijabc}f _{bc}(T _{ij}^{ab})^{*}T _{ji}^{ca} \nonumber \\
+    & +\sum_{ijabc}f _{ac}(T _{ij}^{ab})^{*}T _{ij}^{cb} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{*}T _{ji}^{cb} - \sum_{ijabd}f _{ad}(T _{ij}^{ab})^{*}T _{ij}^{bd} + \sum_{ijabd}f _{ad}(T _{ij}^{ab})^{*}T _{ji}^{bd}\Big) \nonumber \\
+    =& \frac{1}{4}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijkab}f _{ki}(T _{ji}^{ab})^{*}T _{jk}^{ab} + \sum_{ijabc}f _{ac}(T _{ij}^{ba})^{*}T _{ij}^{bc} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{*}T _{ij}^{bc}\Big) \nonumber \\
+    =& \frac{1}{2}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{*}T _{ij}^{bc}\Big)
 \end{align}
 Therefore, the Hylleraas functional, written in spin-orbital form, is:
 \begin{equation}
-    E _{\text{H}} = \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\langle ab||ij\rangle} +  \frac{1}{2}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc}\Big)
+    E _{\text{H}} = \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{*}\langle ab||ij\rangle} +  \frac{1}{2}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{*}T _{ij}^{bc}\Big)
 \end{equation} 
 To formulate the Hylleraas functional into density matrix representation, we write out dependencies on one- and two-electron integrals, i.e., $h _{pq}$ and $\langle pq||rs\rangle$ explicitly.
 \begin{align}
-    E _{\text{H}} =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\langle ab||ij\rangle} + \frac{1}{2}\Big(\sum_{ijkab}h _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijabc}h _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc} \Big) \nonumber \\
-    &+ \frac{1}{2}\Big(\sum_{ijklab}\langle kl||il\rangle (T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijkabc}\langle ak||ck\rangle (T _{ij}^{ab})^{\dagger}T _{ij}^{bc} \Big) \nonumber \\
+    E _{\text{H}} =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{*}\langle ab||ij\rangle} + \frac{1}{2}\Big(\sum_{ijkab}h _{ki}(T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijabc}h _{ac}(T _{ij}^{ab})^{*}T _{ij}^{bc} \Big) \nonumber \\
+    &+ \frac{1}{2}\Big(\sum_{ijklab}\langle kl||il\rangle (T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijkabc}\langle ak||ck\rangle (T _{ij}^{ab})^{*}T _{ij}^{bc} \Big) \nonumber \\
     =& \sum_{ki} h _{ij} \gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\Re{\langle ab||ij\rangle \Gamma _{ij}^{ab}} + \sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
 \end{align}
 in which
 \begin{align}
-    \gamma _{ij} =& \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{\dagger}T _{ki}^{ab} \\
-    \gamma _{ab} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{\dagger}T _{ij}^{cb} \\
-    \Gamma _{ij}^{ab} =& \frac{1}{2}(T _{ij}^{ab})^{\dagger} \\
-    \Gamma _{kl}^{ij} =& \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{\dagger}T _{mi}^{ab}\delta _{jl} \\
-    \Gamma _{bj}^{ai} =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{\dagger}T _{kl}^{cb} \delta _{ij}
+    \gamma _{ij} =& \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}T _{ki}^{ab} \\
+    \gamma _{ab} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}T _{ij}^{cb} \\
+    \Gamma _{ij}^{ab} =& \frac{1}{2}(T _{ij}^{ab})^{*} \\
+    \Gamma _{kl}^{ij} =& \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl} \\
+    \Gamma _{bj}^{ai} =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij}
 \end{align}
 
 \subsection{Perturbed Orthonormality Condition}

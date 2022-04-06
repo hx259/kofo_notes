@@ -43,6 +43,24 @@
 
 \begin{document}
 
+\section{Basics}
+Orbital transformation:
+\begin{align}
+    |\psi _{p}\rangle =& \sum_{\mu}C _{\mu p}|\phi _{\mu}\rangle \\
+    \langle \psi _{p}| =& |\psi _{p}\rangle ^{\dagger} = \sum_{\mu}\langle \phi _{\mu}|C _{\mu p}^{*}
+\end{align}
+Note that $C _{\mu p}$ is just a number, taking the Hermitian conjugate will just give the complex conjugate. In matrix notation:
+\begin{align}
+    \bm{\psi} =& \bm{\phi}\mathbf{C} \\
+    \bm{\psi}^{\dagger} =& \mathbf{C}^{\dagger}\bm{\phi}^{\dagger}
+\end{align}
+\begin{align}
+    h _{pq} =& \langle \psi _{p}|\hat{h}|\psi _{q}\rangle \nonumber \\
+    =& \langle \sum_{\mu}C _{\mu p}\phi _{\mu}|\hat{h}|\sum_{\nu}C _{\nu q}\phi _{\nu}\rangle \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu p}^{*} \langle \phi _{\mu}|\hat{h}|\phi _{\nu}\rangle C _{\nu q} \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}C _{\nu q}
+\end{align}
+
 \section{UHF}
 
 
