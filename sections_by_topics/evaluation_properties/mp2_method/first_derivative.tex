@@ -233,9 +233,104 @@ Expression for CPHF coefficients (c.f. Pople et al. 1979):
 
 
 
-
+\newpage
 
 \section{Lagrangian Method}
+The MP2 Lagrangian could be written as:
+\begin{align}
+    \mathcal{L} _{\text{MP2}} =& E _{\text{MP2}} + C _{\text{Bri}} + C _{\text{ON}} \nonumber \\
+    =& E _{\text{HF}} + E _{\text{H}} + C _{\text{Bri}} + C _{\text{ON}}
+\end{align}
+in which $E _{\text{H}}$ is the Hylleraas functional, $C _{\text{Bri}}$ is the Brillouin condition, and $C _{\text{ON}}$ is the orthonormality condition. 
+
+\subsection{Hartree Fock Energy}
+The Hartree-Fock energy has contribution from zeroth- and first-order energies in MP2:
+\begin{align}
+    E _{\text{HF}} =& E ^{(0)} + E ^{(1)} \nonumber \\
+    =& \sum_{i}h _{ii} + \sum_{ij}\langle ij||ij\rangle - \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \nonumber \\
+    =& \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle
+\end{align}
+
+\subsection{Hylleraas Functional}
+The Hylleraas functional is defined as:
+\begin{align}
+    E _{\text{H}} =& \langle \Psi ^{(1)}|\hat{V}-E ^{(1)}|\Phi _{0}\rangle + \langle \Phi _{0}|\hat{V}-E ^{(1)}|\Psi ^{(1)}\rangle + \langle \Psi ^{(1)}|\hat{H}^{(0)}-E ^{(0)}|\Psi ^{(1)}\rangle \nonumber \\
+    =& 2 \Re\langle \Psi ^{(1)}|\hat{V}-E ^{(1)}|\Phi _{0}\rangle + \langle \Psi ^{(1)}|\hat{H}^{(0)} - E ^{(0)}|\Psi ^{(1)}\rangle
+\end{align}
+in which the relevant operators and functions are:
+\begin{align}
+    \hat{V} - E ^{(1)} =& \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} \\
+    \hat{H}^{(0)} - E ^{(0)} =& \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} = \sum_{pq}h _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \sum_{pqi}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\} \\
+    |\Psi ^{(1)}\rangle =& \frac{1}{4}\sum_{ijab}T _{ij}^{ab}|\Phi _{ij}^{ab}\rangle
+\end{align}
+Therefore the Hylleraas functional could be written as:
+\begin{align}
+    E _{\text{H}} =& \frac{1}{8} \Re {\sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{pqrs}\langle pq||rs\rangle\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle} \nonumber \\
+    &+ \frac{1}{16} \sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{klcd} T _{kl}^{cd} \sum_{pq}\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle
+\end{align}
+First, we need to work out the following expectations:
+\begin{align}
+    \langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle =& \langle \Phi _{0}|\{\hat{i}^{\dagger}\hat{j}^{\dagger}\hat{b}\hat{a}\}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle \\
+    \langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle =& \langle \Phi _{0}|\{\hat{i}^{\dagger}\hat{j}^{\dagger}\hat{b}\hat{a}\}\{\hat{p}^{\dagger}\hat{q}\}\{\hat{c}^{\dagger}\hat{d}^{\dagger}\hat{l}\hat{k}\}|\Phi _{0}\rangle
+\end{align}
+Using GWT, the non-zero contributions come from the fully contracted terms:
+\begin{align}
+    \{\hat{i}^{\dagger}\hat{j}^{\dagger}\hat{b}\hat{a}\}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} =& \{\wick[sep=0.35em]{\c4{\hat{i}^{\dagger}}\c3{\hat{j}^{\dagger}}\c2{\hat{b}}\c1{\hat{a}}\c1{\hat{p}^{\dagger}}\c2{\hat{q}^{\dagger}}\c3{\hat{s}}\c4{\hat{r}}}\}
+    + \{\wick[sep=0.35em]{\c4{\hat{i}^{\dagger}}\c3{\hat{j}^{\dagger}}\c2{\hat{b}}\c1{\hat{a}}\c1{\hat{p}^{\dagger}}\c2{\hat{q}^{\dagger}}\c4{\hat{s}}\c3{\hat{r}}}\}
+    + \{\wick[sep=0.35em]{\c4{\hat{i}^{\dagger}}\c3{\hat{j}^{\dagger}}\c1{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c2{\hat{q}^{\dagger}}\c3{\hat{s}}\c4{\hat{r}}}\}
+    + \{\wick[sep=0.35em]{\c4{\hat{i}^{\dagger}}\c3{\hat{j}^{\dagger}}\c2{\hat{b}}\c1{\hat{a}}\c2{\hat{p}^{\dagger}}\c1{\hat{q}^{\dagger}}\c4{\hat{s}}\c3{\hat{r}}}\} + \dots \nonumber \\
+    =& \delta _{ir}\delta _{js}\delta _{bq}\delta _{ap} + \delta _{is}\delta _{jr}\delta _{bp}\delta _{aq} - \delta _{ir}\delta _{js}\delta _{bp}\delta _{aq} - \delta _{is}\delta _{jr}\delta _{bq}\delta _{ap} + \dots
+\end{align}
+\begin{align}
+   &\{\hat{i}^{\dagger}\hat{j}^{\dagger}\hat{b}\hat{a}\}\{\hat{p}^{\dagger}\hat{q}\}\{\hat{c}^{\dagger}\hat{d}^{\dagger}\hat{l}\hat{k}\} \nonumber \\
+   =& \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c5{\hat{q}}\c2{\hat{c}^{\dagger}}\c3{\hat{d}^{\dagger}}\c1{\hat{l}}\c4{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c5{\hat{q}}\c3{\hat{c}^{\dagger}}\c2{\hat{d}^{\dagger}}\c1{\hat{l}}\c4{\hat{k}}}\}  
+   +\{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c5{\hat{q}}\c2{\hat{c}^{\dagger}}\c3{\hat{d}^{\dagger}}\c4{\hat{l}}\c1{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c5{\hat{q}}\c3{\hat{c}^{\dagger}}\c2{\hat{d}^{\dagger}}\c4{\hat{l}}\c1{\hat{k}}}\}    \nonumber \\
+   &+ \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c4{\hat{q}}\c2{\hat{c}^{\dagger}}\c3{\hat{d}^{\dagger}}\c1{\hat{l}}\c5{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c4{\hat{q}}\c2{\hat{c}^{\dagger}}\c3{\hat{d}^{\dagger}}\c5{\hat{l}}\c1{\hat{k}}}\}
+   + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c4{\hat{q}}\c3{\hat{c}^{\dagger}}\c2{\hat{d}^{\dagger}}\c1{\hat{l}}\c5{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c1{\hat{p}^{\dagger}}\c4{\hat{q}}\c3{\hat{c}^{\dagger}}\c2{\hat{d}^{\dagger}}\c5{\hat{l}}\c1{\hat{k}}}\}         \nonumber \\
+   &+ \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c3{\hat{p}^{\dagger}}\c1{\hat{q}}\c2{\hat{c}^{\dagger}}\c1{\hat{d}^{\dagger}}\c4{\hat{l}}\c5{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c3{\hat{p}^{\dagger}}\c1{\hat{q}}\c2{\hat{c}^{\dagger}}\c1{\hat{d}^{\dagger}}\c5{\hat{l}}\c4{\hat{k}}}\}
+   + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c3{\hat{p}^{\dagger}}\c1{\hat{q}}\c1{\hat{c}^{\dagger}}\c2{\hat{d}^{\dagger}}\c4{\hat{l}}\c5{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c3{\hat{p}^{\dagger}}\c1{\hat{q}}\c1{\hat{c}^{\dagger}}\c2{\hat{d}^{\dagger}}\c5{\hat{l}}\c4{\hat{k}}}\}       \nonumber \\
+   &+ \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c2{\hat{p}^{\dagger}}\c1{\hat{q}}\c1{\hat{c}^{\dagger}}\c3{\hat{d}^{\dagger}}\c4{\hat{l}}\c5{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c2{\hat{p}^{\dagger}}\c1{\hat{q}}\c1{\hat{c}^{\dagger}}\c3{\hat{d}^{\dagger}}\c5{\hat{l}}\c4{\hat{k}}}\}
+   + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c2{\hat{p}^{\dagger}}\c1{\hat{q}}\c3{\hat{c}^{\dagger}}\c1{\hat{d}^{\dagger}}\c4{\hat{l}}\c5{\hat{k}}}\} + \{\wick[sep=0.35em]{\c5{\hat{i}^{\dagger}}\c4{\hat{j}^{\dagger}}\c3{\hat{b}}\c2{\hat{a}}\c2{\hat{p}^{\dagger}}\c1{\hat{q}}\c3{\hat{c}^{\dagger}}\c1{\hat{d}^{\dagger}}\c5{\hat{l}}\c4{\hat{k}}}\} + \dots            \nonumber \\
+   =&\delta _{iq}\delta _{jk}\delta _{bd}\delta _{ac}\delta _{pl} - \delta _{iq}\delta _{jk}\delta _{bc}\delta _{ad}\delta _{pl} - \delta _{iq}\delta _{jl}\delta _{bd}\delta _{ac}\delta _{pk} +\delta _{iq}\delta _{jl}\delta _{bc}\delta _{ad}\delta _{pk} \nonumber \\
+   &- \delta _{ik}\delta _{jq}\delta _{bd}\delta _{ac}\delta _{pl} + \delta _{il}\delta _{jq}\delta _{bd}\delta _{ac}\delta _{pk} +\delta _{ik}\delta _{jq}\delta _{bc}\delta _{ad}\delta _{pl} - \delta _{il}\delta _{jq}\delta _{bc}\delta _{ad}\delta _{pk} \nonumber \\ 
+   &+ \delta _{ik}\delta _{jl}\delta _{bp}\delta _{ac}\delta _{qd} -\delta _{il}\delta _{jk}\delta _{bp}\delta _{ac}\delta _{qd} - \delta _{ik}\delta _{jl}\delta _{bp}\delta _{ad}\delta _{qc} + \delta _{il}\delta _{jk}\delta _{bp}\delta _{ad}\delta _{qc} \nonumber \\
+   &+\delta _{ik}\delta _{jl}\delta _{bd}\delta _{ap}\delta _{qc} - \delta _{il}\delta _{jk}\delta _{bd}\delta _{ap}\delta _{qc} - \delta _{ik}\delta _{jl}\delta _{bc}\delta _{ap}\delta _{qd} +\delta _{il}\delta _{jk}\delta _{bc}\delta _{ap}\delta _{qd} + \dots
+\end{align}
+the terms not fully contrated are ommitted.\\
+Therefore, the two parts of Hylleraas functional could be simplified as:
+\begin{align}
+    &\frac{1}{8}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{pqrs}\langle pq||rs\rangle\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Phi _{0}\rangle} \nonumber \\
+    =& \frac{1}{8}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}(\langle ab||ij\rangle + \langle ba||ji\rangle - \langle ba||ij\rangle - \langle ab||ji\rangle)} \nonumber \\
+    =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\langle ab||ij\rangle}
+\end{align}
+\begin{align}
+    &\frac{1}{16}\sum_{ijab}(T _{ij}^{ab})^{\dagger}\sum_{klcd}T _{kl}^{cd}\sum_{pq}\langle \Phi _{ij}^{ab}|\{\hat{p}^{\dagger}\hat{q}\}|\Phi _{kl}^{cd}\rangle \nonumber \\
+    =& \frac{1}{16}\Big(\sum_{ijlab}f _{li}(T _{ij}^{ab})^{\dagger}T _{jl}^{ab} - \sum_{ijlab}f _{li}(T _{ij}^{ab})^{\dagger}T _{jl}^{ba} - \sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{kj}^{ab} + \sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{kj}^{ba} \nonumber \\
+    & -\sum_{ijlab}f _{lj}(T _{ij}^{ab})^{\dagger}T _{il}^{ab} + \sum_{ijlab}f _{lj}(T _{ij}^{ab})^{\dagger}T _{il}^{ba} + \sum_{ijkab}f _{kj}(T _{ij}^{ab})^{\dagger}T _{ki}^{ab} - \sum_{ijkab}f _{kj}(T _{ij}^{ab})^{\dagger}T _{ki}^{ba} \nonumber \\
+    & +\sum_{ijabd}f _{bd}(T _{ij}^{ab})^{\dagger}T _{ij}^{ad} - \sum_{ijabd}f _{bd}(T _{ij}^{ab})^{\dagger}T _{ji}^{ad} - \sum_{ijabc}f _{bc}(T _{ij}^{ab})^{\dagger}T _{ij}^{ca} + \sum_{ijabc}f _{bc}(T _{ij}^{ab})^{\dagger}T _{ji}^{ca} \nonumber \\
+    & +\sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{cb} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ji}^{cb} - \sum_{ijabd}f _{ad}(T _{ij}^{ab})^{\dagger}T _{ij}^{bd} + \sum_{ijabd}f _{ad}(T _{ij}^{ab})^{\dagger}T _{ji}^{bd}\Big) \nonumber \\
+    =& \frac{1}{4}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijkab}f _{ki}(T _{ji}^{ab})^{\dagger}T _{jk}^{ab} + \sum_{ijabc}f _{ac}(T _{ij}^{ba})^{\dagger}T _{ij}^{bc} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc}\Big) \nonumber \\
+    =& \frac{1}{2}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc}\Big)
+\end{align}
+Therefore, the Hylleraas functional, written in spin-orbital form, is:
+\begin{equation}
+    E _{\text{H}} = \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\langle ab||ij\rangle} +  \frac{1}{2}\Big(\sum_{ijkab}f _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijabc}f _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc}\Big)
+\end{equation} 
+To formulate the Hylleraas functional into density matrix representation, we write out dependencies on one- and two-electron integrals, i.e., $h _{pq}$ and $\langle pq||rs\rangle$ explicitly.
+\begin{align}
+    E _{\text{H}} =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{\dagger}\langle ab||ij\rangle} + \frac{1}{2}\Big(\sum_{ijkab}h _{ki}(T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijabc}h _{ac}(T _{ij}^{ab})^{\dagger}T _{ij}^{bc} \Big) \nonumber \\
+    &+ \frac{1}{2}\Big(\sum_{ijklab}\langle kl||il\rangle (T _{ij}^{ab})^{\dagger}T _{jk}^{ab} - \sum_{ijkabc}\langle ak||ck\rangle (T _{ij}^{ab})^{\dagger}T _{ij}^{bc} \Big) \nonumber \\
+    =& \sum_{ki} h _{ij} \gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\Re{\langle ab||ij\rangle \Gamma _{ij}^{ab}} + \sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
+\end{align}
+in which
+\begin{align}
+    \gamma _{ij} =& \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{\dagger}T _{ki}^{ab} \\
+    \gamma _{ab} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{\dagger}T _{ij}^{cb} \\
+    \Gamma _{ij}^{ab} =& \frac{1}{2}(T _{ij}^{ab})^{\dagger} \\
+    \Gamma _{kl}^{ij} =& \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{\dagger}T _{mi}^{ab}\delta _{jl} \\
+    \Gamma _{bj}^{ai} =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{\dagger}T _{kl}^{cb} \delta _{ij}
+\end{align}
+
 \subsection{Perturbed Orthonormality Condition}
 We have the general orthonormality condition, subject to perturbation, as:
 \begin{equation}
