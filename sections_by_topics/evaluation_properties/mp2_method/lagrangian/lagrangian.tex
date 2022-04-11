@@ -238,10 +238,11 @@ Expression for CPHF coefficients (c.f. Pople et al. 1979):
 \section{Lagrangian Method}
 The MP2 Lagrangian could be written as:
 \begin{align}
-    \mathcal{L} _{\text{MP2}} =& E _{\text{MP2}} + C _{\text{Bri}} + C _{\text{ON}} \nonumber \\
-    =& E _{\text{HF}} + E _{\text{H}} + C _{\text{Bri}} + C _{\text{ON}}
+    \mathcal{L} _{\text{MP2}} =& E _{\text{MP2}} + C _{\text{Bri}} \nonumber \\
+    =& E _{\text{HF}} + E _{\text{H}} + C _{\text{Bri}}
 \end{align}
-in which $E _{\text{H}}$ is the Hylleraas functional, $C _{\text{Bri}}$ is the Brillouin condition, and $C _{\text{ON}}$ is the orthonormality condition. 
+in which $E _{\text{H}}$ is the Hylleraas functional, $C _{\text{Bri}}$ is the Brillouin condition. The orthonormality condition is enforced implicitly by the
+anti-Hermitian condition on the orbital rotation paramer. 
 
 \subsection{Hartree Fock Energy}
 The Hartree-Fock energy has contribution from zeroth- and first-order energies in MP2:
@@ -320,7 +321,7 @@ To formulate the Hylleraas functional into density matrix representation, we wri
 \begin{align}
     E _{\text{H}} =& \frac{1}{2}\Re{\sum_{ijab}(T _{ij}^{ab})^{*}\langle ab||ij\rangle} + \frac{1}{2}\Big(\sum_{ijkab}h _{ki}(T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijabc}h _{ac}(T _{ij}^{ab})^{*}T _{ij}^{bc} \Big) \nonumber \\
     &+ \frac{1}{2}\Big(\sum_{ijklab}\langle kl||il\rangle (T _{ij}^{ab})^{*}T _{jk}^{ab} - \sum_{ijkabc}\langle ak||ck\rangle (T _{ij}^{ab})^{*}T _{ij}^{bc} \Big) \nonumber \\
-    =& \sum_{ki} h _{ij} \gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\Re{\langle ab||ij\rangle \Gamma _{ij}^{ab}} + \sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
+    =& \sum_{ij} h _{ij} \gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\Re{\langle ab||ij\rangle \Gamma _{ij}^{ab}} + \sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
 \end{align}
 in which
 \begin{align}
@@ -349,7 +350,7 @@ Parameterization of the MO coefficients:
 in which $\mathbf{U}(\lambda)$ is the solution to the CPHF equations.
 \\
 
-Now the orthonomality condition using this parameterization:
+Now the orthonormality condition using this parameterization:
 \begin{equation}
     \sum_{\mu \nu}\Big(\sum_{r}U _{rp}^{*}(\lambda)C _{\mu r}^{*}(0)\Big)S _{\mu \nu}(\lambda)\Big(\sum_{s}C _{\nu s}(0)U _{sq}(\lambda)\Big) = \delta _{pq}
 \end{equation}
@@ -406,33 +407,33 @@ Define the one- and two-electron parts of the fock matrix, in AO and MO basis, a
 \end{equation}
 Therefore, the Fock matrix could be expressed as (with the dependency on SCF density explicitly addressed):
 \begin{align}
-    F _{pq} =& h _{pq} + \sum_{i}\langle pi||qi\rangle \nonumber \\
+    f _{pq} =& h _{pq} + \sum_{i}\langle pi||qi\rangle \nonumber \\
     =& \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*} g _{\mu \nu}^{\text{AO}} C _{\nu q} \nonumber \\
     =& \sum_{\mu \nu}C _{\mu p}^{*}\langle \mu|\hat{h}|\nu\rangle C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*}\big(\sum_{\rho \sigma} D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle\big)C _{\nu q} \\
-    F ^{\text{AO}}_{\mu \nu} =& h _{\mu \nu}^{\text{AO}} + g ^{\text{AO}}_{\mu \nu} = \langle \mu|\hat{h}|\nu\rangle + \sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle \\
-    \mathbf{F}=& \mathbf{h} + \mathbf{g}[\mathbf{D}^{\text{SCF}}] \nonumber \\
+    f ^{\text{AO}}_{\mu \nu} =& h _{\mu \nu}^{\text{AO}} + g ^{\text{AO}}_{\mu \nu} = \langle \mu|\hat{h}|\nu\rangle + \sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle \\
+    \mathbf{f}=& \mathbf{h} + \mathbf{g}[\mathbf{D}^{\text{SCF}}] \nonumber \\
     =& \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}}\mathbf{C} + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]\mathbf{C} \nonumber \\
     =& \mathbf{C}^{\dagger}\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]\mathbf{C} \\
-    \mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}] =& \mathbf{h}^{\text{AO}} + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]
+    \mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}] =& \mathbf{h}^{\text{AO}} + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]
 \end{align}
 Evaluating the derivative at $\lambda = 0$, noting that $\mathbf{U}(0) = \mathbf{I}$:
 \begin{align}
-    \mathbf{F}^{\lambda} =& \frac{\dd{\mathbf{F}(\lambda)}}{\dd{\lambda}}\Big|_{{\lambda = 0}} = \Big(\mathbf{C}^{\dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda)\Big)^{\lambda} \nonumber \\
-    =&\mathbf{C}^{\lambda \dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}^{\lambda}(\lambda) \nonumber \\
+    \mathbf{f}^{\lambda} =& \frac{\dd{\mathbf{f}(\lambda)}}{\dd{\lambda}}\Big|_{{\lambda = 0}} = \Big(\mathbf{C}^{\dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda)\Big)^{\lambda} \nonumber \\
+    =&\mathbf{C}^{\lambda \dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}^{\lambda}(\lambda) \nonumber \\
     &+ \mathbf{C}^{\dagger}(\lambda) \Big(\mathbf{h}^{\text{AO}}(\lambda) + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\Big)^{\lambda} \mathbf{C}(\lambda)  \nonumber \\
-    =& \mathbf{U}^{\lambda \dagger}(\lambda)\underbrace{\mathbf{U}^{\dagger}(0)\mathbf{C}^{\dagger}(0)}_\text{$\mathbf{C}^{\dagger}(\lambda = 0)$}\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\underbrace{\mathbf{C}(0)\mathbf{U}(0)}_\text{$\mathbf{C}(\lambda = 0)$}\mathbf{U}^{\lambda}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\lambda \dagger}(\lambda)\underbrace{\mathbf{U}^{\dagger}(0)\mathbf{C}^{\dagger}(0)}_\text{$\mathbf{C}^{\dagger}(\lambda = 0)$}\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\underbrace{\mathbf{C}(0)\mathbf{U}(0)}_\text{$\mathbf{C}(\lambda = 0)$}\mathbf{U}^{\lambda}(\lambda) \nonumber \\
     &+ \mathbf{C}^{\dagger}(\lambda)\Big(\mathbf{h}^{\text{AO},\lambda}(\lambda) + \mathbf{g}^{\text{AO}, \lambda}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda) + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}(\lambda)](\lambda)\Big)\mathbf{C}(\lambda) \nonumber \\
-    =& \mathbf{U}^{\lambda \dagger}\mathbf{F} + \mathbf{F}\mathbf{U}^{\lambda} + \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}, \lambda}\mathbf{C}
+    =& \mathbf{U}^{\lambda \dagger}\mathbf{f} + \mathbf{f}\mathbf{U}^{\lambda} + \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}, \lambda}\mathbf{C}
     + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO},\lambda}[\mathbf{D}^{\text{SCF}}]\mathbf{C} + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}]\mathbf{C}
 \end{align}
 The perturbed Brillouin condition is:
 \begin{equation}
-    F _{ai}^{\lambda} = 0
+    f _{ai}^{\lambda} = 0
 \end{equation}
-To evaluate the perturbed Fock matrix, we write the perturbed quantities in suffix notation as (assuming canonical orbitals, i.e. $F _{pq} = \delta _{pq}\varepsilon _{p}$):
+To evaluate the perturbed Fock matrix, we write the perturbed quantities in suffix notation as (assuming canonical orbitals, i.e. $f _{pq} = \delta _{pq}\varepsilon _{p}$):
 \begin{align}
-    (\mathbf{U}^{\lambda \dagger}\mathbf{F}) _{ai} =& U ^{\lambda *}_{ia}\varepsilon _{i} = \frac{\dd{U _{ia}^{*}}}{\dd{\lambda}}\Big|_{{\lambda = 0}}\varepsilon _{i} \\
-    (\mathbf{F}\mathbf{U}^{\lambda})_{ai} =& \varepsilon _{a}U _{ai}^{\lambda} = \varepsilon _{a}\frac{\dd{U _{ai}}}{\dd{\lambda}}\Big|_{{\lambda=0}} \\
+    (\mathbf{U}^{\lambda \dagger}\mathbf{f}) _{ai} =& U ^{\lambda *}_{ia}\varepsilon _{i} = \frac{\dd{U _{ia}^{*}}}{\dd{\lambda}}\Big|_{{\lambda = 0}}\varepsilon _{i} \\
+    (\mathbf{f}\mathbf{U}^{\lambda})_{ai} =& \varepsilon _{a}U _{ai}^{\lambda} = \varepsilon _{a}\frac{\dd{U _{ai}}}{\dd{\lambda}}\Big|_{{\lambda=0}} \\
     (\mathbf{C}^{\dagger}\mathbf{h}^{\text{AO},\lambda}\mathbf{C})_{ai}=&\sum_{\mu \nu}C _{\mu a}^{*}h _{\mu \nu}^{\lambda} C _{\nu i} = \sum_{\mu \nu}C _{\nu a}^{*}\frac{\dd{h _{\mu \nu}}}{\dd{\lambda}}\Big|_{{\lambda=0}}C _{\nu i} \\
     (\mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}, \lambda}[\mathbf{D}^{\text{SCF}}]\mathbf{C})_{ai} =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle ^{\lambda})C _{\nu i} \nonumber \\
     =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}\frac{\dd{\langle \mu \rho||\nu \sigma\rangle}}{\dd{\lambda}}\Big|_{{\lambda=0}})C _{\nu i} \\
@@ -443,22 +444,307 @@ To evaluate the perturbed Fock matrix, we write the perturbed quantities in suff
 
 
 
+\newpage
+\subsection{Z-Vector Equation (Matrix Parameterization)}
+Imposing the stationary condition on the Lagrangian w.r.t. the orbital rotation parameter:
+\\
+(Usually take the linear combination of $f _{ai}$ and $f _{ia}^{*}$ to make the Lagrangian real, and remember that the fock matrix is Hermitian.)
+\\
+\textcolor{red}{In Matrix Parameterization, $C _{\text{ON}}$ is required!}
+\begin{align}
+    \mathcal{L} _{\text{MP2}} =& E _{\text{HF}} + E _{\text{H}} + \sum_{ai}z _{ai}f _{ai} \nonumber \\
+    =& \sum_{pq}h _{pq}\gamma _{pq} + \sum_{pqrs}\Gamma _{rs}^{pq}\langle pq||rs\rangle + \sum_{ai}z _{ai}f _{ai} \nonumber \\
+    =& \sum_{pq}h _{pq}\gamma _{pq}^{\text{HF}} + \sum_{pqrs}(\Gamma ^{pq}_{rs})^{\text{HF}}\langle pq||rs\rangle \nonumber \\
+     &+ \sum_{pq}h _{pq}\gamma _{pq}^{\text{H}}+ \sum_{pqrs} (\Gamma _{rs}^{pq})^{\text{H}}\langle pq||rs\rangle + \sum_{ai}z _{ai}f _{ai}\\
+    \pdv{\mathcal{L} _{\text{MP2}}}{\mathbf{U}} =& \pdv{E _{\text{HF}}}{\mathbf{U}} + \pdv{E _{\text{H}}}{\mathbf{U}} + \sum_{ai}z _{ai}\pdv{f _{ai}}{\mathbf{U}} = 0
+\end{align}
+The Hylleraas part (assuming real):
+\begin{align}
+    E _{\text{H}} =& \sum_{ij}h _{ij}\gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\langle ab||ij\rangle \Gamma _{ij}^{ab} + \sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
+\end{align}
+\textcolor{red}{Which blocks of $\mathbf{U}$ should be considered?}
+\\
+\textcolor{blue}{In general, all of them! But some will come out to be redundant and the ones contribute are the virtual-occupied blocks.}
+\\
+Also, need to take linear combination of $\pdv{U _{pq}}$ and $\pdv{U _{qp}^{*}}$ to get rid of the Lagrange multilpier in $C _{\text{ON}}$ condition.\\
+Could treat $\mathbf{U}$ and $\mathbf{U}^{*}$ as independent variables, i.e.:
+\begin{equation}
+    \pdv{U _{pq}}{U ^{*}_{rs}} = 0
+\end{equation} 
+Or just treat real and imaginary parts separately.
+\begin{align}
+   \pdv{h _{ij}}{U _{pq}} =& \pdv{U _{pq}}\sum_{\mu \nu}C _{\mu i}^{*}h _{\mu \nu}C _{\nu j} \nonumber \\
+   =& \pdv{U _{pq}}\sum_{\mu \nu rs}C ^{*}_{\mu r}(0)U _{ri}^{*}h _{\mu \nu}C _{\nu s}(0)U _{s j} \nonumber \\
+   =& \sum_{\mu \nu r}C _{\mu r}^{*}(0)\pdv{U ^{*} _{ri}}{U _{pq}}h _{\mu \nu}C _{\nu j} + \sum_{\mu \nu r}C _{\mu i}^{*}h _{\mu \nu}C _{\nu r}(0)\pdv{U _{rj}}{U _{pq}} \nonumber \\
+   =& 0 + \sum_{\mu \nu r}C _{\mu i}^{*}h _{\mu \nu}C _{\nu r}(0)\delta _{pr}\delta _{qj} \nonumber \\
+   =& \sum_{\mu \nu}C _{\mu i}^{*}h _{\mu \nu}C _{\nu p}(0)\delta _{qj}
+\end{align}
+Similarly:
+\begin{align}
+    \pdv{h _{ab}}{U _{pq}} = \sum_{\mu \nu r}C _{\mu r}^{*}(0)(\pdv{U _{ra}}{U _{pq}})^{*}h _{\mu \nu}C _{\nu b} + \sum_{\mu \nu r}C _{\mu a}^{*}h _{\mu \nu}C _{\nu r}(0)\pdv{U _{rb}}{U _{pq}}
+\end{align}
+\begin{align}
+    \pdv{\langle ab||ij\rangle}{U _{pq}} =& \pdv{U _{pq}}\sum_{\mu \nu \sigma \tau}C _{\mu a}^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau j} \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau r} C ^{*}_{\mu r}(0)(\pdv{U _{ra}}{U _{pq}})^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau j} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau r} C _{\mu a}^{*}C ^{*} _{\nu r}(0)(\pdv{U _{rb}}{U _{pq}})^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau j} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau r} C _{\mu a}^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau \rangle C _{\sigma r}(0)\pdv{U _{r i}}{U _{pq}}C _{\tau j} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau r} C _{\mu a}^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau r}(0)\pdv{U _{rj}}{U _{pq}}
+\end{align}
+Other blocks of the 2e-integrals are similar.\\
+note:
+\begin{equation}
+    \dv{U _{pq}}{U _{rs}} = \delta _{pr}\delta _{qs}
+\end{equation}
+
+Now the Brillouin part:
+\begin{align}
+    \pdv{f _{ai}}{U _{pq}} =& \pdv{U _{pq}}(h _{ai} + \sum_{j}\langle aj||ij\rangle)
+\end{align}
+The constituent parts have been worked out from above.
+
+
+
+
+
+\subsection{Z-Vector Equation (Exponential Parameterization)}
+\begin{align}
+    \mathbf{U} =& \exp(-\bm{\kappa}) \nonumber \\
+    =& \sum_{n=0}^{\infty}(-1)^{n}\frac{\bm{\kappa}^{n}}{n!}
+\end{align}
+The orbital rotation parameter $\bm{\kappa}$ is anti-Hermitian:
+\begin{equation}
+    \bm{\kappa}^{\dagger} = (\bm{\kappa}^{*})^{T} = -\bm{\kappa}
+\end{equation}
+Therefore the matrix $\mathbf{U}$ is unitary:
+\begin{equation}
+    \mathbf{U}^{\dagger}\mathbf{U} = \exp(-\bm{\kappa}^{\dagger})\exp(-\bm{\kappa}) = \exp(\bm{\kappa})\exp(-\bm{\kappa}) = \mathbf{I}
+\end{equation}
+Let the matrix $\mathbf{U}$ be the parameter in CPSCF:
+\begin{align}
+    \mathbf{C}(\lambda) =& \mathbf{C}(0)\mathbf{U}(\lambda) = \mathbf{C}(0)\exp[-\bm{\kappa}(\lambda)] \\
+    C _{\mu p}(\lambda) =& \sum_{r} C _{\mu r}(0)U _{rp}(\lambda) = \sum_{r}C _{\mu r}(0)(\exp[-\bm{\kappa}(\lambda)])_{rp} \\
+    [\exp(-\bm{\kappa})]_{rp}=& (\mathbf{I}-\bm{\kappa} + \frac{1}{2!}\bm{\kappa}^{2}-\frac{1}{3!}\bm{\kappa}^{3} + \dots)_{rp} \nonumber \\
+    =&\delta _{rp} - \kappa_{rp} + \frac{1}{2!}\sum_{x}k _{rx}k _{xp} - \frac{1}{3!}\sum_{xy}k _{rx}k _{xy}k_{yp} + \dots
+\end{align} 
+The orthonormality condition is enforced explicitly in matrix parameterization, while in exponential parameterization it comes naturally from the anti-Hermitian property of $\bm{\kappa}$:
+\begin{align}
+    \mathbf{C}^{\dagger}(\lambda)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(\lambda) =& (\mathbf{C}(0)\exp[-\bm{\kappa}(\lambda)])^{\dagger}\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =&\exp[-\bm{\kappa}^{\dagger}(\lambda)]\underbrace{\mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)}_{=\mathbf{I}}\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \exp[\bm{\kappa}(\lambda)]\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \mathbf{I}
+\end{align}
+\textcolor{red}{NO! Take derivatives!:}
+\begin{align}
+    \mathbf{I} =& \mathbf{S}(\lambda) \nonumber \\
+    =& \mathbf{C}^{\dagger}(\lambda)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(\lambda) \nonumber \\
+    =& (\mathbf{C}(0)\exp[-\bm{\kappa}(\lambda)])^{\dagger}\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \exp[-\bm{\kappa}^{\dagger}(\lambda)]\mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \exp[\bm{\kappa}(\lambda)]\bm{\mathcal{S}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \Big[\mathbf{I} + \bm{\kappa}(\lambda) + \frac{1}{2}\bm{\kappa}^{2}(\lambda) + \dots\Big]\bm{\mathcal{S}}(\lambda)\Big[\mathbf{I}-\bm{\kappa}(\lambda)+\frac{1}{2}\bm{\kappa}^{2}(\lambda)+ \dots\Big] \\
+    \Leftrightarrow \delta _{pq} =& \sum_{\mu \nu} C _{\mu p}^{*}(\lambda)S _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu q}(\lambda) \nonumber \\
+    =& \sum_{\mu \nu}\big(\sum_{r}C _{\mu r}^{*}(0)\exp[-\bm{\kappa}(\lambda)]^{*}_{rp}\big)S ^{\text{AO}}_{\mu \nu}(\lambda)\big(\sum_{s}C _{\nu s}\exp[-\bm{\kappa}(\lambda)]_{sq}\big) \nonumber \\
+    =& \sum_{\mu \nu rs}\exp[\bm{\kappa}(\lambda)]_{pr}\big(C ^{*}_{\mu r}(0)S ^{\text{AO}}_{\mu \nu}(\lambda)C _{\nu s}(0)\big)\exp[-\bm{\kappa}(\lambda)]_{sq} \nonumber \\
+    =& \sum_{rs}\exp[\bm{\kappa}(\lambda)]_{pr}\mathcal{S} _{rs}(\lambda)\exp[-\bm{\kappa}(\lambda)]_{sq} \nonumber \\
+    =& \sum_{rs}\Big[\delta _{pr} + \kappa _{pr}(\lambda) + \frac{1}{2}\sum_{x}\kappa _{px}(\lambda)\kappa _{xr}(\lambda)\Big]\mathcal{S} _{rs}(\lambda)\Big[\delta _{sq} + \kappa _{sq}(\lambda) + \frac{1}{2}\sum_{y}\kappa _{sy}(\lambda)\kappa _{yq}(\lambda)\Big]
+\end{align}
+\textcolor{orange}{index $x$ \& $y$ look weird, find other appropriate indices.}\\
+For derivative of ON condition, only first order expansion is needed.
+\begin{align}
+    \delta _{pq} =& \sum_{rs}\big[\delta _{pr} + \kappa _{pr}(\lambda)\big]\mathcal{S} _{rs}(\lambda)\big[\delta _{sq} + \kappa _{sq}(\lambda)\big] \nonumber \\
+    =& \sum_{rs}\delta _{pr}\mathcal{S} _{rs}(\lambda)\delta _{sq} + \sum_{rs}\kappa _{pr}(\lambda)\mathcal{S} _{rs}(\lambda)\kappa _{sq}(\lambda) \nonumber \\
+    =& \mathcal{S} _{pq}(\lambda) + \sum_{rs}\kappa _{pr}(\lambda)\mathcal{S}_{rs}(\lambda)\kappa _{sq}(\lambda)
+\end{align}
+Taking derivative w.r.t. perturbation on both sides (noting that $\bm{\mathcal{S}}(0) =\mathbf{I}$ ):
+\begin{align}
+    0 =& \pdv{\mathcal{S} _{pq}(\lambda)}{\lambda}\Big|_{{\lambda=0}} + \sum_{rs}\pdv{\kappa _{pr}(\lambda)}{\lambda}\Big|_{{\lambda=0}}\mathcal{S} _{sr}(\lambda)\kappa _{sq}(\lambda) + \sum_{rs}\kappa _{pr}(\lambda)\mathcal{S} _{rs}\pdv{\kappa _{sq}(\lambda)}{\lambda}\Big|_{{\lambda=0}} \nonumber \\
+    =& \mathcal{S} _{pq}^{\lambda} + \sum_{rs}\kappa _{pr}^{\lambda}\delta _{sr}\kappa _{sq}+ \sum_{rs}\kappa _{pr}\delta _{rs}\kappa _{sq}^{\lambda} \nonumber \\
+    =& \mathcal{S} _{pq}^{\lambda} + \sum_{r}\kappa _{pr}^{\lambda}\kappa _{rq} + \sum_{r}\kappa _{pr}\kappa _{rq}^{\lambda} \nonumber \\
+    =& \mathcal{S} _{pq}^{\lambda} + \sum_{r}(-\kappa _{rp}^{\lambda *})(-\kappa _{qr}^{*}) + \sum_{r}\kappa _{pr}\kappa _{rq}^{\lambda} \nonumber \\
+    =& \mathcal{S} _{pq}^{\lambda} + \sum_{r}\kappa _{qr}^{*}\kappa _{rp}^{\lambda *} + \sum_{r}\kappa _{pr}\kappa _{rq}^{\lambda}
+\end{align}
+\\
+Now to impose the stationary condition: (only taking up to second derivative, so could truncate $\mathbf{\kappa}$ series up to quadratic term.
+\textcolor{blue}{Could also just use BCH, if that's better for the code generator})
+\begin{align}
+    \pdv{\mathcal{L}_{\text{MP2}}}{\bm{\kappa}} =& \pdv{E _{\text{HF}}}{\bm{\kappa}} + \pdv{E _{\text{H}}}{\bm{\kappa}} + \sum_{ai}z _{ai}\pdv{f _{ai}}{\bm{\kappa}} =0 \\
+    \pdv{E _{\text{HF}}}{\bm{\kappa}} =&        \\
+    \pdv{E _{\text{H}}}{\bm{\kappa}} =&         \\
+    \pdv{f _{ai}}{\bm{\kappa}} =&               
+\end{align}
+The specific blocks:
+\begin{align}
+    \pdv{h _{pq}}{\kappa _{rs}} =& \pdv{\kappa _{rs}}\sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}C _{\nu q} \nonumber \\
+    =& \pdv{\kappa _{rs}}\sum_{\mu \nu}
+\end{align}
+
+
+
+
+
+\subsection{Z-Vector Equation (Improved Exponential Parameterization)}
+\begin{align}
+    \mathbf{C}(\lambda) =& \mathbf{C}(0)\mathbf{U}(\lambda) \\
+    \mathbf{U}(\lambda) =& \bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \\
+    \bm{\mathcal{S}} =& \mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)
+\end{align}
+We need to consider the fact that the canonical AO basis is no longer normalised upon external perturbation. The $\bm{\mathcal{S}}^{-\frac{1}{2}}$ part takes care of the normalisation, and
+the exponential part ensures the MO rotation is unitary (i.e. preserves orthonormality).
+
+In this way:
+\begin{align}
+     \mathbf{S}(\lambda) =& \mathbf{C}^{\dagger}(\lambda)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\dagger}(\lambda)\mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)\mathbf{U}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\dagger}(\lambda)\bm{\mathcal{S}}(\lambda)\mathbf{U}(\lambda) \nonumber \\
+    =& \exp[-\bm{\kappa}(\lambda)]^{\dagger}\bm{\mathcal{S}}^{-\frac{1}{2} \dagger}(\lambda)\bm{\mathcal{S}}(\lambda)\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \exp[\bm{\kappa}(\lambda)]\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \mathbf{I}
+\end{align}
+the orthonormality is ensured (\textcolor{red}{only when $\bm{\mathcal{S}}^{-\frac{1}{2}\dagger}\bm{\mathcal{S}}\bm{\mathcal{S}}^{-\frac{1}{2}} = \mathbf{I}$} holds), and the perturbed orthonormality condition is trivial:
+\begin{equation}
+    \mathbf{S}^{\lambda} = \pdv{\mathbf{S}(\lambda)}{\lambda}\Big|_{{\lambda = 0}} = \mathbf{0}
+\end{equation}
+The derivative of $\mathbf{U}(\lambda)$ is no longer needed here but if required, the derivative of $\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)$ could be solved by taking derivative on this equation \textcolor{red}{(How to demonstrate this?)}:
+\begin{equation}
+    \bm{\mathcal{S}}^{-\frac{1}{2}\dagger}\bm{\mathcal{S}}\bm{\mathcal{S}}^{-\frac{1}{2}} = \mathbf{I}
+\end{equation}
+\textcolor{red}{Does this come naturally? Or do we need to enforce it as the orthonormality condition?}
+\textcolor{blue}{require the AO overlap matrix to be Hermitian}
+\begin{align}
+    \bm{\mathcal{S}}^{-\frac{1}{2}\dagger}\bm{\mathcal{S}}\bm{\mathcal{S}}^{-\frac{1}{2}} = \mathbf{C}^{-\frac{1}{2}\dagger}(0)\mathbf{S}_{\text{AO}}^{-\frac{1}{2}\dagger}\mathbf{C}^{-\frac{1}{2}}(0)\mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}\mathbf{C}(0)\mathbf{C}^{-\frac{1}{2}\dagger}(0)\mathbf{S}_{\text{AO}}^{-\frac{1}{2}}\mathbf{C}^{-\frac{1}{2}}(0)
+\end{align}
 
 
 
 
 
 
+Only up to second derivative is needed, hence we can truncate the exponential expansion in $\bm{\kappa}$ to quadratic term:
+\begin{equation}
+    \exp(-\bm{\kappa}) = \mathbf{I} - \bm{\kappa} + \frac{1}{2}\bm{\kappa}^{2}
+\end{equation}
+Then the relevant integrals could be expressed as:
+\begin{align}
+    \mathbf{h} =& \mathbf{C}^{\dagger}(\lambda)\mathbf{h}^{\text{AO}}(\lambda)\mathbf{C}(\lambda) \nonumber \\
+    =& \exp[\bm{\kappa}(\lambda)]\bm{\mathcal{S}}^{-\frac{1}{2}\dagger}(\lambda)\mathbf{C}^{\dagger}(0)\mathbf{h}^{\text{AO}}(\lambda)\mathbf{C}(0)\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \big(\mathbf{I} + \bm{\kappa} + \frac{1}{2}\bm{\kappa}^{2}\big)\bm{\mathcal{S}}^{-\frac{1}{2}\dagger}(\lambda)\mathbf{C}^{\dagger}(0)\mathbf{h}^{\text{AO}}(\lambda)\mathbf{C}(0)\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\big(\mathbf{I}- \bm{\kappa} +\frac{1}{2}\bm{\kappa}^{2}\big)
+\end{align}
+\begin{equation}
+    \big(\mathbf{I} + \bm{\kappa}+\frac{1}{2}\bm{\kappa}^{2}\big)_{pq} = \delta _{pq} + \kappa _{pq} + \frac{1}{2}\sum_{x}\kappa _{px}\kappa _{xq}
+\end{equation}
+\begin{align}
+    \pdv{\delta _{pq}}{\kappa _{rs}} =& 0 \\
+    \pdv{\kappa _{pq}}{\kappa _{rs}} =& \delta _{pr}\delta _{qs}
+\end{align}
+
+%This is wrong!:
+%\begin{align}
+%    h _{pq} =& \sum_{\mu \nu}C _{\mu p}^{*}(\lambda)h ^{\text{AO}}_{\mu \nu}(\lambda)C _{\nu q}(\lambda) \nonumber \\
+%    =& \sum_{\mu \nu}\big(\sum_{r}C _{\mu r}^{*}(0)\exp[-\bm{\kappa}(\lambda)]_{rp}^{*}\big)h _{\mu \nu}^{\text{AO}}(\lambda)\big(\sum_{s}C _{\nu s}(0)\exp[-\bm{\kappa}(\lambda)]_{sq}\big) \nonumber \\
+%    =& \sum_{\mu \nu rs}\exp[\bm{\kappa}(\lambda)]_{pr}C ^{*}_{\mu r}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\exp[-\bm{\kappa}(\lambda)]_{sq}  \nonumber \\
+%    =& \sum_{\mu \nu rs}\Big[\mathbf{I}+ \bm{\kappa}(\lambda)+\frac{1}{2}\bm{\kappa}^{2}(\lambda)\Big]_{pr}C ^{*}_{\mu r}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\Big[\mathbf{I}-\bm{\kappa}(\lambda)+ \frac{1}{2}\bm{\kappa}^{2}(\lambda)\Big]_{sq} \nonumber \\
+%    =& \sum_{\mu \nu rs}\Big[\delta _{pr}+ \kappa _{pr} + \frac{1}{2}\sum_{x}\kappa _{px}\kappa _{xr}\Big]C ^{*}_{\mu r}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\Big[\delta _{sq} - \kappa _{sq} + \frac{1}{2}\sum_{y}\kappa _{sy}\kappa _{yq}\Big] \nonumber \\
+%\end{align}
+%\begin{align}
+%    \pdv{h _{pq}}{\kappa _{uw}} =& \sum_{\mu \nu rs}\Big[\pdv{\kappa _{pr}}{\kappa _{uw}}+ \frac{1}{2}\sum_{x}\pdv{\kappa _{px}\kappa _{xr}}{\kappa _{uw}}\Big]C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\Big[-\pdv{\kappa _{sq}}{\kappa _{uw}}+\frac{1}{2}\sum_{y}\pdv{\kappa _{sy}\kappa _{yq}}{\kappa _{uw}}\Big] \nonumber \\
+%    =& \sum_{\mu \nu rs}\big[\delta _{pu}\delta _{rw}+\frac{1}{2}\sum_{x}(\delta _{pu}\delta _{xw}\kappa _{xr}+\kappa _{px}\delta _{xu}\delta _{rw})\big]C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0) \big[-\delta _{su}\delta _{qw} \nonumber \\
+%    &+\frac{1}{2}\sum_{y}(\delta _{su}\delta _{yw}\kappa _{yq}+ \kappa _{sy}\delta _{yu}\delta _{qw})\big]  \nonumber \\
+%    =& -\sum_{\mu \nu rs}\delta _{pu}\delta _{rw}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\delta _{su}\delta _{qw} \nonumber \\
+    %&+\frac{1}{2}\sum_{\mu \nu rsy}\delta _{pu}\delta _{rw}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\delta _{su}\delta _{yw}\kappa _{yq} \nonumber \\
+    %&+\frac{1}{2}\sum_{\mu \nu rsy}\delta _{pu}\delta _{rw}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\kappa _{sy}\delta _{yu}\delta _{qw} \nonumber \\
+    %&-\frac{1}{2}\sum_{\mu \nu rsx}\delta _{pu}\delta _{xw}\kappa _{xr}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\delta _{su}\delta _{qw} \nonumber \\
+    %&+\frac{1}{4}\sum_{\mu \nu rsxy}\delta _{pu}\delta _{xw}\kappa _{xr}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\delta _{su}\delta _{yw}\kappa _{yq} \nonumber \\
+    %&+ \frac{1}{4}\sum_{\mu \nu rsxy}\delta _{pu}\delta _{xw}\kappa _{xr}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\kappa _{sy}\delta _{yu}\delta _{qw} \nonumber \\
+    %&-\frac{1}{2}\sum_{\mu \nu rsx}\kappa _{px}\delta _{xu}\delta _{rw}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\delta _{su}\delta _{qw} \nonumber \\
+    %&+\frac{1}{4}\sum_{\mu \nu rsxy}\kappa _{px}\delta _{xu}\delta _{rw}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\delta _{su}\delta _{yw}\kappa _{yq} \nonumber \\
+    %&+\frac{1}{4}\sum_{\mu \nu rsxy}\kappa _{px}\delta _{xu}\delta _{rw}C _{\mu r}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu s}(0)\kappa _{sy}\delta _{yu}\delta _{qw} \nonumber \\
+    %=& -\sum_{\mu \nu}\delta _{pu}C _{\mu w}^{*}(0)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu u}(0)\delta _{qw}
+%\end{align}
+
+\begin{align}
+    h _{pq} =& \sum_{\mu \nu}C _{\mu p}^{*}(\lambda)h _{\mu \nu}^{\text{AO}}(\lambda)C _{\nu q}(\lambda) \nonumber \\
+    =& \sum_{\mu \nu rs}C _{\mu r}^{*}(0)U _{rp}^{*}(\lambda)h _{\mu \nu}^{\text{AO}}(\lambda)C _{vs}(0)U _{sq}(\lambda) \nonumber \\
+    =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\mathcal{S}_{rt}^{-\frac{1}{2}*}\exp[-\bm{\kappa}]_{tp}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu s}\mathcal{S} _{su}^{-\frac{1}{2}}\exp[-\bm{\kappa}]_{uq} \\ \nonumber
+    =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\mathcal{S}_{rt}^{-\frac{1}{2}*}\exp[\bm{\kappa}]_{pt}h _{\mu \nu}^{\text{AO}}C _{\nu s}\mathcal{S} _{su}^{-\frac{1}{2}}\exp[-\bm{\kappa}]_{uq} \\ \nonumber
+    =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\mathcal{S}_{rt}^{-\frac{1}{2}*}\left[\delta _{pt}+\kappa _{pt}+\dots\right]h _{\mu \nu}^{\text{AO}}C _{\nu s}\mathcal{S} _{su}^{-\frac{1}{2}}\left[\delta _{uq}-\kappa _{uq}+\dots\right] \nonumber \\
+    =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\mathcal{S}_{rt}^{-\frac{1}{2}*}h _{\mu \nu}^{\text{AO}}C _{\nu s}\mathcal{S} _{su}^{-\frac{1}{2}}\left[\delta _{pt}\delta _{uq}-\delta _{pt}\kappa _{uq}+\delta _{uq}\kappa _{pt}-\kappa _{pt}\kappa _{uq}\right]
+\end{align}
+By $\bm{\kappa}(\lambda=0)=\mathbf{0}$, we only need to expand the exponential to first order when taking derivative w.r.t. $\bm{\kappa}$:
+\begin{align}
+    \pdv{h _{pq}}{\kappa _{vw}}\Big|_{{\lambda =0}} =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\mathcal{S}_{rt}^{-\frac{1}{2}*}h _{\mu \nu}^{\text{AO}}C _{\nu s}\mathcal{S} _{su}^{-\frac{1}{2}}\left(0-\delta _{pt}\pdv{\kappa _{uq}}{\kappa _{vw}}\Big|_{{\lambda =0}}+\delta _{uq}\pdv{\kappa _{pt}}{\kappa _{vw}}\Big|_{{\lambda=0}}\right) \nonumber \\
+    =&\sum_{\mu \nu rstu}C _{\mu r}^{*}\mathcal{S} _{rt}^{-\frac{1}{2}*}h _{\mu \nu}^{\text{AO}}C _{\nu s}\mathcal{S} _{su}^{-\frac{1}{2}}\left(-\delta _{pt}\delta _{uv}\delta _{qw} + \delta _{uq}\delta _{pv}\delta _{tw}\right)
+\end{align} 
+Note that $\bm{\mathcal{S}}(\lambda=0)=\mathbf{U}(\lambda=0)=\mathbf{I}$, then:
+\begin{align}
+    \pdv{h _{pq}}{\kappa _{vw}}\Big|_{{\lambda=0}} =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\delta _{rt}h _{\mu \nu}^{\text{AO}}C _{vs}\delta _{su}\delta _{uq}\delta _{pv}\delta _{tw} - \sum_{\mu \nu rstu}C _{\mu r}^{*}\delta _{rt}h _{\mu \nu}^{\text{AO}}C _{\nu s}\delta _{su}\delta _{pt}\delta _{uv}\delta _{qw} \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu w}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q}\delta _{pv} - \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu v}\delta _{qw} \nonumber \\
+    =& h _{wq}\delta _{pv}-h _{pv}\delta _{qw}
+\end{align} 
+Change the indices for convenience (and using the fact that the Hamiltonian is Hermitian):
+\begin{equation}
+    \pdv{h _{pq}}{\kappa _{rs}}\Big|_{{\lambda=0}} = h _{qs}\delta _{pr} - h _{pr}\delta _{qs}
+\end{equation}
+hence:
+\begin{align}
+    \sum_{pq}\pdv{h _{pq}}{\kappa _{rs}}\Big|_{{\lambda=0}}=&\sum_{pq} h _{qs}\delta _{pr}-h _{pr}\delta _{qs}
+\end{align}
+
+Now the two-electron integral:
+\begin{align}
+    \langle pq||rs\rangle =& \sum_{\mu \nu \sigma \tau} C _{\mu p}^{*}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}C _{\tau s} \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau}\sum_{tuvw} C _{\mu t}^{*}U _{tp}^{*}C _{\nu u}^{*}U ^{*}_{u q}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}U _{vr} C  _{\tau w}U _{ws} \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn} C _{\mu t}^{*}\mathcal{S} ^{-\frac{1}{2}*}_{tg}\exp[-\bm{\kappa}]^{*}_{gp}C _{\nu u}^{*}\mathcal{S} ^{-\frac{1}{2}*}_{uh}\exp[-\bm{\kappa}]_{hq}^{*} \nonumber \\ 
+    &\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}\mathcal{S} ^{-\frac{1}{2}}_{v m}\exp[-\bm{\kappa}]_{mr}C _{\tau w}\mathcal{S} ^{-\frac{1}{2}}_{wn}\exp[-\bm{\kappa}]_{ns} \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn} C ^{*}_{\mu t}\mathcal{S} _{tg}^{-\frac{1}{2}*}\left(\delta _{pg}+\kappa _{pg}\right)C _{\nu u}^{*}\mathcal{S} ^{-\frac{1}{2}*}_{uh}\left(\delta _{qh}+ \kappa _{qh}\right) \nonumber \\
+    & \langle \mu \nu ||\sigma \tau\rangle C _{\sigma v}\mathcal{S} ^{-\frac{1}{2}}_{vm}\left(\delta _{mr}-\kappa _{mr}\right)C _{\tau w}\mathcal{S}^{-\frac{1}{2}}_{wn}\left(\delta _{ns}-\kappa _{ns}\right) \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn} C _{\mu t}^{*}\mathcal{S} _{tg}^{-\frac{1}{2}*}C _{\nu u}^{*}\mathcal{S} _{uh}^{-\frac{1}{2}*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}\mathcal{S} _{vm}^{-\frac{1}{2}}C _{\tau w}\mathcal{S} _{wn}^{-\frac{1}{2}}(\kappa _{pg}\delta _{qh}\delta _{mr}\delta _{ns} \nonumber \\
+    &+\kappa _{qh}\delta _{pg}\delta _{mr}\delta _{ns}-\kappa _{mr}\delta _{pg}\delta _{qh}\delta _{ns}-\kappa _{ns}\delta _{pg}\delta _{qh}\delta _{mr} + \dots)
+\end{align} 
+now take derivative w.r.t. $\bm{\kappa}$, noting that $\mathbf{U}(\lambda=0) = \bm{\mathcal{S}}(\lambda=0)=\mathbf{I}$:
+\begin{align}
+    \pdv{\langle pq||rs\rangle}{\kappa _{xy}}\Big|_{{\lambda=0}} =& \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn} C _{\mu t}^{*}C _{\nu u}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}C _{\tau w}\delta _{tg}\delta _{uh}\delta _{vm}\delta _{wn}\Big(\pdv{\kappa _{pg}}{\kappa _{xy}}\Big|_{{\lambda=0}}\delta _{qh}\delta _{mr}\delta _{ns} \nonumber \\
+    &+ \pdv{\kappa _{qh}}{\kappa _{xy}}\Big|_{{\lambda=0}}\delta _{pg}\delta _{mr}\delta _{ns} - \pdv{\kappa _{mr}}{\kappa _{xy}}\Big|_{{\lambda =0}}\delta _{pg}\delta _{qh}\delta _{ns} - \pdv{\kappa _{ns}}{\kappa _{xy}}\delta _{pg}\delta _{qh}\delta _{mr}\Big) \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn} C _{\mu t}^{*}C _{\nu u}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}C _{\tau w}\delta _{tg}\delta _{uh}\delta _{vm}\delta _{wn}\delta _{px}\delta _{gy}\delta _{qh}\delta _{mr}\delta _{ns} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn}C _{\mu t}^{*}C _{\nu u}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}C _{\tau w}\delta _{tg}\delta _{uh}\delta _{vm}\delta _{wn}\delta _{qx}\delta _{hy}\delta _{pg}\delta _{mr}\delta _{ns} \nonumber \\
+    &- \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn}C _{\mu t}^{*}C _{\nu u}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}C _{\tau w}\delta _{tg}\delta _{uh}\delta _{vm}\delta _{wn}\delta _{mx}\delta _{ry}\delta _{pg}\delta _{qh}\delta _{ns} \nonumber \\
+    &- \sum_{\mu \nu \sigma \tau}\sum_{tuvw}\sum_{ghmn}C _{\mu t}^{*}C _{\nu u}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma v}C _{\tau w}\delta _{tg}\delta _{uh}\delta _{vm}\delta _{wn}\delta _{nx}\delta _{sy}\delta _{pg}\delta _{qh}\delta _{mr} \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau}C _{\mu y}^{*}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}C _{\tau s}\delta _{px} + \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu y}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}C _{\tau s}\delta _{qx} \nonumber \\
+    &- \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma x}C _{\tau s}\delta _{ry} - \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}C _{\tau x}\delta _{sy} \nonumber \\
+    =& \langle yq||rs\rangle \delta _{px} + \langle py||rs\rangle \delta _{qx} - \langle pq||xs\rangle \delta _{ry} - \langle pq||rx\rangle \delta _{sy}
+\end{align}
 
 
 
 
 
+Therefore, the orbital response for fock matrix is:
+\begin{align}
+    \pdv{f _{ai}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \pdv{h _{ai}}{\kappa _{pq}}\Big|_{{\lambda=0}} + \sum_{k}\pdv{\langle ak||ik\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} \nonumber \\
+    =& h _{iq}\delta _{ap} - h _{ap}\delta _{iq} + \sum_{k}\langle qk||ik\rangle \delta _{ap} + \sum_{k}\langle aq||ik\rangle \delta _{pk} \nonumber \\
+    &-\sum_{k}\langle ak||pk\rangle \delta _{iq} - \sum_{k}\langle ak||ip\rangle \delta _{kq} \nonumber \\
+    =& \delta _{ap}\Big(h _{iq}+\sum_{k}\langle qk||ik\rangle\Big) - \delta _{iq}\Big(h _{ap}+\sum_{k}\langle ak||pk\rangle\Big) \nonumber \\
+    & + \sum_{k}\langle aq||ik\rangle \delta _{pk} - \sum_{k}\langle ak||ip\rangle \delta _{qk} \nonumber \\
+    =& \delta _{ap}f _{iq} - \delta _{iq}f _{ap} + \langle aq||ip\rangle - \langle aq||ip\rangle \nonumber \\
+    =& \delta _{ap}\delta _{iq}\varepsilon _{i} - \delta _{iq}\delta _{ap}\varepsilon _{a} \nonumber \\
+    =& (\varepsilon _{i}-\varepsilon _{a})\delta _{ap}\delta _{iq}
+\end{align}
+thus the only non-redundant orbital response is:
+\begin{equation}
+    \pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}} = (\varepsilon _{i}-\varepsilon _{a})\delta _{ab}\delta _{ij}
+\end{equation}
 
-
-
-
-
+Then, the orbital response for the Hylleraas functional:
+\begin{equation}
+    E _{\text{H}} = \sum_{ij}h _{ij}\gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\langle ab||ij\rangle \Gamma _{ij}^{ab}+\sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
+\end{equation}
+\begin{align}
+    \pdv{h _{ij}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& h _{jq}\delta _{ip}- h _{ip}\delta _{jq} \\
+    \pdv{h _{ab}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& h _{bq}\delta _{ap}- h _{ap}\delta _{bq}
+\end{align}
+\begin{align}
+    \pdv{\langle ab||ij\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \langle qb||ij\rangle \delta _{ap} + \langle aq||ij\rangle \delta _{bp} - \langle ab||pj\rangle \delta _{iq} - \langle ab||ip\rangle \delta _{jq} \\
+    \pdv{\langle ij||kl\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \langle qj||kl\rangle \delta _{ip} + \langle iq||kl\rangle \delta _{jp} - \langle ij||pl\rangle \delta _{kq} - \langle ij||kp\rangle \delta _{lq} \\
+    \pdv{\langle ai||bj\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \langle qi||bj\rangle \delta _{ap} + \langle aq||bj\rangle \delta _{ip} - \langle ai||pj\rangle \delta _{bq} - \langle ai||bp\rangle \delta _{jq}
+\end{align}
 
 
 

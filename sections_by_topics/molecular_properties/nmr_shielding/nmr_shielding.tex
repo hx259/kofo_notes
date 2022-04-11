@@ -73,16 +73,39 @@ The first part is contribution from the external magnetic field, the second part
 \\
 Now parameterize with MO coefficients / densities?
 
-
+\newpage
 \section{SCF Level}
 \begin{align}
-    E ^{\text{SCF}} =& \sum_{i}^{N}h _{ii} + \frac{1}{2}\sum_{ij}^{N}\langle ij||ij\rangle
-    =& \sum_{i}\sum_{\mu \nu}C _{\mu i}
+    E ^{\text{SCF}} =& \sum_{i}^{N}h _{ii} + \frac{1}{2}\sum_{ij}^{N}\langle ij||ij\rangle \nonumber \\
+    =& \sum_{i}\sum_{\mu \nu}C _{\mu i} ^{*} h _{\mu \nu}C _{\nu i} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \\
+    D ^{\text{SCF}}_{\mu \nu} =& \sum_{i}C ^{*}_{\mu i}C _{\nu i} \\
+    C _{\mu p}(\lambda) =& \sum_{q}C _{\mu q}(0)U _{qp}(\lambda)
 \end{align}
 At SCF level, the NMR shielding tensor is given as:
 \begin{align}
-    \sigma ^{\text{SCF},K}_{\beta \alpha} =& \frac{\dd{^{2}E ^{\text{SCF}}}}{\dd{B _{\alpha}}\dd{m _{K _{\beta}}}}\Big|_{{\mathbf{B},\mathbf{m}_{K}=0}} \nonumber \\
-    =& 
+    \sigma ^{\text{SCF},K}_{\beta \alpha} =& \frac{\dd{^{2}E ^{\text{SCF}}}}{\dd{B _{\alpha}}\dd{m _{K _{\beta}}}}\Big|_{{\mathbf{B},\mathbf{m}_{K}=0}}
 \end{align}
+Taking the first derivative against the nuclear magnetic moment gives:
+\begin{align}
+    \dv{E ^{\text{SCF}}}{m _{K _{\beta}}} =& \dv{m _{K _{\beta}}}(\sum_{i \mu \nu}C _{\mu i}^{*}h _{\mu \nu}C _{\nu i}) \nonumber \\
+    =& \sum_{i \mu \nu}C _{\mu i}^{*}C _{\nu i}\dv{h _{\mu \nu}}{m _{K _{\beta}}} \nonumber \\
+    =& \sum_{\mu \nu}D ^{\text{SCF}} _{\mu \nu}\dv{h _{\mu \nu}}{m _{K _{\beta}}}
+\end{align}
+Note that the MO coefficients are variationally determined so $\dv{\mathbf{C}}{m _{K _{\beta}}}=\mathbf{0}$, and the basis function does not depend on the nuclear magnetic moment, i.e. $\dv{\phi _{\mu}}{m _{K _{\beta}}} = 0$ . \\
+Now taking the second derivative w.r.t. the external magnetic field:
+\begin{align}
+    \sigma _{\beta \alpha}^{\text{SCF},K} =& \frac{\dd{^{2}E ^{\text{SCF}}}}{\dd{B _{\alpha}}\dd{m _{K _{\beta}}}} \nonumber \\
+    =& \dv{B _{\alpha}}(\sum_{\mu \nu}D ^{\text{SCF}} _{\mu \nu}\dv{h _{\mu \nu}}{m _{K _{\beta}}}) \nonumber \\
+    =& \sum_{\mu \nu}D ^{\text{SCF}} _{\mu \nu}\frac{\dd{^{2}h _{\mu \nu}}}{\dd{B _{\alpha}}\dd{m _{K _{\beta}}}} + \sum_{\mu \nu}\dv{D ^{\text{SCF}} _{\mu \nu}}{B _{\alpha}}\dv{h _{\mu \nu}}{m _{K _{\beta}}}
+\end{align}
+The response of SCF density to the magnetic field perturbation is:
+\begin{align}
+    \dv{D _{\mu \nu}^{\text{SCF}}}{B _{\alpha}} =& \dv{B _{\alpha}}(\sum_{i}C _{\mu i}^{*}(\mathbf{B})C _{\nu i}(\mathbf{B})) \nonumber \\
+    =& \dv{B _{\alpha}}(\sum_{ipq}C ^{*}_{\mu p}(0)U ^{*}_{pi}(\mathbf{B})C _{\nu q}(0)U _{qi}(\mathbf{B})) \nonumber \\
+    =& \sum_{ip}C ^{*}_{\mu p}(0)\dv{U ^{*} _{pi}(\mathbf{B})}{B _{\alpha}}C _{\nu i}(\mathbf{B}) + \sum_{iq}C _{\mu i}^{*}(\mathbf{B})\dv{U _{qi}(\mathbf{B})}{B _{\alpha}}C _{\nu q}(0) \\
+    =& \sum_{ip}C ^{*}_{\mu p}(U _{pi}^{B _{\alpha}})^{*}C _{\nu i} + \sum_{ip}C _{\mu i}^{*}U _{pi}^{B _{\alpha}}C _{\nu p}
+\end{align}
+The virtual-occupied block of $\mathbf{U}^{\mathbf{B}}$ is obtained from the CPSCF equations, and the occupied-occupied block is chosen according to the orthonormality condition.
+
 
 \end{document}
