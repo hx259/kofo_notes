@@ -21,6 +21,7 @@
 \usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 \usepackage[Sonny]{fncychap}
 \usepackage[calcwidth]{titlesec}
+\usepackage[makeroom]{cancel}
 
 \usetikzlibrary{shapes.geometric, arrows}
 
@@ -745,6 +746,84 @@ Then, the orbital response for the Hylleraas functional:
     \pdv{\langle ij||kl\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \langle qj||kl\rangle \delta _{ip} + \langle iq||kl\rangle \delta _{jp} - \langle ij||pl\rangle \delta _{kq} - \langle ij||kp\rangle \delta _{lq} \\
     \pdv{\langle ai||bj\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \langle qi||bj\rangle \delta _{ap} + \langle aq||bj\rangle \delta _{ip} - \langle ai||pj\rangle \delta _{bq} - \langle ai||bp\rangle \delta _{jq}
 \end{align}
+Evaluating the constituent parts of Hylleraas functional response to orbital rotation ($e\in$ external and $m\in$ internal):
+\begin{align}
+    \sum_{ij}\pdv{h _{ij}}{\kappa _{em}}\gamma _{ij}\Big|_{{\lambda=0}} =& \sum_{ij}(\cancel{h _{jm}\delta _{ie}}-h _{ie}\delta _{jm})\gamma _{ij} \nonumber \\
+    =& -\sum_{i}h _{ie}\gamma _{im}
+\end{align}
+\begin{align}
+    \sum_{ab}\pdv{h _{ab}}{\kappa _{em}}\gamma _{ab}\Big|_{{\lambda=0}} =& \sum_{ab}(h _{bm}\delta _{ae}-\cancel{h _{ae}\delta _{bm}})\gamma _{ab} \nonumber \\
+    =& \sum_{b}h _{bm}\gamma _{eb} = \sum_{a}h _{am}\gamma _{ea}
+\end{align}
+\begin{align}
+    \sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{em}}\Gamma _{ij}^{ab}\Big|_{{\lambda=0}} =& \sum_{ijab}\Big(\langle mb||ij\rangle \delta _{ae}+\langle am||ij\rangle \delta _{be}-\langle ab||ej\rangle \delta _{im}-\langle ab||ie\rangle \delta _{jm}\Big)\Gamma _{ij}^{ab} \nonumber \\
+    =& \sum_{ijb}\langle mb||ij\rangle \Gamma _{ij}^{eb} + \sum_{ija}\langle am||ij\rangle \Gamma _{ij}^{ae} - \sum_{jab}\langle ab||ej\rangle \Gamma _{mj}^{ab} - \sum_{iab}\langle ab||ie\rangle \Gamma _{im}^{ab} \nonumber \\
+    =& \sum_{ija}\langle ma||ij\rangle \Gamma _{ij}^{ea} + \sum_{ija}\langle am||ij\rangle \Gamma _{ij}^{ae} - \sum_{iab}\langle ab||ei\rangle \Gamma _{mi}^{ab} - \sum_{iab}\langle ab||ie\rangle \Gamma _{im}^{ab} \nonumber \\
+    =& \sum_{ija}\langle am||ji\rangle \Gamma _{ij}^{ea} + \sum_{ija}\langle am||ji\rangle \Gamma _{ji}^{ae} - \sum_{iab}\langle ab||ei\rangle \Gamma _{mi}^{ab} - \sum_{iab}\langle ab||ei\rangle \Gamma _{im}^{ba} \nonumber \\
+    =& 2\sum_{ija}\langle am||ji\rangle \Gamma _{ij}^{ea} - 2 \sum_{iab}\langle ab||ei\rangle \Gamma _{mi}^{ab}
+\end{align}
+in which the symmetry of MP2 amplitudes is exploited:
+\begin{equation}
+    T _{ij}^{ab} = T _{ji}^{ba} \Leftrightarrow \Gamma _{ij}^{ab} = \Gamma _{ji}^{ba}
+\end{equation}  
+Then:
+\begin{align}
+    \sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{em}}\Gamma _{kl}^{ij}\Big|_{{\lambda=0}} =& \sum_{ijkl}\Big(\cancel{\langle mj||kl\rangle \delta _{ie}} + \cancel{\langle im||kl\rangle \delta _{je}} - \langle ij||el\rangle \delta _{km} - \langle ij||ke\rangle \delta _{lm} \Big)\Gamma _{kl}^{ij} \nonumber \\
+    =& -\sum_{ijl}\langle ij||el\rangle \Gamma _{ml}^{ij} -\sum_{ijk}\langle ij||ke\rangle\Gamma _{km}^{ij} \nonumber \\
+    =& -\sum_{ijk}\langle ij||ek\rangle \Gamma _{mk}^{ij} - \sum_{ijk}\langle ij||ek\rangle \Gamma _{km}^{ji}
+\end{align}
+No symmetry for $\Gamma ^{ij}_{kl}$ could be used to simplify the expression.
+\begin{align}
+    \sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{em}}\Gamma _{bj}^{ai}\Big|_{{\lambda=0}}=& \sum_{ijab}\Big(\langle mi||bj\rangle \delta _{ae} + \cancel{\langle am||bj\rangle \delta _{ie}} - \cancel{\langle ai||ej\rangle \delta _{bm}} - \langle ai||be\rangle \delta _{jm}\Big)\Gamma _{bj}^{ai} \nonumber \\
+    =& \sum_{ijb}\langle mi||bj\rangle \Gamma _{bj}^{ei} - \sum_{iab}\langle ai||be\rangle \Gamma _{bm}^{ai}
+\end{align}
+
+
+
+
+Therefore, the overall Hylleraas response is:
+\begin{align}
+    \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& \sum_{a}h _{aj}\gamma _{ba}-\sum_{i}h _{ib}\gamma _{ij} \nonumber \\
+    &+ 2 \sum_{ika}\langle aj||ki\rangle \Gamma _{ik}^{ba} - 2 \sum_{iac}\langle ac||bi\rangle \Gamma _{ji}^{ac} \nonumber \\
+    &- \sum_{ikl}\langle ik||bl\rangle \Gamma _{jl}^{ik} - \sum_{ikl}\langle ik||bl\rangle \Gamma _{lj}^{ki} \nonumber \\
+    &+ \sum_{ikc}\langle ji||ck\rangle \Gamma _{ck}^{bi} - \sum_{iac}\langle ai||cb\rangle \Gamma _{cj}^{ai}
+\end{align}
+
+
+For the sake of completeness, we can verify that $E _{\text{HF}}$ response to orbital rotation is zero, as HF energy is variationally determined.
+\begin{equation}
+    E _{\text{HF}} = \sum_{i}h _{ii} + \frac{1}{2}\sum_{ik}\langle ik||ik\rangle
+\end{equation}
+\begin{align}
+    \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& \sum_{i}\pdv{h _{ii}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \frac{1}{2}\sum_{ik}\pdv{\langle ik||ik\rangle}{\kappa _{bj}}\Big|_{{\lambda=0}} \nonumber \\
+    =& \sum_{i}(\cancel{h _{ij}\delta _{ib}} - h _{ib}\delta _{ij}) \nonumber \\
+    & + \frac{1}{2}\sum_{ik}\Big(\cancel{\langle jk||ik\rangle \delta _{ib}} + \cancel{\langle ij||ik\rangle \delta _{kb}} - \langle ik||bk\rangle \delta _{ij} - \langle ik||ib\rangle \delta _{kj} \Big) \nonumber \\
+    =& - h _{jb} - \frac{1}{2}\sum_{k}\langle jk||bk\rangle - \frac{1}{2}\sum_{i}\langle ij||ib\rangle \nonumber \\
+    =& - h _{jb} - \sum_{i}\langle ji||bi\rangle \nonumber \\
+    =& - f _{jb} \nonumber \\
+    =& 0
+\end{align}
+
+The Lagrangian constraint on orbital rotation:
+\begin{equation}
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\Big|_{{\lambda=0}} = \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}} = 0
+\end{equation}
+Now the Z-Vector equation becomes:
+\begin{align}
+    \sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& -\pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}}
+\end{align}
+in which the RHS is the orbital gradient for MP2.
+\begin{align}
+    \text{LHS} =& \sum_{ai}(\varepsilon _{i}- \varepsilon _{a})\delta _{ab}\delta _{ij}z _{ai} \nonumber \\
+    =&(\varepsilon _{j}-\varepsilon _{b})z _{bj}
+\end{align}
+The RHS (Hylleraas response) has been worked out previously. Hence the Z-Vector equation:
+\begin{align}
+    (\varepsilon _{b}-\varepsilon _{j})z _{bj} =& \sum_{a}h _{aj}\gamma _{ba}-\sum_{i}h _{ib}\gamma _{ij} \nonumber \\
+    &+ 2 \sum_{ika}\langle aj||ki\rangle \Gamma _{ik}^{ba} - 2 \sum_{iac}\langle ac||bi\rangle \Gamma _{ji}^{ac} \nonumber \\
+    &- \sum_{ikl}\langle ik||bl\rangle \Gamma _{jl}^{ik} - \sum_{ikl}\langle ik||bl\rangle \Gamma _{lj}^{ki} \nonumber \\
+    &+ \sum_{ikc}\langle ji||ck\rangle \Gamma _{ck}^{bi} - \sum_{iac}\langle ai||cb\rangle \Gamma _{cj}^{ai}
+\end{align}
 
 
 
@@ -773,13 +852,59 @@ Then, the orbital response for the Hylleraas functional:
 
 
 
+\newpage
+
+\section{!!EUREKA: Summary of MP2 Gradient}
+The Lagrangian for MP2 could be written as (with $z _{ai} = z _{ia}^{*}$):
+\begin{align}
+    \mathcal{L}_{\text{MP2}}=& E _{\text{HF}}+E _{\text{H}}+\frac{1}{2}\sum_{ai}\big(z _{ai}f _{ai} + z_{ai}^{*} f _{ai}^{*}\big) \nonumber \\
+    =& \sum_{pq}h _{pq}\gamma _{pq} + \sum_{pqrs}\Gamma _{rs}^{pq}\langle pq||rs\rangle + \frac{1}{2}\sum_{ai}\big(z _{ai}f _{ai} + z ^{*}_{ai}f _{ai}^{*}\big)
+\end{align}
+Constraints:
+\begin{align}
+    \pdv{\mathcal{L}_{\text{MP2}}}{z _{ai}} =& f _{ai} = 0 &&& \text{\small Hatree-Fock Condition}& \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{T _{ij}^{ab}} =& \pdv{E _{\text{H}}}{T _{ij}^{ab}} = 0 &&& \text{\small MP2 Condition}& \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}} =& \pdv{E _{\text{H}}}{\kappa _{bj}} + \frac{1}{2}\sum_{ai}\Big(z _{ai}\pdv{f _{ai}}{\kappa _{bj}}+\bar{z}_{ai}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big) = 0  &&& \text{\small Z-Vector Equations}&
+\end{align}
+Densities:
+\begin{align}
+    \gamma _{pq} =& \gamma ^{\text{HF}} _{pq} + \gamma ^{\text{H}} _{pq} \\
+    \Gamma _{rs}^{pq} =& (\Gamma ^{\text{HF}})_{rs}^{pq} + (\Gamma ^{\text{H}})_{rs}^{pq}
+\end{align}
+\begin{align}
+    &\gamma _{ij}^{\text{H}} = \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}T _{ki}^{ab} &&& \gamma ^{\text{HF}}_{ij} = \delta _{ij}&\\
+    &\gamma^{\text{H}} _{ab} = -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}T _{ij}^{cb} \\
+    &(\Gamma ^{\text{H}}) _{ij}^{ab} = \frac{1}{2}(T _{ij}^{ab})^{*} \\
+    &(\Gamma ^{\text{H}}) _{kl}^{ij} = \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl} &&& (\Gamma ^{\text{HF}})_{kl}^{ij} = \frac{1}{2}\delta _{ik}\delta _{jl}& \\
+    &(\Gamma ^{\text{H}}) _{bj}^{ai} = -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij}
+\end{align}
 
 
 
+\subsection{Hartree-Fock}
+\begin{align}
+    f _{ai} = h _{ai} + \sum_{j}\langle aj||ij\rangle = 0
+\end{align}
+\begin{align}
+    E _{\text{HF}} =& \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle  \nonumber \\
+    =& \sum_{i \mu \nu}C _{\mu i}^{*}C _{\nu i}h _{\mu \nu} + \frac{1}{2}\sum_{ij}\sum_{\mu \nu \sigma \tau} C _{\mu i}^{*}C _{\nu j}^{*}C _{\sigma i}C _{\tau j}\langle \mu \nu||\sigma \tau\rangle  \nonumber \\
+    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{HF}}h _{\mu \nu} + \frac{1}{2}\sum_{\mu \nu \sigma \tau}D _{\mu \sigma}^{\text{HF}}D _{\nu \tau}^{\text{HF}}\langle \mu \nu||\sigma \tau\rangle
+\end{align}
 
-
-
-
+\subsection{MP2}
+\begin{equation}
+    E _{\text{H}} = \sum_{ij}h _{ij}\gamma ^{\text{H}} _{ij} + \sum_{ab}h _{ab}\gamma ^{\text{H}} _{ab} + \sum_{ijab}\langle ab||ij\rangle (\Gamma ^{\text{H}}) _{ij}^{ab} + \sum_{ijkl}\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai}
+\end{equation}
+\begin{align}
+    \sum_{ij}h _{ij}\gamma _{ij}^{\text{H}} =& \sum_{ij \mu \nu}C _{\mu i}^{*}C _{\nu j} h _{\mu \nu}\gamma _{ij}^{\text{H}} \\
+    \sum_{ab}h _{ab}\gamma _{ab}^{\text{H}} =& \sum_{ab \mu \nu}C _{\mu a}^{*}C _{\nu b} h _{\mu \nu}\gamma _{ab}^{\text{H}}
+\end{align}
+\begin{equation}
+    D _{\mu \nu}^{\text{H}} = \sum_{ij}C _{\mu i}^{*}C _{\nu j}\gamma _{ij}^{\text{H}} + \sum_{ab}C _{\mu a}^{*}C _{\nu b}\gamma _{ab}^{\text{H}}
+\end{equation}
+\begin{align}
+    \pdv{\gamma _{ij}^{\text{H}}}{T _{ij}^{ab}} =& 
+\end{align}
 
 
 

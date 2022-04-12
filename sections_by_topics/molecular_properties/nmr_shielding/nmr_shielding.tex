@@ -108,4 +108,66 @@ The response of SCF density to the magnetic field perturbation is:
 The virtual-occupied block of $\mathbf{U}^{\mathbf{B}}$ is obtained from the CPSCF equations, and the occupied-occupied block is chosen according to the orthonormality condition.
 
 
+
+
+
+
+
+
+
+
+\newpage
+\section{MP2 Level}
+\begin{align}
+    \mathcal{L}_{\text{MP2}} =& E _{\text{HF}} + E _{\text{H}} + \frac{1}{2}\sum_{ai}(z _{ai}f _{ai}+ z _{ai}^{*}f _{ai}^{*})
+\end{align}
+\begin{align}
+    E _{\text{HF}} =& \sum_{\mu \nu}h _{\mu \nu}D _{\mu \nu}^{\text{HF}} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \\
+    E _{\text{H}} =& \sum_{ij}h _{ij}\gamma ^{\text{H}} _{ij} + \sum_{ab}h _{ab}\gamma ^{\text{H}} _{ab} + \sum_{pqrs}\langle pq||rs\rangle \Gamma _{rs}^{pq} \nonumber \\
+    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{H}}h _{\mu \nu}^{\text{AO}} + \sum_{pqrs}\langle pq||rs\rangle \Gamma _{rs}^{pq}  \\
+    D _{\mu \nu}^{\text{H}} =& \sum_{ij}C _{\mu i}^{*}C _{\nu j}\gamma _{ij}^{\text{H}} +\sum_{ab}C _{\mu a}^{*}C _{\nu b}\gamma _{ab}^{\text{H}} \\
+    \sum_{ai}z _{ai} f _{ai} =& \sum_{ai}z _{ai} h _{ai} + \sum_{aij}z _{ai}\langle aj||ij\rangle \nonumber \\
+    =& \sum_{\mu \nu ai}z _{ai} C _{\mu a}^{*}C _{\nu i} h _{\mu \nu}^{\text{AO}} + \sum_{aij}z _{ai}\langle aj||ij\rangle \\
+    \sum_{ai}z _{ai}^{*}f _{ai}^{*}=& \sum_{ai} z _{ai}^{*}h _{ai}^{*} + \sum_{aij}z _{ai}^{*}\langle aj||ij\rangle ^{*} \nonumber \\
+    =& \sum_{ai}z _{ia}h _{ia} + \sum_{aij}z _{ia}\langle ij||aj\rangle \nonumber \\
+    =& \sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}h _{\mu \nu}^{\text{AO}} + \sum_{aij}z _{ia}\langle ij||aj\rangle \nonumber \\
+\end{align} 
+
+\subsection{First Derivative}
+We take the first derivative w.r.t. the nuclear magnetic moment $m _{K _{\beta}}$  as only one-electron Hamiltonian $h _{\mu \nu}$ depends on $m _{K _{\beta}}$:
+\begin{align}
+    \dv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} =& \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{bj}\left(\pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\right)\left(\pdv{\kappa _{bj}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    &+ \sum_{ai}\left(\pdv{\mathcal{L}_{\text{MP2}}}{z _{ai}}\right)\left(\pdv{z _{ai}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    =& \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}
+\end{align}
+\begin{align}
+    \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} =& \sum_{\mu \nu}D _{\mu \nu}^{\text{HF}}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{\mu \nu}D _{\mu \nu}^{\text{H}}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    &+ \frac{1}{2}\sum_{\mu \nu ai}z _{ai}C _{\mu a}^{*}C _{\nu i}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    =&\sum_{\mu \nu}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}\left(D _{\mu \nu}^{\text{HF}}+ D _{\mu \nu}^{\text{H}} + \frac{1}{2}\sum_{ai}z _{ai}C _{\mu a}^{*}C _{\nu i} +\frac{1}{2}\sum_{ai}z _{ia}C _{\mu i}^{*}C _{\nu a}\right)
+\end{align}
+\textcolor{red}{note that need to turn $z _{ai}^{*}$ into $z _{ia}$... what about $z _{ia}$ block?} \\
+Trying to resolve $z _{ia}$ 
+\begin{align}
+    &\sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}h _{\mu \nu}^{\text{AO}} \nonumber \\
+    \stackrel{\mu \leftrightarrow \nu}{=}& \sum_{\mu \nu ai}\left(z _{ai}C _{\mu a}^{*}C _{\nu i}\right)^{*}h _{\nu \mu}^{\text{AO}}
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
