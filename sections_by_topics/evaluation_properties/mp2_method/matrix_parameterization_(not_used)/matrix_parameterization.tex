@@ -1,0 +1,106 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+\usepackage[makeroom]{cancel}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\section{Z-Vector Equation (Matrix Parameterization)}
+Imposing the stationary condition on the Lagrangian w.r.t. the orbital rotation parameter:
+\\
+(Usually take the linear combination of $f _{ai}$ and $f _{ia}^{*}$ to make the Lagrangian real, and remember that the fock matrix is Hermitian.)
+\\
+\textcolor{red}{In Matrix Parameterization, $C _{\text{ON}}$ is required!}
+\begin{align}
+    \mathcal{L} _{\text{MP2}} =& E _{\text{HF}} + E _{\text{H}} + \sum_{ai}z _{ai}f _{ai} \nonumber \\
+    =& \sum_{pq}h _{pq}\gamma _{pq} + \sum_{pqrs}\Gamma _{rs}^{pq}\langle pq||rs\rangle + \sum_{ai}z _{ai}f _{ai} \nonumber \\
+    =& \sum_{pq}h _{pq}\gamma _{pq}^{\text{HF}} + \sum_{pqrs}(\Gamma ^{pq}_{rs})^{\text{HF}}\langle pq||rs\rangle \nonumber \\
+     &+ \sum_{pq}h _{pq}\gamma _{pq}^{\text{H}}+ \sum_{pqrs} (\Gamma _{rs}^{pq})^{\text{H}}\langle pq||rs\rangle + \sum_{ai}z _{ai}f _{ai}\\
+    \pdv{\mathcal{L} _{\text{MP2}}}{\mathbf{U}} =& \pdv{E _{\text{HF}}}{\mathbf{U}} + \pdv{E _{\text{H}}}{\mathbf{U}} + \sum_{ai}z _{ai}\pdv{f _{ai}}{\mathbf{U}} = 0
+\end{align}
+The Hylleraas part (assuming real):
+\begin{align}
+    E _{\text{H}} =& \sum_{ij}h _{ij}\gamma _{ij} + \sum_{ab}h _{ab}\gamma _{ab} + \sum_{ijab}\langle ab||ij\rangle \Gamma _{ij}^{ab} + \sum_{ijkl}\langle ij||kl\rangle \Gamma _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle \Gamma _{bj}^{ai}
+\end{align}
+\textcolor{red}{Which blocks of $\mathbf{U}$ should be considered?}
+\\
+\textcolor{blue}{In general, all of them! But some will come out to be redundant and the ones contribute are the virtual-occupied blocks.}
+\\
+Also, need to take linear combination of $\pdv{U _{pq}}$ and $\pdv{U _{qp}^{*}}$ to get rid of the Lagrange multilpier in $C _{\text{ON}}$ condition.\\
+Could treat $\mathbf{U}$ and $\mathbf{U}^{*}$ as independent variables, i.e.:
+\begin{equation}
+    \pdv{U _{pq}}{U ^{*}_{rs}} = 0
+\end{equation} 
+Or just treat real and imaginary parts separately.
+\begin{align}
+   \pdv{h _{ij}}{U _{pq}} =& \pdv{U _{pq}}\sum_{\mu \nu}C _{\mu i}^{*}h _{\mu \nu}C _{\nu j} \nonumber \\
+   =& \pdv{U _{pq}}\sum_{\mu \nu rs}C ^{*}_{\mu r}(0)U _{ri}^{*}h _{\mu \nu}C _{\nu s}(0)U _{s j} \nonumber \\
+   =& \sum_{\mu \nu r}C _{\mu r}^{*}(0)\pdv{U ^{*} _{ri}}{U _{pq}}h _{\mu \nu}C _{\nu j} + \sum_{\mu \nu r}C _{\mu i}^{*}h _{\mu \nu}C _{\nu r}(0)\pdv{U _{rj}}{U _{pq}} \nonumber \\
+   =& 0 + \sum_{\mu \nu r}C _{\mu i}^{*}h _{\mu \nu}C _{\nu r}(0)\delta _{pr}\delta _{qj} \nonumber \\
+   =& \sum_{\mu \nu}C _{\mu i}^{*}h _{\mu \nu}C _{\nu p}(0)\delta _{qj}
+\end{align}
+Similarly:
+\begin{align}
+    \pdv{h _{ab}}{U _{pq}} = \sum_{\mu \nu r}C _{\mu r}^{*}(0)(\pdv{U _{ra}}{U _{pq}})^{*}h _{\mu \nu}C _{\nu b} + \sum_{\mu \nu r}C _{\mu a}^{*}h _{\mu \nu}C _{\nu r}(0)\pdv{U _{rb}}{U _{pq}}
+\end{align}
+\begin{align}
+    \pdv{\langle ab||ij\rangle}{U _{pq}} =& \pdv{U _{pq}}\sum_{\mu \nu \sigma \tau}C _{\mu a}^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau j} \nonumber \\
+    =& \sum_{\mu \nu \sigma \tau r} C ^{*}_{\mu r}(0)(\pdv{U _{ra}}{U _{pq}})^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau j} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau r} C _{\mu a}^{*}C ^{*} _{\nu r}(0)(\pdv{U _{rb}}{U _{pq}})^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau j} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau r} C _{\mu a}^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau \rangle C _{\sigma r}(0)\pdv{U _{r i}}{U _{pq}}C _{\tau j} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau r} C _{\mu a}^{*}C _{\nu b}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma i}C _{\tau r}(0)\pdv{U _{rj}}{U _{pq}}
+\end{align}
+Other blocks of the 2e-integrals are similar.\\
+note:
+\begin{equation}
+    \dv{U _{pq}}{U _{rs}} = \delta _{pr}\delta _{qs}
+\end{equation}
+
+Now the Brillouin part:
+\begin{align}
+    \pdv{f _{ai}}{U _{pq}} =& \pdv{U _{pq}}(h _{ai} + \sum_{j}\langle aj||ij\rangle)
+\end{align}
+The constituent parts have been worked out from above.
+
+
+
+
+\end{document}

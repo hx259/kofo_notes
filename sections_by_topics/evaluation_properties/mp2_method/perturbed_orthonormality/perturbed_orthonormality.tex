@@ -1,0 +1,129 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+\usepackage[makeroom]{cancel}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\section{Perturbed Orthonormality Condition}
+\subsection{Matrix Parameterization}
+We have the general orthonormality condition, subject to perturbation, as:
+\begin{equation}
+    S _{pq}=\langle p|q\rangle = \delta _{pq}
+\end{equation}
+\begin{equation}
+    \sum_{\mu \nu}C _{\mu p}^{*}S _{\mu \nu}C _{\nu q} = \delta _{pq}
+\end{equation}
+Parameterization of the MO coefficients:
+\begin{equation}
+    \mathbf{C}(\lambda) = \mathbf{C}(0)\mathbf{U}(\lambda)
+\end{equation}
+\begin{equation}
+    C _{\mu p}(\lambda) = \sum_{r}C _{\mu r}(0)U _{rp}(\lambda)
+\end{equation}
+in which $\mathbf{U}(\lambda)$ is the solution to the CPHF equations.
+\\
+
+Now the orthonormality condition using this parameterization:
+\begin{equation}
+    \sum_{\mu \nu}\Big(\sum_{r}U _{rp}^{*}(\lambda)C _{\mu r}^{*}(0)\Big)S _{\mu \nu}(\lambda)\Big(\sum_{s}C _{\nu s}(0)U _{sq}(\lambda)\Big) = \delta _{pq}
+\end{equation}
+Introducing the transformed overlap matrix:
+\begin{equation}
+    \mathcal{S} _{pq}(\lambda) = \sum_{\mu \nu}C _{\mu p}^{*}(0)S _{\mu \nu}(\lambda)C _{\nu q}(0)
+\end{equation}
+we have:
+\begin{equation}
+    \sum_{rs}U _{rp}^{*}(\lambda)\mathcal{S}_{rs}(\lambda)U _{sq}(\lambda) = \delta _{pq}
+\end{equation}
+differentiating both sides of the equation gives:
+\begin{equation}
+    \sum_{rs}\frac{\dd{U _{rp}^{*}(\lambda)}}{\dd{\lambda}}\mathcal{S}_{rs}(\lambda)U _{sq}(\lambda) + \sum_{rs}U _{rp}^{*}(\lambda)\frac{\dd{\mathcal{S}_{rs}(\lambda)}}{\dd{\lambda}}U _{sq}(\lambda) + \sum_{rs}U _{rp}^{*}(\lambda)\mathcal{S}_{rs}(\lambda)\frac{\dd{U _{sq}(\lambda)}}{\dd{\lambda}} = 0
+\end{equation}
+Noting that $\bm{\mathcal{S}}(0)=\mathbf{I}$ because the unperturbed spin-orbitals are orthonormal, and it is trivial that $\mathbf{U}(0)=\mathbf{I}$. \\
+Therefore evaluating the derivative at $\lambda = 0$, and denoting $A ^{\lambda} =\big(\frac{\dd{A}}{\dd{\lambda}}\big)\big|_{{\lambda=0}}$ results in:
+\begin{align}
+    \sum_{rs}(U _{rp}^{\lambda})^{*}\delta _{rs}\delta _{sq} + \sum_{rs}\delta _{rp}\mathcal{S}_{rs}^{\lambda}\delta _{sq} + \sum_{rs}\delta _{rp}\delta _{rs}U _{sq}^{\lambda} = 0
+\end{align}
+contracting the Kronecker delta tensors we get the perturbed orthonormality condition:
+\begin{equation}
+    (U _{qp}^{\lambda})^{*} + \mathcal{S}_{pq}^{\lambda} + U _{pq}^{\lambda} = 0
+\end{equation}
+
+
+\newpage
+\subsection{Exponential Parameterization}
+\begin{align}
+    \mathbf{C}(\lambda) =& \mathbf{C}(0)\mathbf{U}(\lambda) \\
+    \mathbf{U}(\lambda) =& \bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \\
+    \bm{\mathcal{S}}(\lambda) =& \mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)
+\end{align}
+
+In this way:
+\begin{align}
+     \mathbf{S}(\lambda) =& \mathbf{C}^{\dagger}(\lambda)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\dagger}(\lambda)\mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)\mathbf{U}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\dagger}(\lambda)\bm{\mathcal{S}}(\lambda)\mathbf{U}(\lambda) \nonumber \\
+    =& \exp[-\bm{\kappa}(\lambda)]^{\dagger}\bm{\mathcal{S}}^{-\frac{1}{2} \dagger}(\lambda)\bm{\mathcal{S}}(\lambda)\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \exp[\bm{\kappa}(\lambda)]\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \mathbf{I}
+\end{align}
+the orthonormality is ensured by $\bm{\mathcal{S}}^{-\frac{1}{2}\dagger}\bm{\mathcal{S}}\bm{\mathcal{S}}^{-\frac{1}{2}} = \mathbf{I}$, as $\mathbf{S}^{\text{AO}}$ thus $\bm{\mathcal{S}}$ matrix is Hermitian. The perturbed orthonormality condition is then trivial:
+\begin{equation}
+    \mathbf{S}^{\lambda} = \pdv{\mathbf{S}(\lambda)}{\lambda}\Big|_{{\lambda = 0}} = \mathbf{0}
+\end{equation}
+With this new parameterization, the orthonormality condition and perturbed orthonormality condition come naturally, hence do not need to be included explicitly in the Lagrangian.\\
+
+The derivative of $\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)$ (needed for $\mathbf{U}^{\lambda}$ appearing in second derivative) could be solved by taking derivative on this equation:
+\begin{equation}
+    \bm{\mathcal{S}}^{-\frac{1}{2}\dagger}\bm{\mathcal{S}}\bm{\mathcal{S}}^{-\frac{1}{2}} = \mathbf{I}
+\end{equation}
+i.e. (note that $\bm{\mathcal{S}}^{\dagger} = \bm{\mathcal{S}}$ and $\bm{\mathcal{S}}(\lambda=0)=\mathbf{I}$ ):
+\begin{align}
+    \mathbf{0} =& \pdv{\bm{\mathcal{S}} ^{-\frac{1}{2}}}{\lambda}\bm{\mathcal{S}}\bm{\mathcal{S}}^{-\frac{1}{2}}\Big|_{{\lambda=0}} + \bm{\mathcal{S}}^{-\frac{1}{2}}\pdv{\bm{\mathcal{S}}}{\lambda}\bm{\mathcal{S}}^{-\frac{1}{2}}\Big|_{{\lambda=0}} + \bm{\mathcal{S}}^{-\frac{1}{2}}\bm{\mathcal{S}}\pdv{\bm{\mathcal{S}}^{-\frac{1}{2}}}{\lambda}\Big|_{{\lambda=0}} \nonumber \\
+    =& 2 \left(\bm{\mathcal{S}}^{-\frac{1}{2}}\right)^{\lambda} + \bm{\mathcal{S}}^{\lambda}
+\end{align}
+\begin{equation}
+    \Leftrightarrow \left(\bm{\mathcal{S}}^{-\frac{1}{2}}\right)^{\lambda} = -\frac{1}{2}\bm{\mathcal{S}}^{\lambda}
+\end{equation}
+
+
+\end{document}

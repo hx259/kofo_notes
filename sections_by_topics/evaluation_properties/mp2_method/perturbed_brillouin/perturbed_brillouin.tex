@@ -1,0 +1,115 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+\usepackage[makeroom]{cancel}
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\subsection{Perturbed Brillouin Condition}
+The SCF density matrix is defined as:
+\begin{equation}
+    D _{\mu \nu}^{\text{SCF}} = \sum_{i}^{N} C _{\mu i}^{*}C _{\nu i}
+\end{equation}
+in which the MO coefficients are parameterized as:
+\begin{align}
+    C _{\mu p}(\lambda) =& \sum_{q} C _{\mu q}(0)U(\lambda)_{qp} \\
+    \mathbf{C}(\lambda) =& \mathbf{C}(0)\mathbf{U}(\lambda)
+\end{align}
+
+
+Define the one- and two-electron parts of the fock matrix, in AO and MO basis, as:
+\begin{equation}
+    \begin{aligned}[t]
+     h _{pq}=& \langle p|\hat{h}|q\rangle
+     = \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q}\\
+     h _{\mu \nu} ^{\text{AO}}=& \langle \mu|\hat{h}|\nu\rangle \\
+    \mathbf{h} =& \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}}\mathbf{C} \\
+    \end{aligned}
+    \qquad 
+    \begin{aligned}[t]
+     g _{pq}=& \sum_{i}\langle pi||qi\rangle
+     = \sum_{i}\sum_{\mu \nu}C _{\mu p}^{*}\langle \mu i||\nu i\rangle C _{\nu q}\\
+     g _{\mu \nu}^{\text{AO}}=& \sum_{i}\langle \mu i||\nu i\rangle
+     = \sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle \\
+    \mathbf{g} =& \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}\mathbf{C} \\
+    \end{aligned}
+\end{equation}
+Therefore, the Fock matrix could be expressed as (with the dependency on SCF density explicitly addressed):
+\begin{align}
+    f _{pq} =& h _{pq} + \sum_{i}\langle pi||qi\rangle \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*} g _{\mu \nu}^{\text{AO}} C _{\nu q} \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu p}^{*}\langle \mu|\hat{h}|\nu\rangle C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*}\big(\sum_{\rho \sigma} D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle\big)C _{\nu q} \\
+    f ^{\text{AO}}_{\mu \nu} =& h _{\mu \nu}^{\text{AO}} + g ^{\text{AO}}_{\mu \nu} = \langle \mu|\hat{h}|\nu\rangle + \sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle \\
+    \mathbf{f}=& \mathbf{h} + \mathbf{g}[\mathbf{D}^{\text{SCF}}] \nonumber \\
+    =& \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}}\mathbf{C} + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]\mathbf{C} \nonumber \\
+    =& \mathbf{C}^{\dagger}\mathbf{F}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]\mathbf{C} \\
+    \mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}] =& \mathbf{h}^{\text{AO}} + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}]
+\end{align}
+Evaluating the derivative at $\lambda = 0$, noting that $\mathbf{U}(0) = \mathbf{I}$:
+\begin{align}
+    \mathbf{f}^{\lambda} =& \frac{\dd{\mathbf{f}(\lambda)}}{\dd{\lambda}}\Big|_{{\lambda = 0}} = \Big(\mathbf{C}^{\dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda)\Big)^{\lambda} \nonumber \\
+    =&\mathbf{C}^{\lambda \dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}^{\lambda}(\lambda) \nonumber \\
+    &+ \mathbf{C}^{\dagger}(\lambda) \Big(\mathbf{h}^{\text{AO}}(\lambda) + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\Big)^{\lambda} \mathbf{C}(\lambda)  \nonumber \\
+    =& \mathbf{U}^{\lambda \dagger}(\lambda)\underbrace{\mathbf{U}^{\dagger}(0)\mathbf{C}^{\dagger}(0)}_\text{$\mathbf{C}^{\dagger}(\lambda = 0)$}\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\mathbf{C}(\lambda) + \mathbf{C}^{\dagger}(\lambda)\mathbf{f}^{\text{AO}}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda)\underbrace{\mathbf{C}(0)\mathbf{U}(0)}_\text{$\mathbf{C}(\lambda = 0)$}\mathbf{U}^{\lambda}(\lambda) \nonumber \\
+    &+ \mathbf{C}^{\dagger}(\lambda)\Big(\mathbf{h}^{\text{AO},\lambda}(\lambda) + \mathbf{g}^{\text{AO}, \lambda}[\mathbf{D}^{\text{SCF}}(\lambda)](\lambda) + \mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}(\lambda)](\lambda)\Big)\mathbf{C}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\lambda \dagger}\mathbf{f} + \mathbf{f}\mathbf{U}^{\lambda} + \mathbf{C}^{\dagger}\mathbf{h}^{\text{AO}, \lambda}\mathbf{C}
+    + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO},\lambda}[\mathbf{D}^{\text{SCF}}]\mathbf{C} + \mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}]\mathbf{C}
+\end{align}
+The perturbed Brillouin condition is:
+\begin{equation}
+    f _{ai}^{\lambda} = 0
+\end{equation}
+To evaluate the perturbed Fock matrix, we write the perturbed quantities in suffix notation as (assuming canonical orbitals, i.e. $f _{pq} = \delta _{pq}\varepsilon _{p}$):
+\begin{align}
+    (\mathbf{U}^{\lambda \dagger}\mathbf{f}) _{ai} =& U ^{\lambda *}_{ia}\varepsilon _{i} = \frac{\dd{U _{ia}^{*}}}{\dd{\lambda}}\Big|_{{\lambda = 0}}\varepsilon _{i} \\
+    (\mathbf{f}\mathbf{U}^{\lambda})_{ai} =& \varepsilon _{a}U _{ai}^{\lambda} = \varepsilon _{a}\frac{\dd{U _{ai}}}{\dd{\lambda}}\Big|_{{\lambda=0}} \\
+    (\mathbf{C}^{\dagger}\mathbf{h}^{\text{AO},\lambda}\mathbf{C})_{ai}=&\sum_{\mu \nu}C _{\mu a}^{*}h _{\mu \nu}^{\lambda} C _{\nu i} = \sum_{\mu \nu}C _{\nu a}^{*}\frac{\dd{h _{\mu \nu}}}{\dd{\lambda}}\Big|_{{\lambda=0}}C _{\nu i} \\
+    (\mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}, \lambda}[\mathbf{D}^{\text{SCF}}]\mathbf{C})_{ai} =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}\langle \mu \rho||\nu \sigma\rangle ^{\lambda})C _{\nu i} \nonumber \\
+    =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}\frac{\dd{\langle \mu \rho||\nu \sigma\rangle}}{\dd{\lambda}}\Big|_{{\lambda=0}})C _{\nu i} \\
+    (\mathbf{C}^{\dagger}\mathbf{g}^{\text{AO}}[\mathbf{D}^{\text{SCF},\lambda}]\mathbf{C})_{ai} =& \sum_{\mu \nu}C _{\mu a}^{*}(\sum_{\rho \sigma}D _{\rho \sigma}^{\lambda}\langle \mu \rho||\nu \sigma\rangle)C _{\nu i} \nonumber \\
+    =& \sum_{\mu \nu} C _{\mu a}^{*}(\sum_{\rho \sigma}\frac{\dd{D}_{\rho \sigma}}{\dd{\lambda}}\Big|_{{\lambda=0}}\langle \mu \rho||\nu \sigma\rangle)C _{\nu i}
+\end{align}
+
+
+
+
+
+\end{document}

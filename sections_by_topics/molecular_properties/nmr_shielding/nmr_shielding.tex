@@ -136,8 +136,11 @@ The virtual-occupied block of $\mathbf{U}^{\mathbf{B}}$ is obtained from the CPS
 \subsection{First Derivative}
 We take the first derivative w.r.t. the nuclear magnetic moment $m _{K _{\beta}}$  as only one-electron Hamiltonian $h _{\mu \nu}$ depends on $m _{K _{\beta}}$:
 \begin{align}
-    \dv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} =& \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{bj}\left(\pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\right)\left(\pdv{\kappa _{bj}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
-    &+ \sum_{ai}\left(\pdv{\mathcal{L}_{\text{MP2}}}{z _{ai}}\right)\left(\pdv{z _{ai}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    \dv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} =& \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    &+ \sum_{ijab}\left(\pdv{\mathcal{L}_{\text{MP2}}}{T _{ij}^{ab}}\right)\left(\pdv{T _{ij}^{ab}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ijab}\left(\pdv{\mathcal{L}_{\text{MP2}}}{(T _{ij}^{ab})^{*}}\right)\left(\pdv{(T _{ij}^{ab})^{*}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    &+ \sum_{bj}\left(\pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\right)\left(\pdv{\kappa _{bj}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} 
+    + \sum_{bj}\left(\pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}^{*}}\right)\left(\pdv{\kappa _{bj}^{*}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    &+ \sum_{bj}\left(\pdv{\mathcal{L}_{\text{MP2}}}{z _{bj}}\right)\left(\pdv{z _{bj}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{bj}\left(\pdv{\mathcal{L}_{\text{MP2}}}{z _{bj}^{*}}\right)\left(\pdv{z _{bj}^{*}}{m _{K _{\beta}}}\right)\Big|_{{\mathbf{m}_{K _{\beta}}=\mathbf{0}}} \nonumber \\
     =& \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}
 \end{align}
 \begin{align}
@@ -145,19 +148,52 @@ We take the first derivative w.r.t. the nuclear magnetic moment $m _{K _{\beta}}
     &+ \frac{1}{2}\sum_{\mu \nu ai}z _{ai}C _{\mu a}^{*}C _{\nu i}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
     =&\sum_{\mu \nu}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}\left(D _{\mu \nu}^{\text{HF}}+ D _{\mu \nu}^{\text{H}} + \frac{1}{2}\sum_{ai}z _{ai}C _{\mu a}^{*}C _{\nu i} +\frac{1}{2}\sum_{ai}z _{ia}C _{\mu i}^{*}C _{\nu a}\right)
 \end{align}
-\textcolor{red}{note that need to turn $z _{ai}^{*}$ into $z _{ia}$... what about $z _{ia}$ block?} \\
+\textcolor{red}{note that need to turn $z _{ai}^{*}$ into $z _{ia}$... what about $z _{ia}$ block?} \textcolor{blue}{what abot $(T _{ij}^{ab})^{*}$?}\\
 Trying to resolve $z _{ia}$ 
 \begin{align}
     &\sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}h _{\mu \nu}^{\text{AO}} \nonumber \\
     \stackrel{\mu \leftrightarrow \nu}{=}& \sum_{\mu \nu ai}\left(z _{ai}C _{\mu a}^{*}C _{\nu i}\right)^{*}h _{\nu \mu}^{\text{AO}}
 \end{align}
 
+\subsection{Stationary Constraints}
+
+\subsubsection*{Brillouin Condition}
+\begin{align}
+    0=& \sum_{bj}\pdv{\mathcal{L}_{\text{MP2}}}{z _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{bj}\pdv{\mathcal{L}_{\text{MP2}}}{z _{bj}^{*}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    =& \frac{1}{2}\sum_{ai}\Big(\pdv{z _{ai}}{z _{bj}}f _{ai}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \pdv{z _{ai}^{*}}{z _{bj}^{*}}f _{ai}^{*}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \Big) \nonumber \\
+    =& \frac{1}{2}\sum_{ai}\Big(\delta _{ab}\delta _{ij}f _{ai} + \delta _{ab}\delta _{ij}f _{ai}^{*}\Big) \nonumber \\
+    =& \frac{1}{2}(f _{bj} + f _{bj}^{*})
+\end{align}
+\begin{align}
+    f _{bj} = h _{bj} + \sum_{i}\langle bi||ji\rangle
+\end{align}
+
+\subsubsection*{MP2 Condition}
+\begin{align}
+    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} = \pdv{E _{\text{H}}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\ 
+    =& \sum_{ij}h _{ij}\pdv{\gamma ^{\text{H}} _{ij}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    &+ \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}
+\end{align}
+Density derivatives:
+\begin{align}
+    \pdv{\gamma _{ij}^{\text{H}}}{T _{mn}^{ef}} =& \frac{1}{2}\sum_{kab}\pdv{(T _{jk}^{ab})^{*}}{T _{mn}^{ef}}T _{ki}^{ab} + \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}\pdv{T _{ki}^{ab}}{T _{mn}^{ef}} \\
+    \pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}} =& -\frac{1}{2}\sum_{ijc}\pdv{(T _{ij}^{ac})^{*}}{T _{mn}^{ef}}T _{ij}^{cb} - \frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}\pdv{T _{ij}^{cb}}{T _{mn}^{ef}} \\
+    \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}} =& \frac{1}{2}\pdv{(T _{ij}^{ab})^{*}}{T _{mn}^{ef}} \\
+    \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}} =& \frac{1}{2}\sum_{m'ab}\pdv{(T _{km'}^{ab})^{*}}{T _{mn}^{ef}}T _{m'i}^{ab}\delta _{jl} + \frac{1}{2}\sum_{m'ab}(T ^{ab}_{km'})^{*}\pdv{T _{m'i}^{ab}}{T _{mn}^{ef}}\delta _{jl} \\
+    \pdv{(\Gamma ^{\text{H}})_{bj}^{ai}}{T _{mn}^{ef}} =& -\frac{1}{2}\sum_{klc}\pdv{(T _{kl}^{ac})^{*}}{T _{mn}^{ef}}T _{kl}^{cd}\delta _{ij} - \frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}\pdv{T _{kl}^{cb}}{T _{mn}^{ef}}\delta _{ij}
+\end{align}
+Contraction with electron integrals:
 
 
 
 
 
 
+\subsubsection*{Orbital Rotation Condition}
+\begin{align}
+    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} = \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
+    =& 
+\end{align}
 
 
 
