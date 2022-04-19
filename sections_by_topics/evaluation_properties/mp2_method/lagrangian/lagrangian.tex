@@ -140,11 +140,158 @@ in which
     \gamma _{ab}^{\text{H}} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}T _{ij}^{cb} \\
     (\Gamma ^{\text{H}}) _{ij}^{ab} =& \frac{1}{4}(T _{ij}^{ab})^{*} \\
     (\Gamma ^{\text{H}}) _{ab}^{ij} =& \frac{1}{4}T _{ij}^{ab} \\
-    (\Gamma ^{\text{H}}) _{kl}^{ij} =& \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl} \\
-    (\Gamma ^{\text{H}}) _{bj}^{ai} =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij}
+    (\Gamma ^{\text{H}}) _{kl}^{ij} =& \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl} = \gamma _{ik}^{\text{H}}\delta _{jl} \\
+    (\Gamma ^{\text{H}}) _{bj}^{ai} =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij} = \gamma _{ab}^{\text{H}}\delta _{ij}
 \end{align}
 
-
+\subsection{MP2 Stationary Condition}
+\begin{align}
+    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{T _{mn}^{ef}}\Big|_{\lambda=0} = \pdv{E _{\text{H}}}{T _{mn}^{ef}}\Big|_{\lambda=0} \nonumber \\ 
+    =& \sum_{ij}h _{ij}\pdv{\gamma ^{\text{H}} _{ij}}{T _{mn}^{ef}}\Big|_{\lambda=0} + \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}}\Big|_{\lambda=0} + \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}}\Big|_{\lambda=0} \nonumber \\
+    &+ \sum_{ijab}\langle ij||ab \rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{T _{mn}^{ef}}\Big|_{\lambda=0} + \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}}\Big|_{\lambda=0} + \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{T _{mn}^{ef}}\Big|_{\lambda=0} \\
+    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} = \pdv{E _{\text{H}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} \nonumber \\
+    =& \sum_{ij}h _{ij}\pdv{\gamma ^{\text{H}} _{ij}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} + \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} + \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} \nonumber \\
+    &+ \sum_{ijab}\langle ij||ab \rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} + \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} + \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0}
+\end{align}
+By the permutational symmetry of MP2 amplitudes, i.e. $T _{ij}^{ab} = - T _{ij}^{ba} = - T _{ji}^{ab} = T _{ji}^{ba}$, the amplitude derivative expands as:
+\begin{align}
+    \pdv{T _{ij}^{ab}}{T _{kl}^{cd}} =& \delta _{ac}\delta _{bd}\delta _{ik}\delta _{jl} - \delta _{ac}\delta _{bd}\delta _{il}\delta _{jk} - \delta _{ad}\delta _{bc}\delta _{ik}\delta _{jl} + \delta _{ad}\delta _{bc}\delta _{il}\delta _{jk} \\
+    \pdv{(T _{ij}^{ab})^{*}}{(T _{kl}^{cd})^{*}} =&\delta _{ac}\delta _{bd}\delta _{ik}\delta _{jl} - \delta _{ac}\delta _{bd}\delta _{il}\delta _{jk} - \delta _{ad}\delta _{bc}\delta _{ik}\delta _{jl} + \delta _{ad}\delta _{bc}\delta _{il}\delta _{jk} \\
+    \pdv{T _{ij}^{ab}}{(T _{kl}^{cd})^{*}} =& \pdv{(T _{ij}^{ab})^{*}}{T _{kl}^{cd}} = 0
+\end{align}
+Density derivatives:
+\begin{align}
+    \pdv{\gamma _{ij}^{\text{H}}}{T _{mn}^{ef}} =& \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}\pdv{T _{ki}^{ab}}{T _{mn}^{ef}}   \nonumber   \\
+    =& \frac{1}{2}\sum_{kab}(T ^{ab}_{jk})^{*}\left(\delta _{ae}\delta _{bf}\delta _{km}\delta _{in} - \delta _{af}\delta _{be}\delta _{km}\delta _{in} - \delta _{ae}\delta _{bf}\delta _{kn}\delta _{im} + \delta _{af}\delta _{be}\delta _{kn}\delta _{im}\right)   \nonumber   \\ 
+    =& \frac{1}{2}(T _{jm}^{ef})^{*}\delta _{in} - \frac{1}{2}(T _{jm}^{fe})^{*}\delta _{in} - \frac{1}{2}(T _{jn}^{ef})^{*}\delta _{im} + \frac{1}{2}(T _{jn}^{fe})^{*}\delta _{im} \nonumber \\
+    =& (T _{jm}^{ef})^{*}\delta _{in} - (T _{jn}^{ef})^{*}\delta _{im} \\
+    \pdv{\gamma _{ij}^{\text{H}}}{(T _{mn}^{ef})^{*}} =& \frac{1}{2}\sum_{kab}\pdv{(T _{jk}^{ab})^{*}}{(T _{mn}^{ef})^{*}}T _{ki}^{ab} \nonumber \\
+    =& \frac{1}{2}\sum_{kab}T _{ki}^{ab}\left(\delta _{ae}\delta _{bf}\delta _{jm}\delta _{kn} - \delta _{af}\delta _{be}\delta _{jm}\delta _{kn} - \delta _{ae}\delta _{bf}\delta _{jn}\delta _{km} + \delta _{af}\delta _{be}\delta _{jn}\delta _{km} \right) \nonumber \\ 
+    =& \frac{1}{2}T _{ni}^{ef}\delta _{jm} - \frac{1}{2}T _{ni}^{fe}\delta _{jm} - \frac{1}{2}T _{mi}^{ef}\delta _{jn} + \frac{1}{2}T _{mi}^{fe}\delta _{jn} \nonumber \\
+    =& T _{ni}^{ef}\delta _{jm} - T _{mi}^{ef}\delta _{jn} \\
+    \pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}\pdv{T _{ij}^{cb}}{T _{mn}^{ef}}    \nonumber \\
+    =& -\frac{1}{2}\sum_{ijc}(T ^{ac}_{ij})^{*}\left(\delta _{ce}\delta _{bf}\delta _{im}\delta _{jn} - \delta _{cf}\delta _{be}\delta _{im}\delta _{jn} - \delta _{ce}\delta _{bf}\delta _{in}\delta _{jm} + \delta _{cf}\delta _{be}\delta _{in}\delta _{jm}\right) \nonumber \\
+    =& -\frac{1}{2}(T _{mn}^{ae})^{*}\delta _{bf} + \frac{1}{2}(T _{mn}^{af})^{*}\delta _{be} + \frac{1}{2}(T _{nm}^{ae})^{*}\delta _{bf} - \frac{1}{2}(T _{nm}^{af})^{*}\delta _{be} \nonumber \\
+    =& (T _{mn}^{af})^{*}\delta _{be} - (T _{mn}^{ae})^{*}\delta _{bf} \\
+    \pdv{\gamma _{ab}^{\text{H}}}{(T _{mn}^{ef})^{*}} =& -\frac{1}{2}\sum_{ijc}\pdv{(T _{ij}^{ac})^{*}}{(T _{mn}^{ef})^{*}}T _{ij}^{cb}        \nonumber \\ 
+    =& -\frac{1}{2}\sum_{ijc}T _{ij}^{cb}\left(\delta _{ae}\delta _{cf}\delta _{im}\delta _{jn} - \delta _{af}\delta _{ce}\delta _{im}\delta _{jn} - \delta _{ae}\delta _{cf}\delta _{in}\delta _{jm} + \delta _{af}\delta _{ce}\delta _{in}\delta _{jm} \right) \nonumber \\
+    =& -\frac{1}{2}T _{mn}^{fb}\delta _{ae} + \frac{1}{2}T _{mn}^{eb}\delta _{af} + \frac{1}{2}T _{nm}^{fb}\delta _{ae} - \frac{1}{2}T _{nm}^{eb}\delta _{af} \nonumber \\
+    =& T _{mn}^{eb}\delta _{af} - T _{mn}^{fb}\delta _{ae} \\
+    \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}} =& 0       \\ 
+    \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{(T _{mn}^{ef})^{*}} =& \frac{1}{4}\pdv{(T _{ij}^{ab})^{*}}{(T _{mn}^{ef})^{*}}        \nonumber \\
+    =& \frac{1}{4}\left(\delta _{ae}\delta _{bf}\delta _{im}\delta _{jn} - \delta _{af}\delta _{be}\delta _{im}\delta _{jn} - \delta _{ae}\delta _{bf}\delta _{in}\delta _{jm} + \delta _{af}\delta _{be}\delta _{in}\delta _{jm}\right) \\
+    \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{T _{mn}^{ef}} =& \frac{1}{4}\pdv{T _{ij}^{ab}}{T _{mn}^{ef}}     \nonumber \\
+    =& \frac{1}{4}\left(\delta _{ae}\delta _{bf}\delta _{im}\delta _{jn} - \delta _{af}\delta _{be}\delta _{im}\delta _{jn} - \delta _{ae}\delta _{bf}\delta _{in}\delta _{jm} + \delta _{af}\delta _{be}\delta _{in}\delta _{jm}\right) \\
+    \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{(T _{mn}^{ef})^{*}}=& 0          \\
+    \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}} =& \frac{1}{2}\sum_{m'ab}(T _{km'}^{ab})^{*}\pdv{T _{m'i}^{ab}}{T _{mn}^{ef}}\delta _{jl}     \nonumber \\ 
+    =& \frac{1}{2}\sum_{m'ab}(T _{km'}^{ab})^{*}(\delta _{ae}\delta _{bf}\delta _{m'm}\delta _{in} - \delta _{af}\delta _{be}\delta _{m'm}\delta _{in} - \delta _{ae}\delta _{bf}\delta _{m'n}\delta _{im} + \delta _{af}\delta _{be}\delta _{m'n}\delta _{im})\delta _{jl} \nonumber \\
+    =& \frac{1}{2}(T _{km}^{ef})^{*}\delta _{in}\delta _{jl} - \frac{1}{2}(T _{km}^{fe})^{*}\delta _{in}\delta _{jl} - \frac{1}{2}(T _{kn}^{ef})^{*}\delta _{im}\delta _{jl} + \frac{1}{2}(T _{kn}^{fe})^{*}\delta _{im}\delta _{jl} \nonumber \\
+    =& (T _{km}^{ef})^{*}\delta _{in}\delta _{jl} - (T _{kn}^{ef})^{*}\delta _{im}\delta _{jl} \\
+    \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{(T _{mn}^{ef})^{*}} =& \frac{1}{2}\sum_{m'ab}\pdv{(T _{km'}^{ab})^{*}}{(T _{mn}^{ef})^{*}}T _{m'i}^{ab}\delta _{jl}         \nonumber \\
+    =& \frac{1}{2}\sum_{m'ab}T _{m'i}^{ab}\left(\delta _{ae}\delta _{bf}\delta _{km}\delta _{m'n} - \delta _{af}\delta _{be}\delta _{km}\delta _{m'n} - \delta _{ae}\delta _{bf}\delta _{kn}\delta _{m'm} + \delta _{af}\delta _{be}\delta _{kn}\delta _{m'm}\right)\delta _{jl} \nonumber \\
+    =& \frac{1}{2}T _{ni}^{ef}\delta _{km}\delta _{jl} - \frac{1}{2}T _{ni}^{fe}\delta _{km}\delta _{jl} - \frac{1}{2}T _{mi}^{ef}\delta _{kn}\delta _{jl} + \frac{1}{2}T _{mi}^{fe}\delta _{kn}\delta _{jl} \nonumber \\
+    =& T _{ni}^{ef}\delta _{km}\delta _{jl} - T _{mi}^{ef}\delta _{kn}\delta _{jl} \\
+    \pdv{(\Gamma ^{\text{H}})_{bj}^{ai}}{T _{mn}^{ef}} =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}\pdv{T _{kl}^{cb}}{T _{mn}^{ef}}\delta _{ij}     \nonumber \\
+    =& -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}\left(\delta _{ce}\delta _{bf}\delta _{km}\delta _{ln} - \delta _{cf}\delta _{be}\delta _{km}\delta _{ln} - \delta _{ce}\delta _{bf}\delta _{kn}\delta _{lm} + \delta _{cf}\delta _{be}\delta _{kn}\delta _{lm}\right)\delta _{ij} \nonumber \\
+    =& -\frac{1}{2}(T _{mn}^{ae})^{*}\delta _{bf}\delta _{ij}+\frac{1}{2}(T _{mn}^{af})^{*}\delta _{be}\delta _{ij} + \frac{1}{2}(T _{nm}^{ae})^{*}\delta _{bf}\delta _{ij}-\frac{1}{2}(T _{nm}^{af})^{*}\delta _{be}\delta _{ij} \nonumber \\
+    =& (T _{mn}^{af})^{*}\delta _{be}\delta _{ij} - (T _{mn}^{ae})^{*}\delta _{bf}\delta _{ij} \\
+    \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{(T _{mn}^{ef})^{*}} =& -\frac{1}{2}\sum_{klc}\pdv{(T _{kl}^{ac})^{*}}{(T _{mn}^{ef})^{*}}T _{kl}^{cb}\delta _{ij}        \nonumber \\ 
+    =&-\frac{1}{2}\sum_{klc}T _{kl}^{cb}\left(\delta _{ae}\delta _{cf}\delta _{km}\delta _{ln}- \delta _{af}\delta _{ce}\delta _{km}\delta _{ln} - \delta _{ae}\delta _{cf}\delta _{kn}\delta _{lm} + \delta _{af}\delta _{ce}\delta _{kn}\delta _{lm}\right)\delta _{ij} \nonumber \\
+    =&-\frac{1}{2}T _{mn}^{fb}\delta _{ae}\delta _{ij} + \frac{1}{2}T _{mn}^{eb}\delta _{af}\delta _{ij} + \frac{1}{2}T _{nm}^{fb}\delta _{ae}\delta _{ij} - \frac{1}{2}T _{nm}^{eb}\delta _{af}\delta _{ij} \nonumber \\
+    =&T _{mn}^{eb}\delta _{af}\delta _{ij} - T _{mn}^{fb}\delta _{ae}\delta _{ij}
+\end{align}
+Contraction with electron integrals:
+\begin{align}
+    \sum_{ij}h _{ij}\pdv{\gamma _{ij}^{\text{H}}}{T _{mn}^{ef}}\Big|_{\lambda=0} =& \sum_{ij}h _{ij}(T _{jm}^{ef})^{*}\delta _{in} - \sum_{ij}h _{ij}(T _{jn}^{ef})^{*}\delta _{im} \nonumber \\
+    =& \sum_{j}h _{nj}(T _{jm}^{ef})^{*} - \sum_{j}h _{mj}(T _{jn}^{ef})^{*} \nonumber \\
+    =& \sum_{j}\mathscr{P}_{mn}^{-}h _{nj}(T _{jm}^{ef})^{*}
+\end{align}
+\begin{align}
+    \sum_{ij}h _{ij}\pdv{\gamma _{ij}^{\text{H}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} =& \sum_{ij}h _{ij}T _{ni}^{ef}\delta _{jm} - \sum_{ij}h _{ij}T _{mi}^{ef}\delta _{jn} \nonumber \\
+    =& \sum_{i}h _{im}T _{ni}^{ef} - \sum_{i}h _{in}T _{mi}^{ef} \nonumber \\
+    =&\sum_{i}\mathscr{P}^{-}_{mn}h _{im}T ^{ef}_{ni}
+\end{align}
+\begin{align}
+    \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}}\Big|_{\lambda=0} =& \sum_{ab}h _{ab}(T _{mn}^{af})^{*}\delta _{be} - \sum_{ab}h _{ab}(T _{mn}^{ae})^{*}\delta _{bf} \nonumber \\
+    =& \sum_{a}h _{ae}(T _{mn}^{af})^{*} - \sum_{a}h _{af}(T _{mn}^{ae})^{*} \nonumber \\
+    =& \sum_{a}\mathscr{P}^{-}_{ef} h _{ae}(T _{mn}^{af})^{*}
+\end{align}
+\begin{align}
+    \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} =& \sum_{ab}h _{ab}T _{mn}^{eb}\delta _{af} -\sum_{ab}h _{ab}T _{mn}^{fb}\delta _{ae} \nonumber \\
+    =& \sum_{b}h _{fb}T _{mn}^{eb} - \sum_{b}h _{eb}T _{mn}^{fb} \nonumber \\
+    =& \sum_{b}\mathscr{P}^{-}_{ef}h _{fb}T _{mn}^{eb}
+\end{align}
+\begin{align}
+    \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}}\Big|_{\lambda=0} =& 0\nonumber \\
+\end{align}
+\begin{align}
+    \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} =& \frac{1}{4}\sum_{ijab}\langle ab||ij\rangle \big(\delta _{ae}\delta _{bf}\delta _{im}\delta _{jn}-\delta _{af}\delta _{be}\delta _{im}\delta _{jn} \nonumber \\ 
+    & - \delta _{ae}\delta _{bf}\delta _{in}\delta _{jm} + \delta _{af}\delta _{be}\delta _{in}\delta _{jm}\big) \nonumber \\
+    =& \frac{1}{4}\left(\langle ef||mn\rangle - \langle fe||mn\rangle - \langle ef||nm\rangle +\langle fe||nm\rangle \right) \nonumber \\
+    =& \langle ef||mn\rangle
+\end{align}
+\begin{align}
+    \sum_{ijab}\langle ij||ab\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{T _{mn}^{ef}}\Big|_{\lambda=0} =& \frac{1}{4}\sum_{ijab}\langle ij||ab\rangle \big(\delta _{ae}\delta _{bf}\delta _{im}\delta _{jn} -\delta _{af}\delta _{be}\delta _{im}\delta _{jn} \nonumber \\ 
+    &-\delta _{ae}\delta _{bf}\delta _{in}\delta _{jm}+\delta _{af}\delta _{be}\delta _{in}\delta _{jm} \big) \nonumber \\
+    =& \frac{1}{4}\left(\langle mn||ef\rangle - \langle mn||fe\rangle - \langle nm||ef\rangle + \langle nm||fe\rangle\right) \nonumber \\
+    =& \langle mn||ef\rangle
+\end{align}
+\begin{align}
+    \sum_{ijab}\langle ij||ab\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} =& 0 \nonumber \\
+\end{align}
+\begin{align}
+    \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}}\Big|_{\lambda=0} =& \sum_{ijkl}\langle ij||kl\rangle (T _{km}^{ef})^{*}\delta _{in}\delta _{jl} - \sum_{ijkl}\langle ij||kl\rangle (T _{kn}^{ef})^{*}\delta _{im}\delta _{jl}  \nonumber \\ 
+    =& \sum_{jk}\langle nj||kj\rangle (T _{km}^{ef})^{*} - \sum_{jk}\langle mj||kj\rangle (T _{kn}^{ef})^{*} \nonumber \\
+    =& \sum_{jk}\mathscr{P}^{-}_{mn}\langle nj||kj\rangle (T ^{ef}_{km})^{*}
+\end{align}
+\begin{align}
+    \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} =& \sum_{ijkl}\langle ij||kl\rangle T _{ni}^{ef}\delta _{km}\delta _{jl} - \sum_{ijkl}\langle ij||kl\rangle T ^{ef}_{mi}\delta _{kn}\delta _{jl} \nonumber \\
+    =& \sum_{ij}\langle ij||mj\rangle T _{ni}^{ef} - \sum_{ij}\langle ij||nj\rangle T _{mi}^{ef} \nonumber \\
+    =& \sum_{ij}\mathscr{P}^{-}_{mn}\langle ij||mj\rangle T _{ni}^{ef}
+\end{align}
+\begin{align}
+    \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{T _{mn}^{ef}}\Big|_{\lambda=0} =& \sum_{ijab}\langle ai||bj\rangle (T _{mn}^{af})^{*}\delta _{be}\delta _{ij} - \sum_{ijab}\langle ai||bj\rangle (T _{mn}^{ae})^{*}\delta _{bf}\delta _{ij} \nonumber \\
+    =& \sum_{ia}\langle ai||ei\rangle (T _{mn}^{af})^{*} - \sum_{ia}\langle ai||fi\rangle (T _{mn}^{ae})^{*} \nonumber \\
+    =& \sum_{ia} \mathscr{P}^{-}_{ef}\langle ai||ei\rangle (T ^{af}_{mn})^{*}
+\end{align}
+\begin{align}
+    \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} =& \sum_{ijab}\langle ai||bj\rangle T _{mn}^{eb}\delta _{af}\delta _{ij} - \sum_{ijab}\langle ai||bj\rangle T _{mn}^{fb}\delta _{ae}\delta _{ij} \nonumber \\
+    =& \sum_{ib}\langle fi||bi\rangle T _{mn}^{eb} - \sum_{ib}\langle ei||bi\rangle T _{mn}^{fb} \nonumber \\
+    =& \sum_{ib}\mathscr{P}^{-}_{ef} \langle fi||bi\rangle T _{mn}^{eb}
+\end{align}
+Therefore the MP2 stationary condition is constructed as:
+\begin{align}
+    0=& \pdv{\mathcal{L} _{\text{MP2}}}{T _{mn}^{ef}}\Big|_{\lambda=0} = \pdv{E _{\text{H}}}{T _{mn}^{ef}}\Big|_{\lambda=0} \nonumber \\
+    =& \sum_{j}\mathscr{P}^{-}_{mn}h _{nj}(T _{jm}^{ef})^{*} + \sum_{a}\mathscr{P}^{-}_{ef}h _{ae}(T _{mn}^{af})^{*} + \langle mn||ef\rangle \nonumber \\ 
+    &+ \sum_{jk}\mathscr{P}^{-}_{mn}\langle nj||kj\rangle (T ^{ef}_{km})^{*} + \sum_{ia}\mathscr{P}^{-}_{ef}\langle ai||ei\rangle (T _{mn}^{af})^{*} \nonumber \\
+    =& \sum_{j}\mathscr{P}^{-}_{mn}h _{nj}(T ^{ef}_{jm})^{*} + \sum_{a}\mathscr{P}^{-}_{ef}h _{ae}(T _{mn}^{af})^{*} + \langle mn||ef\rangle \nonumber \\
+    &+ \sum_{jk}\mathscr{P}^{-}_{mn}\langle nk||jk\rangle (T _{jm}^{ef})^{*} +\sum_{ia}\mathscr{P}^{-}_{ef}\langle ai||ei\rangle (T _{mn}^{af})^{*} \nonumber \\
+    =& \sum_{j}\mathscr{P}^{-}_{mn}f _{nj}(T _{jm}^{ef})^{*} + \sum_{a}\mathscr{P}^{-}_{ef}f _{ae}(T _{mn}^{af})^{*} + \langle mn||ef\rangle
+\end{align}
+\begin{align}
+    0=& \pdv{\mathcal{L} _{\text{MP2}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} = \pdv{E _{\text{H}}}{(T _{mn}^{ef})^{*}}\Big|_{\lambda=0} \nonumber \\
+    =& \sum_{i}\mathscr{P}^{-}_{mn}h _{im}T _{ni}^{ef} + \sum_{b}\mathscr{P}^{-}_{ef}h _{fb}T _{mn}^{eb} + \langle ef||mn\rangle \nonumber \\ 
+    &+ \sum_{ij}\mathscr{P}^{-}_{mn}\langle ij||mj\rangle T _{ni}^{ef} + \sum_{ib}\mathscr{P}^{-}_{ef}\langle fi||bi\rangle T _{mn}^{eb} \nonumber \\
+    =& \sum_{i}\mathscr{P}^{-}_{mn}f _{im}T ^{ef}_{ni} + \sum_{b}\mathscr{P}^{-}_{ef}f _{fb}T ^{eb}_{mn} + \langle ef||mn\rangle
+\end{align}
+The fock matrix is diagonal in canonical basis, i.e. $f _{pq}= \varepsilon _{p}\delta _{pq}$, hence we obtain:
+\begin{align}
+    0 =& \sum_{j}\mathscr{P}^{-}_{mn}\varepsilon _{n}\delta _{nj}(T _{jm}^{ef})^{*} + \sum_{a}\mathscr{P}^{-}_{ef}\varepsilon _{e}\delta _{ae}(T _{mn}^{af})^{*} + \langle mn||ef\rangle \nonumber \\
+    =& \mathscr{P}^{-}_{mn}\varepsilon _{n}(T _{nm}^{ef})^{*} + \mathscr{P}^{-}_{ef}\varepsilon _{e}(T _{mn}^{ef})^{*} + \langle mn||ef\rangle \nonumber \\
+    =& -(T _{mn}^{ef})^{*}\varepsilon _{n} - (T _{mn}^{ef})^{*}\varepsilon _{m}  + (T _{mn}^{ef})^{*}\varepsilon _{e} + (T _{mn}^{ef})^{*}\varepsilon _{f} + \langle mn||ef\rangle \nonumber
+\end{align}  
+\begin{align}
+    (T _{mn}^{ef})^{*} = \frac{\langle mn||ef\rangle}{\varepsilon _{m} + \varepsilon _{n}-\varepsilon _{e}-\varepsilon _{f}}
+\end{align}
+\begin{align}
+    0 =& \sum_{i}\mathscr{P}^{-}_{mn}\varepsilon _{m}\delta _{im}T _{ni}^{ef} + \sum_{b}\mathscr{P}^{-}_{ef}\varepsilon _{f}\delta _{fb}T _{mn}^{eb} + \langle ef||mn\rangle  \nonumber \\
+    =& \mathscr{P}^{-}_{mn}\varepsilon _{m}T _{nm}^{ef} + \mathscr{P}^{-}_{ef}\varepsilon _{f}T _{mn}^{ef} + \langle ef||mn\rangle \nonumber \\
+    =& -T _{mn}^{ef}\varepsilon _{m} - T _{mn}^{ef}\varepsilon _{n} + T _{mn}^{ef}\varepsilon _{f} + T _{mn}^{ef}\varepsilon _{e} + \langle ef||mn\rangle \nonumber
+\end{align}
+\begin{align}
+    T _{mn}^{ef} = \frac{\langle ef||mn\rangle}{\varepsilon _{m} + \varepsilon _{n}-\varepsilon _{e}-\varepsilon _{f}}
+\end{align}
+as the familiar MP2 amplitude expressions.
 
 \newpage
 \subsection{Z-Vector Equation (Exponential Parameterization)}
@@ -269,15 +416,15 @@ Note that $\bm{\mathcal{S}}(\lambda=0)=\mathbf{U}(\lambda=0)=\mathbf{I}$, then:
 \begin{align}
     \pdv{h _{pq}}{\kappa _{vw}}\Big|_{{\lambda=0}} =& \sum_{\mu \nu rstu}C _{\mu r}^{*}\delta _{rt}h _{\mu \nu}^{\text{AO}}C _{vs}\delta _{su}\delta _{uq}\delta _{pv}\delta _{tw} - \sum_{\mu \nu rstu}C _{\mu r}^{*}\delta _{rt}h _{\mu \nu}^{\text{AO}}C _{\nu s}\delta _{su}\delta _{pt}\delta _{uv}\delta _{qw} \nonumber \\
     =& \sum_{\mu \nu}C _{\mu w}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q}\delta _{pv} - \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu v}\delta _{qw} \nonumber \\
-    =& h _{wq}\delta _{pv}-h _{pv}\delta _{qw}
+    =& h _{wq}\delta _{pv}-h _{pv}\delta _{wq}
 \end{align} 
 Change the indices for convenience (and using the fact that the Hamiltonian is Hermitian):
 \begin{equation}
-    \pdv{h _{pq}}{\kappa _{rs}}\Big|_{{\lambda=0}} = h _{qs}\delta _{pr} - h _{pr}\delta _{qs}
+    \pdv{h _{pq}}{\kappa _{rs}}\Big|_{{\lambda=0}} = h _{sq}\delta _{pr} - h _{pr}\delta _{sq}
 \end{equation}
 hence:
 \begin{align}
-    \sum_{pq}\pdv{h _{pq}}{\kappa _{rs}}\Big|_{{\lambda=0}}=&\sum_{pq} h _{qs}\delta _{pr}-h _{pr}\delta _{qs}
+    \sum_{pq}\pdv{h _{pq}}{\kappa _{rs}}\Big|_{{\lambda=0}}=&\sum_{pq} h _{sq}\delta _{pr}-h _{pr}\delta _{qs}
 \end{align}
 
 Now the two-electron integral:
@@ -311,13 +458,22 @@ now take derivative w.r.t. $\bm{\kappa}$, noting that $\mathbf{U}(\lambda=0) = \
 Therefore, the orbital response for fock matrix is:
 \begin{align}
     \pdv{f _{ai}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \pdv{h _{ai}}{\kappa _{pq}}\Big|_{{\lambda=0}} + \sum_{k}\pdv{\langle ak||ik\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} \nonumber \\
-    =& h _{iq}\delta _{ap} - h _{ap}\delta _{iq} + \sum_{k}\langle qk||ik\rangle \delta _{ap} + \sum_{k}\langle aq||ik\rangle \delta _{pk} \nonumber \\
+    =& h _{qi}\delta _{ap} - h _{ap}\delta _{qi} + \sum_{k}\langle qk||ik\rangle \delta _{ap} + \sum_{k}\langle aq||ik\rangle \delta _{pk} \nonumber \\
     &-\sum_{k}\langle ak||pk\rangle \delta _{iq} - \sum_{k}\langle ak||ip\rangle \delta _{kq} \nonumber \\
-    =& \delta _{ap}\Big(h _{iq}+\sum_{k}\langle qk||ik\rangle\Big) - \delta _{iq}\Big(h _{ap}+\sum_{k}\langle ak||pk\rangle\Big) \nonumber \\
+    =& \delta _{ap}\Big(h _{qi}+\sum_{k}\langle qk||ik\rangle\Big) - \delta _{qi}\Big(h _{ap}+\sum_{k}\langle ak||pk\rangle\Big) \nonumber \\
     & + \sum_{k}\langle aq||ik\rangle \delta _{pk} - \sum_{k}\langle ak||ip\rangle \delta _{qk} \nonumber \\
-    =& \delta _{ap}f _{iq} - \delta _{iq}f _{ap} + \langle aq||ip\rangle - \langle aq||ip\rangle \nonumber \\
-    =& \delta _{ap}\delta _{iq}\varepsilon _{i} - \delta _{iq}\delta _{ap}\varepsilon _{a} \nonumber \\
-    =& (\varepsilon _{i}-\varepsilon _{a})\delta _{ap}\delta _{iq}
+    =& \delta _{ap}f _{qi} - \delta _{iq}f _{ap} + \langle aq||ip\rangle - \langle aq||ip\rangle \nonumber \\
+    =& \delta _{ap}\delta _{qi}\varepsilon _{i} - \delta _{qi}\delta _{ap}\varepsilon _{a} \nonumber \\
+    =& (\varepsilon _{i}-\varepsilon _{a})\delta _{ap}\delta _{qi}
+\end{align}
+\begin{align}
+    \pdv{f _{ai}^{*}}{\kappa _{pq}}\Big|_{\lambda=0}=& \pdv{f _{ia}}{\kappa _{pq}}\Big|_{\lambda=0} = \pdv{h _{ia}}{\kappa _{pq}}\Big|_{\lambda=0} + \sum_{k}\pdv{\langle ik||ak\rangle}{\kappa _{pq}}\Big|_{\lambda=0} \nonumber \\
+    =& h _{qa}\delta _{ip} - h _{ip}\delta _{qa} + \sum_{k}\langle qk||ak\rangle \delta _{ip} + \sum_{k}\langle iq||ak\rangle \delta _{kp} \nonumber \\
+    & - \sum_{k}\langle ik||pk\rangle \delta _{aq} - \sum_{k}\langle ik||ap\rangle \delta _{kq} \nonumber \\
+    =& \delta _{ip}\Big(h _{qa}+\sum_{k}\langle qk||ak\rangle\Big) - \delta _{qa}\Big(h _{ip}+\sum_{k}\langle ik||pk\rangle\Big) + \langle iq||ap\rangle - \langle iq||ap\rangle \nonumber \\
+    =& \delta _{ip}f _{qa} - \delta _{qa}f _{ip} \nonumber \\
+    =& \delta _{ip}\delta _{qa}\varepsilon _{a} - \delta _{qa}\delta _{ip}\varepsilon _{i} \nonumber \\
+    =& (\varepsilon _{a} - \varepsilon _{i})\delta _{ip}\delta _{qa}
 \end{align}
 thus the only non-redundant orbital response is:
 \begin{equation}
@@ -330,8 +486,8 @@ Then, the orbital response for the Hylleraas functional:
     &+\sum_{ijkl}\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai}
 \end{align}
 \begin{align}
-    \pdv{h _{ij}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& h _{jq}\delta _{ip}- h _{ip}\delta _{jq} \\
-    \pdv{h _{ab}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& h _{bq}\delta _{ap}- h _{ap}\delta _{bq}
+    \pdv{h _{ij}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& h _{qj}\delta _{ip}- h _{ip}\delta _{qj} \\
+    \pdv{h _{ab}}{\kappa _{pq}}\Big|_{{\lambda=0}} =& h _{qb}\delta _{ap}- h _{ap}\delta _{qb}
 \end{align}
 \begin{align}
     \pdv{\langle ab||ij\rangle}{\kappa _{pq}}\Big|_{{\lambda=0}} =& \langle qb||ij\rangle \delta _{ap} + \langle aq||ij\rangle \delta _{bp} - \langle ab||pj\rangle \delta _{iq} - \langle ab||ip\rangle \delta _{jq} \\
@@ -341,17 +497,17 @@ Then, the orbital response for the Hylleraas functional:
 \end{align}
 Evaluating the constituent parts of Hylleraas functional response to orbital rotation ($e\in$ external and $m\in$ internal):
 \begin{align}
-    \sum_{ij}\pdv{h _{ij}}{\kappa _{em}}\gamma ^{\text{H}} _{ij}\Big|_{{\lambda=0}} =& \sum_{ij}(\cancel{h _{jm}\delta _{ie}}-h _{ie}\delta _{jm})\gamma _{ij}^{\text{H}} \nonumber \\
+    \sum_{ij}\pdv{h _{ij}}{\kappa _{em}}\gamma ^{\text{H}} _{ij}\Big|_{{\lambda=0}} =& \sum_{ij}(\cancel{h _{mj}\delta _{ie}}-h _{ie}\delta _{mj})\gamma _{ij}^{\text{H}} \nonumber \\
     =& -\sum_{i}h _{ie}\gamma _{im}^{\text{H}} \\
     \sum_{ij}\pdv{h _{ij}}{\kappa _{em}^{*}}\gamma _{ij}^{\text{H}}\Big|_{{\lambda=0}} =& -\sum_{ij}\pdv{h _{ij}}{\kappa _{me}}\gamma _{ij}^{\text{H}}\Big|_{{\lambda=0}} \nonumber \\
-    =& -\sum_{ij}(h _{je}\delta _{im} - \cancel{h _{im}\delta _{je}})\gamma _{ij}^{\text{H}} \nonumber \\
-    =& -\sum_{j}h _{je}\gamma _{mj}^{\text{H}} = -\sum_{i}h _{ie}\gamma _{mi}^{\text{H}}
+    =& -\sum_{ij}(h _{ej}\delta _{im} - \cancel{h _{im}\delta _{ej}})\gamma _{ij}^{\text{H}} \nonumber \\
+    =& -\sum_{j}h _{ej}\gamma _{mj}^{\text{H}} = -\sum_{i}h _{ei}\gamma _{mi}^{\text{H}}
 \end{align}
 \begin{align}
-    \sum_{ab}\pdv{h _{ab}}{\kappa _{em}}\gamma ^{\text{H}} _{ab}\Big|_{{\lambda=0}} =& \sum_{ab}(h _{bm}\delta _{ae}-\cancel{h _{ae}\delta _{bm}})\gamma _{ab}^{\text{H}} \nonumber \\
-    =& \sum_{b}h _{bm}\gamma _{eb}^{\text{H}} = \sum_{a}h _{am}\gamma _{ea}^{\text{H}} \\
+    \sum_{ab}\pdv{h _{ab}}{\kappa _{em}}\gamma ^{\text{H}} _{ab}\Big|_{{\lambda=0}} =& \sum_{ab}(h _{mb}\delta _{ae}-\cancel{h _{ae}\delta _{mb}})\gamma _{ab}^{\text{H}} \nonumber \\
+    =& \sum_{b}h _{mb}\gamma _{eb}^{\text{H}} = \sum_{a}h _{ma}\gamma _{ea}^{\text{H}} \\
     \sum_{ab}\pdv{h _{ab}}{\kappa _{em}^{*}}\gamma _{ab}^{\text{H}}\Big|_{{\lambda=0}} =& -\sum_{ab}\pdv{h _{ab}}{\kappa _{me}}\gamma _{ab}^{\text{H}}\Big|_{{\lambda=0}} \nonumber \\
-    =& -\sum_{ab}(\cancel{h _{be}\delta _{am}} - h _{am}\delta _{be})\gamma _{ab}^{\text{H}} \nonumber \\
+    =& -\sum_{ab}(\cancel{h _{eb}\delta _{am}} - h _{am}\delta _{eb})\gamma _{ab}^{\text{H}} \nonumber \\
     =& \sum_{a}h _{am}\gamma _{ae}^{\text{H}}
 \end{align}
 \begin{align}
@@ -367,38 +523,85 @@ in which the symmetry of MP2 amplitudes is exploited:
     T _{ij}^{ab} = T _{ji}^{ba} \Leftrightarrow (\Gamma ^{\text{H}}) _{ij}^{ab} = (\Gamma ^{\text{H}}) _{ji}^{ba}
 \end{equation}  
 \begin{align}
-    &\sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{em}^{*}} \left(\Gamma ^{\text{H}}\right)^{ab}_{ij}\Big|_{\lambda=0} \nonumber \\
-    =& -\sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{me}}\left(\Gamma ^{\text{H}}\right)^{ab}_{ij}\Big|_{\lambda=0} \nonumber \\
-    =& \sum_{ijab}\Big(\Big)
+    &\sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{em}^{*}} \left(\Gamma ^{\text{H}}\right)^{ab}_{ij}\Big|_{\lambda=0}
+    =-\sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{me}}\left(\Gamma ^{\text{H}}\right)^{ab}_{ij}\Big|_{\lambda=0} \nonumber \\
+    =& -\sum_{ijab}\Big(\cancel{\langle eb||ij\rangle \delta _{am}} + \cancel{\langle ae||ij\rangle \delta _{bm}} - \cancel{\langle ab||mj\rangle \delta _{ie}} - \cancel{\langle ab||im\rangle \delta _{je}}\Big)(\Gamma ^{\text{H}})^{ab}_{ij} \nonumber \\
+    =& 0
 \end{align}
 Similarly:
 \begin{align}
-    \sum_{ijab}\pdv{\langle ij||ab\rangle}{\kappa _{em}}\Gamma _{ab}^{ij}\Big|_{{\lambda=0}} =& \sum_{ijab}\Big(\cancel{\langle mj||ab\rangle \delta _{ie}} + \cancel{\langle im||ab\rangle \delta _{je}} - \cancel{\langle ij||eb\rangle \delta _{am}} - \cancel{\langle ij||ae\rangle \delta _{bm}}\Big)\Gamma _{ab}^{ij} \nonumber \\
+    &\sum_{ijab}\pdv{\langle ij||ab\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right) _{ab}^{ij}\Big|_{{\lambda=0}} \nonumber \\ 
+    =& \sum_{ijab}\Big(\cancel{\langle mj||ab\rangle \delta _{ie}} + \cancel{\langle im||ab\rangle \delta _{je}} - \cancel{\langle ij||eb\rangle \delta _{am}} - \cancel{\langle ij||ae\rangle \delta _{bm}}\Big)(\Gamma ^{\text{H}}) _{ab}^{ij} \nonumber \\
     =& 0
+\end{align}
+\begin{align}
+    &\sum_{ijab}\pdv{\langle ij||ab\rangle}{\kappa _{em}^{*}}\left(\Gamma ^{\text{H}}\right)^{ij}_{ab}\Big|_{\lambda=0} = -\sum_{ijab}\pdv{\langle ij||ab\rangle}{\kappa _{me}}\left(\Gamma ^{\text{H}}\right)^{ij}_{ab}\Big|_{\lambda=0} \nonumber \\
+    =& - \sum_{ijab}\Big(\langle ej||ab\rangle \delta _{im} + \langle ie||ab\rangle \delta _{jm} - \langle ij||mb\rangle \delta _{ae} - \langle ij||am\rangle \delta _{be}\Big)(\Gamma ^{\text{H}})^{ij}_{ab} \nonumber \\
+    =& - \sum_{jab}\langle ej||ab\rangle (\Gamma ^{\text{H}})^{mj}_{ab} - \sum_{iab}\langle ie||ab\rangle (\Gamma ^{\text{H}})^{im}_{ab} + \sum_{ijb}\langle ij||mb\rangle (\Gamma ^{\text{H}})^{ij}_{eb} + \sum_{ija}\langle ij||am\rangle (\Gamma ^{\text{H}})^{ij}_{ae} \nonumber \\
+    =& - \sum_{iab}\langle ie||ab\rangle (\Gamma ^{\text{H}})^{mi}_{ba} - \sum_{iab}\langle ie||ab\rangle (\Gamma ^{\text{H}})^{im}_{ab} + \sum_{ija}\langle ij||am\rangle (\Gamma ^{\text{H}})^{ji}_{ea} + \sum_{ija}\langle ij||am\rangle (\Gamma ^{\text{H}})^{ij}_{ae} \nonumber \\
+    =& - \sum_{iab}\langle ie||ab\rangle \left((\Gamma ^{\text{H}})^{mi}_{ba}+(\Gamma ^{\text{H}})^{im}_{ab}\right) + \sum_{ija}\langle ij||am\rangle \left((\Gamma ^{\text{H}})^{ji}_{ea}+(\Gamma ^{\text{H}})^{ij}_{ae}\right) \nonumber \\
+    =& -2 \sum_{iab}\langle ie||ab\rangle (\Gamma ^{\text{H}})^{im}_{ab} + 2\sum_{ija}\langle ij||am\rangle (\Gamma ^{\text{H}})^{ij}_{ae}
 \end{align}
 Then:
 \begin{align}
-    \sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{em}}\Gamma _{kl}^{ij}\Big|_{{\lambda=0}} =& \sum_{ijkl}\Big(\cancel{\langle mj||kl\rangle \delta _{ie}} + \cancel{\langle im||kl\rangle \delta _{je}} - \langle ij||el\rangle \delta _{km} - \langle ij||ke\rangle \delta _{lm} \Big)\Gamma _{kl}^{ij} \nonumber \\
-    =& -\sum_{ijl}\langle ij||el\rangle \Gamma _{ml}^{ij} -\sum_{ijk}\langle ij||ke\rangle\Gamma _{km}^{ij} \nonumber \\
-    =& -\sum_{ijk}\langle ij||ek\rangle \Gamma _{mk}^{ij} - \sum_{ijk}\langle ij||ek\rangle \Gamma _{km}^{ji}
+    &\sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right) _{kl}^{ij}\Big|_{{\lambda=0}} \nonumber \\
+    =& \sum_{ijkl}\Big(\cancel{\langle mj||kl\rangle \delta _{ie}} + \cancel{\langle im||kl\rangle \delta _{je}} - \langle ij||el\rangle \delta _{km} - \langle ij||ke\rangle \delta _{lm} \Big)(\Gamma ^{\text{H}}) _{kl}^{ij} \nonumber \\
+    =& -\sum_{ijl}\langle ij||el\rangle (\Gamma ^{\text{H}}) _{ml}^{ij} -\sum_{ijk}\langle ij||ke\rangle (\Gamma ^{\text{H}}) _{km}^{ij} \nonumber \\
+    =& -\sum_{ijk}\langle ij||ek\rangle (\Gamma ^{\text{H}}) _{mk}^{ij} - \sum_{ijk}\langle ij||ek\rangle (\Gamma ^{\text{H}}) _{km}^{ji}
 \end{align}
-No symmetry for $\Gamma ^{ij}_{kl}$ could be used to simplify the expression.
 \begin{align}
-    \sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{em}}\Gamma _{bj}^{ai}\Big|_{{\lambda=0}}=& \sum_{ijab}\Big(\langle mi||bj\rangle \delta _{ae} + \cancel{\langle am||bj\rangle \delta _{ie}} - \cancel{\langle ai||ej\rangle \delta _{bm}} - \langle ai||be\rangle \delta _{jm}\Big)\Gamma _{bj}^{ai} \nonumber \\
-    =& \sum_{ijb}\langle mi||bj\rangle \Gamma _{bj}^{ei} - \sum_{iab}\langle ai||be\rangle \Gamma _{bm}^{ai}
+    &\sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{em}^{*}}\left(\Gamma ^{\text{H}}\right)^{ij}_{kl}\Big|_{\lambda=0} = -\sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{me}}\left(\Gamma ^{\text{H}}\right)^{ij}_{kl}\Big|_{\lambda=0} \nonumber \\
+    =& -\sum_{ijkl}\Big(\langle ej||kl\rangle \delta _{im}+\langle ie||kl\rangle \delta _{jm} -\cancel{\langle ij||ml\rangle \delta _{ke}} - \cancel{\langle ij||km\rangle \delta _{le}}\Big)(\Gamma ^{\text{H}})^{ij}_{kl} \nonumber \\
+    =& -\sum_{jkl}\langle ej||kl\rangle (\Gamma ^{\text{H}})^{mj}_{kl} - \sum_{ikl}\langle ie||kl\rangle (\Gamma ^{\text{H}})^{im}_{kl} \nonumber \\
+    =& -\sum_{ikl}\langle ie||kl\rangle (\Gamma ^{\text{H}})^{mi}_{lk} - \sum_{ikl}\langle ie||kl\rangle (\Gamma ^{\text{H}})^{im}_{kl}
 \end{align}
+No symmetry for $(\Gamma ^{\text{H}}) ^{ij}_{kl}$ could be used to simplify the expression.
 
+\begin{align}
+    &\sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right) _{bj}^{ai}\Big|_{{\lambda=0}} \nonumber \\
+    =& \sum_{ijab}\Big(\langle mi||bj\rangle \delta _{ae} + \cancel{\langle am||bj\rangle \delta _{ie}} - \cancel{\langle ai||ej\rangle \delta _{bm}} - \langle ai||be\rangle \delta _{jm}\Big)(\Gamma ^{\text{H}}) _{bj}^{ai} \nonumber \\
+    =& \sum_{ijb}\langle mi||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ei} - \sum_{iab}\langle ai||be\rangle (\Gamma ^{\text{H}}) _{bm}^{ai}
+\end{align}
+\begin{align}
+    &\sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{em}^{*}}\left(\Gamma ^{\text{H}}\right)^{ai}_{bj}\Big|_{\lambda=0} = -\sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{me}}\left(\Gamma ^{\text{H}}\right)^{ai}_{bj}\Big|_{\lambda=0} \nonumber \\
+    =& -\sum_{ijab}\Big(\cancel{\langle ei||bj\rangle \delta _{am}} + \langle ae||bj\rangle \delta _{im} - \langle ai||mj\rangle \delta _{be} - \cancel{\langle ai||bm\rangle \delta _{je}}\Big)(\Gamma ^{\text{H}})^{ai}_{bj} \nonumber \\
+    =& -\sum_{jab}\langle ae||bj\rangle (\Gamma ^{\text{H}})^{am}_{bj} + \sum_{ija}\langle ai||mj\rangle (\Gamma ^{\text{H}})^{ai}_{ej}
+\end{align}
 
 
 
 Therefore, the overall Hylleraas response is:
 \begin{align}
-    \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& \sum_{a}h _{aj}\gamma _{ba}-\sum_{i}h _{ib}\gamma _{ij} \nonumber \\
-    &+ 2 \sum_{ika}\langle aj||ki\rangle \Gamma _{ik}^{ba} - 2 \sum_{iac}\langle ac||bi\rangle \Gamma _{ji}^{ac} \nonumber \\
-    &- \sum_{ikl}\langle ik||bl\rangle \Gamma _{jl}^{ik} - \sum_{ikl}\langle ik||bl\rangle \Gamma _{lj}^{ki} \nonumber \\
-    &+ \sum_{ikc}\langle ji||ck\rangle \Gamma _{ck}^{bi} - \sum_{iac}\langle ai||cb\rangle \Gamma _{cj}^{ai}
+    \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& \sum_{a}h _{ja}\gamma ^{\text{H}}_{ba}-\sum_{i}h _{ib}\gamma ^{\text{H}} _{ij} \nonumber \\
+    &+ 2 \sum_{ika}\langle aj||ki\rangle (\Gamma ^{\text{H}}) _{ik}^{ba} - 2 \sum_{iac}\langle ac||bi\rangle (\Gamma ^{\text{H}}) _{ji}^{ac} \nonumber \\
+    &- \sum_{ikl}\langle ik||bl\rangle (\Gamma ^{\text{H}}) _{jl}^{ik} - \sum_{ikl}\langle ik||bl\rangle (\Gamma ^{\text{H}}) _{lj}^{ki} \nonumber \\
+    &+ \sum_{ika}\langle ji||ak\rangle (\Gamma ^{\text{H}}) _{ak}^{bi} - \sum_{iac}\langle ai||cb\rangle (\Gamma ^{\text{H}}) _{cj}^{ai} \nonumber \\
+    =& \sum_{a}h _{ja}\gamma _{ba}^{\text{H}} - \sum_{i}h _{ib}\gamma _{ij}^{\text{H}} + \frac{1}{2}\sum_{ika}\langle aj||ki\rangle (T _{ik}^{ba})^{*} -\frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T ^{ac}_{ji})^{*} \nonumber \\
+    &-\sum_{ikl}\langle ik||bl\rangle \gamma _{ij}^{\text{H}}\delta _{kl} - \sum_{ikl}\langle ik||bl\rangle\gamma _{kl}^{\text{H}}\delta _{ij} + \sum_{ika}\langle ji||ak\rangle \gamma _{ba}^{\text{H}}\delta _{ik} - \sum_{iac}\langle ai||cb\rangle \gamma _{ac}^{\text{H}}\delta _{ij} \nonumber \\
+    =& \sum_{a}h _{ja}\gamma _{ba}^{\text{H}} - \sum_{i}h _{ib}\gamma _{ij}^{\text{H}} + \frac{1}{2}\sum_{ika}\langle aj||ki\rangle (T _{ik}^{ba})^{*} -\frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T ^{ac}_{ji})^{*} \nonumber \\
+    &-\sum_{ik}\langle ik||bk\rangle \gamma _{ij}^{\text{H}} - \sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H}} + \sum_{ia}\langle ji||ai\rangle \gamma _{ba}^{\text{H}} - \sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H}} \nonumber \\
+    =& \sum_{a}\cancel{f _{ja}}\gamma _{ba}^{\text{H}} - \sum_{i}\cancel{f _{ib}}\gamma _{ij}^{\text{H}} + \frac{1}{2}\sum_{ika}\langle ja||ik\rangle (T ^{ba}_{ik})^{*}-\frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T _{ji}^{ac})^{*} \nonumber \\
+    &-\sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H}} - \sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H}} \nonumber \\
+    =& -X _{bj}
 \end{align}
-
+\begin{equation}
+    X _{bj} = \frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T _{ji}^{ac})^{*} - \frac{1}{2}\sum_{ika}\langle ja||ik\rangle (T ^{ba}_{ik})^{*} + \sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H}} + \sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H}}
+\end{equation}
+\begin{align}
+    \pdv{E _{\text{H}}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =& \sum_{a}h _{aj}\gamma _{ab}^{\text{H}} - \sum_{i}h _{bi}\gamma _{ji}^{\text{H}} \nonumber \\
+    &+ 2 \sum_{ika}\langle ik||aj\rangle (\Gamma ^{\text{H}})^{ik}_{ab} - 2 \sum_{iac}\langle ib||ac\rangle (\Gamma ^{\text{H}})^{ij}_{ac} \nonumber \\
+    & - \sum_{ikl}\langle ib||kl\rangle (\Gamma ^{\text{H}})^{ij}_{kl}- \sum_{ikl}\langle ib||kl\rangle (\Gamma ^{\text{H}})^{ji}_{lk} \nonumber \\
+    & + \sum_{ika}\langle ai||jk\rangle (\Gamma ^{\text{H}})^{ai}_{bk} - \sum_{iac}\langle ab||ci\rangle (\Gamma ^{\text{H}})^{aj}_{ci} \nonumber \\
+    =& \sum_{a}h _{aj}\gamma _{ab}^{\text{H}} - \sum_{i}h _{bi}\gamma _{ji}^{\text{H}} + \frac{1}{2}\sum_{ika}\langle ik||aj\rangle T ^{ab}_{ik} - \frac{1}{2}\sum_{iac}\langle ib||ac\rangle T _{ij}^{ac} \nonumber \\
+    &-\sum_{ikl}\langle ib||kl\rangle \gamma _{ik}^{\text{H}}\delta _{jl} - \sum_{ikl}\langle lb||ki\rangle \gamma _{ji}^{\text{H}}\delta _{lk} + \sum_{ika}\langle ai||jk\rangle \gamma _{ab}^{\text{H}}\delta _{ik} - \sum_{iac}\langle ab||ci\rangle \gamma _{ac}^{\text{H}}\delta _{ij} \nonumber \\
+    =& \sum_{a}f _{aj}\gamma _{ab}^{\text{H}} - \sum_{i}f _{bi}\gamma _{ji}^{\text{H}} + \frac{1}{2}\sum_{ika} \langle ik||aj\rangle T _{ik}^{ab} - \frac{1}{2}\sum_{iac}\langle ib||ac\rangle T ^{ac}_{ij} \nonumber \\
+    &-\sum_{ik}\langle ib||kj\rangle \gamma _{ik}^{\text{H}} - \sum_{ac}\langle ab||cj\rangle \gamma _{ac}^{\text{H}} \nonumber \\
+    =& - X _{bj}^{*}
+\end{align}
+%\begin{equation}
+%    X _{bj}^{*} = \frac{1}{2}\sum_{iac}\langle ib||ac\rangle T _{ij}^{ac} - \frac{1}{2}\sum_{ika}\langle ik||aj\rangle T ^{ab}_{ik} + \sum_{ik}\langle ib||kj\rangle \gamma _{ik}^{\text{H}} + \sum_{ac}\langle ab||cj\rangle \gamma _{ac}^{\text{H}}
+%\end{equation}
+which are consistent with the Gauss-1993 paper.
 
 For the sake of completeness, we can verify that $E _{\text{HF}}$ response to orbital rotation is zero, as HF energy is variationally determined.
 \begin{equation}
@@ -406,34 +609,63 @@ For the sake of completeness, we can verify that $E _{\text{HF}}$ response to or
 \end{equation}
 \begin{align}
     \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& \sum_{i}\pdv{h _{ii}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \frac{1}{2}\sum_{ik}\pdv{\langle ik||ik\rangle}{\kappa _{bj}}\Big|_{{\lambda=0}} \nonumber \\
-    =& \sum_{i}(\cancel{h _{ij}\delta _{ib}} - h _{ib}\delta _{ij}) \nonumber \\
+    =& \sum_{i}(\cancel{h _{ji}\delta _{ib}} - h _{ib}\delta _{ij}) \nonumber \\
     & + \frac{1}{2}\sum_{ik}\Big(\cancel{\langle jk||ik\rangle \delta _{ib}} + \cancel{\langle ij||ik\rangle \delta _{kb}} - \langle ik||bk\rangle \delta _{ij} - \langle ik||ib\rangle \delta _{kj} \Big) \nonumber \\
     =& - h _{jb} - \frac{1}{2}\sum_{k}\langle jk||bk\rangle - \frac{1}{2}\sum_{i}\langle ij||ib\rangle \nonumber \\
     =& - h _{jb} - \sum_{i}\langle ji||bi\rangle \nonumber \\
     =& - f _{jb} \nonumber \\
     =& 0
 \end{align}
+\begin{align}
+    \pdv{E _{\text{HF}}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =& -\sum_{i}\pdv{h _{ii}}{\kappa _{jb}}\Big|_{\lambda=0} - \frac{1}{2}\sum_{ik}\pdv{\langle ik||ik\rangle}{\kappa _{jb}}\Big|_{\lambda=0} \nonumber \\
+    =& -\sum_{i}(h _{bi}\delta _{ij} - \cancel{h _{ij}\delta _{ib}}) \nonumber \\
+    &-\frac{1}{2}\sum_{ik}\Big(\langle bk||ik\rangle \delta _{ij}+\langle ib||ik\rangle \delta _{jk} - \cancel{\langle ik||jk\rangle \delta _{ib}} - \cancel{\langle ik||ij\rangle \delta _{bk}}\Big) \nonumber \\
+    =& -h _{bj} -\frac{1}{2}\sum_{k}\langle bk||jk\rangle - \frac{1}{2}\sum_{i}\langle ib||ij\rangle \nonumber \\
+    =& -h _{bj} - \sum_{i}\langle bi||ji\rangle \nonumber \\
+    =& -f _{bj} \nonumber \\
+    =& 0
+\end{align}
 
-The Lagrangian constraint on orbital rotation:
+The Lagrangian constraints on orbital rotation:
+\begin{align}
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \frac{1}{2}\sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \frac{1}{2}\sum_{ai}z ^{*}_{ai}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big|_{\lambda=0} =0 \\ 
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =& \pdv{E _{\text{HF}}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} + \pdv{E _{\text{H}}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} + \frac{1}{2}\sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} + \frac{1}{2}\sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =0
+\end{align}
+The fock matrix derivatives:
+\begin{align}
+    \sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{\lambda=0} =& \sum_{ai}z _{ai}(\varepsilon _{i}-\varepsilon _{a})\delta _{ab}\delta _{ij} \nonumber \\
+    =& z _{bj}(\varepsilon _{j}-\varepsilon _{b})
+\end{align}
+\begin{align}
+    \sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big|_{\lambda=0}=& \sum_{ai} z _{ia}\pdv{f _{ia}}{\kappa _{bj}}\Big|_{\lambda=0} \nonumber \\
+    =& \sum_{ai}z _{ia}(\varepsilon _{a}- \varepsilon _{i})\delta _{ib}\delta _{ja} \nonumber \\
+    =& 0
+\end{align}
+\begin{align}
+    \sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =& -\sum_{ai}z _{ai}\pdv{f _{ai}}{k _{jb}}\Big|_{\lambda=0} \nonumber \\
+    =&-\sum_{ai}z _{ai}(\varepsilon _{i} - \varepsilon _{a})\delta _{aj}\delta _{bi} \nonumber \\
+    =& 0
+\end{align}
+\begin{align}
+    \sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =& -\sum_{ai}z _{ai}^{*}\pdv{f _{ia}}{\kappa _{jb}}\Big|_{\lambda=0} \nonumber \\
+    =& -\sum_{ai}z _{ai}^{*}(\varepsilon _{a}-\varepsilon _{i})\delta _{ij}\delta _{ba} \nonumber \\
+    =& z _{bj}^{*}(\varepsilon _{j} - \varepsilon _{b})
+\end{align}
+Now the Z-Vector equations becomes:
+\begin{align}
+    \frac{1}{2}\sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}}  =& -\pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} \\
+    \frac{1}{2}\sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}^{*}}\Big|_{\lambda=0} =& - \pdv{E _{\text{H}}}{\kappa _{bj}^{*}}\Big|_{\lambda=0}
+\end{align}
+in which the RHS are the orbital gradients for MP2.
+The RHS (Hylleraas response) has been worked out previously. Moving the negative sign to the left, we obtain the Z-Vector equations as:
+\begin{align}
+    \frac{1}{2}(\varepsilon _{b} - \varepsilon _{j})z _{bj}=& -X _{bj}             \\
+    \frac{1}{2}(\varepsilon _{b}-\varepsilon _{j})z _{bj}^{*} =& -X _{bj}^{*} 
+\end{align}
+in which
 \begin{equation}
-    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\Big|_{{\lambda=0}} = \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}} + \sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}} = 0
+    X _{bj} = \frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T _{ji}^{ac})^{*}-\frac{1}{2}\sum_{ika}\langle ja||ik\rangle (T _{ik}^{ba})^{*} + \sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H}} + \sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H}}
 \end{equation}
-Now the Z-Vector equation becomes:
-\begin{align}
-    \sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\lambda=0}} =& -\pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\lambda=0}}
-\end{align}
-in which the RHS is the orbital gradient for MP2.
-\begin{align}
-    \text{LHS} =& \sum_{ai}(\varepsilon _{i}- \varepsilon _{a})\delta _{ab}\delta _{ij}z _{ai} \nonumber \\
-    =&(\varepsilon _{j}-\varepsilon _{b})z _{bj}
-\end{align}
-The RHS (Hylleraas response) has been worked out previously. Hence the Z-Vector equation:
-\begin{align}
-    (\varepsilon _{b}-\varepsilon _{j})z _{bj} =& \sum_{a}h _{aj}\gamma _{ba}-\sum_{i}h _{ib}\gamma _{ij} \nonumber \\
-    &+ 2 \sum_{ika}\langle aj||ki\rangle \Gamma _{ik}^{ba} - 2 \sum_{iac}\langle ac||bi\rangle \Gamma _{ji}^{ac} \nonumber \\
-    &- \sum_{ikl}\langle ik||bl\rangle \Gamma _{jl}^{ik} - \sum_{ikl}\langle ik||bl\rangle \Gamma _{lj}^{ki} \nonumber \\
-    &+ \sum_{ikc}\langle ji||ck\rangle \Gamma _{ck}^{bi} - \sum_{iac}\langle ai||cb\rangle \Gamma _{cj}^{ai}
-\end{align}
 
 
 
@@ -464,7 +696,7 @@ The RHS (Hylleraas response) has been worked out previously. Hence the Z-Vector 
 
 \newpage
 
-\section{!!EUREKA: Summary of MP2 Gradient}
+\section{Summary of MP2 Gradient}
 The Lagrangian for MP2 could be written as (with $z _{ai} = z _{ia}^{*}$):
 \begin{align}
     \mathcal{L}_{\text{MP2}}=& E _{\text{HF}}+E _{\text{H}}+\frac{1}{2}\sum_{ai}\big(z _{ai}f _{ai} + z_{ai}^{*} f _{ai}^{*}\big) \nonumber \\
@@ -472,11 +704,23 @@ The Lagrangian for MP2 could be written as (with $z _{ai} = z _{ia}^{*}$):
 \end{align}
 Constraints:
 \begin{align}
-    \pdv{\mathcal{L}_{\text{MP2}}}{z _{ai}} =& f _{ai} = 0 &&& \text{\small Hatree-Fock Condition}& \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{z _{bj}} =& \frac{1}{2} f _{bj} = 0 &&& \text{\small Hatree-Fock Condition}& \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{z _{bj}^{*}}=& \frac{1}{2}f _{bj}^{*}= 0 &&& \text{\small Hatree-Fock Condition}& \\
     \pdv{\mathcal{L}_{\text{MP2}}}{T _{ij}^{ab}} =& \pdv{E _{\text{H}}}{T _{ij}^{ab}} = 0 &&& \text{\small MP2 Condition}& \\
-    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}} =& \pdv{E _{\text{H}}}{\kappa _{bj}} + \frac{1}{2}\sum_{ai}\Big(z _{ai}\pdv{f _{ai}}{\kappa _{bj}}+\bar{z}_{ai}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big) = 0  &&& \text{\small Z-Vector Equations}&
+    \pdv{\mathcal{L}_{\text{MP2}}}{(T _{ij}^{ab})^{*}} =& \pdv{E _{\text{H}}}{(T_{ij}^{ab})^{*}} = 0 &&& \text{\small MP2 Condition}& \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}} =& \pdv{E _{\text{H}}}{\kappa _{bj}} + \frac{1}{2}\sum_{ai}\Big(z _{ai}\pdv{f _{ai}}{\kappa _{bj}}+z ^{*}_{ai}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big) = 0  &&& \text{\small Z-Vector Equation}& \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}^{*}}=&\pdv{E _{\text{H}}}{\kappa _{bj}^{*}} + \frac{1}{2}\sum_{ai}\Big(z _{ai}\pdv{f _{ai}}{\kappa _{bj}^{*}} +  z ^{*}_{ai}\pdv{f _{ai}^{*}}{\kappa _{bj}^{*}}\Big)=0 &&& \text{\small Z-Vector Equation}
 \end{align}
-Densities:
+The orthonormality condition is already fulfilled through the parameterization of orbital rotation:
+\begin{align}
+     \mathbf{S}(\lambda) =& \mathbf{C}^{\dagger}(\lambda)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\dagger}(\lambda)\mathbf{C}^{\dagger}(0)\mathbf{S}^{\text{AO}}(\lambda)\mathbf{C}(0)\mathbf{U}(\lambda) \nonumber \\
+    =& \mathbf{U}^{\dagger}(\lambda)\bm{\mathcal{S}}(\lambda)\mathbf{U}(\lambda) \nonumber \\
+    =& \exp[-\bm{\kappa}(\lambda)]^{\dagger}\bm{\mathcal{S}}^{-\frac{1}{2} \dagger}(\lambda)\bm{\mathcal{S}}(\lambda)\bm{\mathcal{S}}^{-\frac{1}{2}}(\lambda)\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \exp[\bm{\kappa}(\lambda)]\exp[-\bm{\kappa}(\lambda)] \nonumber \\
+    =& \mathbf{I}
+\end{align}
+Unrelaxed reduced density matrices (RDMs):
 \begin{align}
     \gamma _{pq} =& \gamma ^{\text{HF}} _{pq} + \gamma ^{\text{H}} _{pq} \\
     \Gamma _{rs}^{pq} =& (\Gamma ^{\text{HF}})_{rs}^{pq} + (\Gamma ^{\text{H}})_{rs}^{pq}
@@ -484,37 +728,43 @@ Densities:
 \begin{align}
     &\gamma _{ij}^{\text{H}} = \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}T _{ki}^{ab} &&& \gamma ^{\text{HF}}_{ij} = \delta _{ij}&\\
     &\gamma^{\text{H}} _{ab} = -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}T _{ij}^{cb} \\
-    &(\Gamma ^{\text{H}}) _{ij}^{ab} = \frac{1}{2}(T _{ij}^{ab})^{*} \\
-    &(\Gamma ^{\text{H}}) _{kl}^{ij} = \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl} &&& (\Gamma ^{\text{HF}})_{kl}^{ij} = \frac{1}{2}\delta _{ik}\delta _{jl}& \\
-    &(\Gamma ^{\text{H}}) _{bj}^{ai} = -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij}
+    &(\Gamma ^{\text{H}}) _{ij}^{ab} = \frac{1}{4}(T _{ij}^{ab})^{*} \\
+    &(\Gamma ^{\text{H}}) _{ab}^{ij} = \frac{1}{4}T _{ij}^{ab} \\
+    &(\Gamma ^{\text{H}}) _{kl}^{ij} = \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl}=\gamma _{ik}^{\text{H}}\delta _{jl} &&& (\Gamma ^{\text{HF}})_{kl}^{ij} = \frac{1}{2}\delta _{ik}\delta _{jl}& \\
+    &(\Gamma ^{\text{H}}) _{bj}^{ai} = -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij}=\gamma _{ab}^{\text{H}}\delta _{ij}
 \end{align}
 
 
 
-\subsection{Hartree-Fock}
-\begin{align}
-    f _{ai} = h _{ai} + \sum_{j}\langle aj||ij\rangle = 0
-\end{align}
-\begin{align}
-    E _{\text{HF}} =& \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle  \nonumber \\
-    =& \sum_{i \mu \nu}C _{\mu i}^{*}C _{\nu i}h _{\mu \nu} + \frac{1}{2}\sum_{ij}\sum_{\mu \nu \sigma \tau} C _{\mu i}^{*}C _{\nu j}^{*}C _{\sigma i}C _{\tau j}\langle \mu \nu||\sigma \tau\rangle  \nonumber \\
-    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{HF}}h _{\mu \nu} + \frac{1}{2}\sum_{\mu \nu \sigma \tau}D _{\mu \sigma}^{\text{HF}}D _{\nu \tau}^{\text{HF}}\langle \mu \nu||\sigma \tau\rangle
-\end{align}
-
-\subsection{MP2}
-\begin{equation}
-    E _{\text{H}} = \sum_{ij}h _{ij}\gamma ^{\text{H}} _{ij} + \sum_{ab}h _{ab}\gamma ^{\text{H}} _{ab} + \sum_{ijab}\langle ab||ij\rangle (\Gamma ^{\text{H}}) _{ij}^{ab} + \sum_{ijkl}\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai}
-\end{equation}
-\begin{align}
-    \sum_{ij}h _{ij}\gamma _{ij}^{\text{H}} =& \sum_{ij \mu \nu}C _{\mu i}^{*}C _{\nu j} h _{\mu \nu}\gamma _{ij}^{\text{H}} \\
-    \sum_{ab}h _{ab}\gamma _{ab}^{\text{H}} =& \sum_{ab \mu \nu}C _{\mu a}^{*}C _{\nu b} h _{\mu \nu}\gamma _{ab}^{\text{H}}
-\end{align}
-\begin{equation}
-    D _{\mu \nu}^{\text{H}} = \sum_{ij}C _{\mu i}^{*}C _{\nu j}\gamma _{ij}^{\text{H}} + \sum_{ab}C _{\mu a}^{*}C _{\nu b}\gamma _{ab}^{\text{H}}
-\end{equation}
-\begin{align}
-    \pdv{\gamma _{ij}^{\text{H}}}{T _{ij}^{ab}} =& 
-\end{align}
+%\subsection{Hartree-Fock}
+%\begin{align}
+%    f _{ai} =& h _{ai} + \sum_{j}\langle aj||ij\rangle = 0 \\
+%    f _{ai}^{*} = f _{ia} =& h _{ia} + \sum_{j}\langle ij||aj\rangle = 0
+%\end{align}
+%\begin{align}
+%    E _{\text{HF}} =& \sum_{i}h _{ii} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle  \nonumber \\
+%    =& \sum_{i \mu \nu}C _{\mu i}^{*}C _{\nu i}h _{\mu \nu} + \frac{1}{2}\sum_{ij}\sum_{\mu \nu \sigma \tau} C _{\mu i}^{*}C _{\nu j}^{*}C _{\sigma i}C _{\tau j}\langle \mu \nu||\sigma \tau\rangle  \nonumber \\
+%    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{HF}}h _{\mu \nu} + \frac{1}{2}\sum_{\mu \nu \sigma \tau}D _{\mu \sigma}^{\text{HF}}D _{\nu \tau}^{\text{HF}}\langle \mu \nu||\sigma \tau\rangle
+%\end{align}
+%Unrelaxed density in AO basis:
+%\begin{align}
+%    D _{\mu \nu}^{\text{HF}} =& \sum_{i} C _{\mu i}^{*}C _{\nu i}^{*}
+%\end{align}
+%
+%\subsection{MP2}
+%\begin{equation}
+%    E _{\text{H}} = \sum_{ij}h _{ij}\gamma ^{\text{H}} _{ij} + \sum_{ab}h _{ab}\gamma ^{\text{H}} _{ab} + \sum_{ijab}\langle ab||ij\rangle (\Gamma ^{\text{H}}) _{ij}^{ab} + \sum_{ijkl}\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai}
+%\end{equation}
+%\begin{align}
+%    \sum_{ij}h _{ij}\gamma _{ij}^{\text{H}} =& \sum_{ij \mu \nu}C _{\mu i}^{*}C _{\nu j} h _{\mu \nu}\gamma _{ij}^{\text{H}} \\
+%    \sum_{ab}h _{ab}\gamma _{ab}^{\text{H}} =& \sum_{ab \mu \nu}C _{\mu a}^{*}C _{\nu b} h _{\mu \nu}\gamma _{ab}^{\text{H}}
+%\end{align}
+%\begin{equation}
+%    D _{\mu \nu}^{\text{H}} = \sum_{ij}C _{\mu i}^{*}C _{\nu j}\gamma _{ij}^{\text{H}} + \sum_{ab}C _{\mu a}^{*}C _{\nu b}\gamma _{ab}^{\text{H}}
+%\end{equation}
+%\begin{align}
+%    \pdv{\gamma _{ij}^{\text{H}}}{T _{ij}^{ab}} =& 
+%\end{align}
 
 
 

@@ -118,21 +118,29 @@ The virtual-occupied block of $\mathbf{U}^{\mathbf{B}}$ is obtained from the CPS
 
 \newpage
 \section{MP2 Level}
+Lagrangian:
 \begin{align}
     \mathcal{L}_{\text{MP2}} =& E _{\text{HF}} + E _{\text{H}} + \frac{1}{2}\sum_{ai}(z _{ai}f _{ai}+ z _{ai}^{*}f _{ai}^{*})
 \end{align}
+Energies:
 \begin{align}
     E _{\text{HF}} =& \sum_{\mu \nu}h _{\mu \nu}D _{\mu \nu}^{\text{HF}} + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle \\
     E _{\text{H}} =& \sum_{ij}h _{ij}\gamma ^{\text{H}} _{ij} + \sum_{ab}h _{ab}\gamma ^{\text{H}} _{ab} + \sum_{pqrs}\langle pq||rs\rangle \Gamma _{rs}^{pq} \nonumber \\
-    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{H}}h _{\mu \nu}^{\text{AO}} + \sum_{pqrs}\langle pq||rs\rangle \Gamma _{rs}^{pq}  \\
+    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{H}}h _{\mu \nu}^{\text{AO}} + \sum_{pqrs}\langle pq||rs\rangle \Gamma _{rs}^{pq}
+\end{align} 
+Unrelaxed densities:
+\begin{align}
+    D _{\mu \nu}^{\text{HF}} =& \sum_{i}C _{\mu i}^{*}C _{\mu i} \\
     D _{\mu \nu}^{\text{H}} =& \sum_{ij}C _{\mu i}^{*}C _{\nu j}\gamma _{ij}^{\text{H}} +\sum_{ab}C _{\mu a}^{*}C _{\nu b}\gamma _{ab}^{\text{H}} \\
+\end{align}
+Brillouin conditions:
+\begin{align}
     \sum_{ai}z _{ai} f _{ai} =& \sum_{ai}z _{ai} h _{ai} + \sum_{aij}z _{ai}\langle aj||ij\rangle \nonumber \\
     =& \sum_{\mu \nu ai}z _{ai} C _{\mu a}^{*}C _{\nu i} h _{\mu \nu}^{\text{AO}} + \sum_{aij}z _{ai}\langle aj||ij\rangle \\
     \sum_{ai}z _{ai}^{*}f _{ai}^{*}=& \sum_{ai} z _{ai}^{*}h _{ai}^{*} + \sum_{aij}z _{ai}^{*}\langle aj||ij\rangle ^{*} \nonumber \\
     =& \sum_{ai}z _{ia}h _{ia} + \sum_{aij}z _{ia}\langle ij||aj\rangle \nonumber \\
-    =& \sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}h _{\mu \nu}^{\text{AO}} + \sum_{aij}z _{ia}\langle ij||aj\rangle \nonumber \\
-\end{align} 
-
+    =& \sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}h _{\mu \nu}^{\text{AO}} + \sum_{aij}z _{ia}\langle ij||aj\rangle
+\end{align}
 \subsection{First Derivative}
 We take the first derivative w.r.t. the nuclear magnetic moment $m _{K _{\beta}}$  as only one-electron Hamiltonian $h _{\mu \nu}$ depends on $m _{K _{\beta}}$:
 \begin{align}
@@ -148,12 +156,28 @@ We take the first derivative w.r.t. the nuclear magnetic moment $m _{K _{\beta}}
     &+ \frac{1}{2}\sum_{\mu \nu ai}z _{ai}C _{\mu a}^{*}C _{\nu i}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
     =&\sum_{\mu \nu}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}\left(D _{\mu \nu}^{\text{HF}}+ D _{\mu \nu}^{\text{H}} + \frac{1}{2}\sum_{ai}z _{ai}C _{\mu a}^{*}C _{\nu i} +\frac{1}{2}\sum_{ai}z _{ia}C _{\mu i}^{*}C _{\nu a}\right)
 \end{align}
-\textcolor{red}{note that need to turn $z _{ai}^{*}$ into $z _{ia}$... what about $z _{ia}$ block?} \textcolor{blue}{what abot $(T _{ij}^{ab})^{*}$?}\\
-Trying to resolve $z _{ia}$ 
+Using the Hermitian property of the one-body Hamiltonian:
 \begin{align}
     &\sum_{\mu \nu ai}z _{ia}C _{\mu i}^{*}C _{\nu a}h _{\mu \nu}^{\text{AO}} \nonumber \\
-    \stackrel{\mu \leftrightarrow \nu}{=}& \sum_{\mu \nu ai}\left(z _{ai}C _{\mu a}^{*}C _{\nu i}\right)^{*}h _{\nu \mu}^{\text{AO}}
+    \stackrel{\mu \leftrightarrow \nu}{=}& \sum_{\mu \nu ai}\left(z _{ai}C _{\mu a}^{*}C _{\nu i}\right)^{*}h _{\nu \mu}^{\text{AO}} \nonumber \\
+    =& \sum_{\mu \nu ai}(z _{ai}C _{\mu a}^{*}C _{\nu i})^{*}h _{\mu \nu}^{\text{AO}}
 \end{align}
+Therefore:
+\begin{align}
+    \pdv{\mathcal{L}_{\text{MP2}}}{m _{K _{\beta}}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} = \sum_{\mu \nu}D _{\mu \nu}^{\text{R}}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{\mathbf{m}_{K}=\mathbf{0}}
+\end{align}
+in which the orbital-relaxed density matrix is:
+\begin{align}
+    D _{\mu \nu}^{\text{R}} =& D _{\mu \nu}^{\text{HF}} + D _{\mu \nu}^{\text{H}} + \frac{1}{2}D _{\mu \nu}^{z} + \frac{1}{2}D _{\mu \nu}^{z *} \nonumber \\
+    =& \sum_{i}C _{\mu i}^{*}C _{\nu i} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H}}C _{\nu j} + \sum_{ab}C _{\mu a}^{*}\gamma _{ab}^{\text{H}}C _{\nu b} \nonumber \\
+    &+ \frac{1}{2}\sum_{ai} C _{\mu a}^{*} z _{ai}C _{\nu i} + \frac{1}{2}\sum_{ai}\big(C _{\mu a}^{*}z _{ai}C _{\nu i}\big)^{*}
+\end{align}
+In order to obtain the orbital-relaxed density matrices, we need:
+\begin{itemize}
+\item MO coefficients $C _{\mu p}$ from HF equation (Brillouin condition)
+\item MP2 amplitudes $T _{ij}^{ab}$ from MP2 stationary condition
+\item Z-Vector $z _{ai}$ from Z-Vector equation
+\end{itemize}
 
 \subsection{Stationary Constraints}
 
@@ -168,40 +192,62 @@ Trying to resolve $z _{ia}$
     f _{bj} = h _{bj} + \sum_{i}\langle bi||ji\rangle
 \end{align}
 
-\subsubsection*{MP2 Condition}
+\subsubsection*{MP2 Stationary Condition}
 \begin{align}
-    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} = \pdv{E _{\text{H}}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\ 
-    =& \sum_{ij}h _{ij}\pdv{\gamma ^{\text{H}} _{ij}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
-    &+ \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{T _{mn}^{ef}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}}
+    \pdv{\mathcal{L}_{\text{MP2}}}{T _{mn}^{ef}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} =& \pdv{E _{\text{H}}}{T _{mn}^{ef}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} = 0 \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{(T _{mn}^{ef})^{*}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} =& \pdv{E _{\text{H}}}{T _{mn}^{ef}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} =0
 \end{align}
-Density derivatives:
+Solving these equations we can obtain the expressions for MP2 amplitudes as:
 \begin{align}
-    \pdv{\gamma _{ij}^{\text{H}}}{T _{mn}^{ef}} =& \frac{1}{2}\sum_{kab}\pdv{(T _{jk}^{ab})^{*}}{T _{mn}^{ef}}T _{ki}^{ab} + \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}\pdv{T _{ki}^{ab}}{T _{mn}^{ef}} \\
-    \pdv{\gamma _{ab}^{\text{H}}}{T _{mn}^{ef}} =& -\frac{1}{2}\sum_{ijc}\pdv{(T _{ij}^{ac})^{*}}{T _{mn}^{ef}}T _{ij}^{cb} - \frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}\pdv{T _{ij}^{cb}}{T _{mn}^{ef}} \\
-    \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{T _{mn}^{ef}} =& \frac{1}{2}\pdv{(T _{ij}^{ab})^{*}}{T _{mn}^{ef}} \\
-    \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{T _{mn}^{ef}} =& \frac{1}{2}\sum_{m'ab}\pdv{(T _{km'}^{ab})^{*}}{T _{mn}^{ef}}T _{m'i}^{ab}\delta _{jl} + \frac{1}{2}\sum_{m'ab}(T ^{ab}_{km'})^{*}\pdv{T _{m'i}^{ab}}{T _{mn}^{ef}}\delta _{jl} \\
-    \pdv{(\Gamma ^{\text{H}})_{bj}^{ai}}{T _{mn}^{ef}} =& -\frac{1}{2}\sum_{klc}\pdv{(T _{kl}^{ac})^{*}}{T _{mn}^{ef}}T _{kl}^{cd}\delta _{ij} - \frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}\pdv{T _{kl}^{cb}}{T _{mn}^{ef}}\delta _{ij}
+    T _{ij}^{ab} =& \frac{\langle ab||ij\rangle}{\varepsilon _{i}+\varepsilon _{j}-\varepsilon _{a}-\varepsilon _{b}} \\
+    (T _{ij}^{ab})^{*} =& \frac{\langle ij||ab\rangle}{\varepsilon _{i}+\varepsilon _{j}-\varepsilon _{a}-\varepsilon _{b}}
 \end{align}
-Contraction with electron integrals:
-
-
 
 
 
 
 \subsubsection*{Orbital Rotation Condition}
 \begin{align}
-    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} = \pdv{E _{\text{HF}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \nonumber \\
-    =& 
+    0 =& \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} = \pdv{E _{\text{H}}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} + \frac{1}{2}\sum_{ai}z _{ai}\pdv{f _{ai}}{\kappa _{bj}}\Big|_{{\mathbf{m}_{K}=\mathbf{0}}} \\
+    0 =& \pdv{\mathcal{L} _{\text{MP2}}}{\kappa _{bj}^{*}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} = \pdv{E _{\text{H}}}{\kappa _{bj}^{*}}\Big|_{\mathbf{m}_{K}=\mathbf{0}} + \frac{1}{2}\sum_{ai}z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}}\Big|_{\mathbf{m}_{K}=\mathbf{0}}
 \end{align}
+These produces the Z-Vector equations:
+\begin{align}
+    \frac{1}{2}(\varepsilon _{b} - \varepsilon _{j})z _{bj}=& -X _{bj}             \\
+    \frac{1}{2}(\varepsilon _{b}-\varepsilon _{j})z _{bj}^{*} =& -X _{bj}^{*} 
+\end{align}
+in which
+\begin{equation}
+    X _{bj} = \frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T _{ji}^{ac})^{*}-\frac{1}{2}\sum_{ika}\langle ja||ik\rangle (T _{ik}^{ba})^{*} + \sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H}} + \sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H}}
+\end{equation}
+
+
+Now all parts of the orbital-relaxed density $D _{\mu \nu}^{\text{R}}$are ready, the first derivative could be computed.
 
 
 
 
 
-
-
-
+\subsection{Second Derivative}
+\begin{align}
+    \frac{\dd{ ^{2}\mathcal{L}_{\text{MP2}}}}{\dd{ m _{K _{\beta}}}\dd{B _{\alpha}}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} =& \frac{\partial ^{2}\mathcal{L} _{\text{MP2}}}{\partial m _{K _{\beta}}\partial B _{\alpha}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} \nonumber \\
+    =& \sum_{\mu \nu}D _{\mu \nu}^{\text{R}}\frac{\partial ^{2} h _{\mu \nu}^{\text{AO}}}{\partial m _{K _{\beta}}\partial B _{\alpha}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} + \sum_{\mu \nu}\pdv{D _{\mu \nu}^{\text{R}}}{B _{\alpha}}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}
+\end{align} 
+Need to get the response of orbital-relaxed density under external magnetic field, $\pdv{D _{\mu \nu}^{\text{R}}}{\mathbf{B}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}$ for the second derivative. We should denote this as $D _{\mu \nu}^{\text{R},\mathbf{B}}$ 
+\begin{align}
+    D _{\mu \nu}^{\text{R}} =& D _{\mu \nu}^{\text{HF}} + D _{\mu \nu}^{\text{H}} + \frac{1}{2}D _{\mu \nu}^{z} + \frac{1}{2}D _{\mu \nu}^{z*} \nonumber \\
+    =& \sum_{i}C _{\mu i}^{*}C _{\nu i} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H}}C _{\nu j} + \sum_{ab}C _{\mu a}^{*}\gamma _{ab}^{\text{H}}C _{\nu b} \nonumber \\
+    &+ \frac{1}{2}\sum_{ai} C _{\mu a}^{*} z _{ai}C _{\nu i} + \frac{1}{2}\sum_{ai}\big(C _{\mu a}^{*}z _{ai}C _{\nu i}\big)^{*}
+\end{align}
+\begin{align}
+    D _{\mu \nu}^{\text{R},\mathbf{B}} = D _{\mu \nu}^{\text{HF},\mathbf{B}} + D _{\mu \nu}^{\text{H}, \mathbf{B}} + \frac{1}{2}D _{\mu \nu}^{z,\mathbf{B}} +\frac{1}{2}D _{\mu \nu}^{z*,\mathbf{B}}
+\end{align}
+\begin{align}
+    D _{\mu \nu}^{\text{HF}, \mathbf{B}} =& \sum_{i}C _{\mu i}^{*,\mathbf{B}}C _{\nu i} + \sum_{i}C _{\mu i}^{*}C _{\nu i}^{\mathbf{B}} \\
+    D _{\mu \nu}^{\text{H}, \mathbf{B}} =& \sum_{ij}C _{\mu i}^{*, \mathbf{B}}\gamma _{ij}^{\text{H}}C _{\nu j} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H},\mathbf{B}}C _{\nu j} + \sum_{ij}C _{\mu j}^{*}\gamma _{ij}^{\text{H}}C _{\nu j}^{\mathbf{B}} \\
+    D _{\mu \nu}^{z, \mathbf{B}}=& \sum_{ai}C _{\mu a}^{*,\mathbf{B}}z _{ai}C _{\nu i} + \sum_{ai}C _{\mu a}^{*}z _{ai}^{\mathbf{B}}C _{\nu i} + \sum_{ai}C _{\mu a}^{*}z _{ai}C _{\nu i}^{\mathbf{B}}
+\end{align}
+The responses $C _{\mu p}^{\mathbf{B}}$, $h _{\mu \nu}^{\text{AO},\mathbf{B}}$, $S _{\mu \nu}^{\text{AO},\mathbf{B}}$ and $\langle \mu \nu||\sigma \tau\rangle ^{\mathbf{B}}$ are needed.
 
 
 
