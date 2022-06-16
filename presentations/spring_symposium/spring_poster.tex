@@ -1,0 +1,196 @@
+\documentclass[xcolor=dvipsnames,compress,9pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{caption}
+\usepackage{multicol}
+
+\pgfplotsset{compat=1.7}
+
+\renewcommand{\indent}{\hspace*{2em}}
+
+\usetheme{Madrid}
+\useoutertheme[subsection=false]{miniframes}
+\useinnertheme{circles}
+\usefonttheme[onlymath]{serif}
+
+%color theme from latexcolor.com:
+
+%\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77}
+%\usecolortheme[named=cherryblossompink]{structure}
+%\definecolor{etonblue}{rgb}{0.59, 0.78, 0.64}
+%\usecolortheme[named=etonblue]{structure}
+%\definecolor{unitednationsblue}{rgb}{0.36, 0.57, 0.9}
+%\usecolortheme[named=unitednationsblue]{structure}
+\definecolor{tiffanyblue}{rgb}{0.04, 0.73, 0.71}
+\usecolortheme[named=tiffanyblue]{structure}
+%\definecolor{tearose(orange)}{rgb}{0.97, 0.51, 0.47}
+%\usecolortheme[named=tearose(orange)]{structure}
+%\definecolor{lightseagreen}{rgb}{0.13, 0.7, 0.67}
+%\usecolortheme[named=lightseagreen]{structure}
+%\definecolor{palecerulean}{rgb}{0.61, 0.77, 0.89}
+%\usecolortheme[named=palecerulean]{structure}
+%\definecolor{ruddypink}{rgb}{0.88, 0.56, 0.59}
+%\usecolortheme[named=ruddypink]{structure}
+%\definecolor{burntorange}{rgb}{0.8, 0.33, 0.0}
+%\usecolortheme[named=burntorange]{structure}
+
+
+\title[Molecular Properties]{Theoretical Calculation Towards Molecular Properties}
+\author[H.Xu]{Hang Xu}
+\titlegraphic{\includegraphics[width=5.5cm]{logo2.jpg}
+    %\begin{picture}(0,0)
+    %    \put(170,195){\makebox(0,0)[rt]{\includegraphics[width=3cm]{logo.png}}}
+    %\end{picture}
+}
+\institute[Neese Group]
+{
+  Neese Department\\
+  Max-Planck-Institut für Kohlenforschung
+}
+\date{\today}
+
+
+
+%===================================================================
+\setbeamertemplate{title page}
+{
+  \vbox{}
+  \begingroup
+    \begin{flushright}
+        {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}\vskip3em
+    \end{flushright}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+  \endgroup
+  \vfill
+}
+%===================================================================
+
+\begin{document}
+\maketitle
+
+
+\begin{frame}
+    \frametitle{Molecular Properties as Energy Derivatives}
+    Hamiltonian subject to some external perturbation:
+    \begin{equation}
+        \hat{H} = \hat{H}(0)+\lambda \hat{O}+\dots
+    \end{equation}
+    Example of external perturbations:
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item $\mathbf{F}$: external electric field
+            \item $\mathbf{B}$: external magnetic field
+            \item $\mathbf{I}$: nuclear spin
+            \item $\mathbf{R}$: nuclear geometric displacement
+        \end{itemize}
+    \end{multicols}
+    Energy expansion in terms of external perturbation:
+    \begin{equation}
+        E(\lambda) = E(0) + \lambda \frac{\dd{E}}{\dd{\lambda}}\Big|_{{\lambda=0}} + \frac{1}{2!}\lambda ^{2}\frac{\dd{^{2}E}}{\dd{\lambda ^{2}}}\Big|_{{\lambda=0}} + \dots
+    \end{equation}
+
+    The n-th order property could be written as the n-th order derivative against perturbation.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Types of Molecular Properties}
+    Some first and second order molecular properties, expressed as energy derivatives: 
+    \begin{equation}
+        \frac{\partial ^{n _{1}+n _{2}}E}{\partial ^{n _{1}}\lambda _{1}\partial ^{n _{2}}\lambda _{2}} \nonumber
+    \end{equation}
+    \begin{center}
+       \begin{tabular}{ c  c  c  c  l}
+           \hline
+           $n _{\mathbf{F}}$ & $n _{\mathbf{B}}$  & $n _{\mathbf{I}}$ & $n _{\mathbf{R}}$ & Property \\
+           \hline
+           1 & 0 & 0 & 0 & electric dipole moment \\
+           0 & 1 & 0 & 0 & magnetic dipole moment \\
+           0 & 0 & 1 & 0 & hyperfine coupling constant \\
+           0 & 0 & 0 & 1 & nuclear gradient \\
+           \hline
+           2 & 0 & 0 & 0 & electric polarizability \\
+           0 & 2 & 0 & 0 & magnetizability \\
+           0 & 0 & 2 & 0 & nuclear spin-spin coupling \\
+           0 & 0 & 0 & 2 & harmonic vibrational frequencies \\
+           1 & 0 & 0 & 1 & infrared absorption intensities \\
+           0 & 1 & 1 & 0 & NMR shielding \\
+           \hline
+           \footnote{Introduction to computational chemistry - Jensen, 2007}
+       \end{tabular} 
+    \end{center}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Property Evaluation: Example - NMR Shielding Tensor} 
+    NMR Shielding Tensor:
+    \begin{align}
+        \sigma _{\beta \alpha}^{K} =& \frac{\dd{^{2}E}}{\dd{B _{\alpha}}\dd{m_{K_{\beta}}}}\Big|_{{\mathbf{B},\mathbf{m}_{K} =\mathbf{0}}} \nonumber \\
+        =& \sum_{\mu \nu}D _{\mu \nu}\frac{\dd{^{2}h _{\mu \nu}}}{\dd{B _{\alpha}}\dd{m _{K _{\beta}}}} + \sum_{\mu \nu}\dv{D _{\mu \nu}}{B _{\alpha}}\dv{h _{\mu \nu}}{m _{K _{\beta}}}
+    \end{align}
+    $D _{\mu \nu}$ is the density matrix specific to different levels of theory, e.g. $D ^{\text{SCF}}$, $D ^{\text{MP2}}$, $D ^{\text{CC}}$ \dots   
+    \\~\\
+    \pause
+    Energy functionals:
+    \begin{align}
+        \mathcal{L}_{\text{MP2}} =& E _{\text{HF}} + E _{\text{H}} + \sum_{ai}f _{ai}z _{ai} \\
+        \mathcal{L}_{\text{CC}} =& \langle \Phi _{0}|(1 + \hat{\Lambda})\mathcal{H}|\Phi _{0}\rangle + \sum_{ai}f _{ai}z _{ai}
+    \end{align}
+    Corresponding (relaxed) density:
+    \begin{align}
+        D ^{\text{R}}_{\mu \nu} =& D ^{\text{amp}} _{\mu \nu} + D ^{z}_{\mu \nu}
+    \end{align}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Current Progress}
+    Have done:
+    \begin{itemize}
+    \item Derivation: MP2 level equations derived by hand, CC equations in progress
+    \item Implementation: hand-written code for MP2 UHF energy and relaxed density now in ORCA-AUTOCI module
+    \end{itemize}
+    \pause
+    TODO:
+    \begin{itemize}
+    \item To connect the MP2 code with SHARK to get density derivative hence the second-order properties like NMR shielding
+    \item Maybe use ORCA-AGE to generate automatic code for comparison
+    \end{itemize}
+    \pause
+    Further Plan:
+    \begin{itemize}
+    \item Implement Coupled Cluster derivatives
+    \item Local approximation: DLPNO
+    \end{itemize}
+    \pause
+    \begin{align}
+    \text{Acknowlegement: }&\text{Prof. Dr. Frank Neese} \nonumber \\
+                    &\text{Stan Papadopoulos}\nonumber \\
+                    &\text{Dr. Georgi Stoychev}\nonumber
+    \end{align}
+\end{frame}
+    
+\end{document}

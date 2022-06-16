@@ -44,6 +44,150 @@
 \begin{document}
 
 
+\section{Basic Ansatz}
+\subsection*{The Hamiltonian}
+The Hamiltonian in general form:
+\begin{equation}
+    \hat{H} = \sum_{pq}\langle p|\hat{h}|q\rangle \hat{p}^{\dagger}\hat{q} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}
+\end{equation}
+Using Wick's theorem:
+\begin{align}
+    \hat{H} =& \sum_{pq}h _{pq} \{\hat{p}^{\dagger}\hat{q}\} + \sum_{i}h _{ii} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}
+    + \frac{1}{2}\sum_{ij}\langle ij||ij\rangle + \sum_{pqi}\langle pi||qi\rangle \{\hat{p}^{\dagger}\hat{q}\} \nonumber \\
+    =& E _{\text{HF}} + \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}
+\end{align} 
+and the normal-ordered Hamiltonian:
+\begin{equation}
+    \hat{H}_{\text{N}} = \sum_{pq}f _{pq}\{\hat{p}^{\dagger}\hat{q}\} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}
+\end{equation}
+\subsection*{Coupled-Cluster Energy}
+\begin{align}
+     \hat{H}&|\Psi _{\text{CC}}\rangle = E _{\text{CC}}|\Psi _{\text{CC}}\rangle \\
+    \Leftrightarrow \hat{H}e ^{\hat{T}}&|\Phi _{0}\rangle= E _{\text{CC}}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+    \Leftrightarrow e ^{-\hat{T}}\hat{H}e ^{\hat{T}}&|\Phi _{0}\rangle = E _{\text{CC}}|\Phi _{0}\rangle \nonumber \\
+    \Leftrightarrow \mathcal{H}&|\Phi _{0}\rangle = E _{\text{CC}}|\Phi _{0}\rangle
+\end{align}
+Projecting $\langle \Phi _{0}|$ onto equation 5: 
+\begin{align}
+    E _{\text{CC}} =&\langle \Phi _{0}|\mathcal{H}|\Phi _{0} \rangle \nonumber \\
+    =& \sum_{pq}h _{pq}\langle \Phi _{0}|e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|\Phi _{0}\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+    =& E _{\text{HF}} + \sum_{pq}f _{pq}\langle \Phi _{0}|e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|\Phi _{0}\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}e ^{\hat{T}}|\Phi _{0}\rangle
+\end{align}
+Also, by intermediate normalisation, projecting $\langle \Phi _{0}|$ onto equation 4: 
+\begin{align}
+    E _{\text{CC}} =& \langle \Phi _{0}|\hat{H}|\Psi _{\text{CC}}\rangle \nonumber \\
+    =& \langle \Phi _{0}|\hat{H} e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+    =& \sum_{pq}h _{pq}\langle \Phi _{0}|\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|\Phi _{0}\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{T}|\Phi _{0}\rangle \nonumber \\
+    =& E _{\text{HF}} + \sum_{pq}f _{pq}\langle \Phi _{0}|\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|\Phi _{0}\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}e ^{\hat{T}}|\Phi _{0}\rangle
+\end{align}
+
+
+%By expressing the energy as the expectation value of the Hamiltonian:
+%\begin{align}
+%    E _{\text{CC}} =& \frac{\langle \Psi _{\text{CC}}|\hat{H}|\Psi _{\text{CC}}\rangle}{\langle \Psi _{\text{CC}}|\Psi _{\text{CC}}\rangle}
+%    = \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}\hat{H}e ^{\hat{T}}|\Phi _{0}\rangle}{\langle\Phi _{0}|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|\Phi _{0}\rangle}
+%\end{align}
+%inserting the resolution of identity $e ^{\hat{T}}(\hat{P}+\hat{Q})e ^{-\hat{T}} = \hat{1}$:
+%\begin{align}
+%    E _{\text{CC}} =& \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}(\hat{P}+\hat{Q})e ^{-\hat{T}}\hat{H}e ^{\hat{T}}|\Phi _{0}\rangle}{\langle\Phi _{0}|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|\Phi _{0}\rangle} \nonumber \\
+%    =& \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}|\Phi _{0}\rangle} \langle \Phi _{0}|e ^{-\hat{T}}\hat{H}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+%    =& 
+%\end{align}
+
+\subsection*{Reduced Density Matrices}
+Consider only CC energy:
+\begin{align}
+    E _{\text{CC}} =& \langle \Phi _{0}|\mathcal{H}|\Phi _{0}\rangle \nonumber \\
+    =& \sum_{pq}h _{pq}\langle \Phi _{0}|e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|\Phi _{0}\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+    =& E _{\text{HF}} + \sum_{pq}f _{pq}\langle \Phi _{0}|e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|\Phi _{0}\rangle + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}e ^{\hat{T}}|\Phi _{0}\rangle
+\end{align}
+
+Defining the one-body reduced density matrix:
+\begin{align}
+    \gamma _{pq} = \frac{\langle \Psi _{\text{CC}}|\hat{p}^{\dagger}\hat{q}|\Psi _{\text{CC}}\rangle}{\langle \Psi _{\text{CC}}|\Psi _{\text{CC}}\rangle}
+    = \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}
+\end{align}
+and two-body reduced density matrix:
+\begin{align}
+    \Gamma _{rs}^{pq} = \frac{\langle \Psi _{\text{CC}}|\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}|\Psi _{\text{CC}}\rangle}{\langle \Psi _{\text{CC}}|\Psi _{\text{CC}}\rangle}
+    = \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r} e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}
+\end{align}
+Then CC energy could be expressed as:
+\begin{align}
+    E _{\text{CC}} =& \sum_{pq}h _{pq}\gamma _{pq} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \Gamma ^{pq}_{rs} \nonumber \\
+    =& \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}(\sum_{pq}h _{pq}\hat{p}^{\dagger}\hat{q})e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}
+    + \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}(\frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}) e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle} \nonumber \\
+    =& \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}\hat{H} e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}
+\end{align}
+inserting the resolution of identity $e ^{\hat{T}}(\hat{P}+\hat{Q})e ^{-\hat{T}} = \hat{1}$:
+\begin{align}
+    E _{\text{CC}} =& \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}e ^{\hat{T}}(\hat{P}+\hat{Q})e ^{-\hat{T}}\hat{H} e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle} \nonumber \\
+    =& \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle} \langle \Phi _{0}|e ^{-\hat{T}}\hat{H}e ^{\hat{T}}|\Phi _{0}\rangle + 0 \nonumber \\
+    =& \langle \Phi _{0}|\mathcal{H}|\Phi _{0}\rangle 
+\end{align}
+as expected. Note that we used that $\hat{Q}\mathcal{H}|\Phi _{0}\rangle = 0$ which is the CC amplitude constraint.
+\\
+
+Similarly, we could define the normal-ordered one- and two-body reduced density matrices as:
+\begin{align}
+    (\gamma _{\text{N}}) _{pq} = \frac{\langle \Psi _{\text{CC}}|\{\hat{p}^{\dagger}\hat{q}\}|\Psi _{\text{CC}}\rangle}{\langle \Psi _{\text{CC}}|\Psi _{\text{CC}}\rangle}
+    = \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}
+\end{align}
+\begin{align}
+    (\Gamma _{\text{N}}) _{rs}^{pq} = \frac{\langle \Psi _{\text{CC}}|\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}|\Psi _{\text{CC}}\rangle}{\langle \Psi _{\text{CC}}|\Psi _{\text{CC}}\rangle}
+    = \frac{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\} e ^{\hat{T}}|\Phi _{0}\rangle}{\langle \Phi _{0}|e ^{\hat{T}^{\dagger}} e ^{\hat{T}}|\Phi _{0}\rangle}
+\end{align}
+Accordingly, the correlation contribution of CC energy could be expressed as:
+\begin{align}
+    \Delta E _{\text{CC}} =& E _{\text{CC}} - E _{\text{HF}} \nonumber \\
+    =& \sum_{pq}f _{pq}(\gamma _{\text{N}})_{pq} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle (\Gamma _{\text{N}})_{rs}^{pq}
+\end{align}
+
+Generally, for one- and two-body operators, the expectation value could be evaluated as:
+\begin{align}
+    \langle \hat{O}\rangle =& \sum_{pq}o _{pq}\gamma _{pq} \\
+    \langle \hat{G}\rangle =& \frac{1}{4}\sum_{pqrs}\langle pq|\hat{g}|rs\rangle _{\text{A}} \Gamma _{rs}^{pq}
+\end{align}
+
+
+\subsection*{Response Density Matrices}
+Consider the Lagrangian which only includes the CC energy and amplitude constraints:
+\begin{align}
+     \mathcal{L}_{\text{CC}} =& E _{\text{CC}}+ \sum_{\mu}\lambda _{\mu}\langle \Phi _{\mu}|\mathcal{H}|\Phi _{0}\rangle \nonumber \\
+     =& \langle \Phi _{0}|\mathcal{H}|\Phi _{0}\rangle + \langle \Phi _{0}|\hat{\Lambda}\mathcal{H}|\Phi _{0}\rangle \nonumber \\
+     =& \langle \Phi _{0}|(1+\hat{\Lambda})\mathcal{H}|\Phi _{0}\rangle \nonumber \\
+     =& \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\hat{H}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+     =& \sum_{pq}h _{pq}\langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|\Phi _{0}\rangle
+     + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+     =& E _{\text{HF}} + \sum_{pq}f _{pq}\langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|\Phi _{0}\rangle
+     + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}e ^{\hat{T}}|\Phi _{0}\rangle \nonumber \\
+\end{align}
+By defining the response density matrices:
+\begin{align}
+    \gamma _{pq} = \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}e ^{\hat{T}}|\Phi _{0}\rangle & \\
+    \Gamma _{rs}^{pq} = \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}e ^{\hat{T}}|\Phi _{0}\rangle & \\
+    (\gamma _{\text{N}})_{pq} = \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}\}e ^{\hat{T}}|\Phi _{0}\rangle & \\
+    (\Gamma _{\text{N}}) _{rs}^{pq} = \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\{\hat{p}^{\dagger}\hat{q}^{\dagger}\hat{s}\hat{r}\}e ^{\hat{T}}|\Phi _{0}\rangle &
+\end{align}
+the Lagrangian coulde be written as:
+\begin{equation}
+    \mathcal{L}_{\text{CC}} = E _{\text{HF}} + \sum_{pq}f _{pq}(\gamma _{\text{N}})_{pq} + \frac{1}{4}\sum_{pqrs}\langle pq||rs\rangle (\Gamma _{\text{N}})^{pq}_{rs}
+\end{equation}
+
+
+
+
+\section{CC Lagrangian}
+To construct the complete Lagrangian for CC ansatz, the constraints of Brillouin condition and orthonomality should also be included.
+From now on, denote $\mathcal{H} = e ^{-\hat{T}}\hat{H}_{\text{N}}e ^{\hat{T}}$: 
+
+\begin{align}
+    \mathcal{L}_{\text{CC}}^{\text{N}} =& \langle \Phi _{0}|(1+\hat{\Lambda})e ^{-\hat{T}}\hat{H}_{\text{N}} e ^{\hat{T}}|\Phi _{0}\rangle + \sum_{ai}z _{ai}f _{ai} \nonumber \\
+    =& \langle \Phi _{0}|(1+\hat{\Lambda})\mathcal{H}|\Phi _{0}\rangle + \sum_{ai} z _{ai}f _{ai}
+\end{align}
+
+
+\newpage
 \section{Stationary Lagrangian}
 
 

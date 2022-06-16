@@ -233,7 +233,7 @@ Now all parts of the orbital-relaxed density $D _{\mu \nu}^{\text{R}}$are ready,
     \frac{\dd{ ^{2}\mathcal{L}_{\text{MP2}}}}{\dd{ m _{K _{\beta}}}\dd{B _{\alpha}}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} =& \frac{\partial ^{2}\mathcal{L} _{\text{MP2}}}{\partial m _{K _{\beta}}\partial B _{\alpha}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} \nonumber \\
     =& \sum_{\mu \nu}D _{\mu \nu}^{\text{R}}\frac{\partial ^{2} h _{\mu \nu}^{\text{AO}}}{\partial m _{K _{\beta}}\partial B _{\alpha}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} + \sum_{\mu \nu}\pdv{D _{\mu \nu}^{\text{R}}}{B _{\alpha}}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}
 \end{align} 
-Need to get the response of orbital-relaxed density under external magnetic field, $\pdv{D _{\mu \nu}^{\text{R}}}{\mathbf{B}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}$ for the second derivative. We should denote this as $D _{\mu \nu}^{\text{R},\mathbf{B}}$ 
+Need to get the response of orbital-relaxed density under external magnetic field, $\pdv{D _{\mu \nu}^{\text{R}}}{\mathbf{B}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}$ for the second derivative. We should denote this as $D _{\mu \nu}^{\text{R},\mathbf{B}}$ for convenience.
 \begin{align}
     D _{\mu \nu}^{\text{R}} =& D _{\mu \nu}^{\text{HF}} + D _{\mu \nu}^{\text{H}} + \frac{1}{2}D _{\mu \nu}^{z} + \frac{1}{2}D _{\mu \nu}^{z*} \nonumber \\
     =& \sum_{i}C _{\mu i}^{*}C _{\nu i} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H}}C _{\nu j} + \sum_{ab}C _{\mu a}^{*}\gamma _{ab}^{\text{H}}C _{\nu b} \nonumber \\
@@ -244,10 +244,166 @@ Need to get the response of orbital-relaxed density under external magnetic fiel
 \end{align}
 \begin{align}
     D _{\mu \nu}^{\text{HF}, \mathbf{B}} =& \sum_{i}C _{\mu i}^{*,\mathbf{B}}C _{\nu i} + \sum_{i}C _{\mu i}^{*}C _{\nu i}^{\mathbf{B}} \\
-    D _{\mu \nu}^{\text{H}, \mathbf{B}} =& \sum_{ij}C _{\mu i}^{*, \mathbf{B}}\gamma _{ij}^{\text{H}}C _{\nu j} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H},\mathbf{B}}C _{\nu j} + \sum_{ij}C _{\mu j}^{*}\gamma _{ij}^{\text{H}}C _{\nu j}^{\mathbf{B}} \\
+    D _{\mu \nu}^{\text{H}, \mathbf{B}} =& \sum_{ij}C _{\mu i}^{*, \mathbf{B}}\gamma _{ij}^{\text{H}}C _{\nu j} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H},\mathbf{B}}C _{\nu j} + \sum_{ij}C _{\mu i}^{*}\gamma _{ij}^{\text{H}}C _{\nu j}^{\mathbf{B}} \nonumber \\
+    &+ \sum_{ab}C _{\mu a}^{*,\mathbf{B}}\gamma _{ab}^{\text{H}}C _{\nu b} + \sum_{ab}C _{\mu a}^{*}\gamma _{ab}^{\text{H},\mathbf{B}}C _{\nu b} + \sum_{ab}C _{\mu a}^{*}\gamma _{ab}^{\text{H}}C _{\nu b}^{\mathbf{B}}  \\
     D _{\mu \nu}^{z, \mathbf{B}}=& \sum_{ai}C _{\mu a}^{*,\mathbf{B}}z _{ai}C _{\nu i} + \sum_{ai}C _{\mu a}^{*}z _{ai}^{\mathbf{B}}C _{\nu i} + \sum_{ai}C _{\mu a}^{*}z _{ai}C _{\nu i}^{\mathbf{B}}
 \end{align}
-The responses $C _{\mu p}^{\mathbf{B}}$, $h _{\mu \nu}^{\text{AO},\mathbf{B}}$, $S _{\mu \nu}^{\text{AO},\mathbf{B}}$ and $\langle \mu \nu||\sigma \tau\rangle ^{\mathbf{B}}$ are needed.
+The responses $\kappa _{pq}^{\mathbf{B}}$ , $h _{\mu \nu}^{\text{AO},\mathbf{B}}$, $S _{\mu \nu}^{\text{AO},\mathbf{B}}$ and $\langle \mu \nu||\sigma \tau\rangle ^{\mathbf{B}}$ are needed for these density responses. For the second derivative,
+$h _{\mu \nu}^{\text{AO},\mathbf{m}_{K}}$ and $h _{\mu \nu}^{\text{AO},\mathbf{m}_{K},\mathbf{B}}$ are also required.
+
+\subsubsection*{HF Contribution}
+$S ^{\text{AO},\mathbf{B}}_{\mu \nu}$ and $\kappa _{pq}^{\mathbf{B}}$ are needed for HF contribution to the relaxed density response.
+\begin{align}
+    C _{\mu p}(\mathbf{B}) =& \sum_{r}C _{\mu r}(0)U _{rp}(\mathbf{B}) \nonumber \\
+    =& \sum_{rt}C _{\mu r}(0)(S ^{00})_{rt}^{-\frac{1}{2}}(\mathbf{B})\exp[-\bm{\kappa}(\mathbf{B})]_{tp} \\
+    C _{\mu p}^{\mathbf{B}} =& \sum_{rt}C _{\mu r}(S ^{00}) _{rt}^{-\frac{1}{2},\mathbf{B}}\exp[-\bm{\kappa}]_{tp} + \sum_{rt}C _{\mu r}(S ^{00}) _{rt}^{-\frac{1}{2}}\exp[-\bm{\kappa}]_{tp}^{\mathbf{B}}
+\end{align}
+Since only first derivative of $\mathbf{C}$ is needed and $\bm{\kappa}(\mathbf{B}=\mathbf{0}) = \mathbf{I}$ , we can expand the exponential up to first order:
+\begin{equation}
+    \exp(-\bm{\kappa}) = \mathbf{I} - \bm{\kappa}
+\end{equation}
+\begin{align}
+    C _{\mu p}^{\mathbf{B}} =& \sum_{rt}C _{\mu r}(S ^{00}) _{rt}^{-\frac{1}{2},\mathbf{B}}\delta _{tp} + \sum_{rt}C _{\mu r}(S ^{00}) _{rt}^{-\frac{1}{2}}(\delta _{tp}^{\mathbf{B}}-\kappa _{tp}^{\mathbf{B}}) \nonumber \\
+    =& \sum_{r}C _{\mu r}(S ^{00}) _{rp}^{-\frac{1}{2},\mathbf{B}}-\sum_{rt}C _{\mu r}\delta _{rt}\kappa _{tp}^{\mathbf{B}} \nonumber \\
+    =& \sum_{r}C _{\mu r}(S ^{00}) ^{-\frac{1}{2},\mathbf{B}}_{rp} - \sum_{r}C _{\mu r}\kappa _{rp}^{\mathbf{B}}
+\end{align}
+\begin{align}
+    S ^{00,\mathbf{B}}_{pq} = \sum_{\mu \nu}C _{\mu p}^{*}(0)S _{\mu \nu}^{\text{AO},\mathbf{B}} C _{\nu q}(0)
+\end{align}
+and $(\mathbf{S} ^{00})^{-\frac{1}{2},\mathbf{B}}$ could be obtianed from differentiating the equation, noting that $\mathbf{S}^{00,\dagger} = \mathbf{S}^{00}$ and $\mathbf{S}^{00}(\mathbf{B}=\mathbf{0})=\mathbf{I}$ :
+\begin{align}
+    (\mathbf{S}^{00})^{-\frac{1}{2}\dagger}\mathbf{S}^{00}(\mathbf{S}^{00})^{-\frac{1}{2}} = \mathbf{I}
+\end{align}
+\begin{align}
+    \mathbf{0}=&(\mathbf{S}^{00})^{-\frac{1}{2},\mathbf{B}}\mathbf{S}^{00}(\mathbf{S}^{00})^{-\frac{1}{2}}\Big|_{\mathbf{B}=\mathbf{0}} + (\mathbf{S}^{00})^{-\frac{1}{2}}\mathbf{S}^{00,\mathbf{B}}(\mathbf{S}^{00})^{-\frac{1}{2}}\Big|_{\mathbf{B}=\mathbf{0}} + (\mathbf{S}^{00})^{-\frac{1}{2}}\mathbf{S}^{00}(\mathbf{S}^{00})^{-\frac{1}{2},\mathbf{B}}\Big|_{\mathbf{B}=\mathbf{0}} \nonumber \\
+    =&(\mathbf{S}^{00})^{-\frac{1}{2},\mathbf{B}} + \mathbf{S}^{00,\mathbf{B}} + (\mathbf{S}^{00})^{-\frac{1}{2},\mathbf{B}} \nonumber \\
+    =&2(\mathbf{S}^{00}) ^{-\frac{1}{2},\mathbf{B}} + \mathbf{S}^{00,\mathbf{B}}
+\end{align}
+Therefore:
+\begin{equation}
+    (\mathbf{S}^{00})^{-\frac{1}{2},\mathbf{B}} = -\frac{1}{2}\mathbf{S}^{00,\mathbf{B}}
+\end{equation}
+
+\subsubsection*{Hylleraas Contribution}
+For Hylleraas contribution, we need $S ^{\text{AO},\mathbf{B}}_{\mu \nu}$, $\kappa _{pq}^{\mathbf{B}}$ and $\langle \mu \nu||\sigma \tau\rangle ^{\mathbf{B}}$, as the MP2 amplitudes depend on the two-electron integrals.
+\begin{align}
+    \gamma _{ij}^{\text{H}} =& \frac{1}{2}\sum_{kab}(T ^{ab}_{jk})^{*}T _{ki}^{ab} \\
+    \gamma _{ab}^{\text{H}} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}T _{ij}^{cb}
+\end{align}
+\begin{align}
+    \gamma _{ij}^{\text{H},\mathbf{B}} =& \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*,\mathbf{B}}T _{ki}^{ab} + \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}(T _{ki}^{ab})^{\mathbf{B}} \\
+    \gamma _{ab}^{\text{H},\mathbf{B}} =& -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*,\mathbf{B}}T _{ij}^{cb} -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}(T _{ij}^{cb})^{\mathbf{B}}
+\end{align}
+The MP2 amplitude response:
+\begin{align}
+    T _{ij}^{ab} =& \frac{\langle ab||ij\rangle}{\varepsilon _{i}+\varepsilon _{j}-\varepsilon _{a}-\varepsilon _{b}} = \frac{1}{\Delta _{ab}^{ij}}\langle ab||ij\rangle \\
+    (T _{ij}^{ab})^{*} =& \frac{\langle ij||ab\rangle}{\varepsilon _{i}+\varepsilon _{j}-\varepsilon _{a}-\varepsilon _{b}} = \frac{1}{\Delta _{ab}^{ij}}\langle ij||ab\rangle
+\end{align}
+\begin{align}
+    \langle pq||rs\rangle^{\mathbf{B}} =& \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle ^{\mathbf{B}} C _{\sigma r}C _{\tau s} \nonumber \\
+    &+ \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*,\mathbf{B}}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}C _{\tau s} + \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu q}^{*,\mathbf{B}}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}C _{\tau s} \nonumber \\
+    &+  \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu q}^{*}\langle \mu \nu||\sigma \tau\rangle C _{\sigma r}^{\mathbf{B}}C _{\tau s} + \sum_{\mu \nu \sigma \tau}C _{\mu p}^{*}C _{\nu q}^{*}\langle \mu \nu ||\sigma \tau\rangle C _{\sigma r}C _{\tau s}^{\mathbf{B}}
+\end{align}
+\begin{align}
+    (\Delta _{ab}^{ij})^{\mathbf{B}} =& \varepsilon _{i}^{\mathbf{B}} + \varepsilon _{j}^{\mathbf{B}} - \varepsilon _{a}^{\mathbf{B}} - \varepsilon _{b}^{\mathbf{B}}
+\end{align}
+\begin{align}
+    f _{pq}^{\mathbf{B}} =& h _{pq}^{\mathbf{B}} + \sum_{i}\langle pi||qi\rangle ^{\mathbf{B}}
+\end{align}
+\begin{align}
+    h _{pq}^{\mathbf{B}} =& \sum_{\mu \nu}C _{\mu p}^{*,\mathbf{B}}h _{\mu \nu}^{\text{AO}}C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO},\mathbf{B}}C _{\nu q} + \sum_{\mu \nu}C _{\mu p}^{*}h _{\mu \nu}^{\text{AO}}C _{\nu q}^{\mathbf{B}}
+\end{align}
+\begin{align}
+    (T _{ij}^{ab})^{\mathbf{B}} =& \frac{\langle ab||ij\rangle ^{\mathbf{B}}\Delta _{ab}^{ij} - \langle ab||ij\rangle (\Delta _{ab}^{ij})^{\mathbf{B}}}{(\Delta _{ab}^{ij})^{2}} \nonumber \\
+    =& \frac{\langle ab||ij\rangle ^{\mathbf{B}}}{\Delta _{ab}^{ij}} - \frac{1}{\Delta _{ab}^{ij}}\Big(\sum_{m}\frac{\langle ab||im\rangle}{\Delta _{ab}^{im}}f _{mj}^{\mathbf{B}} + \sum_{m}\frac{\langle ab||mj\rangle}{\Delta _{ab}^{mj}}f _{mi}^{\mathbf{B}} \nonumber \\
+    &-\sum_{e}\frac{\langle ae||ij\rangle}{\Delta _{ae}^{ij}}f _{eb}^{\mathbf{B}} - \sum_{e}\frac{\langle eb||ij\rangle}{\Delta _{eb}^{ij}}f _{ae}^{\mathbf{B}} \Big) \nonumber \\
+    =& \frac{1}{\Delta _{ab}^{ij}}\left(\langle ab||ij\rangle ^{\mathbf{B}} - \sum_{m}T ^{ab}_{im}f _{mj}^{\mathbf{B}} - \sum_{m}T _{mj}^{ab}f _{mi}^{\mathbf{B}}+ \sum_{e}T ^{ae}_{ij}f _{eb}^{\mathbf{B}}+\sum_{e}T ^{eb}_{ij}f _{ae}^{\mathbf{B}}\right) \\
+    (T _{ij}^{ab})^{*,\mathbf{B}} =& \frac{1}{\Delta _{ab}^{ij}}\left(\langle ij||ab\rangle ^{\mathbf{B}} - \sum_{m}(T ^{ab}_{im})^{*}f _{mj}^{\mathbf{B}}-\sum_{m}(T _{mj}^{ab})^{*}f _{mi}^{\mathbf{B}}+\sum_{e}(T _{ij}^{ae})^{*}f _{eb}^{\mathbf{B}}+\sum_{e}(T _{ij}^{eb})^{*}f _{ae}^{\mathbf{B}}\right)
+\end{align}
+
+
+\subsubsection*{Z-Vector Contribution}
+The perturbed Z-vectors are obtained by differentiating the zero-th order Z-vector equation and solving it iteratively:
+\begin{align}
+    \frac{1}{2} z _{bj}(\varepsilon _{b}-\varepsilon _{j}) + \frac{1}{2}\sum_{ai}\left(z _{ai}\langle aj||ib\rangle + z ^{*}_{ai}\langle ij||ab\rangle\right) = -X _{bj} \\
+    X _{bj} = \frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T _{ji}^{ac})^{*}-\frac{1}{2}\sum_{ika}\langle ja||ik\rangle (T _{ik}^{ba})^{*} + \sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H}} + \sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H}}
+\end{align}
+Differentiating the LHS:
+\begin{align}
+    &\pdv{\mathbf{B}}\left(\frac{1}{2} z _{bj}(\varepsilon _{b}-\varepsilon _{j}) + \frac{1}{2}\sum_{ai}\left(z _{ai}\langle aj||ib\rangle + z ^{*}_{ai}\langle ij||ab\rangle\right)\right) \nonumber \\
+    =& \frac{1}{2}z _{bj}^{\mathbf{B}}(\varepsilon _{b}-\varepsilon _{j}) +\frac{1}{2}\sum_{ai}\left(z _{ai}^{\mathbf{B}}\langle aj||ib\rangle + z _{ai}^{*,\mathbf{B}}\langle ij||ab\rangle\right) \nonumber \\
+    &+ \frac{1}{2}z _{bj}(\varepsilon _{b}^{\mathbf{B}}-\varepsilon _{j}^{\mathbf{B}}) + \frac{1}{2}\sum_{ai}\left(z _{ai}\langle aj||ib\rangle ^{\mathbf{B}} + z _{ai}^{*}\langle ij||ab\rangle ^{\mathbf{B}}\right)
+\end{align}
+and the RHS:
+\begin{align}
+    \pdv{X _{bj}}{\mathbf{B}} =& \frac{1}{2}\sum_{iac}\langle ac||bi\rangle ^{\mathbf{B}}(T _{ji}^{ac})^{*} + \frac{1}{2}\sum_{iac}\langle ac||bi\rangle (T _{ji}^{ac})^{*,\mathbf{B}}
+    -\frac{1}{2}\sum_{ika}\langle ja||ik\rangle ^{\mathbf{B}}(T _{ik}^{ba})^{*} -\frac{1}{2}\sum_{ika}\langle ja||ik\rangle (T _{ik}^{ba})^{*,\mathbf{B}} \nonumber \\ 
+    &+ \sum_{ac}\langle aj||cb\rangle ^{\mathbf{B}}\gamma _{ac}^{\text{H}}+\sum_{ac}\langle aj||cb\rangle \gamma _{ac}^{\text{H},\mathbf{B}}
+    + \sum_{kl}\langle jk||bl\rangle ^{\mathbf{B}}\gamma _{kl}^{\text{H}} + \sum_{kl}\langle jk||bl\rangle \gamma _{kl}^{\text{H},\mathbf{B}}
+\end{align}
+
+
+\newpage
+\subsection{Implementation Plan}
+\begin{align}
+    \frac{\dd{ ^{2}\mathcal{L}_{\text{MP2}}}}{\dd{ m _{K _{\beta}}}\dd{B _{\alpha}}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} = \sum_{\mu \nu}D _{\mu \nu}^{\text{R}}\frac{\partial ^{2} h _{\mu \nu}^{\text{AO}}}{\partial m _{K _{\beta}}\partial B _{\alpha}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}} + \sum_{\mu \nu}\pdv{D _{\mu \nu}^{\text{R}}}{B _{\alpha}}\pdv{h _{\mu \nu}^{\text{AO}}}{m _{K _{\beta}}}\Big|_{\mathbf{B},\mathbf{m}_{K}=\mathbf{0}}
+\end{align} 
+
+\subsubsection*{Orbital-Relaxed Density}
+Parts needed to compute relaxed density $D _{\mu \nu}^{\text{R}}$: 
+
+\begin{itemize}
+\item MO coefficients for occupied orbitals $C _{\mu i}$  
+\item MO coefficients for virtual orbitals $C _{\mu a}$
+\item 2 e integrals $\langle pq||rs\rangle$ 
+\item 1 e integrals $h _{pq}$ 
+\end{itemize}
+
+Main steps:
+\begin{enumerate}
+\item Compute MP2 amplitudes using $\langle pq||rs\rangle$ and $h _{pq}$ (or are orbital energies directly available?)
+\item Compute the X-intermediates using $\langle pq||rs\rangle$ and MP2 amplitudes
+\item Compute Z-vectors with X-intermediates and orbital energies
+\item Make contractions to compute $D _{\mu \nu}^{\text{AO}}$ 
+\end{enumerate}
+
+\subsubsection*{Density Response to Magnetic Field}
+Additional parts needed to compute $D _{\mu \nu}^{\text{R},\mathbf{B}}$:
+
+\begin{itemize}
+\item perturbed orbital rotation matrix $\kappa _{pq}^{\mathbf{B}}$ 
+\item perturbed AO 1e integral $h _{\mu \nu}^{\text{AO},\mathbf{B}}$ 
+\item perturbed AO overlap integral $S _{\mu \nu}^{\text{AO},\mathbf{B}}$ 
+\item perturbed AO 2e integral $\langle \mu \nu||\sigma \tau\rangle ^{\mathbf{B}}$ 
+\end{itemize}
+
+Main steps:
+\begin{enumerate}
+\item Compute $S _{pq} ^{00,\mathbf{B}}$ with unperturbed MO coefficients $C _{\mu p}$ and $S _{\mu \nu}^{\text{AO},\mathbf{B}}$  
+\item Compute the perturbed MO coefficients $C _{\mu p}^{\mathbf{B}}$ with $\kappa _{pq}^{\mathbf{B}}$ and $S _{pq} ^{00,\mathbf{B}}$ 
+\item Compute the perturbed MO 2e integrals $\langle pq||rs\rangle ^{\mathbf{B}}$ with $\langle pq||rs\rangle$ and $C _{\mu p}^{\mathbf{B}}$  
+\item Compute the perturbed fock matrix $f _{pq}^{\mathbf{B}}$ using $h _{\mu \nu}^{\text{AO},\mathbf{B}}$ and $\langle pq||rs \rangle ^{\mathbf{B}}$ 
+\item Compute the perturbed MP2 amplitudes $(T _{ij}^{ab})^{\mathbf{B}}$ with $f _{pq}^{\mathbf{B}}$, $\langle pq||rs\rangle ^{\mathbf{B}}$  and $T _{ij}^{ab}$
+\item Compute the perturbed Hylleraas 1-RDMs $\gamma _{ij}^{\text{H},\mathbf{B}}$ and $\gamma _{ab}^{\text{H},\mathbf{B}}$ with $(T _{ij}^{ab})^{\mathbf{B}}$ and $T _{ij}^{ab}$  
+\item Compute the perturbed X-intermediates $X _{bj}^{\mathbf{B}}$  using $(T _{ij}^{ab})^{\mathbf{B}}$, $T _{ij}^{ab}$, $\langle pq||rs\rangle ^{\mathbf{B}}$ and perturbed 1-RDMs
+\item Compute the perturbed Z-vectors $z _{bj}^{\mathbf{B}}$  with $X _{bj}^{\mathbf{B}}$, $f _{pq}^{\mathbf{B}}$ and $z _{bj}$ 
+\item Make contractions to compute $D _{\mu \nu}^{\text{R},\mathbf{B}}$ 
+\end{enumerate}
+
+\subsubsection*{Second derivative}
+Additional parts needed to compute the second derivative:
+\begin{itemize}
+\item $h _{\mu \nu}^{\text{AO},\mathbf{m}_{K}}$ 
+\item $h _{\mu \nu}^{\text{AO},\mathbf{B},\mathbf{m}_{K}}$ 
+\end{itemize}
+
+
+
+
+
+
+
+
 
 
 

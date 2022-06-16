@@ -1,0 +1,260 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{braket}
+\usepackage{physics}
+\usepackage{parskip}
+\usepackage{bm}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{simpler-wick}
+\usepackage{enumerate}
+\usepackage{csquotes}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{tablefootnote}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{titling}
+\usepackage{erewhon}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[Sonny]{fncychap}
+\usepackage[calcwidth]{titlesec}
+\usepackage[makeroom]{cancel}
+
+
+\usetikzlibrary{shapes.geometric, arrows}
+
+\allowdisplaybreaks
+
+\pgfplotsset{compat=1.7}
+
+%fncychap layout (for chapter page)
+%\renewcommand{\thechapter}{\Roman{chapter}}
+\ChNameVar{\bfseries\LARGE\fontfamily{phv}}
+\ChNumVar{\fontsize{50}{52}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\LARGE\rm\bfseries}
+\ChRuleWidth{0.8pt}
+
+%fancyhdr layout (for header and footer)
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\fontsize{9}{9}\itshape{\rightmark}}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\section{Summary: Derivation of Z-Vector Equation}
+\subsection{Notation and Convention}
+MP2 Lagrangian:
+\begin{align}
+    \mathcal{L}_{\text{MP2}} = E _{\text{HF}} + E _{\text{H}} + \frac{1}{2}\sum_{ai}\left(z _{ai}f _{ai} + z _{ai}^{*}f _{ai}^{*}\right)
+\end{align}
+in which $E _{\text{H}}$ is the Hylleraas functional:
+\begin{align}
+    E _{\text{H}} =& \sum_{ij}h _{ij}\gamma ^{\text{H}} _{ij} + \sum_{ab}h _{ab}\gamma ^{\text{H}} _{ab} + \sum_{ijab}\langle ab||ij\rangle (\Gamma ^{\text{H}}) _{ij}^{ab}+ \sum_{ijab}\langle ij||ab\rangle (\Gamma ^{\text{H}})^{ij}_{ab} \nonumber \\
+    &+\sum_{ijkl}\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij} + \sum_{ijab}\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai}
+\end{align}
+Unrelaxed reduced density matrices (RDMs):
+\begin{align}
+    \gamma _{pq} =& \gamma ^{\text{HF}} _{pq} + \gamma ^{\text{H}} _{pq} \\
+    \Gamma _{rs}^{pq} =& (\Gamma ^{\text{HF}})_{rs}^{pq} + (\Gamma ^{\text{H}})_{rs}^{pq}
+\end{align}
+\begin{align}
+    &\gamma _{ij}^{\text{H}} = \frac{1}{2}\sum_{kab}(T _{jk}^{ab})^{*}T _{ki}^{ab} &&& \gamma ^{\text{HF}}_{ij} = \delta _{ij}&\\
+    &\gamma^{\text{H}} _{ab} = -\frac{1}{2}\sum_{ijc}(T _{ij}^{ac})^{*}T _{ij}^{cb} \\
+    &(\Gamma ^{\text{H}}) _{ij}^{ab} = \frac{1}{4}(T _{ij}^{ab})^{*} \\
+    &(\Gamma ^{\text{H}}) _{ab}^{ij} = \frac{1}{4}T _{ij}^{ab} \\
+    &(\Gamma ^{\text{H}}) _{kl}^{ij} = \frac{1}{2}\sum_{mab}(T _{km}^{ab})^{*}T _{mi}^{ab}\delta _{jl}=\gamma _{ik}^{\text{H}}\delta _{jl} &&& (\Gamma ^{\text{HF}})_{kl}^{ij} = \frac{1}{2}\delta _{ik}\delta _{jl}& \\
+    &(\Gamma ^{\text{H}}) _{bj}^{ai} = -\frac{1}{2}\sum_{klc}(T _{kl}^{ac})^{*}T _{kl}^{cb} \delta _{ij}=\gamma _{ab}^{\text{H}}\delta _{ij}
+\end{align}
+The MP2 amplitudes and its symmetry:
+\begin{align}
+    T _{ij}^{ab} = -T _{ij}^{ba} = -T _{ji}^{ab} = T _{ji}^{ba} = \frac{\langle ab||ij\rangle}{\Delta _{ab}^{ij}}
+\end{align}
+Constraint on orbital rotation for the Lagrangian (i.e. z-vector equation):
+\begin{align}
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}} =& \pdv{E _{\text{H}}}{\kappa _{bj}} + \frac{1}{2}\sum_{ai}\left(z _{ai}\pdv{f _{ai}}{\kappa _{bj}} + z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}}\right) = 0 \\
+    \pdv{\mathcal{L}_{\text{MP2}}}{\kappa _{bj}^{*}} =& \pdv{E _{\text{H}}}{\kappa _{bj}^{*}} + \frac{1}{2}\sum_{ai}\left(z _{ai} \pdv{f _{ai}}{\kappa _{bj}^{*}}+z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}^{*}}\right) = 0
+\end{align}
+The LHS of z-vector equation contains z-vector terms, and the RHS is the derivative of the Hylleraas functional.\\
+In this derivation, the following index convention is used:
+\begin{itemize}
+\item $p,q,r,s,x,y$: general space 
+\item $i,j,k,l,m,n$: internal space
+\item $a,b,c,d,e,f$: virtual space 
+\end{itemize}
+*All the derivatives are taken at zero-point of the external perturbation, i.e. $\lambda = 0$, and canonical orbitals are used throughout.
+
+\newpage
+\subsection{Intermediate Derivatives}
+Here's a summary of intermediate derivatives which are used repeatedly in further derivation.
+\begin{align}
+    &\pdv{h _{pq}}{\kappa _{rs}} = h _{sq}\delta _{pr} - h _{pr}\delta _{sq} \\
+    &\pdv{h _{pq}}{\kappa _{rs}^{*}} = -\pdv{h _{pq}}{\kappa _{sr}}= -h _{rq}\delta _{ps}+h _{ps}\delta _{rq} \\
+    &\pdv{\langle pq||rs\rangle}{\kappa _{xy}} =\langle yq||rs\rangle \delta _{px} + \langle py||rs\rangle \delta _{qx} - \langle pq||xs\rangle \delta _{ry} - \langle pq||rx\rangle \delta _{sy} \\
+    &\pdv{\langle pq||rs\rangle}{\kappa _{xy}^{*}} =-\pdv{\langle pq||rs\rangle}{\kappa _{yx}} = -\langle xq||rs\rangle \delta _{py} -\langle px||rs\rangle \delta _{qy} + \langle pq||ys\rangle \delta _{rx} + \langle pq||ry\rangle \delta _{sx}
+%    &\pdv{\Delta _{ij}^{ab}}{\kappa _{em}} = \langle am||ae\rangle + \langle bm||be\rangle - \langle im||ie\rangle -\langle jm||je\rangle \\
+%    &\pdv{\Delta _{ij}^{ab}}{\kappa _{em}^{*}} = \langle ae||am\rangle + \langle be||bm\rangle -\langle ie||im\rangle -\langle je||jm\rangle
+\end{align}
+
+\iffalse
+\begin{align}
+    \pdv{(T _{ij}^{ab})^{*}}{\kappa _{em}}\Big|_{\lambda = 0} =& \frac{(T _{ij}^{ab})^{*}}{\Delta _{ab}^{ij}}\big(\langle im||ie\rangle + \langle jm||je\rangle - \langle am||ae\rangle - \langle bm||be\rangle \big) \\
+    \pdv{T _{ij}^{ab}}{\kappa _{em}^{*}}\Big|_{\lambda = 0} =& \frac{T _{ij}^{ab}}{\Delta _{ab}^{ij}}\big(\langle ie||im\rangle + \langle je||jm\rangle -\langle ae||am\rangle - \langle be||bm\rangle \big) \\
+    \pdv{T _{ij}^{ab}}{\kappa _{em}}\Big|_{\lambda=0} =& \frac{\langle mb||ij\rangle}{\Delta _{ab}^{ij}} \delta _{ae} + \frac{\langle am||ij\rangle}{\Delta _{ab}^{ij}} \delta _{be} - \frac{\langle ab||ej\rangle}{\Delta _{ab}^{ij}} \delta _{im} - \frac{\langle ab||ie\rangle}{\Delta _{ab}^{ij}} \delta _{jm} \nonumber \\
+    &+ \frac{\langle im||ie\rangle}{\Delta _{ab}^{ij}}T _{ij}^{ab} + \frac{\langle jm||je\rangle}{\Delta _{ab}^{ij}}T _{ij}^{ab} - \frac{\langle am||ae\rangle}{\Delta _{ab}^{ij}}T _{ij}^{ab} - \frac{\langle bm||be\rangle}{\Delta _{ab}^{ij}}T _{ij}^{ab} \\
+    \pdv{(T _{ij}^{ab})^{*}}{\kappa _{em}^{*}}\Big|_{\lambda=0} =& \frac{\langle ij||mb\rangle}{\Delta _{ab}^{ij}} \delta _{ae} + \frac{\langle ij||am\rangle}{\Delta _{ab}^{ij}} \delta _{be} - \frac{\langle ej||ab\rangle}{\Delta _{ab}^{ij}} \delta _{im} - \frac{\langle ie||ab\rangle}{\Delta _{ab}^{ij}} \delta _{jm} \nonumber \\
+    &+\frac{\langle ie||im\rangle}{\Delta _{ab}^{ij}}(T _{ij}^{ab})^{*} + \frac{\langle je||jm\rangle}{\Delta _{ab}^{ij}}(T _{ij}^{ab})^{*}-\frac{\langle ae||am\rangle}{\Delta _{ab}^{ij}}(T _{ij}^{ab})^{*} - \frac{\langle be||bm\rangle}{\Delta _{ab}^{ij}}(T _{ij}^{ab})^{*}
+\end{align}
+\fi
+
+
+\subsection{LHS}
+The LHS of Z-Vector equation:
+\begin{align}
+    \pdv{f _{ai}}{\kappa _{bj}} =& (\varepsilon _{i}-\varepsilon _{a})\delta _{ij}\delta _{ab} - \langle aj||ib\rangle \\
+    \pdv{f _{ai}^{*}}{\kappa _{bj}}=& -\langle ij||ab\rangle \\
+    \pdv{f _{ai}}{\kappa _{bj}^{*}} =& -\langle ab||ij\rangle \\
+    \pdv{f _{ai}^{*}}{\kappa _{bj}^{*}} =& (\varepsilon _{i}-\varepsilon _{a})\delta _{ij}\delta _{ab} - \langle ib||aj\rangle
+\end{align}
+
+Stationarity with $\kappa _{bj}$: 
+\begin{align}
+    \text{LHS} =& \frac{1}{2}\sum_{ai}\left(z _{ai}\pdv{f _{ai}}{\kappa _{bj}}+ z _{ai}^{*}\pdv{f _{ai}^{*}}{\kappa _{bj}}\right) \nonumber \\
+    =&\frac{1}{2}\sum_{ai}z _{ai}\Big((\varepsilon _{i}-\varepsilon _{a})\delta _{ij}\delta _{ab} - \langle aj||ib\rangle\Big) - \frac{1}{2}\sum_{ai}z _{ai}^{*}\langle ij||ab\rangle \nonumber \\
+    =& \frac{1}{2}z _{bj}\left(\varepsilon _{j}-\varepsilon _{b}\right)-\frac{1}{2}\sum_{ai}\Big(z _{ai}\langle aj||ib\rangle + z _{ai}^{*}\langle ij||ab\rangle\Big)
+\end{align}
+Stationarity with $\kappa _{jb}$:
+ 
+
+\newpage
+\subsection{RHS}
+The RHS of Z-Vector equation comes from the Hylleraas response to orbital rotation.
+\begin{align}
+    \pdv{E _{\text{H}}}{\kappa _{em}} =& \sum_{ij}\pdv{(h _{ij}\gamma ^{\text{H}} _{ij})}{\kappa _{em}} + \sum_{ab}\pdv{(h _{ab}\gamma ^{\text{H}} _{ab})}{\kappa _{em}} + \sum_{ijab}\pdv{(\langle ab||ij\rangle (\Gamma ^{\text{H}}) _{ij}^{ab})}{\kappa _{em}}+ \sum_{ijab}\pdv{(\langle ij||ab\rangle (\Gamma ^{\text{H}})^{ij}_{ab})}{\kappa _{em}} \nonumber \\
+    &+\sum_{ijkl}\pdv{(\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij})}{\kappa _{em}} + \sum_{ijab}\pdv{(\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai})}{\kappa _{em}}
+\end{align}
+As the one- and two-body unrelaxed RDMs only depends on MP2 amplitudes, which are treated indepently from the orbital rotation parameter $\bm{\kappa}$, hence only the derivatives of electron integrals against $\bm{\kappa}$ are concerned.
+
+
+
+
+
+
+
+\subsubsection*{$\gamma _{ij}^{\text{H}}$ Part}
+\iffalse
+\begin{align}
+    \sum_{ij}\pdv{(h _{ij}\gamma _{ij}^{\text{H}})}{\kappa _{em}} = \sum_{ij}\pdv{h _{ij}}{\kappa _{em}}\gamma _{ij}^{\text{H}} + \sum_{ij}h _{ij}\pdv{\gamma _{ij}^{\text{H}}}{\kappa _{em}}
+\end{align}
+\fi
+\begin{align}
+    \sum_{ij}\pdv{h _{ij}}{\kappa _{em}}\gamma _{ij}^{\text{H}} =& -\sum_{i}h _{ie}\gamma _{im}^{\text{H}}
+%    \sum_{ij}h _{ij}\pdv{\gamma _{ij}^{\text{H}}}{\kappa _{em}} =& \sum_{ijka}h _{ij}(T _{jk}^{ae})^{*}\frac{\langle am||ki\rangle}{\Delta _{ae}^{ki}} - \frac{1}{2}\sum_{ijab}h _{ij}(T _{jm}^{ab})^{*}\frac{\langle ab||ei\rangle}{\Delta _{ab}^{mi}} - \frac{1}{2}\sum_{jkab}h _{mj}(T _{jk}^{ab})^{*}\frac{\langle ab||ke\rangle}{\Delta _{ab}^{km}} \nonumber \\
+%    &+ \frac{1}{2}\sum_{ijkab}h _{ij}\frac{(T _{jk}^{ab})^{*}T _{ki}^{ab}}{\Delta _{ab}^{jk}}\left(\langle jm||je\rangle + \langle km||ke\rangle - \langle am||ae\rangle -\langle bm||be\rangle \right) \nonumber \\
+%    &+ \frac{1}{2}\sum_{ijkab}h _{ij}\frac{(T _{jk}^{ab})^{*}T _{ki}^{ab}}{\Delta _{ab}^{ki}}\left(\langle km||ke\rangle + \langle im||ie\rangle - \langle am||ae\rangle -\langle bm||be\rangle\right)
+\end{align}
+
+\subsubsection*{$\gamma _{ab}^{\text{H}}$ Part}
+\iffalse
+\begin{align}
+    \sum_{ab}\pdv{(h _{ab}\gamma _{ab}^{\text{H}})}{\kappa _{em}} = \sum_{ab}\pdv{h _{ab}}{\kappa _{em}}\gamma _{ab}^{\text{H}} + \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{\kappa _{em}}
+\end{align}
+\fi
+\begin{align}
+    \sum_{ab}\pdv{h _{ab}}{\kappa _{em}}\gamma _{ab}^{\text{H}} =& \sum_{a}h _{ma}\gamma _{ea}^{\text{H}}
+%    \sum_{ab}h _{ab}\pdv{\gamma _{ab}^{\text{H}}}{\kappa _{em}} =& -\frac{1}{2}\sum_{ijab}h _{ab}(T _{ij}^{ae})^{*}\frac{\langle mb||ij\rangle}{\Delta _{eb}^{ij}} - \frac{1}{2}\sum_{ijac}h _{ae}(T _{ij}^{ac})^{*}\frac{\langle cm||ij\rangle}{\Delta _{ce}^{ij}} + \sum_{iabc}h _{ab}(T _{im}^{ac})^{*}\frac{\langle cb||ie\rangle}{\Delta _{cb}^{im}} \nonumber \\
+%    & -\frac{1}{2}\sum_{ijabc}h _{ab}\frac{(T _{ij}^{ac})^{*}T _{ij}^{cb}}{\Delta _{ac}^{ij}}\left(\langle im||ie\rangle + \langle jm||je\rangle - \langle am||ae\rangle - \langle cm||ce\rangle \right) \nonumber \\
+%    & -\frac{1}{2}\sum_{ijabc}h _{ab}\frac{(T _{ij}^{ac})^{*}T _{ij}^{cb}}{\Delta _{cb}^{ij}}\left(\langle \langle im||ie\rangle + \langle jm||je\rangle - \langle cm||ce\rangle - \langle bm||be\rangle\right)
+\end{align}
+
+
+\subsubsection*{$(\Gamma ^{\text{H}})^{ab}_{ij}$ Part}
+\iffalse
+\begin{align}
+    \sum_{ijab}\pdv{(\langle ab||ij\rangle (\Gamma ^{\text{H}})^{ab}_{ij})}{\kappa _{em}} = \sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ab}_{ij} + \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{\kappa _{em}}
+\end{align}
+\fi
+\begin{align}
+    \sum_{ijab}\pdv{\langle ab||ij\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ab}_{ij} =& 2\sum_{ija}\langle am||ji\rangle (\Gamma ^{\text{H}}) _{ij}^{ea} - 2 \sum_{iab}\langle ab||ei\rangle (\Gamma ^{\text{H}}) _{mi}^{ab}
+%    \sum_{ijab}\langle ab||ij\rangle \pdv{(\Gamma ^{\text{H}})^{ab}_{ij}}{\kappa _{em}} =& \frac{1}{4}\sum_{ijab}(T _{ij}^{ab})^{*}T _{ij}^{ab}\left(\langle im||ie\rangle + \langle jm||je\rangle - \langle am||ae\rangle - \langle bm||be\rangle \right)
+\end{align}
+
+
+\subsubsection*{$(\Gamma ^{\text{H}})^{ij}_{ab}$ Part}
+\iffalse
+\begin{align}
+    \sum_{ijab}\pdv{(\langle ij||ab\rangle (\Gamma ^{\text{H}})^{ij}_{ab})}{\kappa _{em}} = \sum_{ijab}\pdv{\langle ij||ab\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ij}_{ab} + \sum_{ijab}\langle ij||ab\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{\kappa _{em}}
+\end{align}
+\fi
+\begin{align}
+    \sum_{ijab}\pdv{\langle ij||ab\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ij}_{ab}=& 0 
+%    \sum_{ijab}\langle ij||ab\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{ab}}{\kappa _{em}} =& \frac{1}{2}\sum_{ija}T _{ij}^{ae}\langle am||ij\rangle - \frac{1}{2}\sum_{iab}T _{im}^{ab}\langle ab||ie \rangle \nonumber \\
+%    &+ \frac{1}{4}\sum_{ijab}(T _{ij}^{ab})^{*}T _{ij}^{ab} \left(\langle im||ie\rangle + \langle jm||je\rangle - \langle am||ae\rangle - \langle bm||be\rangle \right)
+\end{align}
+
+
+\subsubsection*{$(\Gamma ^{\text{H}})^{ij}_{kl}$ Part}
+\iffalse
+\begin{align}
+    \sum_{ijkl}\pdv{(\langle ij||kl\rangle (\Gamma ^{\text{H}}) _{kl}^{ij})}{\kappa _{em}} = \sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ij}_{kl} + \sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{\kappa _{em}}
+\end{align}
+\fi
+\begin{align}
+    &\sum_{ijkl}\pdv{\langle ij||kl\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ij}_{kl}=-\sum_{ijk}\langle ij||ek\rangle (\Gamma ^{\text{H}}) _{mk}^{ij} - \sum_{ijk}\langle ij||ek\rangle (\Gamma ^{\text{H}}) _{km}^{ji}
+%    &\sum_{ijkl}\langle ij||kl\rangle \pdv{(\Gamma ^{\text{H}})^{ij}_{kl}}{\kappa _{em}}  \nonumber \\
+%    &= \sum_{ijkna}\frac{\langle ij||kj\rangle \langle am||ni\rangle}{\Delta _{ae}^{ni}}(T _{kn}^{ae})^{*} - \frac{1}{2}\sum_{ijkab}\frac{\langle ij||kj\rangle \langle ab||ei\rangle}{\Delta _{ab}^{mi}}(T _{km}^{ab})^{*} + \frac{1}{2}\sum_{ijkab} \frac{\langle mj||kj\rangle\langle ab||ei\rangle}{\Delta _{ab}^{mi}}(T ^{ab}_{ki})^{*} \nonumber \\
+%    &+ \frac{1}{2}\sum_{ijknab}\langle ij||kj\rangle \frac{(T _{kn}^{ab})^{*}T _{ni}^{ab}}{\Delta _{ab}^{kn}}\left(\langle km||ke\rangle + \langle nm||ne\rangle - \langle am||ae\rangle - \langle bm||be\rangle \right) \nonumber \\
+%    &+\frac{1}{2}\sum_{ijknab}\langle ij||kj\rangle \frac{(T _{kn}^{ab})^{*}T _{ni}^{ab}}{\Delta _{ab}^{ni}}\left(\langle nm||ne\rangle +\langle im||ie\rangle - \langle am||ae\rangle -\langle bm||be\rangle \right)
+\end{align}
+
+
+\subsubsection*{$(\Gamma ^{\text{H}})^{ai}_{bj}$ Part}
+\iffalse
+\begin{align}
+    \sum_{ijab}\pdv{(\langle ai||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ai})}{\kappa _{em}} = \sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ai}_{bj} + \sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{\kappa _{em}}
+\end{align}
+\fi
+
+\begin{align}
+    &\sum_{ijab}\pdv{\langle ai||bj\rangle}{\kappa _{em}}\left(\Gamma ^{\text{H}}\right)^{ai}_{bj}=\sum_{ijb}\langle mi||bj\rangle (\Gamma ^{\text{H}}) _{bj}^{ei} - \sum_{iab}\langle ai||be\rangle (\Gamma ^{\text{H}}) _{bm}^{ai} 
+%    &\sum_{ijab}\langle ai||bj\rangle \pdv{(\Gamma ^{\text{H}})^{ai}_{bj}}{\kappa _{em}} \nonumber \\
+%    &= \frac{1}{2}\sum_{ijkab}\frac{\langle ai||bi\rangle \langle bm||jk\rangle}{\Delta _{eb}^{jk}}(T _{jk}^{ae})^{*} + \frac{1}{2}\sum_{ijkac}\frac{\langle ai||ei\rangle \langle mc||jk\rangle}{\Delta _{ce}^{jk}}(T _{jk}^{ac})^{*} - \sum_{ijabc}\frac{\langle ai||bi\rangle \langle cb||ej\rangle}{\Delta _{cb}^{mj}} (T _{jm}^{ac})^{*} \nonumber \\
+%    & -\frac{1}{2}\sum_{iklabc}\langle ai||bi\rangle \frac{(T _{kl}^{ac})^{*}T _{kl}^{cb}}{\Delta _{ac}^{kl}}\left( \langle km||ke\rangle + \langle lm||le\rangle - \langle am||ae\rangle -\langle cm||ce\rangle \right)     \nonumber \\
+%    & -\frac{1}{2}\sum_{iklabc} \langle ai||bi\rangle \frac{(T _{kl}^{ac})^{*}T _{kl}^{cb}}{\Delta _{cb}^{kl}}\left(\langle km||ke\rangle + \langle lm||le\rangle - \langle cm||ce\rangle - \langle bm||be\rangle \right)
+\end{align}
+
+
+\subsubsection*{Overall}
+Summing over the constituent parts:
+\begin{align}
+    &-\sum_{i}h _{ie}\gamma _{im}^{\text{H}} + \sum_{a}h _{ma}\gamma _{ea}^{\text{H}} + 2 \sum_{ija}\langle am||ji\rangle (\Gamma ^{\text{H}})^{ea}_{ij} - 2 \sum_{iab}\langle ab||ei\rangle (\Gamma ^{\text{H}})^{ab}_{mi} \nonumber \\
+    & - \sum_{ijk}\langle ij||ek\rangle (\Gamma ^{\text{H}})^{ij}_{mk} - \sum_{ijk}\langle ij||ek\rangle (\Gamma ^{\text{H}})^{ji}_{km} + \sum_{ijb}\langle mi||bj\rangle (\Gamma ^{\text{H}})^{ei}_{bj}-\sum_{iab}\langle ai||be\rangle (\Gamma ^{\text{H}})^{ai}_{bm} \nonumber \\
+    =& \textcolor{orange}{-\sum_{i}h _{ie}\gamma _{im}^{\text{H}}} \textcolor{violet}{+ \sum_{a}h _{ma}\gamma _{ea}^{\text{H}}} + \frac{1}{2}\sum_{ija}\langle am||ji\rangle (T _{ij}^{ea})^{*} -\frac{1}{2}\sum_{iab}\langle ab||ei\rangle (T ^{ab}_{mi})^{*}   \nonumber \\
+    &\textcolor{orange}{-\sum_{ijk}\langle ij||ek\rangle \gamma _{im}^{\text{H}}\delta _{jk}} - \sum_{ijk}\langle ij||ek\rangle \gamma _{jk}^{\text{H}}\delta _{im} \textcolor{violet}{+ \sum_{ijb}\langle mi||aj\rangle \gamma _{ea}^{\text{H}}\delta _{ij}} - \sum_{iab}\langle ai||be\rangle \gamma _{ab}^{\text{H}}\delta _{im} \nonumber \\
+    =&\textcolor{orange}{-\sum_{i}f _{ie}\gamma _{im}^{\text{H}}} \textcolor{violet}{+ \sum_{a}f _{ma}\gamma _{ea}^{\text{H}}} + \frac{1}{2}\sum_{ija}\langle am||ji\rangle (T _{ij}^{ea})^{*}-\frac{1}{2}\sum_{iab}\langle ab||ei\rangle (T _{mi}^{ab})^{*} \nonumber \\
+    &-\sum_{jk}\langle mj||ek\rangle \gamma _{jk}^{\text{H}} - \sum_{ab}\langle am||be\rangle \gamma _{ab}^{\text{H}} \nonumber \\
+    =&\frac{1}{2}\sum_{ija}\langle ma||ij\rangle (T _{ij}^{ea})^{*}-\frac{1}{2}\sum_{iab}\langle ab||ei\rangle (T _{mi}^{ab})^{*}
+    -\sum_{jk}\langle mj||ek\rangle \gamma _{jk}^{\text{H}} - \sum_{ab}\langle am||be\rangle \gamma _{ab}^{\text{H}} \nonumber \\
+    =& -X _{em}
+\end{align}
+as defined in Gauss 1993 papar \href{https://doi.org/10.1063/1.466161}{[J. Chem. Phys. 99, 3629 (1993)]}, and this makes the RHS of the z-vector equation.
+We should address these terms as the orbital gradient.
+
+\iffalse
+\textcolor{magenta}{Question to Georgi:}
+
+This already completes the z-vector equation as stated in the Gauss paper. However, I haven't added the second half of the product rule of derivatives, i.e. $\sum_{pq}h _{pq}\pdv{\gamma _{pq}^{\text{H}}}{\kappa _{em}} + \sum_{pqrs}\langle pq||rs\rangle \pdv{(\Gamma ^{\text{H}})^{pq}_{rs}}{\kappa _{em}}$. \\
+
+These are the derivatives of unrelaxed Hylleraas densities against orbital rotation, contracted with one- and two-electron integrals. While I'm checking my maths to see if all these terms add up to zero (they do not in my first attempt but I'll try again), can you offer some insights or explanation from chemistry point of view why they shouldn't contribute?
+\fi
+
+Therefore, the \textcolor{red}{z-vector equation} reads:
+\begin{align}
+    \frac{1}{2}z _{em}(\varepsilon _{e}-\varepsilon _{m}) + \frac{1}{2}\sum_{ai}(z _{ai}\langle am||ie\rangle + z _{ai}^{*}\langle im||ae\rangle) = -X _{em}
+\end{align}
+with $X _{em}$ defined as above.
+
+\end{document}

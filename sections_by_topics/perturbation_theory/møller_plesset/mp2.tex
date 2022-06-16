@@ -207,14 +207,15 @@ Therefore (exploiting the permutation symmetry $T _{ij}^{ab} = -T _{ji}^{ab} = -
 \end{align}
 hence we obtain the amplitude as:
 \begin{equation}
-    T _{kl}^{cd} = \frac{\langle \Phi _{kl}^{cd}|\hat{V}|\Phi _{0}\rangle}{f _{kk}+f _{ll}-f _{cc}-f _{dd}}
+    T _{kl}^{cd} = \frac{\langle \Phi _{kl}^{cd}|\hat{V}|\Phi _{0}\rangle}{f _{kk}+f _{ll}-f _{cc}-f _{dd}} = \frac{\langle cd||kl\rangle}{\Delta _{cd}^{kl}}
 \end{equation}
 and the second-order energy:
 \begin{align}
     E ^{(2)} =& \langle \Phi _{0}|\hat{V}|\Psi ^{(1)}\rangle \nonumber \\
     =& \frac{1}{4}\sum_{ijab}\langle \Phi _{0}|\hat{V}|\Phi _{ij}^{ab}\rangle T _{ij}^{ab} \nonumber \\
     =& \frac{1}{4}\sum_{ijab}\frac{\langle \Phi _{0}|\hat{V}|\Phi _{ij}^{ab}\rangle\langle \Phi _{ij}^{ab}|\hat{V}|\Phi _{0}\rangle}{f _{ii}+f _{jj}- f _{aa}-f _{bb}} \nonumber \\
-    =& \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle\langle ab||ij\rangle}{f _{ii}+f _{jj}-f _{aa}-f _{bb}}
+    =& \frac{1}{4}\sum_{ijab}\frac{\langle ij||ab\rangle\langle ab||ij\rangle}{f _{ii}+f _{jj}-f _{aa}-f _{bb}} \nonumber \\
+    =& \frac{1}{4}\sum_{ijab}T _{ij}^{ab}\langle ij||ab\rangle = \frac{1}{4}\sum_{ijab}(T _{ij}^{ab})^{*}\langle ab||ij\rangle
 \end{align}
 note that the $-\frac{1}{2}\sum_{ij}\langle ij||ij\rangle$ part in $\hat{V}$ does not contribute to the second-order energy, since $\langle \Phi _{0}|\Phi _{ij}^{ab}\rangle = 0$. \\
 The total energy up to MP2-level correction is:
